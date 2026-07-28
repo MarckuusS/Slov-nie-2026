@@ -5,396 +5,433 @@
     --paper:      #F1F4EF;
     --surface:    #FFFFFF;
     --surface-2:  #E7EBE3;
+    --glass:      rgba(241, 244, 239, .88);
     --ink:        #1A211E;
-    --ink-soft:   #5B655F;
-    --ink-faint:  #8A948D;
+    --ink-soft:   #59635D;
+    --ink-faint:  #87918A;
     --rule:       #D3DACF;
-    --soca:       #0C7367;
-    --soca-lift:  #E0F0EB;
-    --blaze:      #BF3A2B;
-    --blaze-soft: #F6E4E1;
-    --shadow:     0 1px 2px rgba(26,33,30,.06), 0 6px 18px -10px rgba(26,33,30,.18);
+    --rule-soft:  #E2E7DE;
+    --soca:       #0B6E63;
+    --soca-lift:  #DEEFEA;
+    --blaze:      #BB3728;
+    --blaze-soft: #F7E5E2;
+    --shadow:     0 1px 2px rgba(26,33,30,.06), 0 8px 20px -12px rgba(26,33,30,.22);
+    --theme-color:#EAF1EC;
 
     --f-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-    --f-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --f-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --f-data: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 
-    --wrap: 42rem;
+    --wrap: 40rem;
+    --pad: max(1.15rem, env(safe-area-inset-left));
+    --pad-r: max(1.15rem, env(safe-area-inset-right));
+    --tabbar: 3.6rem;
+    --tap: 2.75rem;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
       --paper:      #0E1412;
       --surface:    #161E1B;
-      --surface-2:  #1E2723;
-      --ink:        #E4EAE5;
-      --ink-soft:   #A2AEA7;
-      --ink-faint:  #6F7B75;
+      --surface-2:  #1F2824;
+      --glass:      rgba(14, 20, 18, .88);
+      --ink:        #E5EBE6;
+      --ink-soft:   #A4B0A9;
+      --ink-faint:  #717D77;
       --rule:       #2A342F;
-      --soca:       #4CC3AD;
-      --soca-lift:  #10302B;
-      --blaze:      #E0705F;
-      --blaze-soft: #2E1B18;
-      --shadow:     0 1px 2px rgba(0,0,0,.4), 0 8px 22px -12px rgba(0,0,0,.6);
+      --rule-soft:  #212A26;
+      --soca:       #4FC7B1;
+      --soca-lift:  #0F312B;
+      --blaze:      #E4735F;
+      --blaze-soft: #2F1A16;
+      --shadow:     0 1px 2px rgba(0,0,0,.45), 0 10px 26px -14px rgba(0,0,0,.7);
+      --theme-color:#0E1412;
     }
   }
 
   :root[data-theme="dark"] {
     --paper:      #0E1412;
     --surface:    #161E1B;
-    --surface-2:  #1E2723;
-    --ink:        #E4EAE5;
-    --ink-soft:   #A2AEA7;
-    --ink-faint:  #6F7B75;
+    --surface-2:  #1F2824;
+    --glass:      rgba(14, 20, 18, .88);
+    --ink:        #E5EBE6;
+    --ink-soft:   #A4B0A9;
+    --ink-faint:  #717D77;
     --rule:       #2A342F;
-    --soca:       #4CC3AD;
-    --soca-lift:  #10302B;
-    --blaze:      #E0705F;
-    --blaze-soft: #2E1B18;
-    --shadow:     0 1px 2px rgba(0,0,0,.4), 0 8px 22px -12px rgba(0,0,0,.6);
+    --rule-soft:  #212A26;
+    --soca:       #4FC7B1;
+    --soca-lift:  #0F312B;
+    --blaze:      #E4735F;
+    --blaze-soft: #2F1A16;
+    --shadow:     0 1px 2px rgba(0,0,0,.45), 0 10px 26px -14px rgba(0,0,0,.7);
+    --theme-color:#0E1412;
   }
 
   :root[data-theme="light"] {
     --paper:      #F1F4EF;
     --surface:    #FFFFFF;
     --surface-2:  #E7EBE3;
+    --glass:      rgba(241, 244, 239, .88);
     --ink:        #1A211E;
-    --ink-soft:   #5B655F;
-    --ink-faint:  #8A948D;
+    --ink-soft:   #59635D;
+    --ink-faint:  #87918A;
     --rule:       #D3DACF;
-    --soca:       #0C7367;
-    --soca-lift:  #E0F0EB;
-    --blaze:      #BF3A2B;
-    --blaze-soft: #F6E4E1;
-    --shadow:     0 1px 2px rgba(26,33,30,.06), 0 6px 18px -10px rgba(26,33,30,.18);
+    --rule-soft:  #E2E7DE;
+    --soca:       #0B6E63;
+    --soca-lift:  #DEEFEA;
+    --blaze:      #BB3728;
+    --blaze-soft: #F7E5E2;
+    --shadow:     0 1px 2px rgba(26,33,30,.06), 0 8px 20px -12px rgba(26,33,30,.22);
+    --theme-color:#EAF1EC;
   }
 
   * { box-sizing: border-box; }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  }
 
   body {
     margin: 0;
     background: var(--paper);
     color: var(--ink);
     font-family: var(--f-body);
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.6;
-    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+    overscroll-behavior-y: contain;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
   }
+
+  img, svg, table { max-width: 100%; }
+  p, li, td, th, h1, h2, h3, summary { overflow-wrap: break-word; }
 
   .wrap {
     max-width: var(--wrap);
     margin: 0 auto;
-    padding: 0 1.25rem;
+    padding-left: var(--pad);
+    padding-right: var(--pad-r);
   }
 
-  /* ---------- trail blaze, the Knafelc marker ---------- */
+  /* the Knafelc trail blaze: red ring, white centre, painted on every waymark in Slovenia */
   .blaze {
     display: inline-block;
-    width: .85rem; height: .85rem;
+    width: .8rem; height: .8rem;
     border-radius: 50%;
     background: radial-gradient(circle, var(--surface) 0 36%, var(--blaze) 37% 100%);
     flex: none;
   }
 
-  /* ---------- hero ---------- */
-  header.hero {
-    padding: 3rem 0 2rem;
+  /* ============ top bar ============ */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--glass);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+    backdrop-filter: saturate(160%) blur(14px);
     border-bottom: 1px solid var(--rule);
-    background:
-      linear-gradient(180deg, var(--soca-lift) 0%, transparent 70%);
+    padding-top: env(safe-area-inset-top);
   }
-  .eyebrow {
+  .topbar-in {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: .55rem var(--pad-r) .55rem var(--pad);
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    min-height: 2.9rem;
+  }
+  .topbar .mark {
     font-family: var(--f-data);
-    font-size: .7rem;
-    letter-spacing: .16em;
+    font-size: .68rem;
+    letter-spacing: .14em;
     text-transform: uppercase;
-    color: var(--soca);
-    display: flex; align-items: center; gap: .55rem;
-    margin: 0 0 1rem;
+    color: var(--ink-soft);
+    display: flex; align-items: center; gap: .45rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+  .now {
+    margin-left: auto;
+    flex: none;
+    font-family: var(--f-data);
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .05em;
+    color: var(--soca);
+    background: var(--soca-lift);
+    border-radius: 999px;
+    padding: .25rem .65rem;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ============ tab panels ============ */
+  main { display: block; }
+  .panel { padding-bottom: 1rem; }
+  [data-app="on"] .panel { display: none; }
+  [data-app="on"] .panel.is-active { display: block; }
+
+  section.block { padding: 1.9rem 0 .25rem; }
+  section.block:first-child { padding-top: 1.4rem; }
+
   h1 {
     font-family: var(--f-display);
-    font-size: clamp(2.6rem, 12vw, 4.2rem);
-    line-height: .95;
-    letter-spacing: -.02em;
+    font-size: clamp(2.5rem, 13vw, 3.9rem);
+    line-height: .94;
+    letter-spacing: -.022em;
     font-weight: 400;
     margin: 0;
     text-wrap: balance;
   }
-  h1 em {
-    font-style: italic;
+  h1 em { font-style: italic; color: var(--soca); }
+
+  h2 {
+    font-family: var(--f-display);
+    font-size: clamp(1.5rem, 6vw, 1.85rem);
+    font-weight: 400;
+    letter-spacing: -.012em;
+    line-height: 1.15;
+    margin: 0 0 .4rem;
+    display: flex; align-items: center; gap: .55rem;
+    text-wrap: balance;
+  }
+  h3 {
+    font-family: var(--f-body);
+    font-size: .74rem;
+    font-weight: 700;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 1.9rem 0 .65rem;
+  }
+  .sub {
+    color: var(--ink-soft);
+    font-size: .93rem;
+    margin: 0 0 1.25rem;
+    max-width: 56ch;
+  }
+
+  /* ============ hero ============ */
+  .hero {
+    padding: 1.9rem 0 1.6rem;
+    background: linear-gradient(180deg, var(--soca-lift) 0%, transparent 78%);
+    margin-bottom: .4rem;
+  }
+  .eyebrow {
+    font-family: var(--f-data);
+    font-size: .66rem;
+    letter-spacing: .17em;
+    text-transform: uppercase;
     color: var(--soca);
+    display: flex; align-items: center; gap: .5rem;
+    margin: 0 0 .9rem;
   }
   .dek {
     font-family: var(--f-display);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-style: italic;
+    line-height: 1.4;
     color: var(--ink-soft);
-    margin: .8rem 0 0;
+    margin: .75rem 0 0;
     max-width: 30ch;
   }
   .stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1px;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     background: var(--rule);
     border: 1px solid var(--rule);
-    border-radius: 3px;
+    border-radius: 4px;
     overflow: hidden;
   }
-  .stat {
-    background: var(--surface);
-    padding: .85rem .75rem;
-  }
+  .stat { background: var(--surface); padding: .75rem .7rem; min-width: 0; }
   .stat b {
     display: block;
     font-family: var(--f-data);
-    font-size: 1.35rem;
+    font-size: clamp(1.1rem, 5.5vw, 1.35rem);
     font-weight: 600;
     letter-spacing: -.02em;
     font-variant-numeric: tabular-nums;
   }
   .stat span {
     font-family: var(--f-data);
-    font-size: .62rem;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-
-  /* ---------- sticky day rail ---------- */
-  nav.rail {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    background: color-mix(in srgb, var(--paper) 92%, transparent);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--rule);
-  }
-  .rail-scroll {
-    display: flex;
-    gap: .4rem;
-    overflow-x: auto;
-    padding: .6rem 1.25rem;
-    max-width: var(--wrap);
-    margin: 0 auto;
-    scrollbar-width: none;
-  }
-  .rail-scroll::-webkit-scrollbar { display: none; }
-  .rail a {
-    flex: none;
-    font-family: var(--f-data);
-    font-size: .72rem;
-    letter-spacing: .06em;
-    text-decoration: none;
-    color: var(--ink-soft);
-    border: 1px solid var(--rule);
-    border-radius: 999px;
-    padding: .3rem .7rem;
-    white-space: nowrap;
-    background: var(--surface);
-    transition: color .15s, border-color .15s;
-  }
-  .rail a:hover, .rail a:focus-visible {
-    color: var(--soca);
-    border-color: var(--soca);
-  }
-
-  /* ---------- sections ---------- */
-  section { padding: 2.75rem 0 .5rem; }
-  h2 {
-    font-family: var(--f-display);
-    font-size: 1.75rem;
-    font-weight: 400;
-    letter-spacing: -.01em;
-    margin: 0 0 .35rem;
-    display: flex; align-items: center; gap: .6rem;
-    text-wrap: balance;
-  }
-  .sub {
-    color: var(--ink-soft);
-    font-size: .92rem;
-    margin: 0 0 1.4rem;
-    max-width: 58ch;
-  }
-  h3 {
-    font-family: var(--f-body);
-    font-size: .78rem;
-    font-weight: 700;
+    font-size: .58rem;
     letter-spacing: .1em;
     text-transform: uppercase;
     color: var(--ink-faint);
-    margin: 2rem 0 .7rem;
   }
 
-  /* ---------- cards ---------- */
-  .cards {
-    display: grid;
-    gap: .7rem;
-  }
-  @media (min-width: 34rem) {
-    .cards.two { grid-template-columns: 1fr 1fr; }
-  }
+  /* ============ cards ============ */
+  .cards { display: grid; gap: .65rem; }
+  @media (min-width: 33rem) { .cards.two { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .card {
     background: var(--surface);
     border: 1px solid var(--rule);
-    border-radius: 4px;
-    padding: .9rem 1rem;
+    border-radius: 5px;
+    padding: .85rem .95rem;
     box-shadow: var(--shadow);
+    min-width: 0;
   }
   .card .k {
     font-family: var(--f-data);
-    font-size: .62rem;
+    font-size: .6rem;
     letter-spacing: .13em;
     text-transform: uppercase;
     color: var(--ink-faint);
     display: block;
-    margin-bottom: .2rem;
+    margin-bottom: .25rem;
   }
-  .card .v {
-    font-size: 1rem;
-    line-height: 1.45;
-  }
+  .card .v { font-size: .95rem; line-height: 1.5; }
   .card .v strong { font-family: var(--f-data); font-weight: 600; }
 
   .alert {
     border-left: 3px solid var(--blaze);
     background: var(--blaze-soft);
-    border-radius: 0 4px 4px 0;
-    padding: .8rem 1rem;
-    font-size: .93rem;
+    border-radius: 0 5px 5px 0;
+    padding: .8rem .95rem;
+    font-size: .92rem;
+    line-height: 1.55;
+    margin-top: 1rem;
   }
-  .alert b { font-weight: 700; }
 
-  /* ---------- emergency ---------- */
+  /* ============ emergency ============ */
   .sos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1px;
     background: var(--rule);
     border: 1px solid var(--rule);
-    border-radius: 4px;
+    border-radius: 5px;
     overflow: hidden;
   }
-  .sos div { background: var(--surface); padding: .7rem .8rem; }
+  @media (min-width: 30rem) { .sos { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .sos a {
+    background: var(--surface);
+    padding: .65rem .7rem;
+    text-decoration: none;
+    display: block;
+    min-height: var(--tap);
+    touch-action: manipulation;
+  }
+  .sos a:active { background: var(--surface-2); }
   .sos .n {
     font-family: var(--f-data);
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 600;
     color: var(--blaze);
     font-variant-numeric: tabular-nums;
   }
-  .sos .l {
-    font-size: .72rem;
-    color: var(--ink-soft);
-  }
+  .sos .l { font-size: .7rem; line-height: 1.35; color: var(--ink-soft); }
 
-  /* ---------- days ---------- */
-  details.day {
-    border-top: 1px solid var(--rule);
-    padding: 0;
-  }
+  /* ============ days ============ */
+  details.day { border-top: 1px solid var(--rule); scroll-margin-top: 4.5rem; }
   details.day:last-of-type { border-bottom: 1px solid var(--rule); }
   details.day > summary {
     list-style: none;
     cursor: pointer;
-    padding: .95rem 0;
+    padding: .8rem 0;
     display: grid;
-    grid-template-columns: 2.6rem 1fr auto;
+    grid-template-columns: 2.35rem minmax(0, 1fr) auto;
     align-items: baseline;
-    gap: .6rem;
+    gap: .5rem;
+    min-height: var(--tap);
+    touch-action: manipulation;
   }
   details.day > summary::-webkit-details-marker { display: none; }
+  details.day > summary:active { opacity: .6; }
   .daynum {
     font-family: var(--f-data);
-    font-size: .8rem;
+    font-size: .78rem;
     font-weight: 600;
     color: var(--soca);
     letter-spacing: .04em;
   }
-  .daytitle {
-    font-family: var(--f-display);
-    font-size: 1.15rem;
-    line-height: 1.25;
-  }
+  .daytitle { font-family: var(--f-display); font-size: 1.1rem; line-height: 1.25; }
   .daydate {
     font-family: var(--f-data);
-    font-size: .65rem;
+    font-size: .62rem;
     color: var(--ink-faint);
     letter-spacing: .06em;
     white-space: nowrap;
   }
   details.day[open] > summary .daytitle { color: var(--soca); }
-  .daybody { padding: 0 0 1.5rem 2.6rem; }
+  details.day.is-today { background: var(--soca-lift); }
+  details.day.is-today .daydate { color: var(--soca); font-weight: 600; }
+  .daybody { padding: 0 0 1.4rem 2.35rem; }
   .daymeta {
     font-family: var(--f-data);
-    font-size: .7rem;
+    font-size: .68rem;
     color: var(--ink-soft);
-    letter-spacing: .04em;
-    display: flex;
-    flex-wrap: wrap;
-    gap: .2rem .9rem;
-    margin: 0 0 1rem;
-    padding-bottom: .8rem;
+    letter-spacing: .03em;
+    display: flex; flex-wrap: wrap;
+    gap: .15rem .8rem;
+    margin: 0 0 .9rem;
+    padding-bottom: .75rem;
     border-bottom: 1px dashed var(--rule);
   }
-  ol.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: .9rem; }
+
+  ol.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: .85rem; }
   ol.steps li {
     display: grid;
-    grid-template-columns: 3.2rem 1fr;
-    gap: .7rem;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: .6rem;
     align-items: start;
   }
   ol.steps .t {
     font-family: var(--f-data);
-    font-size: .72rem;
+    font-size: .7rem;
     font-weight: 600;
     color: var(--ink-faint);
     font-variant-numeric: tabular-nums;
-    padding-top: .18rem;
+    padding-top: .2rem;
   }
-  ol.steps .d { font-size: .94rem; line-height: 1.55; }
-  ol.steps .d b { color: var(--ink); }
+  ol.steps .d { font-size: .93rem; line-height: 1.55; min-width: 0; }
   .tag {
     display: inline-block;
     font-family: var(--f-data);
-    font-size: .62rem;
-    letter-spacing: .06em;
-    padding: .08rem .4rem;
+    font-size: .6rem;
+    letter-spacing: .05em;
+    padding: .1rem .4rem;
     border-radius: 3px;
     background: var(--soca-lift);
     color: var(--soca);
-    margin-left: .35rem;
+    margin-left: .3rem;
     white-space: nowrap;
   }
   .tag.free { background: var(--surface-2); color: var(--ink-soft); }
 
-  /* ---------- tables ---------- */
-  .tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: .88rem;
-    min-width: 20rem;
+  /* ============ tables ============ */
+  .tablewrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    max-width: 100%;
   }
+  table { width: 100%; border-collapse: collapse; font-size: .87rem; }
   th {
     text-align: left;
     font-family: var(--f-data);
-    font-size: .62rem;
+    font-size: .6rem;
     letter-spacing: .12em;
     text-transform: uppercase;
     color: var(--ink-faint);
     font-weight: 500;
-    padding: .5rem .6rem .5rem 0;
+    padding: .45rem .5rem .45rem 0;
     border-bottom: 1px solid var(--ink-faint);
   }
-  td {
-    padding: .55rem .6rem .55rem 0;
-    border-bottom: 1px solid var(--rule);
-    vertical-align: top;
-  }
-  td.num {
+  td { padding: .5rem .5rem .5rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  td.num, th.num {
     font-family: var(--f-data);
     font-variant-numeric: tabular-nums;
     text-align: right;
@@ -405,528 +442,1152 @@
     border-bottom: none;
     border-top: 2px solid var(--ink);
     font-weight: 700;
-    padding-top: .7rem;
+    padding-top: .6rem;
   }
 
-  /* ---------- checklist ---------- */
-  .check { display: grid; gap: .1rem; }
-  .check label {
+  /* ============ controls: steppers, toggles, inputs ============ */
+  .field {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: .5rem;
+    padding: .6rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .field .lab { font-size: .93rem; line-height: 1.35; min-width: 0; }
+  .field .lab small { display: block; font-size: .74rem; color: var(--ink-faint); }
+  .stepper { display: flex; align-items: center; gap: .35rem; flex: none; }
+  .stepper button {
+    -webkit-appearance: none;
+    appearance: none;
+    width: var(--tap); height: var(--tap);
+    min-width: var(--tap);
+    border-radius: 50%;
+    border: 1px solid var(--rule);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 1.15rem;
+    line-height: 1;
+    font-family: var(--f-data);
+    cursor: pointer;
+    touch-action: manipulation;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .stepper button:active { background: var(--soca-lift); border-color: var(--soca); }
+  .stepper output {
+    font-family: var(--f-data);
+    font-size: .95rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    min-width: 3.6rem;
+    text-align: center;
+  }
+
+  .chips { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .3rem; }
+  .chip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    min-height: var(--tap);
+    padding: .4rem .8rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--surface);
+    font-size: .85rem;
+    cursor: pointer;
+    touch-action: manipulation;
+    user-select: none;
+  }
+  .chip input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .chip .price {
+    font-family: var(--f-data);
+    font-size: .74rem;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+  /* .is-on is set in JS: :has() only landed in Safari 15.4, the class covers older iPhones */
+  .chip.is-on {
+    border-color: var(--soca);
+    background: var(--soca-lift);
+    color: var(--soca);
+  }
+  .chip.is-on .price { color: var(--soca); }
+  .chip:focus-within { outline: 2px solid var(--soca); outline-offset: 2px; }
+
+  /* live readout */
+  .readout {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    margin-top: 1.1rem;
+  }
+  .readout .big {
+    font-family: var(--f-data);
+    font-size: clamp(2rem, 11vw, 2.7rem);
+    font-weight: 600;
+    letter-spacing: -.03em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .readout .cap {
+    font-family: var(--f-data);
+    font-size: .62rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display: block;
+    margin-bottom: .3rem;
+  }
+  .verdict {
+    font-size: .88rem;
+    margin-top: .5rem;
+    font-weight: 600;
+  }
+  .verdict.ok { color: var(--soca); }
+  .verdict.over { color: var(--blaze); }
+
+  .meter {
+    height: .5rem;
+    border-radius: 999px;
+    background: var(--surface-2);
+    overflow: hidden;
+    margin-top: .8rem;
+  }
+  .meter i {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: var(--soca);
+    border-radius: 999px;
+    transition: width .3s ease;
+  }
+  .meter.over i { background: var(--blaze); }
+
+  .split {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .8rem;
+    margin-top: .9rem;
+    padding-top: .9rem;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .split div { min-width: 0; }
+  .split .k {
+    font-family: var(--f-data);
+    font-size: .6rem;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display: block;
+  }
+  .split .v {
+    font-family: var(--f-data);
+    font-size: 1.05rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* expense rows */
+  .spend { display: grid; gap: 0; }
+  .spend .row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 6.5rem;
+    align-items: center;
+    gap: .6rem;
+    padding: .45rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .spend .row .lab { font-size: .9rem; min-width: 0; }
+  .spend .row .lab small {
+    display: block;
+    font-family: var(--f-data);
+    font-size: .65rem;
+    color: var(--ink-faint);
+    letter-spacing: .05em;
+  }
+  .spend input[type="number"] {
+    width: 100%;
+    min-height: var(--tap);
+    font-family: var(--f-data);
+    font-size: 1rem; /* 16px minimum: below this, iOS zooms on focus */
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    padding: .3rem .55rem;
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+    background: var(--surface);
+    color: var(--ink);
+    -moz-appearance: textfield;
+  }
+  .spend input[type="number"]::-webkit-outer-spin-button,
+  .spend input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .spend input:focus { outline: 2px solid var(--soca); outline-offset: 1px; border-color: var(--soca); }
+
+  /* ============ checklist ============ */
+  .progress {
     display: flex;
     align-items: baseline;
-    gap: .6rem;
-    padding: .38rem .2rem;
-    border-radius: 3px;
-    font-size: .93rem;
-    cursor: pointer;
-  }
-  .check label:hover { background: var(--surface-2); }
-  .check input {
-    accent-color: var(--soca);
-    width: 1rem; height: 1rem;
-    flex: none;
-    transform: translateY(.12rem);
-  }
-  .check input:checked + span { color: var(--ink-faint); text-decoration: line-through; }
-  .reset {
+    gap: .5rem;
     font-family: var(--f-data);
     font-size: .68rem;
-    letter-spacing: .08em;
+    letter-spacing: .1em;
     text-transform: uppercase;
-    background: none;
+    color: var(--ink-faint);
+    margin-bottom: .5rem;
+  }
+  .progress b { font-size: 1.05rem; color: var(--soca); font-variant-numeric: tabular-nums; letter-spacing: 0; }
+  .check { display: grid; gap: 0; }
+  .check label {
+    display: flex;
+    align-items: flex-start;
+    gap: .65rem;
+    padding: .55rem .3rem;
+    border-radius: 5px;
+    font-size: .93rem;
+    line-height: 1.45;
+    min-height: var(--tap);
+    cursor: pointer;
+    touch-action: manipulation;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .check label:active { background: var(--surface-2); }
+  .check input {
+    accent-color: var(--soca);
+    width: 1.35rem; height: 1.35rem;
+    flex: none;
+    margin: 0;
+    transform: translateY(.05rem);
+  }
+  .check input:checked + span { color: var(--ink-faint); text-decoration: line-through; }
+  .check span { min-width: 0; }
+
+  .btn {
+    font-family: var(--f-data);
+    font-size: .68rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    background: var(--surface);
     border: 1px solid var(--rule);
     color: var(--ink-soft);
     border-radius: 999px;
-    padding: .3rem .8rem;
+    padding: .55rem 1rem;
+    min-height: var(--tap);
     cursor: pointer;
+    touch-action: manipulation;
     margin-top: 1rem;
   }
-  .reset:hover { border-color: var(--blaze); color: var(--blaze); }
+  .btn:active { border-color: var(--blaze); color: var(--blaze); }
 
-  /* ---------- phrasebook ---------- */
+  /* ============ phrasebook ============ */
   .lex {
     display: grid;
     gap: 1px;
     background: var(--rule);
     border: 1px solid var(--rule);
-    border-radius: 4px;
+    border-radius: 5px;
     overflow: hidden;
   }
   .lex div {
     background: var(--surface);
-    padding: .6rem .8rem;
+    padding: .55rem .75rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: .5rem;
     align-items: baseline;
   }
-  .lex .sl {
-    font-family: var(--f-display);
-    font-size: 1rem;
-    font-weight: 600;
-  }
+  .lex .sl { font-family: var(--f-display); font-size: .98rem; font-weight: 600; min-width: 0; }
   .lex .sl small {
     display: block;
     font-family: var(--f-data);
-    font-size: .62rem;
+    font-size: .6rem;
     font-weight: 400;
     color: var(--ink-faint);
     letter-spacing: .03em;
   }
-  .lex .fr { font-size: .88rem; color: var(--ink-soft); }
+  .lex .fr { font-size: .85rem; color: var(--ink-soft); min-width: 0; }
+
+  /* ============ map links ============ */
+  .waypoints { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 5px; overflow: hidden; }
+  .waypoints a {
+    background: var(--surface);
+    padding: .65rem .8rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: .6rem;
+    text-decoration: none;
+    color: inherit;
+    min-height: var(--tap);
+    touch-action: manipulation;
+  }
+  .waypoints a:active { background: var(--surface-2); }
+  .waypoints .wn { font-size: .92rem; min-width: 0; }
+  .waypoints .wn small { display: block; font-family: var(--f-data); font-size: .63rem; color: var(--ink-faint); letter-spacing: .04em; }
+  .waypoints .go {
+    font-family: var(--f-data);
+    font-size: .62rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--soca);
+    white-space: nowrap;
+  }
+
+  /* ============ bottom tab bar ============ */
+  .tabbar {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 50;
+    background: var(--glass);
+    -webkit-backdrop-filter: saturate(160%) blur(16px);
+    backdrop-filter: saturate(160%) blur(16px);
+    border-top: 1px solid var(--rule);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  [data-app="off"] .tabbar { display: none; }
+  .tabbar-in {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  .tabbar button {
+    -webkit-appearance: none;
+    appearance: none;
+    background: none;
+    border: 0;
+    padding: .4rem .15rem .45rem;
+    min-height: var(--tabbar);
+    color: var(--ink-faint);
+    font-family: var(--f-body);
+    font-size: .62rem;
+    letter-spacing: .02em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .15rem;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: color .15s;
+  }
+  .tabbar button svg { width: 1.35rem; height: 1.35rem; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .tabbar button[aria-selected="true"] { color: var(--soca); }
+  .tabbar button:active { opacity: .55; }
+
+  main { padding-bottom: calc(var(--tabbar) + 1.5rem + env(safe-area-inset-bottom)); }
+  [data-app="off"] main { padding-bottom: 2rem; }
 
   footer {
-    margin-top: 3.5rem;
-    padding: 2rem 0 3rem;
+    margin-top: 2.5rem;
+    padding: 1.6rem 0 1rem;
     border-top: 1px solid var(--rule);
-    font-size: .8rem;
+    font-size: .78rem;
+    line-height: 1.55;
     color: var(--ink-faint);
   }
-  footer p { margin: .3rem 0; }
+  footer p { margin: .35rem 0; }
 
   a { color: var(--soca); }
-  :focus-visible { outline: 2px solid var(--soca); outline-offset: 2px; }
+  :focus-visible { outline: 2px solid var(--soca); outline-offset: 2px; border-radius: 3px; }
 
-  @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; transition: none !important; }
+  @media (min-width: 48rem) {
+    :root { --pad: 1.5rem; --pad-r: 1.5rem; }
+    body { font-size: 1.05rem; }
   }
 </style>
 
-<header class="hero">
-  <div class="wrap">
-    <p class="eyebrow"><span class="blaze"></span> Carnet de terrain</p>
-    <h1>Slovenie<br><em>en boucle</em></h1>
-    <p class="dek">Du lundi 7 au dimanche 13 septembre 2026. Bled, Bohinj, le col du Vrsic, la Soca, Skocjan, Ljubljana.</p>
-    <div class="stats">
-      <div class="stat"><b>7</b><span>jours</span></div>
-      <div class="stat"><b>700</b><span>km</span></div>
-      <div class="stat"><b>600 €</b><span>par pers.</span></div>
-    </div>
+<div class="topbar">
+  <div class="topbar-in">
+    <span class="mark"><span class="blaze"></span> Slovenie . 7-13 sept 2026</span>
+    <span class="now" id="now">chargement</span>
   </div>
-</header>
+</div>
 
-<nav class="rail" aria-label="Navigation rapide">
-  <div class="rail-scroll">
-    <a href="#essentiel">Essentiel</a>
-    <a href="#j1">J1 Bled</a>
-    <a href="#j2">J2 Vintgar</a>
-    <a href="#j3">J3 Montagne</a>
-    <a href="#j4">J4 Vrsic</a>
-    <a href="#j5">J5 Soca</a>
-    <a href="#j6">J6 Skocjan</a>
-    <a href="#j7">J7 Ljubljana</a>
-    <a href="#prix">Prix</a>
-    <a href="#valise">Valise</a>
-    <a href="#mots">Slovene</a>
-    <a href="#pluie">S'il pleut</a>
+<main id="app">
+
+  <!-- =================== JOURS =================== -->
+  <div class="panel is-active" id="p-jours" role="tabpanel" aria-labelledby="t-jours">
+
+    <div class="hero">
+      <div class="wrap">
+        <p class="eyebrow"><span class="blaze"></span> Carnet de terrain</p>
+        <h1>Slovenie<br><em>en boucle</em></h1>
+        <p class="dek">Bled, Bohinj, le col du Vrsic, la Soca, Skocjan, Ljubljana. Sept jours, deux personnes, une petite voiture.</p>
+        <div class="stats">
+          <div class="stat"><b>7</b><span>jours</span></div>
+          <div class="stat"><b>700</b><span>km</span></div>
+          <div class="stat"><b>600 €</b><span>par pers.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="block wrap">
+      <h2><span class="blaze"></span> Les sept jours</h2>
+      <p class="sub">Touchez un jour pour l'ouvrir. Le jour en cours s'ouvre tout seul pendant le voyage.</p>
+
+      <details class="day" id="j1" data-day="0">
+        <summary>
+          <span class="daynum">J1</span>
+          <span class="daytitle">Arrivee et premier lac</span>
+          <span class="daydate">LUN 7</span>
+        </summary>
+        <div class="daybody">
+          <p class="daymeta"><span>35 km</span><span>35 min de route</span><span>Nuit : Bled / Bohinjska Bistrica</span></p>
+          <ol class="steps">
+            <li><span class="t">arrivee</span><span class="d">Aeroport <b>Joze Pucnik</b>. Recuperation de la voiture : <b>filmez-la avant de partir</b>, en gros plan sur chaque rayure. Demandez pour la vignette.</span></li>
+            <li><span class="t">+40 min</span><span class="d">Gros ravitaillement au <b>Hofer ou Lidl de Lesce</b>, sur la route de Bled. 30 a 40 € pour deux, ca tient trois jours.</span></li>
+            <li><span class="t">15h00</span><span class="d"><b>Tour du lac de Bled a pied.</b> 6 km, plat, 1h30. Dans le sens des aiguilles d'une montre pour garder l'ile en face.<span class="tag free">gratuit</span></span></li>
+            <li><span class="t">17h00</span><span class="d">Une <b>kremsnita</b> sur une terrasse. Le millefeuille invente au Park Hotel en 1953. Un pour deux, il est enorme.<span class="tag">6 €</span></span></li>
+            <li><span class="t">18h00</span><span class="d"><b>Montee a Ojstrica</b> depuis Velika Zaka. 25 min, raide, cordes sur la fin. Le lac, l'ile et le chateau dans le meme cadre.<span class="tag free">gratuit</span></span></li>
+            <li><span class="t">19h30</span><span class="d">Coucher de soleil. Enchainez sur <b>Mala Osojnica</b>, 15 min plus haut, si vous avez encore des jambes.</span></li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="day" id="j2" data-day="1">
+        <summary>
+          <span class="daynum">J2</span>
+          <span class="daytitle">La riviere et les cascades</span>
+          <span class="daydate">MAR 8</span>
+        </summary>
+        <div class="daybody">
+          <p class="daymeta"><span>60 km</span><span>1h15 de route</span><span>Nuit : meme base</span></p>
+          <ol class="steps">
+            <li><span class="t">08h00</span><span class="d"><b>Gorges de Vintgar</b>, creneau reserve a l'avance. Parking central LIP, navette electrique, casque obligatoire. 1,6 km de passerelles au-dessus de la Radovna, jusqu'a la cascade de Sum.<span class="tag">15 €</span></span></li>
+            <li><span class="t">10h00</span><span class="d">Option : la <b>gorge de Pokljuka</b> juste a cote. Canyon sec, arche naturelle, personne.<span class="tag free">gratuit</span></span></li>
+            <li><span class="t">11h00</span><span class="d"><b>Radovljica.</b> Place medievale, musee de l'apiculture, et on y mange deux fois moins cher qu'a Bled.</span></li>
+            <li><span class="t">13h00</span><span class="d">Route vers le <b>lac de Bohinj</b>. Pique-nique cote Ribcev Laz, au pont de pierre.</span></li>
+            <li><span class="t">15h00</span><span class="d"><b>Gorge de Mostnica</b> depuis Stara Fuzina. Cherchez <b>l'Elephant</b>, la roche qui en dessine un exactement.<span class="tag">3 €</span></span></li>
+            <li><span class="t">17h30</span><span class="d"><b>Baignade dans le lac de Bohinj.</b> Plus froid qu'a Bled, transparent au point de voir le fond a 4 m.</span></li>
+          </ol>
+          <div class="alert">Mostnica est <b>gratuite avant 8h et apres 17h</b>, et gratuite avec la Bohinj Card que votre hebergement doit vous donner.</div>
+        </div>
+      </details>
+
+      <details class="day" id="j3" data-day="2">
+        <summary>
+          <span class="daynum">J3</span>
+          <span class="daytitle">La montagne</span>
+          <span class="daydate">MER 9</span>
+        </summary>
+        <div class="daybody">
+          <p class="daymeta"><span>40 km max</span><span>Journee de marche</span><span>Nuit : meme base</span></p>
+          <p style="font-size:.93rem;margin:0 0 .9rem">Deux versions. <b>Regardez la meteo la veille au soir et choisissez.</b></p>
+          <ol class="steps">
+            <li><span class="t">A</span><span class="d"><b>Telecabine de Vogel.</b> 1535 m en 4 minutes, panorama sur le Triglav et tout le lac. Puis rando facile vers <b>Sija</b> (1880 m, 1h30). Verifiez la webcam le matin : par nuages bas, vous payez pour du brouillard.<span class="tag">33 €</span></span></li>
+            <li><span class="t">B</span><span class="d"><b>Rando du Vogar</b> depuis Stara Fuzina. 550 m de denivele, 3h30 aller-retour, et une vue plongeante sur le lac qui vaut celle de la telecabine.<span class="tag free">gratuit</span></span></li>
+            <li><span class="t">15h30</span><span class="d"><b>Cascade de Savica.</b> 500 marches, 25 min de montee. 78 m qui jaillissent de la paroi en forme de A. C'est la source de la Sava.<span class="tag">4 € + 5 € parking</span></span></li>
+            <li><span class="t">17h30</span><span class="d">Retour au lac. Baignade, lecture, rien.</span></li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="day" id="j4" data-day="3">
+        <summary>
+          <span class="daynum">J4</span>
+          <span class="daytitle">Le col et la source de la Soca</span>
+          <span class="daydate">JEU 10</span>
+        </summary>
+        <div class="daybody">
+          <p class="daymeta"><span>135 km</span><span>3h de route</span><span>Nuit : Kobarid</span><span>La journee du voyage</span></p>
+          <ol class="steps">
+            <li><span class="t">07h30</span><span class="d">Depart de Bohinj. <b>Partez tot</b> : le parking du sommet est plein a 9h30.</span></li>
+            <li><span class="t">09h00</span><span class="d"><b>Lac de Jasna</b>, a l'entree de Kranjska Gora. Bleu irreel, statue du bouquetin dore. <b>Plein d'essence ici</b>, il n'y a plus rien pendant 60 km.</span></li>
+            <li><span class="t">09h45</span><span class="d"><b>Chapelle russe</b>, lacet n°8. Batie en 1916 par des prisonniers de guerre russes pour leurs camarades ensevelis sous une avalanche pendant la construction de la route.</span></li>
+            <li><span class="t">10h30</span><span class="d"><b>Sommet du Vrsic, 1611 m.</b> Si vous avez de l'energie : <b>Slemenova Spica</b>, 2h30 aller-retour, une prairie d'altitude face au Jalovec. <b>La plus belle balade facile des Alpes juliennes.</b><span class="tag">parking 3 €/h</span></span></li>
+            <li><span class="t">13h00</span><span class="d"><b>Source de la Soca.</b> 15 min de marche, les 50 derniers metres sur cables fixes : rangez le telephone, il faut les deux mains.<span class="tag free">gratuit</span></span></li>
+            <li><span class="t">15h30</span><span class="d"><b>Velika korita.</b> La riviere dans une faille de 15 m de profondeur et 2 m de large. <b>Le moment photo du voyage.</b><span class="tag free">gratuit</span></span></li>
+            <li><span class="t">17h00</span><span class="d"><b>Cascade de Boka</b>, 106 m, la plus haute du pays. Le belvedere a 5 min du pont suffit : en septembre le debit est faible.<span class="tag free">gratuit</span></span></li>
+            <li><span class="t">18h00</span><span class="d">Arrivee a <b>Kobarid</b>, installation pour deux nuits.</span></li>
+          </ol>
+          <div class="alert">Dans les lacets, <b>la voiture qui monte a la priorite</b>. En descente, passez en 2e et laissez le frein moteur travailler sur les 24 lacets. Verifiez l'ouverture du col sur <b>promet.si</b> le matin meme.</div>
+        </div>
+      </details>
+
+      <details class="day" id="j5" data-day="4">
+        <summary>
+          <span class="daynum">J5</span>
+          <span class="daytitle">La vallee de la Soca a fond</span>
+          <span class="daydate">VEN 11</span>
+        </summary>
+        <div class="daybody">
+          <p class="daymeta"><span>50 km</span><span>Base a Kobarid</span></p>
+          <ol class="steps">
+            <li><span class="t">08h00</span><span class="d"><b>Cascade de Kozjak.</b> 30 min de marche depuis Kamp Koren. Elle tombe de 15 m dans une <b>chambre de pierre fermee</b>, une cavite ou la lumiere entre par le haut. <b>Y aller a 8h fait toute la difference</b> : apres 10h il y a la queue sur la passerelle.<span class="tag">5 €</span></span></li>
+            <li><span class="t">10h00</span><span class="d"><b>Pont Napoleon</b> sur la Soca turquoise, puis Kobarid.</span></li>
+            <li><span class="t">10h30</span><span class="d">Le <b>sentier historique de Kobarid</b> : 5 km, gratuit, par l'ossuaire italien et les tranchees du front de l'Isonzo. Ou le <b>musee de Kobarid</b>, un des meilleurs d'Europe sur 14-18.<span class="tag">8 €</span></span></li>
+            <li><span class="t">12h30</span><span class="d">Dejeuner. Gouter les <b>kobariski struklji</b>, roules aux noix et cannelle, specialite absolue de la ville.</span></li>
+            <li><span class="t">14h30</span><span class="d"><b>Gorges de Tolmin.</b> Tete d'ours, pont du Diable a 60 m, source thermale. Le point le plus bas du parc du Triglav.<span class="tag">8 €</span></span></li>
+            <li><span class="t">16h30</span><span class="d"><b>Baignade dans la Soca</b> sous le pont Napoleon. 11 °C : un choc, puis une euphorie. Ne sautez jamais sans avoir verifie le fond.</span></li>
+            <li><span class="t">18h00</span><span class="d"><b>Courses pour le week-end</b> a Kobarid ou Tolmin. Dimanche tout sera ferme.</span></li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="day" id="j6" data-day="5">
+        <summary>
+          <span class="daynum">J6</span>
+          <span class="daytitle">La grotte, puis la ville</span>
+          <span class="daydate">SAM 12</span>
+        </summary>
+        <div class="daybody">
+          <p class="daymeta"><span>180 km</span><span>2h45 de route</span><span>Nuit : Ljubljana</span></p>
+          <ol class="steps">
+            <li><span class="t">08h30</span><span class="d"><b>Most na Soci</b>, le lac emeraude du barrage. Arret photo.</span></li>
+            <li><span class="t">09h30</span><span class="d"><b>Idrija</b> (option). Ville UNESCO du mercure. Meme sans visiter la mine, arretez-vous manger des <b>zlikrofi</b>, les raviolis de pomme de terre, premier plat slovene protege par l'UE.</span></li>
+            <li><span class="t">13h00</span><span class="d"><b>Grottes de Skocjan.</b> Un <b>canyon souterrain de 146 m de haut</b>, traverse sur une passerelle a 45 m au-dessus du torrent. Le plus grand connu au monde, UNESCO. Prevoyez un pull : il fait 12 °C. Photos interdites pendant la visite.<span class="tag">24 €</span></span></li>
+            <li><span class="t">15h30</span><span class="d">A la sortie, faites le <b>sentier du canyon exterieur</b>, 20 min, gratuit, et que presque personne ne fait.</span></li>
+            <li><span class="t">16h00</span><span class="d"><b>Chateau de Predjama</b>, encastre dans 123 m de falaise. La vue depuis le parking donne toute la photo : inutile d'entrer.<span class="tag free">gratuit dehors</span></span></li>
+            <li><span class="t">20h00</span><span class="d">Premiere soiree a <b>Ljubljana</b>, sur les quais de la Ljubljanica. C'est le soir que la ville est la meilleure.</span></li>
+          </ol>
+          <div class="alert"><b>Skocjan ou Postojna, jamais les deux.</b> Postojna coute 30,90 €, c'est un train touristique et des concretions. Skocjan coute 24 €, c'est un gouffre. Pour ce voyage, Skocjan gagne.</div>
+        </div>
+      </details>
+
+      <details class="day" id="j7" data-day="6">
+        <summary>
+          <span class="daynum">J7</span>
+          <span class="daytitle">Ljubljana et retour</span>
+          <span class="daydate">DIM 13</span>
+        </summary>
+        <div class="daybody">
+          <p class="daymeta"><span>26 km</span><span>Magasins fermes</span><span>Vol le soir</span></p>
+          <ol class="steps">
+            <li><span class="t">09h30</span><span class="d"><b>Montee au chateau a pied</b>, 15 min. Cour, remparts et vue sont <b>gratuits</b> : seuls le musee et la tour sont payants. Le funiculaire a 4 € ne sert a rien.<span class="tag free">gratuit</span></span></li>
+            <li><span class="t">11h00</span><span class="d">Le <b>marche aux puces du dimanche</b> sur les quais de Breg. Le bon endroit pour un souvenir qui ne soit pas un aimant de frigo.</span></li>
+            <li><span class="t">12h00</span><span class="d">Le centre a pied : place Preseren, <b>Triple Pont</b> de Plecnik, <b>pont des Dragons</b>, les portes de bronze de la cathedrale, les ruelles de Gornji trg. Tout tient dans 800 m.</span></li>
+            <li><span class="t">15h00</span><span class="d"><b>Parc Tivoli</b> et son allee de photos geantes, ou <b>Metelkova</b>, l'ancienne caserne devenue squat d'artistes, couverte de fresques du sol au toit.</span></li>
+            <li><span class="t">17h00</span><span class="d"><b>Restitution de la voiture.</b> Plein a Vodice ou Brnik juste avant. Comptez 30 min d'etat des lieux. Refilmez la voiture.</span></li>
+          </ol>
+        </div>
+      </details>
+
+      <h3>Les cinq choses</h3>
+      <ol class="steps" style="gap:1rem">
+        <li><span class="t">01</span><span class="d"><b>Ojstrica au coucher du soleil</b>, au-dessus du lac de Bled. 25 min de montee, zero euro.</span></li>
+        <li><span class="t">02</span><span class="d"><b>Les Velika korita de la Soca.</b> Ce vert n'existe nulle part ailleurs.</span></li>
+        <li><span class="t">03</span><span class="d"><b>La cascade de Kozjak a 8h</b>, seules dans sa chambre de pierre.</span></li>
+        <li><span class="t">04</span><span class="d"><b>Le canyon souterrain de Skocjan</b>, sur la passerelle a 45 m au-dessus du torrent.</span></li>
+        <li><span class="t">05</span><span class="d"><b>Le col du Vrsic dans la lumiere du matin</b>, avec la chapelle russe.</span></li>
+      </ol>
+    </section>
   </div>
-</nav>
 
-<main class="wrap">
+  <!-- =================== ARGENT =================== -->
+  <div class="panel" id="p-argent" role="tabpanel" aria-labelledby="t-argent">
+    <section class="block wrap">
+      <h2><span class="blaze"></span> Simulateur de budget</h2>
+      <p class="sub">Reglez vos hypotheses, le total par personne se recalcule. Hors vol, a deux, tout partage.</p>
 
-  <section id="essentiel">
-    <h2><span class="blaze"></span> L'essentiel</h2>
-    <p class="sub">Ce qu'il faut avoir sous les yeux quand on est au bord de la route.</p>
-
-    <div class="sos">
-      <div><div class="n">112</div><div class="l">Urgences, secours en montagne</div></div>
-      <div><div class="n">113</div><div class="l">Police</div></div>
-      <div><div class="n">1987</div><div class="l">Depannage AMZS</div></div>
-      <div><div class="n">1970</div><div class="l">Info routiere</div></div>
-    </div>
-
-    <h3>A verifier des le premier jour</h3>
-    <div class="cards two">
-      <div class="card">
-        <span class="k">Vignette autoroute</span>
-        <div class="v">Demandez au loueur si elle est incluse, puis verifiez la plaque sur <strong>evinjeta.dars.si</strong>. Sinon <strong>16 €</strong> pour 7 jours. Amende : <strong>300 a 800 €</strong>.</div>
+      <div class="field">
+        <span class="lab">Nuit pour deux <small>6 nuits</small></span>
+        <span class="stepper">
+          <button type="button" data-step="-5" data-target="nuit" aria-label="Baisser le prix de la nuit">-</button>
+          <output id="out-nuit">50 €</output>
+          <button type="button" data-step="5" data-target="nuit" aria-label="Augmenter le prix de la nuit">+</button>
+        </span>
       </div>
-      <div class="card">
-        <span class="k">Feux de croisement</span>
-        <div class="v">Obligatoires <strong>jour et nuit, toute l'annee</strong>. Verifiez qu'ils sont bien allumes en sortant du parking.</div>
+      <div class="field">
+        <span class="lab">Nourriture par jour <small>et par personne, 7 jours</small></span>
+        <span class="stepper">
+          <button type="button" data-step="-2" data-target="food" aria-label="Baisser le budget nourriture">-</button>
+          <output id="out-food">20 €</output>
+          <button type="button" data-step="2" data-target="food" aria-label="Augmenter le budget nourriture">+</button>
+        </span>
       </div>
-      <div class="card">
-        <span class="k">Carburant</span>
-        <div class="v">SP95 <strong>~1,56 €/L</strong>, diesel <strong>~1,63 €/L</strong>. Plein obligatoire a <strong>Kranjska Gora</strong> avant le Vrsic : rien pendant 60 km.</div>
+      <div class="field">
+        <span class="lab">Voiture pour la semaine <small>pour deux</small></span>
+        <span class="stepper">
+          <button type="button" data-step="-20" data-target="car" aria-label="Baisser le prix de la voiture">-</button>
+          <output id="out-car">250 €</output>
+          <button type="button" data-step="20" data-target="car" aria-label="Augmenter le prix de la voiture">+</button>
+        </span>
       </div>
-      <div class="card">
-        <span class="k">Alcool au volant</span>
-        <div class="v"><strong>0,5 g/L</strong>, et <strong>0,0</strong> si moins de 21 ans ou moins de 3 ans de permis.</div>
+
+      <h3>Les extras</h3>
+      <div class="chips" id="extras">
+        <label class="chip"><input type="checkbox" data-cost="33" data-k="x-vogel"> Vogel <span class="price">33 €</span></label>
+        <label class="chip"><input type="checkbox" data-cost="70" data-k="x-raft"> Rafting <span class="price">70 €</span></label>
+        <label class="chip"><input type="checkbox" data-cost="19" data-k="x-grad"> Chateau de Bled <span class="price">19 €</span></label>
+        <label class="chip"><input type="checkbox" data-cost="20" data-k="x-pletna"> Pletna <span class="price">20 €</span></label>
+        <label class="chip"><input type="checkbox" data-cost="8" data-k="x-musee"> Musee de Kobarid <span class="price">8 €</span></label>
+        <label class="chip"><input type="checkbox" data-cost="12" data-k="x-mine"> Mine d'Idrija <span class="price">12 €</span></label>
+        <label class="chip"><input type="checkbox" data-cost="17" data-k="x-predjama"> Predjama interieur <span class="price">17 €</span></label>
       </div>
-      <div class="card">
-        <span class="k">Especes</span>
-        <div class="v">Carte partout, mais gardez <strong>50 a 80 €</strong> en liquide : barque de Bled, parkings de vallee, refuges, fermes.</div>
+
+      <div class="readout">
+        <span class="cap">Total par personne, hors vol</span>
+        <div class="big" id="total">578 €</div>
+        <div class="meter" id="meter"><i></i></div>
+        <p class="verdict ok" id="verdict">Dans la cible des 600 €.</p>
+        <div class="split">
+          <div><span class="k">Fixe (voiture, essence, vignette, parkings, taxe)</span><span class="v" id="s-fixe">198 €</span></div>
+          <div><span class="k">Hebergement</span><span class="v" id="s-lit">150 €</span></div>
+          <div><span class="k">Nourriture</span><span class="v" id="s-food">140 €</span></div>
+          <div><span class="k">Visites et extras</span><span class="v" id="s-vis">90 €</span></div>
+        </div>
       </div>
-      <div class="card">
-        <span class="k">Eau</span>
-        <div class="v">Robinet potable partout, y compris aux fontaines de village et en refuge. <strong>Deux gourdes</strong> = 5 €/jour economises.</div>
+      <p class="sub" style="margin-top:.9rem;font-size:.83rem">Base fixe : essence 35 €, vignette 8 €, parkings 15 €, taxe de sejour 15 €, imprevu 30 €, visites du programme 61,50 €.</p>
+    </section>
+
+    <section class="block wrap">
+      <h2><span class="blaze"></span> Depenses du voyage</h2>
+      <p class="sub">A remplir chaque soir. Le total reste enregistre sur ce telephone.</p>
+
+      <div class="spend" id="spend">
+        <div class="row"><span class="lab">Jour 1 <small>LUN 7 . Bled</small></span><input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="d0" aria-label="Depenses du jour 1"></div>
+        <div class="row"><span class="lab">Jour 2 <small>MAR 8 . Vintgar</small></span><input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="d1" aria-label="Depenses du jour 2"></div>
+        <div class="row"><span class="lab">Jour 3 <small>MER 9 . Montagne</small></span><input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="d2" aria-label="Depenses du jour 3"></div>
+        <div class="row"><span class="lab">Jour 4 <small>JEU 10 . Vrsic</small></span><input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="d3" aria-label="Depenses du jour 4"></div>
+        <div class="row"><span class="lab">Jour 5 <small>VEN 11 . Soca</small></span><input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="d4" aria-label="Depenses du jour 5"></div>
+        <div class="row"><span class="lab">Jour 6 <small>SAM 12 . Skocjan</small></span><input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="d5" aria-label="Depenses du jour 6"></div>
+        <div class="row"><span class="lab">Jour 7 <small>DIM 13 . Ljubljana</small></span><input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="d6" aria-label="Depenses du jour 7"></div>
+        <div class="row"><span class="lab">Paye avant le depart <small>voiture, hebergements</small></span><input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="pre" aria-label="Depenses payees avant le depart"></div>
       </div>
-    </div>
 
-    <div class="alert" style="margin-top:1rem">
-      <b>Dimanche 13, tout est ferme.</b> Les supermarches slovenes ne travaillent pas le dimanche. Faites les courses <b>samedi 12 avant 17h</b>, a Kobarid ou Tolmin. Restaurants, cafes et musees, eux, sont ouverts.
-    </div>
-
-    <h3>Meteo de septembre</h3>
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>Zone</th><th class="num">Jour</th><th class="num">Nuit</th><th class="num">Eau</th></tr></thead>
-        <tbody>
-          <tr><td>Ljubljana, Bled</td><td class="num">21 °C</td><td class="num">11 °C</td><td class="num">20-22 °C</td></tr>
-          <tr><td>Alpes, Vrsic, Bohinj</td><td class="num">17-19 °C</td><td class="num">8-10 °C</td><td class="num">18-20 °C</td></tr>
-          <tr><td>Karst, cote</td><td class="num">23-25 °C</td><td class="num">14-16 °C</td><td class="num">23 °C</td></tr>
-          <tr><td>La Soca</td><td class="num">-</td><td class="num">-</td><td class="num">10-13 °C</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="sub" style="margin-top:.8rem">Environ 12 jours de pluie sur le mois : comptez 1 ou 2 journees degradees. Le brouillard de fond de vallee se leve entre 9h et 11h. Appli a consulter chaque soir : <strong>ARSO Vreme</strong>.</p>
-  </section>
-
-  <section id="jours">
-    <h2><span class="blaze"></span> Les sept jours</h2>
-    <p class="sub">Touchez un jour pour l'ouvrir. Les horaires sont indicatifs : la vraie regle est de partir tot.</p>
-
-    <details class="day" id="j1" open>
-      <summary>
-        <span class="daynum">J1</span>
-        <span class="daytitle">Arrivee et premier lac</span>
-        <span class="daydate">LUN 7</span>
-      </summary>
-      <div class="daybody">
-        <p class="daymeta"><span>35 km</span><span>35 min de route</span><span>Nuit : Bled / Bohinjska Bistrica</span></p>
-        <ol class="steps">
-          <li><span class="t">arrivee</span><span class="d">Aeroport <b>Joze Pucnik</b>. Recuperation de la voiture : <b>filmez-la avant de partir</b>, en gros plan sur chaque rayure. Demandez pour la vignette.</span></li>
-          <li><span class="t">+40 min</span><span class="d">Gros ravitaillement au <b>Hofer ou Lidl de Lesce</b>, sur la route de Bled. 30 a 40 € pour deux, ca tient trois jours.</span></li>
-          <li><span class="t">15h00</span><span class="d"><b>Tour du lac de Bled a pied.</b> 6 km, plat, 1h30. Dans le sens des aiguilles d'une montre pour garder l'ile en face.<span class="tag free">gratuit</span></span></li>
-          <li><span class="t">17h00</span><span class="d">Une <b>kremsnita</b> sur une terrasse. Le millefeuille invente au Park Hotel en 1953. Un pour deux, il est enorme.<span class="tag">6 €</span></span></li>
-          <li><span class="t">18h00</span><span class="d"><b>Montee a Ojstrica</b> depuis Velika Zaka. 25 min, raide, cordes sur la fin. Le lac, l'ile et le chateau dans le meme cadre.<span class="tag free">gratuit</span></span></li>
-          <li><span class="t">19h30</span><span class="d">Coucher de soleil. Enchainez sur <b>Mala Osojnica</b>, 15 min plus haut, si vous avez encore des jambes.</span></li>
-        </ol>
+      <div class="readout">
+        <span class="cap">Depense par personne</span>
+        <div class="big" id="spent">0 €</div>
+        <div class="meter" id="spentmeter"><i></i></div>
+        <p class="verdict ok" id="spentverdict">Il reste 600 € sur l'enveloppe.</p>
       </div>
-    </details>
+      <button class="btn" id="resetSpend" type="button">Remettre a zero</button>
+    </section>
 
-    <details class="day" id="j2">
-      <summary>
-        <span class="daynum">J2</span>
-        <span class="daytitle">La riviere et les cascades</span>
-        <span class="daydate">MAR 8</span>
-      </summary>
-      <div class="daybody">
-        <p class="daymeta"><span>60 km</span><span>1h15 de route</span><span>Nuit : meme base</span></p>
-        <ol class="steps">
-          <li><span class="t">08h00</span><span class="d"><b>Gorges de Vintgar</b>, creneau reserve a l'avance. Parking central LIP, navette electrique, casque obligatoire. 1,6 km de passerelles au-dessus de la Radovna, jusqu'a la cascade de Sum.<span class="tag">15 €</span></span></li>
-          <li><span class="t">10h00</span><span class="d">Option : la <b>gorge de Pokljuka</b> juste a cote. Canyon sec, arche naturelle, personne.<span class="tag free">gratuit</span></span></li>
-          <li><span class="t">11h00</span><span class="d"><b>Radovljica.</b> Place medievale, musee de l'apiculture, et on y mange deux fois moins cher qu'a Bled.</span></li>
-          <li><span class="t">13h00</span><span class="d">Route vers le <b>lac de Bohinj</b>. Pique-nique cote Ribcev Laz, au pont de pierre.</span></li>
-          <li><span class="t">15h00</span><span class="d"><b>Gorge de Mostnica</b> depuis Stara Fuzina. Cherchez <b>l'Elephant</b>, la roche qui en dessine un exactement.<span class="tag">3 €</span></span></li>
-          <li><span class="t">17h30</span><span class="d"><b>Baignade dans le lac de Bohinj.</b> Plus froid qu'a Bled, transparent au point de voir le fond a 4 m.</span></li>
-        </ol>
-        <div class="alert" style="margin-top:1rem">Mostnica est <b>gratuite avant 8h et apres 17h</b>, et gratuite avec la Bohinj Card que votre hebergement doit vous donner.</div>
+    <section class="block wrap">
+      <h2><span class="blaze"></span> Les prix verifies</h2>
+      <p class="sub">Releves en juillet 2026. Revoyez Vintgar, Skocjan et Tolmin avant de partir.</p>
+
+      <h3>Entrees du circuit</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Site</th><th class="num">Prix</th></tr></thead>
+          <tbody>
+            <tr><td>Vintgar, pass tout compris</td><td class="num">15 €</td></tr>
+            <tr><td>Mostnica</td><td class="num">3 €</td></tr>
+            <tr><td>Savica (+ parking)</td><td class="num">6,50 €</td></tr>
+            <tr><td>Kozjak</td><td class="num">5 €</td></tr>
+            <tr><td>Gorges de Tolmin, septembre</td><td class="num">8 €</td></tr>
+            <tr><td>Grottes de Skocjan</td><td class="num">24 €</td></tr>
+            <tr class="total"><td>Programme retenu</td><td class="num">61,50 €</td></tr>
+          </tbody>
+        </table>
       </div>
-    </details>
 
-    <details class="day" id="j3">
-      <summary>
-        <span class="daynum">J3</span>
-        <span class="daytitle">La montagne</span>
-        <span class="daydate">MER 9</span>
-      </summary>
-      <div class="daybody">
-        <p class="daymeta"><span>40 km max</span><span>Journee de marche</span><span>Nuit : meme base</span></p>
-        <p style="font-size:.94rem;margin:0 0 1rem">Deux versions. <b>Regardez la meteo la veille au soir et choisissez.</b></p>
-        <ol class="steps">
-          <li><span class="t">A</span><span class="d"><b>Telecabine de Vogel.</b> 1535 m en 4 minutes, panorama sur le Triglav et tout le lac. Puis rando facile vers <b>Sija</b> (1880 m, 1h30). Verifiez la webcam le matin : par nuages bas, vous payez pour du brouillard.<span class="tag">33 €</span></span></li>
-          <li><span class="t">B</span><span class="d"><b>Rando du Vogar</b> depuis Stara Fuzina. 550 m de denivele, 3h30 aller-retour, et une vue plongeante sur le lac qui vaut celle de la telecabine.<span class="tag free">gratuit</span></span></li>
-          <li><span class="t">15h30</span><span class="d"><b>Cascade de Savica.</b> 500 marches, 25 min de montee. 78 m qui jaillissent de la paroi en forme de A. C'est la source de la Sava.<span class="tag">4 € + 5 € parking</span></span></li>
-          <li><span class="t">17h30</span><span class="d">Retour au lac. Baignade, lecture, rien.</span></li>
-        </ol>
+      <h3>Ce qu'on laisse de cote</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Site</th><th class="num">Prix</th><th>Pourquoi</th></tr></thead>
+          <tbody>
+            <tr><td>Vogel</td><td class="num">33 €</td><td>La rando du Vogar donne la meme vue pour 0 €</td></tr>
+            <tr><td>Chateau de Bled</td><td class="num">19 €</td><td>La vue sur le chateau vaut mieux que la vue depuis</td></tr>
+            <tr><td>Barque pletna</td><td class="num">20 €</td><td>Une barque a rames a deux revient a 12,50 € chacune</td></tr>
+            <tr><td>Postojna</td><td class="num">30,90 €</td><td>Skocjan est moins cher et plus fort</td></tr>
+            <tr><td>Predjama, interieur</td><td class="num">16,90 €</td><td>La facade se voit entierement du parking</td></tr>
+          </tbody>
+        </table>
       </div>
-    </details>
 
-    <details class="day" id="j4">
-      <summary>
-        <span class="daynum">J4</span>
-        <span class="daytitle">Le col et la source de la Soca</span>
-        <span class="daydate">JEU 10</span>
-      </summary>
-      <div class="daybody">
-        <p class="daymeta"><span>135 km</span><span>3h de route</span><span>Nuit : Kobarid</span><span>La journee du voyage</span></p>
-        <ol class="steps">
-          <li><span class="t">07h30</span><span class="d">Depart de Bohinj. <b>Partez tot</b> : le parking du sommet est plein a 9h30.</span></li>
-          <li><span class="t">09h00</span><span class="d"><b>Lac de Jasna</b>, a l'entree de Kranjska Gora. Bleu irreel, statue du bouquetin dore. <b>Plein d'essence ici</b>, il n'y a plus rien pendant 60 km.</span></li>
-          <li><span class="t">09h45</span><span class="d"><b>Chapelle russe</b>, lacet n°8. Batie en 1916 par des prisonniers de guerre russes pour leurs camarades ensevelis sous une avalanche pendant la construction de la route.</span></li>
-          <li><span class="t">10h30</span><span class="d"><b>Sommet du Vrsic, 1611 m.</b> Si vous avez de l'energie : <b>Slemenova Spica</b>, 2h30 aller-retour, une prairie d'altitude face au Jalovec. <b>La plus belle balade facile des Alpes juliennes.</b><span class="tag">parking 3 €/h</span></span></li>
-          <li><span class="t">13h00</span><span class="d"><b>Source de la Soca.</b> 15 min de marche, les 50 derniers metres sur cables fixes : rangez le telephone, il faut les deux mains.<span class="tag free">gratuit</span></span></li>
-          <li><span class="t">15h30</span><span class="d"><b>Velika korita.</b> La riviere dans une faille de 15 m de profondeur et 2 m de large. <b>Le moment photo du voyage.</b><span class="tag free">gratuit</span></span></li>
-          <li><span class="t">17h00</span><span class="d"><b>Cascade de Boka</b>, 106 m, la plus haute du pays. Le belvedere a 5 min du pont suffit : en septembre le debit est faible.<span class="tag free">gratuit</span></span></li>
-          <li><span class="t">18h00</span><span class="d">Arrivee a <b>Kobarid</b>, installation pour deux nuits.</span></li>
-        </ol>
-        <div class="alert" style="margin-top:1rem">Dans les lacets, <b>la voiture qui monte a la priorite</b>. En descente, passez en 2e et laissez le frein moteur travailler sur les 24 lacets. Verifiez l'ouverture du col sur <b>promet.si</b> le matin meme.</div>
+      <h3>Frais courants</h3>
+      <div class="tablewrap">
+        <table>
+          <tbody>
+            <tr><td>Vignette 7 jours</td><td class="num">16 €</td></tr>
+            <tr><td>Essence SP95 / diesel</td><td class="num">1,56 / 1,63 €/L</td></tr>
+            <tr><td>Parking Savica</td><td class="num">5 € les 3h</td></tr>
+            <tr><td>Parking sommet du Vrsic</td><td class="num">3 €/h</td></tr>
+            <tr><td>Parking Skocjan</td><td class="num">gratuit</td></tr>
+            <tr><td>Taxe de sejour, Ljubljana</td><td class="num">3,91 €/nuit</td></tr>
+            <tr><td>Taxe de sejour, Bled</td><td class="num">3,13 €/nuit</td></tr>
+            <tr><td>Biere pression 0,5 L</td><td class="num">3 a 4 €</td></tr>
+            <tr><td>Burek</td><td class="num">3 a 4 €</td></tr>
+            <tr><td>Plat du jour, midi en semaine</td><td class="num">8 a 12 €</td></tr>
+          </tbody>
+        </table>
       </div>
-    </details>
+    </section>
+  </div>
 
-    <details class="day" id="j5">
-      <summary>
-        <span class="daynum">J5</span>
-        <span class="daytitle">La vallee de la Soca a fond</span>
-        <span class="daydate">VEN 11</span>
-      </summary>
-      <div class="daybody">
-        <p class="daymeta"><span>50 km</span><span>Base a Kobarid</span></p>
-        <ol class="steps">
-          <li><span class="t">08h00</span><span class="d"><b>Cascade de Kozjak.</b> 30 min de marche depuis Kamp Koren. Elle tombe de 15 m dans une <b>chambre de pierre fermee</b>, une cavite ou la lumiere entre par le haut. <b>Y aller a 8h fait toute la difference</b> : apres 10h il y a la queue sur la passerelle.<span class="tag">5 €</span></span></li>
-          <li><span class="t">10h00</span><span class="d"><b>Pont Napoleon</b> sur la Soca turquoise, puis Kobarid.</span></li>
-          <li><span class="t">10h30</span><span class="d">Le <b>sentier historique de Kobarid</b> : 5 km, gratuit, par l'ossuaire italien et les tranchees du front de l'Isonzo. Ou le <b>musee de Kobarid</b>, un des meilleurs d'Europe sur 14-18.<span class="tag">8 €</span></span></li>
-          <li><span class="t">12h30</span><span class="d">Dejeuner. Gouter les <b>kobariski struklji</b>, roules aux noix et cannelle, specialite absolue de la ville.</span></li>
-          <li><span class="t">14h30</span><span class="d"><b>Gorges de Tolmin.</b> Tete d'ours, pont du Diable a 60 m, source thermale. Le point le plus bas du parc du Triglav.<span class="tag">8 €</span></span></li>
-          <li><span class="t">16h30</span><span class="d"><b>Baignade dans la Soca</b> sous le pont Napoleon. 11 °C : un choc, puis une euphorie. Ne sautez jamais sans avoir verifie le fond.</span></li>
-          <li><span class="t">18h00</span><span class="d"><b>Courses pour le week-end</b> a Kobarid ou Tolmin. Dimanche tout sera ferme.</span></li>
-        </ol>
+  <!-- =================== TERRAIN =================== -->
+  <div class="panel" id="p-terrain" role="tabpanel" aria-labelledby="t-terrain">
+    <section class="block wrap">
+      <h2><span class="blaze"></span> Urgences</h2>
+      <p class="sub">Touchez un numero pour appeler.</p>
+      <div class="sos">
+        <a href="tel:112"><span class="n">112</span><span class="l">Urgences, secours en montagne</span></a>
+        <a href="tel:113"><span class="n">113</span><span class="l">Police</span></a>
+        <a href="tel:1987"><span class="n">1987</span><span class="l">Depannage AMZS</span></a>
+        <a href="tel:1970"><span class="n">1970</span><span class="l">Info routiere</span></a>
       </div>
-    </details>
+      <p class="sub" style="margin-top:.8rem;font-size:.85rem">Le 112 fonctionne sans reseau ni carte SIM, sur n'importe quel operateur disponible, et repond en anglais. Ambassade de France a Ljubljana : <a href="tel:+38614790400">+386 1 479 04 00</a>.</p>
+    </section>
 
-    <details class="day" id="j6">
-      <summary>
-        <span class="daynum">J6</span>
-        <span class="daytitle">La grotte, puis la ville</span>
-        <span class="daydate">SAM 12</span>
-      </summary>
-      <div class="daybody">
-        <p class="daymeta"><span>180 km</span><span>2h45 de route</span><span>Nuit : Ljubljana</span></p>
-        <ol class="steps">
-          <li><span class="t">08h30</span><span class="d"><b>Most na Soci</b>, le lac emeraude du barrage. Arret photo.</span></li>
-          <li><span class="t">09h30</span><span class="d"><b>Idrija</b> (option). Ville UNESCO du mercure. Meme sans visiter la mine, arretez-vous manger des <b>zlikrofi</b>, les raviolis de pomme de terre, premier plat slovene protege par l'UE.</span></li>
-          <li><span class="t">13h00</span><span class="d"><b>Grottes de Skocjan.</b> Un <b>canyon souterrain de 146 m de haut</b>, traverse sur une passerelle a 45 m au-dessus du torrent. Le plus grand connu au monde, UNESCO. Prevoyez un pull : il fait 12 °C. Photos interdites pendant la visite.<span class="tag">24 €</span></span></li>
-          <li><span class="t">15h30</span><span class="d">A la sortie, faites le <b>sentier du canyon exterieur</b>, 20 min, gratuit, et que presque personne ne fait.</span></li>
-          <li><span class="t">16h00</span><span class="d"><b>Chateau de Predjama</b>, encastre dans 123 m de falaise. La vue depuis le parking donne toute la photo : inutile d'entrer.<span class="tag free">gratuit dehors</span></span></li>
-          <li><span class="t">20h00</span><span class="d">Premiere soiree a <b>Ljubljana</b>, sur les quais de la Ljubljanica. C'est le soir que la ville est la meilleure.</span></li>
-        </ol>
-        <div class="alert" style="margin-top:1rem"><b>Skocjan ou Postojna, jamais les deux.</b> Postojna coute 30,90 €, c'est un train touristique et des concretions. Skocjan coute 24 €, c'est un gouffre. Pour ce voyage, Skocjan gagne.</div>
+    <section class="block wrap">
+      <h2><span class="blaze"></span> A verifier le premier jour</h2>
+      <div class="cards two">
+        <div class="card">
+          <span class="k">Vignette autoroute</span>
+          <div class="v">Demandez au loueur si elle est incluse, puis verifiez la plaque sur <strong>evinjeta.dars.si</strong>. Sinon <strong>16 €</strong> pour 7 jours. Amende : <strong>300 a 800 €</strong>.</div>
+        </div>
+        <div class="card">
+          <span class="k">Feux de croisement</span>
+          <div class="v">Obligatoires <strong>jour et nuit, toute l'annee</strong>. Verifiez qu'ils sont allumes en sortant du parking.</div>
+        </div>
+        <div class="card">
+          <span class="k">Etat des lieux</span>
+          <div class="v">Filmez la voiture en tournant autour, jantes et pare-brise compris. Trois minutes qui evitent 400 € de litige.</div>
+        </div>
+        <div class="card">
+          <span class="k">Alcool au volant</span>
+          <div class="v"><strong>0,5 g/L</strong>, et <strong>0,0</strong> si moins de 21 ans ou moins de 3 ans de permis.</div>
+        </div>
+        <div class="card">
+          <span class="k">Carburant</span>
+          <div class="v">Plein obligatoire a <strong>Kranjska Gora</strong> avant le Vrsic : rien pendant 60 km de montagne.</div>
+        </div>
+        <div class="card">
+          <span class="k">Especes</span>
+          <div class="v">Carte partout, mais gardez <strong>50 a 80 €</strong> en liquide : barque de Bled, parkings de vallee, refuges, fermes.</div>
+        </div>
       </div>
-    </details>
+      <div class="alert"><b>Dimanche 13, tout est ferme.</b> Les supermarches slovenes ne travaillent pas le dimanche. Faites les courses <b>samedi 12 avant 17h</b>, a Kobarid ou Tolmin. Restaurants, cafes et musees, eux, sont ouverts.</div>
+    </section>
 
-    <details class="day" id="j7">
-      <summary>
-        <span class="daynum">J7</span>
-        <span class="daytitle">Ljubljana et retour</span>
-        <span class="daydate">DIM 13</span>
-      </summary>
-      <div class="daybody">
-        <p class="daymeta"><span>26 km</span><span>Magasins fermes</span><span>Vol le soir</span></p>
-        <ol class="steps">
-          <li><span class="t">09h30</span><span class="d"><b>Montee au chateau a pied</b>, 15 min. Cour, remparts et vue sont <b>gratuits</b> : seuls le musee et la tour sont payants. Le funiculaire a 4 € ne sert a rien.<span class="tag free">gratuit</span></span></li>
-          <li><span class="t">11h00</span><span class="d">Le <b>marche aux puces du dimanche</b> sur les quais de Breg. Le bon endroit pour un souvenir qui ne soit pas un aimant de frigo.</span></li>
-          <li><span class="t">12h00</span><span class="d">Le centre a pied : place Preseren, <b>Triple Pont</b> de Plecnik, <b>pont des Dragons</b>, les portes de bronze de la cathedrale, les ruelles de Gornji trg. Tout tient dans 800 m.</span></li>
-          <li><span class="t">15h00</span><span class="d"><b>Parc Tivoli</b> et son allee de photos geantes, ou <b>Metelkova</b>, l'ancienne caserne devenue squat d'artistes, couverte de fresques du sol au toit.</span></li>
-          <li><span class="t">17h00</span><span class="d"><b>Restitution de la voiture.</b> Plein a Vodice ou Brnik juste avant. Comptez 30 min d'etat des lieux. Refilmez la voiture.</span></li>
-        </ol>
+    <section class="block wrap">
+      <h2><span class="blaze"></span> Les points GPS</h2>
+      <p class="sub">Touchez pour ouvrir dans Plans. Les noms sont ecrits sans accents slovenes pour la saisie.</p>
+      <div class="waypoints">
+        <a href="https://maps.apple.com/?q=Vintgar%20Gorge%20Parking%20LIP%20Bled" target="_blank" rel="noopener"><span class="wn">Vintgar, parking central LIP<small>J2 . le parking, pas la gorge</small></span><span class="go">Plans</span></a>
+        <a href="https://maps.apple.com/?q=Ojstrica%20Bled%20viewpoint" target="_blank" rel="noopener"><span class="wn">Ojstrica, depart depuis Velika Zaka<small>J1 . le point de vue sur le lac</small></span><span class="go">Plans</span></a>
+        <a href="https://maps.apple.com/?q=Stara%20Fuzina%20Mostnica%20Gorge" target="_blank" rel="noopener"><span class="wn">Gorge de Mostnica, Stara Fuzina<small>J2</small></span><span class="go">Plans</span></a>
+        <a href="https://maps.apple.com/?q=Slap%20Savica%20Ukanc%20Bohinj" target="_blank" rel="noopener"><span class="wn">Cascade de Savica, Ukanc<small>J3</small></span><span class="go">Plans</span></a>
+        <a href="https://maps.apple.com/?q=Jasna%20Lake%20Kranjska%20Gora" target="_blank" rel="noopener"><span class="wn">Lac de Jasna, Kranjska Gora<small>J4 . dernier plein avant le col</small></span><span class="go">Plans</span></a>
+        <a href="https://maps.apple.com/?q=Russian%20Chapel%20Vrsic%20Pass" target="_blank" rel="noopener"><span class="wn">Chapelle russe, lacet n°8<small>J4</small></span><span class="go">Plans</span></a>
+        <a href="https://maps.apple.com/?q=Izvir%20Soce%20source%20of%20Soca" target="_blank" rel="noopener"><span class="wn">Source de la Soca, Trenta<small>J4</small></span><span class="go">Plans</span></a>
+        <a href="https://maps.apple.com/?q=Velika%20korita%20Soce%20Soca%20Slovenia" target="_blank" rel="noopener"><span class="wn">Velika korita de la Soca<small>J4 . le moment photo</small></span><span class="go">Plans</span></a>
+        <a href="https://maps.apple.com/?q=Kamp%20Koren%20Kobarid%20Slap%20Kozjak" target="_blank" rel="noopener"><span class="wn">Cascade de Kozjak, Kamp Koren<small>J5 . y etre a 8h</small></span><span class="go">Plans</span></a>
+        <a href="https://maps.apple.com/?q=Tolminska%20korita%20Zatolmin" target="_blank" rel="noopener"><span class="wn">Gorges de Tolmin, Zatolmin<small>J5</small></span><span class="go">Plans</span></a>
+        <a href="https://maps.apple.com/?q=Skocjan%20Caves%20Divaca%20Slovenia" target="_blank" rel="noopener"><span class="wn">Grottes de Skocjan<small>J6 . parking gratuit</small></span><span class="go">Plans</span></a>
+        <a href="https://maps.apple.com/?q=P%2BR%20Dolgi%20most%20Ljubljana" target="_blank" rel="noopener"><span class="wn">P+R Dolgi most, Ljubljana<small>J6 . 1,20 € la journee, bus compris</small></span><span class="go">Plans</span></a>
       </div>
-    </details>
-  </section>
+    </section>
 
-  <section id="prix">
-    <h2><span class="blaze"></span> Ce que ca coute</h2>
-    <p class="sub">Budget par personne, a deux, hors vol. Tout est partage : voiture, chambre, courses.</p>
+    <section class="block wrap">
+      <h2><span class="blaze"></span> Meteo de septembre</h2>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Zone</th><th class="num">Jour</th><th class="num">Nuit</th><th class="num">Eau</th></tr></thead>
+          <tbody>
+            <tr><td>Ljubljana, Bled</td><td class="num">21 °C</td><td class="num">11 °C</td><td class="num">20-22 °C</td></tr>
+            <tr><td>Alpes, Vrsic, Bohinj</td><td class="num">17-19 °C</td><td class="num">8-10 °C</td><td class="num">18-20 °C</td></tr>
+            <tr><td>Karst, cote</td><td class="num">23-25 °C</td><td class="num">14-16 °C</td><td class="num">23 °C</td></tr>
+            <tr><td>La Soca</td><td class="num">-</td><td class="num">-</td><td class="num">10-13 °C</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="sub" style="margin-top:.8rem">Environ 12 jours de pluie sur le mois : comptez 1 ou 2 journees degradees. Le brouillard de fond de vallee se leve entre 9h et 11h. A consulter chaque soir : l'appli <strong>ARSO Vreme</strong>.</p>
+    </section>
 
-    <h3>Le budget cible</h3>
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>Poste</th><th class="num">Pour 2</th><th class="num">Par pers.</th></tr></thead>
-        <tbody>
-          <tr><td>Voiture, 7 jours</td><td class="num">250 €</td><td class="num">125 €</td></tr>
-          <tr><td>Carburant, 700 km</td><td class="num">70 €</td><td class="num">35 €</td></tr>
-          <tr><td>Vignette 7 jours</td><td class="num">16 €</td><td class="num">8 €</td></tr>
-          <tr><td>Parkings</td><td class="num">30 €</td><td class="num">15 €</td></tr>
-          <tr><td>Hebergement, 6 nuits</td><td class="num">300 €</td><td class="num">150 €</td></tr>
-          <tr><td>Taxe de sejour</td><td class="num">30 €</td><td class="num">15 €</td></tr>
-          <tr><td>Nourriture, 7 jours</td><td class="num">280 €</td><td class="num">140 €</td></tr>
-          <tr><td>Visites</td><td class="num">120 €</td><td class="num">60 €</td></tr>
-          <tr><td>Imprevu</td><td class="num">60 €</td><td class="num">30 €</td></tr>
-          <tr class="total"><td>Total</td><td class="num">1156 €</td><td class="num">578 €</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <section class="block wrap">
+      <h2><span class="blaze"></span> S'il pleut</h2>
+      <p class="sub">On intervertit, on n'annule pas.</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Ce que vous voyez</th><th>Ce que vous faites</th></tr></thead>
+          <tbody>
+            <tr><td>Brouillard en fond de vallee, bleu au-dessus</td><td>Ne changez rien. Ca se leve entre 9h et 11h, et c'est le plus beau moment sur les lacs.</td></tr>
+            <tr><td>Nuages accroches aux sommets</td><td>Abandonnez l'altitude. Gorges, cascades, fonds de vallee. Surtout, ne payez pas Vogel.</td></tr>
+            <tr><td>Pluie fine continue</td><td>Les gorges sont meilleures sous la pluie : plus de debit, moins de monde. Attention, ca glisse.</td></tr>
+            <tr><td>Pluie forte et vent</td><td>Skocjan, le musee de Kobarid, Idrija, Radovljica, les musees de Ljubljana. Ou le Vodni park de Bohinjska Bistrica.</td></tr>
+            <tr><td>Orage annonce l'apres-midi</td><td>Rando le matin, redescendues a 15h. Sans discussion.</td></tr>
+            <tr><td>Col du Vrsic ferme</td><td>Le train-navette de Bohinjska Bistrica passe le tunnel <b>avec la voiture a bord</b> jusqu'a Most na Soci. Sinon, par Idrija, 2h15.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
 
-    <h3>Les entrees du circuit</h3>
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>Site</th><th class="num">Prix</th></tr></thead>
-        <tbody>
-          <tr><td>Vintgar, pass tout compris</td><td class="num">15 €</td></tr>
-          <tr><td>Mostnica</td><td class="num">3 €</td></tr>
-          <tr><td>Savica (+ parking)</td><td class="num">6,50 €</td></tr>
-          <tr><td>Kozjak</td><td class="num">5 €</td></tr>
-          <tr><td>Gorges de Tolmin, septembre</td><td class="num">8 €</td></tr>
-          <tr><td>Grottes de Skocjan</td><td class="num">24 €</td></tr>
-          <tr class="total"><td>Total du programme</td><td class="num">61,50 €</td></tr>
-        </tbody>
-      </table>
-    </div>
+  <!-- =================== VALISE =================== -->
+  <div class="panel" id="p-valise" role="tabpanel" aria-labelledby="t-valise">
+    <section class="block wrap">
+      <h2><span class="blaze"></span> Valise</h2>
+      <p class="sub">Un sac cabine et un sac a dos de journee chacune. Les cases restent cochees sur ce telephone.</p>
 
-    <h3>Ce qu'on laisse de cote, et pourquoi</h3>
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>Site</th><th class="num">Prix</th><th>Pourquoi</th></tr></thead>
-        <tbody>
-          <tr><td>Telecabine de Vogel</td><td class="num">33 €</td><td>La rando du Vogar donne la meme vue pour 0 €</td></tr>
-          <tr><td>Chateau de Bled</td><td class="num">19 €</td><td>La vue sur le chateau vaut mieux que la vue depuis</td></tr>
-          <tr><td>Barque pletna</td><td class="num">20 €</td><td>Une barque a rames a deux revient a 12,50 € chacune</td></tr>
-          <tr><td>Grotte de Postojna</td><td class="num">30,90 €</td><td>Skocjan est moins cher et plus fort</td></tr>
-          <tr><td>Predjama, interieur</td><td class="num">16,90 €</td><td>La facade se voit entierement du parking</td></tr>
-          <tr><td>Rafting sur la Soca</td><td class="num">62-70 €</td><td>Le seul extra qui vaut vraiment qu'on coupe 3 restos</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+      <div class="progress"><b id="packcount">0/21</b> <span>prepare</span></div>
+      <div class="meter" id="packmeter"><i></i></div>
 
-  <section id="valise">
-    <h2><span class="blaze"></span> Valise</h2>
-    <p class="sub">Un sac cabine et un sac a dos de journee chacune. Les cases restent cochees sur ce telephone.</p>
+      <h3>Indispensable</h3>
+      <div class="check">
+        <label><input type="checkbox" data-k="p1"><span><b>Chaussures de randonnee</b> ou bonnes baskets de trail</span></label>
+        <label><input type="checkbox" data-k="p2"><span><b>Veste impermeable</b> avec capuche</span></label>
+        <label><input type="checkbox" data-k="p3"><span><b>Polaire ou doudoune fine</b> : grottes, matins, altitude</span></label>
+        <label><input type="checkbox" data-k="p4"><span>Sandales de riviere ou vieilles baskets pour la Soca</span></label>
+        <label><input type="checkbox" data-k="p5"><span>Maillot de bain et serviette microfibre</span></label>
+        <label><input type="checkbox" data-k="p6"><span>Sac a dos 20-25 L et <b>deux gourdes</b></span></label>
+        <label><input type="checkbox" data-k="p7"><span>Batterie externe et cables</span></label>
+        <label><input type="checkbox" data-k="p8"><span>Creme solaire, lunettes, casquette</span></label>
+        <label><input type="checkbox" data-k="p9"><span>Pansements anti-ampoules, paracetamol, anti-nauseeux (50 lacets)</span></label>
+        <label><input type="checkbox" data-k="p10"><span>Bonnet leger ou buff : 6 °C possibles au Vrsic le matin</span></label>
+        <label><input type="checkbox" data-k="p11"><span>Couteau pliant et petite planche pour les pique-niques <b>(en soute)</b></span></label>
+        <label><input type="checkbox" data-k="p12"><span>Tote bag pliable : les sacs sont payants en supermarche</span></label>
+      </div>
 
-    <h3>Indispensable</h3>
-    <div class="check" id="pack">
-      <label><input type="checkbox" data-k="p1"><span><b>Chaussures de randonnee</b> ou bonnes baskets de trail</span></label>
-      <label><input type="checkbox" data-k="p2"><span><b>Veste impermeable</b> avec capuche</span></label>
-      <label><input type="checkbox" data-k="p3"><span><b>Polaire ou doudoune fine</b> : grottes, matins, altitude</span></label>
-      <label><input type="checkbox" data-k="p4"><span>Sandales de riviere ou vieilles baskets pour la Soca</span></label>
-      <label><input type="checkbox" data-k="p5"><span>Maillot de bain et serviette microfibre</span></label>
-      <label><input type="checkbox" data-k="p6"><span>Sac a dos 20-25 L et <b>deux gourdes</b></span></label>
-      <label><input type="checkbox" data-k="p7"><span>Batterie externe et cables</span></label>
-      <label><input type="checkbox" data-k="p8"><span>Creme solaire, lunettes, casquette</span></label>
-      <label><input type="checkbox" data-k="p9"><span>Pansements anti-ampoules, paracetamol, anti-nauseeux (50 lacets)</span></label>
-      <label><input type="checkbox" data-k="p10"><span>Bonnet leger ou buff : 6 °C possibles au Vrsic le matin</span></label>
-      <label><input type="checkbox" data-k="p11"><span>Couteau pliant et petite planche pour les pique-niques <b>(en soute)</b></span></label>
-      <label><input type="checkbox" data-k="p12"><span>Tote bag pliable : les sacs sont payants en supermarche</span></label>
-    </div>
+      <h3>Papiers</h3>
+      <div class="check">
+        <label><input type="checkbox" data-k="d1"><span>Carte d'identite ou passeport</span></label>
+        <label><input type="checkbox" data-k="d2"><span><b>Permis de conduire</b></span></label>
+        <label><input type="checkbox" data-k="d3"><span><b>Carte de credit au nom de la conductrice</b> pour la caution</span></label>
+        <label><input type="checkbox" data-k="d4"><span>CEAM, une chacune, commandee sur ameli</span></label>
+        <label><input type="checkbox" data-k="d5"><span>Voucher de location, billets, reservation Vintgar en PDF</span></label>
+        <label><input type="checkbox" data-k="d6"><span>50 a 80 € en especes</span></label>
+      </div>
 
-    <h3>Papiers</h3>
-    <div class="check">
-      <label><input type="checkbox" data-k="d1"><span>Carte d'identite ou passeport</span></label>
-      <label><input type="checkbox" data-k="d2"><span><b>Permis de conduire</b></span></label>
-      <label><input type="checkbox" data-k="d3"><span><b>Carte de credit au nom de la conductrice</b> pour la caution</span></label>
-      <label><input type="checkbox" data-k="d4"><span>CEAM, une chacune, commandee sur ameli</span></label>
-      <label><input type="checkbox" data-k="d5"><span>Voucher de location, billets, reservation Vintgar en PDF</span></label>
-      <label><input type="checkbox" data-k="d6"><span>50 a 80 € en especes</span></label>
-    </div>
+      <h3>A faire avant de partir</h3>
+      <div class="check">
+        <label><input type="checkbox" data-k="a1"><span><b>Reserver la voiture</b> : le poste qui double si on attend</span></label>
+        <label><input type="checkbox" data-k="a2"><span><b>Reserver le creneau de Vintgar</b> sur vintgar.si, premier creneau du matin</span></label>
+        <label><input type="checkbox" data-k="a3"><span>Telecharger la carte hors ligne de la Slovenie dans Plans et Google Maps</span></label>
+      </div>
 
-    <h3>Inutile d'emporter</h3>
-    <div class="check">
-      <label><input type="checkbox" data-k="n1"><span>Adaptateur de prise : les prises sont les memes qu'en France</span></label>
-      <label><input type="checkbox" data-k="n2"><span>Devises : c'est l'euro</span></label>
-      <label><input type="checkbox" data-k="n3"><span>Grande valise rigide : penible dans une petite voiture et dans les escaliers</span></label>
-    </div>
+      <h3>Inutile d'emporter</h3>
+      <div class="check">
+        <label><input type="checkbox" data-k="n1"><span>Adaptateur de prise : les prises sont les memes qu'en France</span></label>
+        <label><input type="checkbox" data-k="n2"><span>Devises : c'est l'euro</span></label>
+        <label><input type="checkbox" data-k="n3"><span>Grande valise rigide : penible dans une petite voiture et dans les escaliers</span></label>
+      </div>
 
-    <button class="reset" id="reset" type="button">Tout decocher</button>
-  </section>
+      <button class="btn" id="resetPack" type="button">Tout decocher</button>
+    </section>
+  </div>
 
-  <section id="mots">
-    <h2><span class="blaze"></span> Slovene de survie</h2>
-    <p class="sub">L'anglais suffit partout. Mais trois mots changent tout, parce que personne n'essaie jamais.</p>
+  <!-- =================== MOTS =================== -->
+  <div class="panel" id="p-mots" role="tabpanel" aria-labelledby="t-mots">
+    <section class="block wrap">
+      <h2><span class="blaze"></span> Slovene de survie</h2>
+      <p class="sub">L'anglais suffit partout. Mais trois mots changent tout, parce que personne n'essaie jamais.</p>
 
-    <div class="lex">
-      <div><span class="sl">Dober dan<small>dober dane</small></span><span class="fr">Bonjour</span></div>
-      <div><span class="sl">Hvala<small>hvala</small></span><span class="fr">Merci</span></div>
-      <div><span class="sl">Prosim<small>prossim</small></span><span class="fr">S'il vous plait / pardon ?</span></div>
-      <div><span class="sl">Oprostite<small>oprostité</small></span><span class="fr">Excusez-moi</span></div>
-      <div><span class="sl">Nasvidenje<small>nasvidenié</small></span><span class="fr">Au revoir</span></div>
-      <div><span class="sl">Koliko stane?<small>koliko stané</small></span><span class="fr">Combien ca coute ?</span></div>
-      <div><span class="sl">Racun, prosim<small>ratchoun prossim</small></span><span class="fr">L'addition</span></div>
-      <div><span class="sl">Na zdravje!<small>na zdravié</small></span><span class="fr">Sante ! (en se regardant dans les yeux)</span></div>
-    </div>
+      <div class="lex">
+        <div><span class="sl">Dober dan<small>dober dane</small></span><span class="fr">Bonjour</span></div>
+        <div><span class="sl">Hvala<small>hvala</small></span><span class="fr">Merci</span></div>
+        <div><span class="sl">Prosim<small>prossim</small></span><span class="fr">S'il vous plait / pardon ?</span></div>
+        <div><span class="sl">Oprostite<small>oprostité</small></span><span class="fr">Excusez-moi</span></div>
+        <div><span class="sl">Nasvidenje<small>nasvidenié</small></span><span class="fr">Au revoir</span></div>
+        <div><span class="sl">Govorite anglesko?<small>govorité angléchko</small></span><span class="fr">Parlez-vous anglais ?</span></div>
+        <div><span class="sl">Koliko stane?<small>koliko stané</small></span><span class="fr">Combien ca coute ?</span></div>
+        <div><span class="sl">Racun, prosim<small>ratchoun prossim</small></span><span class="fr">L'addition</span></div>
+        <div><span class="sl">Brez mesa, prosim<small>brez messa</small></span><span class="fr">Sans viande</span></div>
+        <div><span class="sl">Na zdravje!<small>na zdravié</small></span><span class="fr">Sante ! en se regardant dans les yeux</span></div>
+      </div>
 
-    <h3>Les mots des panneaux</h3>
-    <div class="lex">
-      <div><span class="sl">Slap</span><span class="fr">Cascade</span></div>
-      <div><span class="sl">Korita / soteska</span><span class="fr">Gorges</span></div>
-      <div><span class="sl">Jama</span><span class="fr">Grotte</span></div>
-      <div><span class="sl">Jezero</span><span class="fr">Lac</span></div>
-      <div><span class="sl">Izvir</span><span class="fr">Source</span></div>
-      <div><span class="sl">Koca / dom</span><span class="fr">Refuge de montagne</span></div>
-      <div><span class="sl">Vstopnina</span><span class="fr">Droit d'entree</span></div>
-      <div><span class="sl">Odprto / zaprto</span><span class="fr">Ouvert / ferme</span></div>
-      <div><span class="sl">Pitna voda</span><span class="fr">Eau potable</span></div>
-      <div><span class="sl">Pozor</span><span class="fr">Attention</span></div>
-      <div><span class="sl">Lekarna</span><span class="fr">Pharmacie</span></div>
-      <div><span class="sl">Pekarna</span><span class="fr">Boulangerie</span></div>
-    </div>
+      <h3>Les mots des panneaux</h3>
+      <div class="lex">
+        <div><span class="sl">Slap</span><span class="fr">Cascade</span></div>
+        <div><span class="sl">Korita / soteska</span><span class="fr">Gorges</span></div>
+        <div><span class="sl">Jama</span><span class="fr">Grotte</span></div>
+        <div><span class="sl">Jezero</span><span class="fr">Lac</span></div>
+        <div><span class="sl">Izvir</span><span class="fr">Source</span></div>
+        <div><span class="sl">Koca / dom</span><span class="fr">Refuge de montagne</span></div>
+        <div><span class="sl">Planina</span><span class="fr">Alpage</span></div>
+        <div><span class="sl">Vstopnina</span><span class="fr">Droit d'entree</span></div>
+        <div><span class="sl">Odprto / zaprto</span><span class="fr">Ouvert / ferme</span></div>
+        <div><span class="sl">Pitna voda</span><span class="fr">Eau potable</span></div>
+        <div><span class="sl">Pozor</span><span class="fr">Attention</span></div>
+        <div><span class="sl">Prepovedano</span><span class="fr">Interdit</span></div>
+        <div><span class="sl">Lekarna</span><span class="fr">Pharmacie</span></div>
+        <div><span class="sl">Pekarna</span><span class="fr">Boulangerie</span></div>
+        <div><span class="sl">Sobe / apartma</span><span class="fr">Chambres / appartement</span></div>
+        <div><span class="sl">Gostilna</span><span class="fr">Auberge-restaurant</span></div>
+      </div>
 
-    <h3>Prononciation, en trois regles</h3>
-    <div class="cards">
-      <div class="card"><span class="k">Le c</span><div class="v">se dit <strong>ts</strong>, et avec son accent <strong>tch</strong>. Soca se dit <strong>So-tcha</strong>, Skocjan <strong>Chkotch-yan</strong>.</div></div>
-      <div class="card"><span class="k">Le s accentue</span><div class="v">se dit <strong>ch</strong>. Vrsic se dit <strong>Veur-chitch</strong>.</div></div>
-      <div class="card"><span class="k">Le j</span><div class="v">se dit <strong>y</strong>. Ljubljana se dit <strong>Lyou-blia-na</strong>, Bohinj se dit <strong>Bo-hine</strong>.</div></div>
-    </div>
-  </section>
+      <h3>Prononciation, en trois regles</h3>
+      <div class="cards">
+        <div class="card"><span class="k">Le c</span><div class="v">se dit <strong>ts</strong>, et avec son accent <strong>tch</strong>. Soca se dit <strong>So-tcha</strong>, Skocjan <strong>Chkotch-yan</strong>.</div></div>
+        <div class="card"><span class="k">Le s accentue</span><div class="v">se dit <strong>ch</strong>. Vrsic se dit <strong>Veur-chitch</strong>.</div></div>
+        <div class="card"><span class="k">Le j</span><div class="v">se dit <strong>y</strong>. Ljubljana se dit <strong>Lyou-blia-na</strong>, Bohinj se dit <strong>Bo-hine</strong>.</div></div>
+      </div>
 
-  <section id="pluie">
-    <h2><span class="blaze"></span> S'il pleut</h2>
-    <p class="sub">Ouvrez le volet, regardez le ciel, appliquez la ligne qui correspond. On intervertit, on n'annule pas.</p>
+      <h3>A gouter</h3>
+      <div class="lex">
+        <div><span class="sl">Burek</span><span class="fr">Chausson feuillete, viande ou fromage. 3 a 4 €, ca vaut un repas.</span></div>
+        <div><span class="sl">Kranjska klobasa</span><span class="fr">La saucisse de Carniole, AOP. Le plat national.</span></div>
+        <div><span class="sl">Kremsnita</span><span class="fr">Le millefeuille de Bled. Un pour deux.</span></div>
+        <div><span class="sl">Kobariski struklji</span><span class="fr">Roules aux noix et cannelle, a Kobarid.</span></div>
+        <div><span class="sl">Zlikrofi</span><span class="fr">Raviolis de pomme de terre d'Idrija.</span></div>
+        <div><span class="sl">Jota</span><span class="fr">Soupe de choucroute et haricots.</span></div>
+        <div><span class="sl">Bezgov sok</span><span class="fr">Sirop de fleur de sureau. La boisson du pays.</span></div>
+        <div><span class="sl">Teran</span><span class="fr">Le rouge tres sombre du Karst.</span></div>
+      </div>
 
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>Ce que vous voyez</th><th>Ce que vous faites</th></tr></thead>
-        <tbody>
-          <tr><td>Brouillard en fond de vallee, bleu au-dessus</td><td>Ne changez rien. Ca se leve entre 9h et 11h, et c'est le plus beau moment sur les lacs.</td></tr>
-          <tr><td>Nuages accroches aux sommets</td><td>Abandonnez l'altitude. Gorges, cascades, fonds de vallee. Surtout, ne payez pas Vogel.</td></tr>
-          <tr><td>Pluie fine continue</td><td>Les gorges sont meilleures sous la pluie : plus de debit, moins de monde. Attention, ca glisse.</td></tr>
-          <tr><td>Pluie forte et vent</td><td>Skocjan, le musee de Kobarid, Idrija, Radovljica, les musees de Ljubljana. Ou le Vodni park de Bohinjska Bistrica.</td></tr>
-          <tr><td>Orage annonce l'apres-midi</td><td>Rando le matin, redescendues a 15h. Sans discussion.</td></tr>
-          <tr><td>Col du Vrsic ferme</td><td>Le train-navette de Bohinjska Bistrica passe le tunnel <b>avec la voiture a bord</b> jusqu'a Most na Soci. Sinon, par Idrija, 2h15.</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section>
-    <h2><span class="blaze"></span> Les cinq choses</h2>
-    <p class="sub">Si tout tombe a l'eau et qu'il ne reste que ca.</p>
-    <ol class="steps" style="gap:1.1rem">
-      <li><span class="t">01</span><span class="d"><b>Ojstrica au coucher du soleil</b>, au-dessus du lac de Bled. 25 min de montee, zero euro.</span></li>
-      <li><span class="t">02</span><span class="d"><b>Les Velika korita de la Soca.</b> Ce vert n'existe nulle part ailleurs.</span></li>
-      <li><span class="t">03</span><span class="d"><b>La cascade de Kozjak a 8h</b>, seules dans sa chambre de pierre.</span></li>
-      <li><span class="t">04</span><span class="d"><b>Le canyon souterrain de Skocjan</b>, sur la passerelle a 45 m au-dessus du torrent.</span></li>
-      <li><span class="t">05</span><span class="d"><b>Le col du Vrsic dans la lumiere du matin</b>, avec la chapelle russe.</span></li>
-    </ol>
-  </section>
+      <footer>
+        <p>Carnet de terrain, Slovenie, 7 au 13 septembre 2026.</p>
+        <p>Prix releves en juillet 2026. Les tarifs bougent d'une saison a l'autre : revoyez Vintgar, Skocjan et Tolmin sur leurs sites officiels avant de partir.</p>
+        <p>Le carnet complet, avec les fiches par zone, les randonnees, les hebergements et le carnet de bord, est dans le depot.</p>
+        <p>Sur iPhone : bouton Partager, puis "Sur l'ecran d'accueil" pour l'ouvrir comme une application, sans barre Safari.</p>
+      </footer>
+    </section>
+  </div>
 
 </main>
 
-<footer>
-  <div class="wrap">
-    <p>Carnet de terrain, Slovenie, 7 au 13 septembre 2026.</p>
-    <p>Prix verifies en juillet 2026. Les tarifs des sites bougent d'une saison a l'autre : revoyez Vintgar, Skocjan et Tolmin sur leurs sites officiels avant de partir.</p>
-    <p>Le carnet complet, avec les fiches par zone, les randonnees, les hebergements et le carnet de bord, est dans le depot.</p>
+<nav class="tabbar" role="tablist" aria-label="Sections du carnet">
+  <div class="tabbar-in">
+    <button type="button" role="tab" id="t-jours" aria-controls="p-jours" aria-selected="true" data-tab="jours">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 19h19L14.6 7 11.4 12.4 9.2 9.6z"/></svg>
+      Jours
+    </button>
+    <button type="button" role="tab" id="t-argent" aria-controls="p-argent" aria-selected="false" data-tab="argent">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/><path d="M6 12h.01M18 12h.01"/></svg>
+      Argent
+    </button>
+    <button type="button" role="tab" id="t-terrain" aria-controls="p-terrain" aria-selected="false" data-tab="terrain">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.2 4.8-4.8 2.2 2.2-4.8z"/></svg>
+      Terrain
+    </button>
+    <button type="button" role="tab" id="t-valise" aria-controls="p-valise" aria-selected="false" data-tab="valise">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 10a6.5 6.5 0 0 1 13 0v8.5a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2z"/><path d="M9 9.5V7.5a3 3 0 0 1 6 0v2"/><path d="M9 14.5h6"/></svg>
+      Valise
+    </button>
+    <button type="button" role="tab" id="t-mots" aria-controls="p-mots" aria-selected="false" data-tab="mots">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 12a7.5 7.5 0 0 1-7.5 7.5H8.4L4 22.2V17A7.5 7.5 0 0 1 8.5 4.5h4.5A7.5 7.5 0 0 1 20.5 12z"/></svg>
+      Mots
+    </button>
   </div>
-</footer>
+</nav>
 
 <script>
-  (function () {
-    var KEY = 'slo2026.pack';
-    var store = {};
-    try { store = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { store = {}; }
+(function () {
+  "use strict";
 
-    var boxes = document.querySelectorAll('input[type="checkbox"][data-k]');
-    boxes.forEach(function (b) {
-      if (store[b.dataset.k]) { b.checked = true; }
-      b.addEventListener('change', function () {
-        store[b.dataset.k] = b.checked;
-        try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {}
-      });
-    });
+  /* ---------- iPhone: viewport, safe areas, standalone ---------- */
+  function meta(name, content) {
+    var m = document.querySelector('meta[name="' + name + '"]');
+    if (!m) { m = document.createElement('meta'); m.setAttribute('name', name); document.head.appendChild(m); }
+    m.setAttribute('content', content);
+  }
+  // viewport-fit=cover is what makes env(safe-area-inset-*) report real values
+  meta('viewport', 'width=device-width, initial-scale=1, viewport-fit=cover');
+  meta('apple-mobile-web-app-capable', 'yes');
+  meta('mobile-web-app-capable', 'yes');
+  meta('apple-mobile-web-app-title', 'Slovenie');
+  meta('format-detection', 'telephone=no');
 
-    document.getElementById('reset').addEventListener('click', function () {
-      boxes.forEach(function (b) { b.checked = false; });
-      store = {};
-      try { localStorage.removeItem(KEY); } catch (e) {}
-    });
+  function paintThemeColor() {
+    var c = getComputedStyle(document.documentElement).getPropertyValue('--theme-color').trim();
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (!m) { m = document.createElement('meta'); m.setAttribute('name', 'theme-color'); document.head.appendChild(m); }
+    m.setAttribute('content', c || '#EAF1EC');
+  }
+  paintThemeColor();
+  if (window.matchMedia) {
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq.addEventListener) { mq.addEventListener('change', paintThemeColor); }
+  }
+  new MutationObserver(paintThemeColor).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
-    // Ouvre le jour en cours si on arrive par une ancre
-    var rail = document.querySelectorAll('.rail a');
-    rail.forEach(function (a) {
-      a.addEventListener('click', function () {
-        var id = a.getAttribute('href').slice(1);
-        var el = document.getElementById(id);
-        if (el && el.tagName === 'DETAILS') { el.open = true; }
-      });
+  /* ---------- storage, tolerant of private mode ---------- */
+  var KEY = 'slo2026.v2';
+  var db = {};
+  try { db = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { db = {}; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(db)); } catch (e) {} }
+
+  var eur = function (n) {
+    return (Math.round(n * 100) / 100).toLocaleString('fr-FR', { maximumFractionDigits: 0 }) + ' €';
+  };
+
+  /* ---------- tabs ---------- */
+  document.documentElement.setAttribute('data-app', 'on');
+  var panels = {};
+  ['jours', 'argent', 'terrain', 'valise', 'mots'].forEach(function (k) {
+    panels[k] = document.getElementById('p-' + k);
+  });
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabbar button'));
+
+  function show(name, push) {
+    if (!panels[name]) { name = 'jours'; }
+    Object.keys(panels).forEach(function (k) {
+      panels[k].classList.toggle('is-active', k === name);
     });
-  })();
+    tabs.forEach(function (b) {
+      b.setAttribute('aria-selected', b.dataset.tab === name ? 'true' : 'false');
+    });
+    window.scrollTo(0, 0);
+    if (push) {
+      try { history.replaceState(null, '', '#' + name); } catch (e) {}
+    }
+    db.tab = name; save();
+  }
+
+  tabs.forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.tab, true); });
+  });
+
+  /* ---------- where are we in the trip ---------- */
+  var DAYS = ['lundi 7', 'mardi 8', 'mercredi 9', 'jeudi 10', 'vendredi 11', 'samedi 12', 'dimanche 13'];
+  var nowEl = document.getElementById('now');
+  var today = new Date();
+  var midnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  var start = new Date(2026, 8, 7);
+  var offset = Math.round((midnight - start) / 86400000);
+  var currentDay = -1;
+
+  if (offset < 0) {
+    nowEl.textContent = 'J-' + Math.abs(offset);
+    nowEl.title = 'Jours avant le depart';
+  } else if (offset > 6) {
+    nowEl.textContent = 'termine';
+  } else {
+    currentDay = offset;
+    nowEl.textContent = 'Jour ' + (offset + 1) + ' . ' + DAYS[offset];
+  }
+
+  var dayEls = Array.prototype.slice.call(document.querySelectorAll('details.day'));
+  dayEls.forEach(function (d) {
+    if (parseInt(d.dataset.day, 10) === currentDay) {
+      d.classList.add('is-today');
+      d.open = true;
+      var meta2 = d.querySelector('.daymeta');
+      if (meta2) {
+        var s = document.createElement('span');
+        s.textContent = "Aujourd'hui";
+        s.style.color = 'var(--soca)';
+        s.style.fontWeight = '600';
+        meta2.insertBefore(s, meta2.firstChild);
+      }
+    }
+  });
+  if (currentDay < 0) { dayEls[0].open = true; }
+
+  /* ---------- budget simulator ---------- */
+  var sim = db.sim || { nuit: 50, food: 20, car: 250 };
+  var LIMITS = { nuit: [25, 160, 5], food: [8, 60, 2], car: [120, 600, 20] };
+  var FIXE_OTHER = 35 + 8 + 15 + 15 + 30;   // essence, vignette, parkings, taxe, imprevu
+  var VISITES_BASE = 61.5;
+  var CIBLE = 600;
+
+  var outs = { nuit: document.getElementById('out-nuit'), food: document.getElementById('out-food'), car: document.getElementById('out-car') };
+  var extras = Array.prototype.slice.call(document.querySelectorAll('#extras input'));
+
+  function paintChip(x) {
+    var chip = x.parentNode;
+    if (chip && chip.classList) { chip.classList.toggle('is-on', x.checked); }
+  }
+  extras.forEach(function (x) {
+    if (db[x.dataset.k]) { x.checked = true; }
+    paintChip(x);
+    x.addEventListener('change', function () {
+      db[x.dataset.k] = x.checked; save(); paintChip(x); computeBudget();
+    });
+  });
+
+  document.querySelectorAll('.stepper button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var t = b.dataset.target;
+      var lim = LIMITS[t];
+      sim[t] = Math.min(lim[1], Math.max(lim[0], sim[t] + parseInt(b.dataset.step, 10)));
+      db.sim = sim; save();
+      computeBudget();
+    });
+  });
+
+  function computeBudget() {
+    var fixe = sim.car / 2 + FIXE_OTHER;
+    var lit = (sim.nuit * 6) / 2;
+    var food = sim.food * 7;
+    var vis = VISITES_BASE;
+    extras.forEach(function (x) { if (x.checked) { vis += parseFloat(x.dataset.cost); } });
+    var total = fixe + lit + food + vis;
+
+    outs.nuit.textContent = eur(sim.nuit);
+    outs.food.textContent = eur(sim.food);
+    outs.car.textContent = eur(sim.car);
+
+    document.getElementById('total').textContent = eur(total);
+    document.getElementById('s-fixe').textContent = eur(fixe);
+    document.getElementById('s-lit').textContent = eur(lit);
+    document.getElementById('s-food').textContent = eur(food);
+    document.getElementById('s-vis').textContent = eur(vis);
+
+    var meterEl = document.getElementById('meter');
+    var pct = Math.min(100, (total / CIBLE) * 100);
+    meterEl.querySelector('i').style.width = pct + '%';
+    meterEl.classList.toggle('over', total > CIBLE);
+
+    var v = document.getElementById('verdict');
+    if (total > CIBLE) {
+      v.className = 'verdict over';
+      v.textContent = eur(total - CIBLE) + ' au-dessus de la cible. Coupez un extra, ou une nuit en auberge.';
+    } else {
+      v.className = 'verdict ok';
+      v.textContent = 'Il reste ' + eur(CIBLE - total) + ' de marge sur les 600 €.';
+    }
+  }
+  computeBudget();
+
+  /* ---------- expense tracker ---------- */
+  var spendInputs = Array.prototype.slice.call(document.querySelectorAll('#spend input'));
+  spendInputs.forEach(function (i) {
+    if (db[i.dataset.k] != null) { i.value = db[i.dataset.k]; }
+    i.addEventListener('input', function () {
+      db[i.dataset.k] = i.value; save(); computeSpend();
+    });
+  });
+
+  function computeSpend() {
+    var sum = 0;
+    spendInputs.forEach(function (i) {
+      var n = parseFloat(String(i.value).replace(',', '.'));
+      if (!isNaN(n) && n > 0) { sum += n; }
+    });
+    document.getElementById('spent').textContent = eur(sum);
+    var m = document.getElementById('spentmeter');
+    m.querySelector('i').style.width = Math.min(100, (sum / CIBLE) * 100) + '%';
+    m.classList.toggle('over', sum > CIBLE);
+    var v = document.getElementById('spentverdict');
+    if (sum > CIBLE) {
+      v.className = 'verdict over';
+      v.textContent = eur(sum - CIBLE) + " au-dessus de l'enveloppe.";
+    } else {
+      v.className = 'verdict ok';
+      v.textContent = 'Il reste ' + eur(CIBLE - sum) + " sur l'enveloppe.";
+    }
+  }
+  computeSpend();
+
+  document.getElementById('resetSpend').addEventListener('click', function () {
+    spendInputs.forEach(function (i) { i.value = ''; delete db[i.dataset.k]; });
+    save(); computeSpend();
+  });
+
+  /* ---------- packing checklist ---------- */
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('#p-valise input[type="checkbox"]'));
+  boxes.forEach(function (b) {
+    if (db[b.dataset.k]) { b.checked = true; }
+    b.addEventListener('change', function () { db[b.dataset.k] = b.checked; save(); computePack(); });
+  });
+
+  function computePack() {
+    var n = boxes.filter(function (b) { return b.checked; }).length;
+    document.getElementById('packcount').textContent = n + '/' + boxes.length;
+    document.getElementById('packmeter').querySelector('i').style.width = (n / boxes.length * 100) + '%';
+  }
+  computePack();
+
+  document.getElementById('resetPack').addEventListener('click', function () {
+    boxes.forEach(function (b) { b.checked = false; delete db[b.dataset.k]; });
+    save(); computePack();
+  });
+
+  /* ---------- open on the right tab ---------- */
+  var hash = (location.hash || '').replace('#', '');
+  show(panels[hash] ? hash : (db.tab || 'jours'), false);
+  window.addEventListener('hashchange', function () {
+    var h = (location.hash || '').replace('#', '');
+    if (panels[h]) { show(h, false); }
+  });
+})();
 </script>
