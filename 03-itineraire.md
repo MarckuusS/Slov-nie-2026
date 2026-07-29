@@ -2,8 +2,8 @@
 
 Retour au [sommaire](README.md)
 
-Du **lundi 7 au dimanche 13 septembre 2026**. Environ 700 km au total, jamais plus de 3h de route
-dans une journee, et une seule vraie journee de conduite (J4, celle du col).
+Du **lundi 7 au dimanche 13 septembre 2026**. 611 km au total, et deux journees de route notables :
+J4 (le col, 127 km) et J6 (le passage au Karst, 232 km). Les cinq autres restent sous 100 km.
 
 Les horaires sont indicatifs. **La regle : partir tot, finir tot.** En septembre, le soleil se couche
 vers 19h30 et la lumiere de fin d'apres-midi sur les Alpes juliennes est la plus belle du voyage.
@@ -209,7 +209,7 @@ Attention : **dimanche, les magasins sont fermes.** Les restaurants, cafes et mu
 | Skocjan -> Predjama | 30 | 30 min |
 | Predjama -> Ljubljana | 50 | 45 min |
 | Ljubljana -> aeroport LJU | 26 | 25 min |
-| **Total du circuit** | **~700 km** | **~13h de conduite sur 7 jours** |
+| **Total du circuit** | **611 km** | **13h40 de conduite sur 7 jours** |
 
 ---
 

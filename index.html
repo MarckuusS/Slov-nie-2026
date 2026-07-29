@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Slovenie 2026 - tableau de bord</title>
+<meta name="description" content="Tableau de bord du voyage en Slovenie, 7 au 13 septembre 2026 : itineraire cartographie jour par jour, temps de route, budget, guide et valise.">
+<meta name="theme-color" content="#EAF1EC">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Slovenie">
+<meta name="format-detection" content="telephone=no">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23BB3728'/%3E%3Ccircle cx='16' cy='16' r='5.5' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%23F1F4EF'/%3E%3Ccircle cx='90' cy='90' r='58' fill='%23BB3728'/%3E%3Ccircle cx='90' cy='90' r='21' fill='%23F1F4EF'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <span class="mark"><span class="blaze"></span> Slovenie . 7-13 sept 2026</span>
+    <span class="now" id="now">chargement</span>
+  </div>
+</div>
+
+<main>
+
+  <!-- ============ JOURS ============ -->
+  <div class="panel is-active" id="p-jours" role="tabpanel" aria-labelledby="t-jours">
+    <div class="dayrail"><div class="dayrail-in" id="dayrail"></div></div>
+    <div class="mapwrap"><div class="mm" id="daymap"></div></div>
+    <div class="wrap" id="daybody"></div>
+  </div>
+
+  <!-- ============ CARTE ============ -->
+  <div class="panel" id="p-carte" role="tabpanel" aria-labelledby="t-carte">
+    <div class="mapwrap is-static"><div class="mm" id="allmap"></div></div>
+    <div class="maplegend" id="maplegend"></div>
+    <div id="allbody"></div>
+  </div>
+
+  <!-- ============ BUDGET ============ -->
+  <div class="panel" id="p-budget" role="tabpanel" aria-labelledby="t-budget">
+    <div id="budgetbody"></div>
+  </div>
+
+  <!-- ============ GUIDE ============ -->
+  <div class="panel" id="p-guide" role="tabpanel" aria-labelledby="t-guide">
+    <div id="guidebody"></div>
+  </div>
+
+  <!-- ============ SAC ============ -->
+  <div class="panel" id="p-sac" role="tabpanel" aria-labelledby="t-sac">
+    <div id="packbody"></div>
+  </div>
+
+  <noscript>
+    <div class="wrap block">
+      <h2>Le tableau de bord a besoin de JavaScript</h2>
+      <p class="sub">La version longue du carnet est lisible sans rien activer, directement sur GitHub :
+      itineraire, budget, randonnees, hebergements, valise et slovene de survie.</p>
+      <p><a href="README.md">Ouvrir le carnet en markdown</a></p>
+    </div>
+  </noscript>
+
+</main>
+
+<nav class="tabbar" role="tablist" aria-label="Sections">
+  <div class="tabbar-in">
+    <button type="button" role="tab" id="t-jours" aria-controls="p-jours" aria-selected="true" data-tab="jours">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 19h19L14.6 7 11.4 12.4 9.2 9.6z"/></svg>
+      Jours
+    </button>
+    <button type="button" role="tab" id="t-carte" aria-controls="p-carte" aria-selected="false" data-tab="carte">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3.5 3.5 5.8v14.7L9 18.2l6 2.3 5.5-2.3V3.5L15 5.8z"/><path d="M9 3.5v14.7M15 5.8v14.7"/></svg>
+      Carte
+    </button>
+    <button type="button" role="tab" id="t-budget" aria-controls="p-budget" aria-selected="false" data-tab="budget">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/><path d="M6 12h.01M18 12h.01"/></svg>
+      Budget
+    </button>
+    <button type="button" role="tab" id="t-guide" aria-controls="p-guide" aria-selected="false" data-tab="guide">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.2 4.8-4.8 2.2 2.2-4.8z"/></svg>
+      Guide
+    </button>
+    <button type="button" role="tab" id="t-sac" aria-controls="p-sac" aria-selected="false" data-tab="sac">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 10a6.5 6.5 0 0 1 13 0v8.5a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2z"/><path d="M9 9.5V7.5a3 3 0 0 1 6 0v2"/><path d="M9 14.5h6"/></svg>
+      Sac
+    </button>
+  </div>
+</nav>
+
+<script src="assets/data.js"></script>
+<script src="assets/map.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

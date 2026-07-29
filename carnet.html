@@ -1,59 +1,64 @@
-<title>Carnet de terrain - Slovenie, septembre 2026</title>
-
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Slovenie 2026 - tableau de bord</title>
+<!-- Fichier genere par build-single.py. Ne pas editer a la main :
+     modifiez index.html et assets/, puis relancez le script. -->
+<meta name="description" content="Tableau de bord du voyage en Slovenie, 7 au 13 septembre 2026 : itineraire cartographie jour par jour, temps de route, budget, guide et valise.">
+<meta name="theme-color" content="#EAF1EC">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Slovenie">
+<meta name="format-detection" content="telephone=no">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23BB3728'/%3E%3Ccircle cx='16' cy='16' r='5.5' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%23F1F4EF'/%3E%3Ccircle cx='90' cy='90' r='58' fill='%23BB3728'/%3E%3Ccircle cx='90' cy='90' r='21' fill='%23F1F4EF'/%3E%3C/svg%3E">
 <style>
+/* =============================================================
+   Slovenie 2026 - feuille de style
+   Mobile d'abord, pensee pour iPhone : zones sures, cibles de
+   44 px, typographie fluide, aucun debordement horizontal.
+   ============================================================= */
+
+:root {
+  --paper:      #F1F4EF;
+  --surface:    #FFFFFF;
+  --surface-2:  #E7EBE3;
+  --glass:      rgba(241, 244, 239, .90);
+  --ink:        #1A211E;
+  --ink-soft:   #59635D;
+  --ink-faint:  #87918A;
+  --rule:       #D3DACF;
+  --rule-soft:  #E4E9E0;
+  --soca:       #0B6E63;
+  --soca-lift:  #DEEFEA;
+  --blaze:      #BB3728;
+  --blaze-soft: #F7E5E2;
+  --shadow:     0 1px 2px rgba(26,33,30,.06), 0 8px 20px -12px rgba(26,33,30,.22);
+  --theme-color:#EAF1EC;
+  --map-filter: saturate(.42) contrast(.93) brightness(1.05);
+  --map-void:   #E4E9E0;
+
+  --f-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --f-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --f-data: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+
+  --wrap: 44rem;
+  --pad: max(1.1rem, env(safe-area-inset-left));
+  --pad-r: max(1.1rem, env(safe-area-inset-right));
+  --tabbar: 3.55rem;
+  --tap: 2.75rem;
+  --top-h: calc(env(safe-area-inset-top) + 2.85rem);
+}
+
+@media (prefers-color-scheme: dark) {
   :root {
-    --paper:      #F1F4EF;
-    --surface:    #FFFFFF;
-    --surface-2:  #E7EBE3;
-    --glass:      rgba(241, 244, 239, .88);
-    --ink:        #1A211E;
-    --ink-soft:   #59635D;
-    --ink-faint:  #87918A;
-    --rule:       #D3DACF;
-    --rule-soft:  #E2E7DE;
-    --soca:       #0B6E63;
-    --soca-lift:  #DEEFEA;
-    --blaze:      #BB3728;
-    --blaze-soft: #F7E5E2;
-    --shadow:     0 1px 2px rgba(26,33,30,.06), 0 8px 20px -12px rgba(26,33,30,.22);
-    --theme-color:#EAF1EC;
-
-    --f-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-    --f-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --f-data: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-
-    --wrap: 40rem;
-    --pad: max(1.15rem, env(safe-area-inset-left));
-    --pad-r: max(1.15rem, env(safe-area-inset-right));
-    --tabbar: 3.6rem;
-    --tap: 2.75rem;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --paper:      #0E1412;
-      --surface:    #161E1B;
-      --surface-2:  #1F2824;
-      --glass:      rgba(14, 20, 18, .88);
-      --ink:        #E5EBE6;
-      --ink-soft:   #A4B0A9;
-      --ink-faint:  #717D77;
-      --rule:       #2A342F;
-      --rule-soft:  #212A26;
-      --soca:       #4FC7B1;
-      --soca-lift:  #0F312B;
-      --blaze:      #E4735F;
-      --blaze-soft: #2F1A16;
-      --shadow:     0 1px 2px rgba(0,0,0,.45), 0 10px 26px -14px rgba(0,0,0,.7);
-      --theme-color:#0E1412;
-    }
-  }
-
-  :root[data-theme="dark"] {
     --paper:      #0E1412;
     --surface:    #161E1B;
     --surface-2:  #1F2824;
-    --glass:      rgba(14, 20, 18, .88);
+    --glass:      rgba(14, 20, 18, .90);
     --ink:        #E5EBE6;
     --ink-soft:   #A4B0A9;
     --ink-faint:  #717D77;
@@ -65,741 +70,676 @@
     --blaze-soft: #2F1A16;
     --shadow:     0 1px 2px rgba(0,0,0,.45), 0 10px 26px -14px rgba(0,0,0,.7);
     --theme-color:#0E1412;
+    --map-filter: invert(.92) hue-rotate(180deg) saturate(.4) brightness(.94) contrast(1.05);
+    --map-void:   #1B2320;
   }
+}
 
-  :root[data-theme="light"] {
-    --paper:      #F1F4EF;
-    --surface:    #FFFFFF;
-    --surface-2:  #E7EBE3;
-    --glass:      rgba(241, 244, 239, .88);
-    --ink:        #1A211E;
-    --ink-soft:   #59635D;
-    --ink-faint:  #87918A;
-    --rule:       #D3DACF;
-    --rule-soft:  #E2E7DE;
-    --soca:       #0B6E63;
-    --soca-lift:  #DEEFEA;
-    --blaze:      #BB3728;
-    --blaze-soft: #F7E5E2;
-    --shadow:     0 1px 2px rgba(26,33,30,.06), 0 8px 20px -12px rgba(26,33,30,.22);
-    --theme-color:#EAF1EC;
-  }
+:root[data-theme="dark"] {
+  --paper:      #0E1412;
+  --surface:    #161E1B;
+  --surface-2:  #1F2824;
+  --glass:      rgba(14, 20, 18, .90);
+  --ink:        #E5EBE6;
+  --ink-soft:   #A4B0A9;
+  --ink-faint:  #717D77;
+  --rule:       #2A342F;
+  --rule-soft:  #212A26;
+  --soca:       #4FC7B1;
+  --soca-lift:  #0F312B;
+  --blaze:      #E4735F;
+  --blaze-soft: #2F1A16;
+  --shadow:     0 1px 2px rgba(0,0,0,.45), 0 10px 26px -14px rgba(0,0,0,.7);
+  --theme-color:#0E1412;
+  --map-filter: invert(.92) hue-rotate(180deg) saturate(.4) brightness(.94) contrast(1.05);
+  --map-void:   #1B2320;
+}
 
-  * { box-sizing: border-box; }
+:root[data-theme="light"] {
+  --paper:      #F1F4EF;
+  --surface:    #FFFFFF;
+  --surface-2:  #E7EBE3;
+  --glass:      rgba(241, 244, 239, .90);
+  --ink:        #1A211E;
+  --ink-soft:   #59635D;
+  --ink-faint:  #87918A;
+  --rule:       #D3DACF;
+  --rule-soft:  #E4E9E0;
+  --soca:       #0B6E63;
+  --soca-lift:  #DEEFEA;
+  --blaze:      #BB3728;
+  --blaze-soft: #F7E5E2;
+  --shadow:     0 1px 2px rgba(26,33,30,.06), 0 8px 20px -12px rgba(26,33,30,.22);
+  --theme-color:#EAF1EC;
+  --map-filter: saturate(.42) contrast(.93) brightness(1.05);
+  --map-void:   #E4E9E0;
+}
 
-  html {
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-    scroll-behavior: smooth;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
-  }
+* { box-sizing: border-box; }
 
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--f-body);
-    font-size: 1rem;
-    line-height: 1.6;
-    overflow-x: hidden;
-    overscroll-behavior-y: contain;
-    -webkit-font-smoothing: antialiased;
-    -webkit-tap-highlight-color: transparent;
-  }
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
 
-  img, svg, table { max-width: 100%; }
-  p, li, td, th, h1, h2, h3, summary { overflow-wrap: break-word; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
 
-  .wrap {
-    max-width: var(--wrap);
-    margin: 0 auto;
-    padding-left: var(--pad);
-    padding-right: var(--pad-r);
-  }
+img, svg, table { max-width: 100%; }
+p, li, td, th, h1, h2, h3, summary, span { overflow-wrap: break-word; }
+a { color: var(--soca); }
+:focus-visible { outline: 2px solid var(--soca); outline-offset: 2px; border-radius: 3px; }
 
-  /* the Knafelc trail blaze: red ring, white centre, painted on every waymark in Slovenia */
-  .blaze {
-    display: inline-block;
-    width: .8rem; height: .8rem;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--surface) 0 36%, var(--blaze) 37% 100%);
-    flex: none;
-  }
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding-left: var(--pad);
+  padding-right: var(--pad-r);
+}
 
-  /* ============ top bar ============ */
-  .topbar {
-    position: sticky;
-    top: 0;
-    z-index: 40;
-    background: var(--glass);
-    -webkit-backdrop-filter: saturate(160%) blur(14px);
-    backdrop-filter: saturate(160%) blur(14px);
-    border-bottom: 1px solid var(--rule);
-    padding-top: env(safe-area-inset-top);
-  }
-  .topbar-in {
-    max-width: var(--wrap);
-    margin: 0 auto;
-    padding: .55rem var(--pad-r) .55rem var(--pad);
-    display: flex;
-    align-items: center;
-    gap: .6rem;
-    min-height: 2.9rem;
-  }
-  .topbar .mark {
-    font-family: var(--f-data);
-    font-size: .68rem;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    display: flex; align-items: center; gap: .45rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .now {
-    margin-left: auto;
-    flex: none;
-    font-family: var(--f-data);
-    font-size: .68rem;
-    font-weight: 600;
-    letter-spacing: .05em;
-    color: var(--soca);
-    background: var(--soca-lift);
-    border-radius: 999px;
-    padding: .25rem .65rem;
-    white-space: nowrap;
-    font-variant-numeric: tabular-nums;
-  }
+.blaze {
+  display: inline-block;
+  width: .78rem; height: .78rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--surface) 0 36%, var(--blaze) 37% 100%);
+  flex: none;
+}
 
-  /* ============ tab panels ============ */
-  main { display: block; }
-  .panel { padding-bottom: 1rem; }
-  [data-app="on"] .panel { display: none; }
-  [data-app="on"] .panel.is-active { display: block; }
+/* ================= barre du haut ================= */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: var(--glass);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid var(--rule);
+  padding-top: env(safe-area-inset-top);
+}
+.topbar-in {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: .5rem var(--pad-r) .5rem var(--pad);
+  display: flex; align-items: center; gap: .55rem;
+  min-height: 2.85rem;
+}
+.topbar .mark {
+  font-family: var(--f-data);
+  font-size: .66rem;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  display: flex; align-items: center; gap: .45rem;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.now {
+  margin-left: auto; flex: none;
+  font-family: var(--f-data);
+  font-size: .66rem; font-weight: 600; letter-spacing: .04em;
+  color: var(--soca); background: var(--soca-lift);
+  border-radius: 999px; padding: .24rem .6rem;
+  white-space: nowrap; font-variant-numeric: tabular-nums;
+}
 
-  section.block { padding: 1.9rem 0 .25rem; }
-  section.block:first-child { padding-top: 1.4rem; }
+/* ================= panneaux ================= */
+.panel { display: none; padding-bottom: 1rem; }
+.panel.is-active { display: block; }
+.block { padding: 1.7rem 0 .2rem; }
+.block:first-child { padding-top: 1.2rem; }
 
-  h1 {
-    font-family: var(--f-display);
-    font-size: clamp(2.5rem, 13vw, 3.9rem);
-    line-height: .94;
-    letter-spacing: -.022em;
-    font-weight: 400;
-    margin: 0;
-    text-wrap: balance;
-  }
-  h1 em { font-style: italic; color: var(--soca); }
+h1 {
+  font-family: var(--f-display);
+  font-size: clamp(2.1rem, 10vw, 3.1rem);
+  line-height: .96; letter-spacing: -.022em; font-weight: 400;
+  margin: 0; text-wrap: balance;
+}
+h1 em { font-style: italic; color: var(--soca); }
+h2 {
+  font-family: var(--f-display);
+  font-size: clamp(1.4rem, 5.6vw, 1.75rem);
+  font-weight: 400; letter-spacing: -.012em; line-height: 1.15;
+  margin: 0 0 .35rem;
+  display: flex; align-items: center; gap: .5rem;
+  text-wrap: balance;
+}
+h3 {
+  font-family: var(--f-body);
+  font-size: .72rem; font-weight: 700; letter-spacing: .11em;
+  text-transform: uppercase; color: var(--ink-faint);
+  margin: 1.7rem 0 .6rem;
+}
+.sub { color: var(--ink-soft); font-size: .92rem; margin: 0 0 1.1rem; max-width: 56ch; }
+.fine { font-size: .8rem; color: var(--ink-faint); line-height: 1.5; }
 
-  h2 {
-    font-family: var(--f-display);
-    font-size: clamp(1.5rem, 6vw, 1.85rem);
-    font-weight: 400;
-    letter-spacing: -.012em;
-    line-height: 1.15;
-    margin: 0 0 .4rem;
-    display: flex; align-items: center; gap: .55rem;
-    text-wrap: balance;
-  }
-  h3 {
-    font-family: var(--f-body);
-    font-size: .74rem;
-    font-weight: 700;
-    letter-spacing: .11em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin: 1.9rem 0 .65rem;
-  }
-  .sub {
-    color: var(--ink-soft);
-    font-size: .93rem;
-    margin: 0 0 1.25rem;
-    max-width: 56ch;
-  }
+/* ================= selecteur de jour ================= */
+.dayrail {
+  position: sticky;
+  top: var(--top-h);
+  z-index: 45;
+  background: var(--glass);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid var(--rule);
+}
+.dayrail-in {
+  max-width: var(--wrap); margin: 0 auto;
+  display: flex; gap: .35rem;
+  overflow-x: auto; scrollbar-width: none;
+  padding: .5rem var(--pad-r) .5rem var(--pad);
+  -webkit-overflow-scrolling: touch;
+}
+.dayrail-in::-webkit-scrollbar { display: none; }
+.daybtn {
+  -webkit-appearance: none; appearance: none;
+  flex: none;
+  display: flex; flex-direction: column; align-items: flex-start;
+  gap: .05rem;
+  min-height: var(--tap);
+  padding: .32rem .7rem;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--dc, var(--rule));
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--ink-soft);
+  cursor: pointer; touch-action: manipulation;
+  text-align: left;
+}
+.daybtn b {
+  font-family: var(--f-data); font-size: .72rem; font-weight: 600;
+  letter-spacing: .04em; color: var(--ink);
+}
+.daybtn span {
+  font-family: var(--f-data); font-size: .56rem;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint);
+}
+.daybtn[aria-pressed="true"] { background: var(--soca-lift); border-color: var(--dc, var(--soca)); }
+.daybtn[aria-pressed="true"] b { color: var(--ink); }
+.daybtn.is-today::after {
+  content: "auj.";
+  font-family: var(--f-data); font-size: .5rem; letter-spacing: .1em;
+  color: var(--blaze);
+}
 
-  /* ============ hero ============ */
-  .hero {
-    padding: 1.9rem 0 1.6rem;
-    background: linear-gradient(180deg, var(--soca-lift) 0%, transparent 78%);
-    margin-bottom: .4rem;
-  }
-  .eyebrow {
-    font-family: var(--f-data);
-    font-size: .66rem;
-    letter-spacing: .17em;
-    text-transform: uppercase;
-    color: var(--soca);
-    display: flex; align-items: center; gap: .5rem;
-    margin: 0 0 .9rem;
-  }
-  .dek {
-    font-family: var(--f-display);
-    font-size: 1.1rem;
-    font-style: italic;
-    line-height: 1.4;
-    color: var(--ink-soft);
-    margin: .75rem 0 0;
-    max-width: 30ch;
-  }
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1px;
-    margin-top: 1.5rem;
-    background: var(--rule);
-    border: 1px solid var(--rule);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .stat { background: var(--surface); padding: .75rem .7rem; min-width: 0; }
-  .stat b {
-    display: block;
-    font-family: var(--f-data);
-    font-size: clamp(1.1rem, 5.5vw, 1.35rem);
-    font-weight: 600;
-    letter-spacing: -.02em;
-    font-variant-numeric: tabular-nums;
-  }
-  .stat span {
-    font-family: var(--f-data);
-    font-size: .58rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
+/* ================= carte ================= */
+.mapwrap {
+  position: sticky;
+  /* juste sous la barre du haut et le selecteur de jour */
+  top: calc(var(--top-h) + 3.8rem);
+  z-index: 30;
+  background: var(--paper);
+  padding-bottom: .1rem;
+}
+.mapwrap.is-static { position: static; }
+.mapwrap.is-static .mm { height: clamp(240px, 52vh, 520px); }
+.mm {
+  position: relative;
+  height: clamp(180px, 38vh, 360px);
+  background: var(--map-void);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+  touch-action: none;
+  cursor: grab;
+  user-select: none; -webkit-user-select: none;
+}
+.mm:active { cursor: grabbing; }
+.mm-inner { position: absolute; inset: 0; }
+.mm-tiles { position: absolute; inset: 0; will-change: transform; }
+.mm-tile {
+  position: absolute;
+  width: 256px; height: 256px;
+  filter: var(--map-filter);
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none;
+}
+.mm-tile.is-on { opacity: 1; }
+.mm-tile.is-dead { display: none; }
+.mm.is-flat .mm-tiles { display: none; }
 
-  /* ============ cards ============ */
-  .cards { display: grid; gap: .65rem; }
-  @media (min-width: 33rem) { .cards.two { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    border-radius: 5px;
-    padding: .85rem .95rem;
-    box-shadow: var(--shadow);
-    min-width: 0;
-  }
-  .card .k {
-    font-family: var(--f-data);
-    font-size: .6rem;
-    letter-spacing: .13em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    display: block;
-    margin-bottom: .25rem;
-  }
-  .card .v { font-size: .95rem; line-height: 1.5; }
-  .card .v strong { font-family: var(--f-data); font-weight: 600; }
+.mm-svg { position: absolute; inset: 0; overflow: visible; }
+.mm-halo { fill: none; stroke: var(--paper); stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
+.mm-line { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.mm-line.is-dim { stroke-width: 2.5; opacity: .3; }
+.mm-mark { cursor: pointer; }
+.mm-ring { stroke: var(--paper); stroke-width: 2.5; }
+.mm-mark.is-dim .mm-ring { opacity: .35; }
+.mm-mark.is-active .mm-ring { stroke: var(--ink); stroke-width: 3; }
+.mm-num {
+  font-family: var(--f-data); font-size: 11px; font-weight: 700;
+  fill: #fff; pointer-events: none;
+}
+.mm-hit { fill: transparent; }
+.mm-mark:focus-visible .mm-ring { stroke: var(--blaze); stroke-width: 3.5; }
 
-  .alert {
-    border-left: 3px solid var(--blaze);
-    background: var(--blaze-soft);
-    border-radius: 0 5px 5px 0;
-    padding: .8rem .95rem;
-    font-size: .92rem;
-    line-height: 1.55;
-    margin-top: 1rem;
-  }
+.mm-attrib {
+  position: absolute; right: 0; bottom: 0; z-index: 5;
+  font-family: var(--f-data); font-size: .55rem; letter-spacing: .04em;
+  background: var(--glass); color: var(--ink-faint);
+  padding: .15rem .4rem; text-decoration: none;
+  border-top-left-radius: 4px;
+}
+.mm-ctrl {
+  position: absolute; right: .5rem; top: .5rem; z-index: 5;
+  display: grid; gap: .3rem;
+}
+.mm-ctrl button {
+  -webkit-appearance: none; appearance: none;
+  width: 2.1rem; height: 2.1rem;
+  border-radius: 5px; border: 1px solid var(--rule);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  color: var(--ink); font-family: var(--f-data); font-size: 1.05rem; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; touch-action: manipulation;
+}
+.mm-ctrl button:active { background: var(--soca-lift); border-color: var(--soca); }
+.mm-ctrl svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 
-  /* ============ emergency ============ */
-  .sos {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  @media (min-width: 30rem) { .sos { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-  .sos a {
-    background: var(--surface);
-    padding: .65rem .7rem;
-    text-decoration: none;
-    display: block;
-    min-height: var(--tap);
-    touch-action: manipulation;
-  }
-  .sos a:active { background: var(--surface-2); }
-  .sos .n {
-    font-family: var(--f-data);
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--blaze);
-    font-variant-numeric: tabular-nums;
-  }
-  .sos .l { font-size: .7rem; line-height: 1.35; color: var(--ink-soft); }
+.maplegend {
+  display: flex; flex-wrap: wrap; gap: .3rem .8rem;
+  padding: .5rem var(--pad-r) .5rem var(--pad);
+  max-width: var(--wrap); margin: 0 auto;
+  font-family: var(--f-data); font-size: .6rem;
+  letter-spacing: .06em; color: var(--ink-faint);
+}
+.maplegend i { display: inline-block; width: .8rem; height: .2rem; border-radius: 2px; vertical-align: middle; margin-right: .25rem; }
 
-  /* ============ days ============ */
-  details.day { border-top: 1px solid var(--rule); scroll-margin-top: 4.5rem; }
-  details.day:last-of-type { border-bottom: 1px solid var(--rule); }
-  details.day > summary {
-    list-style: none;
-    cursor: pointer;
-    padding: .8rem 0;
-    display: grid;
-    grid-template-columns: 2.35rem minmax(0, 1fr) auto;
-    align-items: baseline;
-    gap: .5rem;
-    min-height: var(--tap);
-    touch-action: manipulation;
-  }
-  details.day > summary::-webkit-details-marker { display: none; }
-  details.day > summary:active { opacity: .6; }
-  .daynum {
-    font-family: var(--f-data);
-    font-size: .78rem;
-    font-weight: 600;
-    color: var(--soca);
-    letter-spacing: .04em;
-  }
-  .daytitle { font-family: var(--f-display); font-size: 1.1rem; line-height: 1.25; }
-  .daydate {
-    font-family: var(--f-data);
-    font-size: .62rem;
-    color: var(--ink-faint);
-    letter-spacing: .06em;
-    white-space: nowrap;
-  }
-  details.day[open] > summary .daytitle { color: var(--soca); }
-  details.day.is-today { background: var(--soca-lift); }
-  details.day.is-today .daydate { color: var(--soca); font-weight: 600; }
-  .daybody { padding: 0 0 1.4rem 2.35rem; }
-  .daymeta {
-    font-family: var(--f-data);
-    font-size: .68rem;
-    color: var(--ink-soft);
-    letter-spacing: .03em;
-    display: flex; flex-wrap: wrap;
-    gap: .15rem .8rem;
-    margin: 0 0 .9rem;
-    padding-bottom: .75rem;
-    border-bottom: 1px dashed var(--rule);
-  }
+/* ================= entete de jour ================= */
+.dayhead { padding-top: 1.1rem; }
+.dayhead .kicker {
+  font-family: var(--f-data); font-size: .62rem; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--soca);
+  display: flex; align-items: center; gap: .45rem; margin: 0 0 .45rem;
+}
+.dayhead h2 { margin-bottom: .5rem; }
+.dayhead .brief { font-family: var(--f-display); font-size: 1.02rem; font-style: italic; color: var(--ink-soft); line-height: 1.45; margin: 0 0 1rem; }
 
-  ol.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: .85rem; }
-  ol.steps li {
-    display: grid;
-    grid-template-columns: 3rem minmax(0, 1fr);
-    gap: .6rem;
-    align-items: start;
-  }
-  ol.steps .t {
-    font-family: var(--f-data);
-    font-size: .7rem;
-    font-weight: 600;
-    color: var(--ink-faint);
-    font-variant-numeric: tabular-nums;
-    padding-top: .2rem;
-  }
-  ol.steps .d { font-size: .93rem; line-height: 1.55; min-width: 0; }
-  .tag {
-    display: inline-block;
-    font-family: var(--f-data);
-    font-size: .6rem;
-    letter-spacing: .05em;
-    padding: .1rem .4rem;
-    border-radius: 3px;
-    background: var(--soca-lift);
-    color: var(--soca);
-    margin-left: .3rem;
-    white-space: nowrap;
-  }
-  .tag.free { background: var(--surface-2); color: var(--ink-soft); }
+.daystats {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule); border-radius: 5px; overflow: hidden;
+}
+.daystats div { background: var(--surface); padding: .55rem .5rem; min-width: 0; }
+.daystats b {
+  display: block; font-family: var(--f-data);
+  font-size: clamp(.88rem, 4vw, 1.05rem); font-weight: 600;
+  font-variant-numeric: tabular-nums; letter-spacing: -.01em;
+}
+.daystats span {
+  font-family: var(--f-data); font-size: .53rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-faint);
+}
 
-  /* ============ tables ============ */
-  .tablewrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-x: contain;
-    max-width: 100%;
-  }
-  table { width: 100%; border-collapse: collapse; font-size: .87rem; }
-  th {
-    text-align: left;
-    font-family: var(--f-data);
-    font-size: .6rem;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    font-weight: 500;
-    padding: .45rem .5rem .45rem 0;
-    border-bottom: 1px solid var(--ink-faint);
-  }
-  td { padding: .5rem .5rem .5rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
-  td.num, th.num {
-    font-family: var(--f-data);
-    font-variant-numeric: tabular-nums;
-    text-align: right;
-    white-space: nowrap;
-    padding-right: 0;
-  }
-  tr.total td {
-    border-bottom: none;
-    border-top: 2px solid var(--ink);
-    font-weight: 700;
-    padding-top: .6rem;
-  }
+.startrow {
+  display: flex; align-items: center; gap: .5rem;
+  margin-top: .9rem; padding: .5rem .75rem;
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 5px;
+}
+.startrow .lab { font-size: .85rem; color: var(--ink-soft); min-width: 0; }
+.startrow .stepper { margin-left: auto; }
 
-  /* ============ controls: steppers, toggles, inputs ============ */
-  .field {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: center;
-    gap: .5rem;
-    padding: .6rem 0;
-    border-bottom: 1px solid var(--rule-soft);
-  }
-  .field .lab { font-size: .93rem; line-height: 1.35; min-width: 0; }
-  .field .lab small { display: block; font-size: .74rem; color: var(--ink-faint); }
-  .stepper { display: flex; align-items: center; gap: .35rem; flex: none; }
-  .stepper button {
-    -webkit-appearance: none;
-    appearance: none;
-    width: var(--tap); height: var(--tap);
-    min-width: var(--tap);
-    border-radius: 50%;
-    border: 1px solid var(--rule);
-    background: var(--surface);
-    color: var(--ink);
-    font-size: 1.15rem;
-    line-height: 1;
-    font-family: var(--f-data);
-    cursor: pointer;
-    touch-action: manipulation;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .stepper button:active { background: var(--soca-lift); border-color: var(--soca); }
-  .stepper output {
-    font-family: var(--f-data);
-    font-size: .95rem;
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
-    min-width: 3.6rem;
-    text-align: center;
-  }
+.stepper { display: flex; align-items: center; gap: .3rem; flex: none; }
+.stepper button {
+  -webkit-appearance: none; appearance: none;
+  width: var(--tap); height: var(--tap); min-width: var(--tap);
+  border-radius: 50%; border: 1px solid var(--rule);
+  background: var(--surface); color: var(--ink);
+  font-size: 1.1rem; line-height: 1; font-family: var(--f-data);
+  cursor: pointer; touch-action: manipulation;
+  display: flex; align-items: center; justify-content: center;
+}
+.stepper button:active { background: var(--soca-lift); border-color: var(--soca); }
+.stepper output {
+  font-family: var(--f-data); font-size: .95rem; font-weight: 600;
+  font-variant-numeric: tabular-nums; min-width: 3.4rem; text-align: center;
+}
 
-  .chips { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .3rem; }
-  .chip {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: .4rem;
-    min-height: var(--tap);
-    padding: .4rem .8rem;
-    border: 1px solid var(--rule);
-    border-radius: 999px;
-    background: var(--surface);
-    font-size: .85rem;
-    cursor: pointer;
-    touch-action: manipulation;
-    user-select: none;
-  }
-  .chip input { position: absolute; opacity: 0; width: 0; height: 0; }
-  .chip .price {
-    font-family: var(--f-data);
-    font-size: .74rem;
-    color: var(--ink-faint);
-    font-variant-numeric: tabular-nums;
-  }
-  /* .is-on is set in JS: :has() only landed in Safari 15.4, the class covers older iPhones */
-  .chip.is-on {
-    border-color: var(--soca);
-    background: var(--soca-lift);
-    color: var(--soca);
-  }
-  .chip.is-on .price { color: var(--soca); }
-  .chip:focus-within { outline: 2px solid var(--soca); outline-offset: 2px; }
+.warnbar {
+  border-left: 3px solid var(--blaze); background: var(--blaze-soft);
+  border-radius: 0 5px 5px 0; padding: .7rem .9rem;
+  font-size: .9rem; line-height: 1.5; margin-top: .9rem;
+}
 
-  /* live readout */
-  .readout {
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    border-radius: 5px;
-    padding: 1rem;
-    box-shadow: var(--shadow);
-    margin-top: 1.1rem;
-  }
-  .readout .big {
-    font-family: var(--f-data);
-    font-size: clamp(2rem, 11vw, 2.7rem);
-    font-weight: 600;
-    letter-spacing: -.03em;
-    line-height: 1;
-    font-variant-numeric: tabular-nums;
-  }
-  .readout .cap {
-    font-family: var(--f-data);
-    font-size: .62rem;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    display: block;
-    margin-bottom: .3rem;
-  }
-  .verdict {
-    font-size: .88rem;
-    margin-top: .5rem;
-    font-weight: 600;
-  }
-  .verdict.ok { color: var(--soca); }
-  .verdict.over { color: var(--blaze); }
+/* ================= choix A / B ================= */
+.choice { display: grid; gap: .5rem; margin-top: 1rem; }
+.choice > .lab { font-family: var(--f-data); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); }
+.choice .opts { display: grid; gap: .45rem; }
+@media (min-width: 30rem) { .choice .opts { grid-template-columns: 1fr 1fr; } }
+.optbtn {
+  -webkit-appearance: none; appearance: none;
+  text-align: left; padding: .65rem .8rem;
+  border: 1px solid var(--rule); border-radius: 5px;
+  background: var(--surface); color: var(--ink);
+  min-height: var(--tap); cursor: pointer; touch-action: manipulation;
+}
+.optbtn b { display: block; font-size: .93rem; }
+.optbtn span { font-size: .8rem; color: var(--ink-soft); line-height: 1.4; }
+.optbtn[aria-pressed="true"] { border-color: var(--soca); background: var(--soca-lift); }
 
-  .meter {
-    height: .5rem;
-    border-radius: 999px;
-    background: var(--surface-2);
-    overflow: hidden;
-    margin-top: .8rem;
-  }
-  .meter i {
-    display: block;
-    height: 100%;
-    width: 0%;
-    background: var(--soca);
-    border-radius: 999px;
-    transition: width .3s ease;
-  }
-  .meter.over i { background: var(--blaze); }
+/* ================= timeline ================= */
+.timeline { margin-top: 1.3rem; }
 
-  .split {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: .8rem;
-    margin-top: .9rem;
-    padding-top: .9rem;
-    border-top: 1px solid var(--rule-soft);
-  }
-  .split div { min-width: 0; }
-  .split .k {
-    font-family: var(--f-data);
-    font-size: .6rem;
-    letter-spacing: .11em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    display: block;
-  }
-  .split .v {
-    font-family: var(--f-data);
-    font-size: 1.05rem;
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
-  }
+.stop {
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr);
+  gap: .7rem;
+  position: relative;
+}
+.stop .gutter { position: relative; display: flex; flex-direction: column; align-items: center; }
+.stop .pin {
+  width: 1.75rem; height: 1.75rem; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--f-data); font-size: .74rem; font-weight: 700;
+  color: #fff; flex: none; margin-top: .15rem;
+  box-shadow: 0 0 0 3px var(--paper);
+}
+.stop .thread { flex: 1; width: 2px; background: var(--rule); margin-top: .25rem; }
+.stop:last-child .thread { display: none; }
 
-  /* expense rows */
-  .spend { display: grid; gap: 0; }
-  .spend .row {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 6.5rem;
-    align-items: center;
-    gap: .6rem;
-    padding: .45rem 0;
-    border-bottom: 1px solid var(--rule-soft);
-  }
-  .spend .row .lab { font-size: .9rem; min-width: 0; }
-  .spend .row .lab small {
-    display: block;
-    font-family: var(--f-data);
-    font-size: .65rem;
-    color: var(--ink-faint);
-    letter-spacing: .05em;
-  }
-  .spend input[type="number"] {
-    width: 100%;
-    min-height: var(--tap);
-    font-family: var(--f-data);
-    font-size: 1rem; /* 16px minimum: below this, iOS zooms on focus */
-    font-variant-numeric: tabular-nums;
-    text-align: right;
-    padding: .3rem .55rem;
-    border: 1px solid var(--rule);
-    border-radius: 5px;
-    background: var(--surface);
-    color: var(--ink);
-    -moz-appearance: textfield;
-  }
-  .spend input[type="number"]::-webkit-outer-spin-button,
-  .spend input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-  .spend input:focus { outline: 2px solid var(--soca); outline-offset: 1px; border-color: var(--soca); }
+.stopcard {
+  background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 6px; padding: .75rem .85rem;
+  box-shadow: var(--shadow); min-width: 0;
+  margin-bottom: .2rem;
+}
+.stopcard.is-active { border-color: var(--soca); box-shadow: 0 0 0 2px var(--soca-lift), var(--shadow); }
+.stop.is-opt .stopcard { border-style: dashed; }
 
-  /* ============ checklist ============ */
-  .progress {
-    display: flex;
-    align-items: baseline;
-    gap: .5rem;
-    font-family: var(--f-data);
-    font-size: .68rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: .5rem;
-  }
-  .progress b { font-size: 1.05rem; color: var(--soca); font-variant-numeric: tabular-nums; letter-spacing: 0; }
-  .check { display: grid; gap: 0; }
-  .check label {
-    display: flex;
-    align-items: flex-start;
-    gap: .65rem;
-    padding: .55rem .3rem;
-    border-radius: 5px;
-    font-size: .93rem;
-    line-height: 1.45;
-    min-height: var(--tap);
-    cursor: pointer;
-    touch-action: manipulation;
-    border-bottom: 1px solid var(--rule-soft);
-  }
-  .check label:active { background: var(--surface-2); }
-  .check input {
-    accent-color: var(--soca);
-    width: 1.35rem; height: 1.35rem;
-    flex: none;
-    margin: 0;
-    transform: translateY(.05rem);
-  }
-  .check input:checked + span { color: var(--ink-faint); text-decoration: line-through; }
-  .check span { min-width: 0; }
+.stoptop { display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap; }
+.stoptime {
+  font-family: var(--f-data); font-size: .74rem; font-weight: 600;
+  color: var(--soca); font-variant-numeric: tabular-nums; letter-spacing: .02em;
+}
+.stopdur {
+  font-family: var(--f-data); font-size: .62rem; color: var(--ink-faint);
+  letter-spacing: .06em; margin-left: auto;
+}
+.stopname { font-family: var(--f-display); font-size: 1.08rem; line-height: 1.25; margin: .15rem 0 .05rem; }
+.stopsub { font-size: .82rem; color: var(--ink-soft); line-height: 1.4; }
+.stoptip { font-size: .87rem; line-height: 1.55; margin: .55rem 0 0; color: var(--ink); }
 
-  .btn {
-    font-family: var(--f-data);
-    font-size: .68rem;
-    letter-spacing: .09em;
-    text-transform: uppercase;
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    color: var(--ink-soft);
-    border-radius: 999px;
-    padding: .55rem 1rem;
-    min-height: var(--tap);
-    cursor: pointer;
-    touch-action: manipulation;
-    margin-top: 1rem;
-  }
-  .btn:active { border-color: var(--blaze); color: var(--blaze); }
+.badges { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .5rem; }
+.badge {
+  font-family: var(--f-data); font-size: .6rem; letter-spacing: .05em;
+  padding: .16rem .45rem; border-radius: 3px;
+  background: var(--surface-2); color: var(--ink-soft); white-space: nowrap;
+}
+.badge.pay { background: var(--soca-lift); color: var(--soca); }
+.badge.book { background: var(--blaze-soft); color: var(--blaze); }
+.badge.kind { text-transform: uppercase; letter-spacing: .08em; }
 
-  /* ============ phrasebook ============ */
-  .lex {
-    display: grid;
-    gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  .lex div {
-    background: var(--surface);
-    padding: .55rem .75rem;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: .5rem;
-    align-items: baseline;
-  }
-  .lex .sl { font-family: var(--f-display); font-size: .98rem; font-weight: 600; min-width: 0; }
-  .lex .sl small {
-    display: block;
-    font-family: var(--f-data);
-    font-size: .6rem;
-    font-weight: 400;
-    color: var(--ink-faint);
-    letter-spacing: .03em;
-  }
-  .lex .fr { font-size: .85rem; color: var(--ink-soft); min-width: 0; }
+.links { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .65rem; }
+.links a, .links button {
+  -webkit-appearance: none; appearance: none;
+  display: inline-flex; align-items: center; gap: .3rem;
+  min-height: 2.1rem; padding: .3rem .6rem;
+  border: 1px solid var(--rule); border-radius: 999px;
+  background: var(--surface); color: var(--ink-soft);
+  font-family: var(--f-data); font-size: .63rem; letter-spacing: .05em;
+  text-decoration: none; cursor: pointer; touch-action: manipulation;
+  white-space: nowrap;
+}
+.links a:active, .links button:active { border-color: var(--soca); color: var(--soca); background: var(--soca-lift); }
+/* toute icone inline generee par le script : sans taille explicite,
+   un SVG sans width/height retombe sur 300x150 et se remplit de noir */
+.ic {
+  width: .85rem; height: .85rem; flex: none;
+  fill: none; stroke: currentColor; stroke-width: 1.7;
+  stroke-linecap: round; stroke-linejoin: round;
+  vertical-align: -.1em;
+}
+.links svg { width: .85rem; height: .85rem; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 
-  /* ============ map links ============ */
-  .waypoints { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 5px; overflow: hidden; }
-  .waypoints a {
-    background: var(--surface);
-    padding: .65rem .8rem;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: center;
-    gap: .6rem;
-    text-decoration: none;
-    color: inherit;
-    min-height: var(--tap);
-    touch-action: manipulation;
-  }
-  .waypoints a:active { background: var(--surface-2); }
-  .waypoints .wn { font-size: .92rem; min-width: 0; }
-  .waypoints .wn small { display: block; font-family: var(--f-data); font-size: .63rem; color: var(--ink-faint); letter-spacing: .04em; }
-  .waypoints .go {
-    font-family: var(--f-data);
-    font-size: .62rem;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--soca);
-    white-space: nowrap;
-  }
+.leg {
+  display: grid; grid-template-columns: 2.4rem minmax(0, 1fr);
+  gap: .7rem; align-items: center;
+  margin: .1rem 0 .55rem;
+}
+.leg .legline { display: flex; justify-content: center; }
+.leg .legline i { width: 2px; height: 100%; min-height: 2.1rem; background: var(--rule); display: block; }
+.legbody {
+  display: flex; align-items: center; gap: .5rem; flex-wrap: wrap;
+  font-family: var(--f-data); font-size: .66rem; letter-spacing: .05em;
+  color: var(--ink-faint); padding: .25rem 0;
+}
+.legbody b { color: var(--ink-soft); font-weight: 600; font-variant-numeric: tabular-nums; }
+.legbody a {
+  margin-left: auto; text-decoration: none; color: var(--soca);
+  border: 1px solid var(--rule); border-radius: 999px;
+  padding: .25rem .55rem; min-height: 1.9rem;
+  display: inline-flex; align-items: center; gap: .25rem;
+}
 
-  /* ============ bottom tab bar ============ */
-  .tabbar {
-    position: fixed;
-    left: 0; right: 0; bottom: 0;
-    z-index: 50;
-    background: var(--glass);
-    -webkit-backdrop-filter: saturate(160%) blur(16px);
-    backdrop-filter: saturate(160%) blur(16px);
-    border-top: 1px solid var(--rule);
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-  [data-app="off"] .tabbar { display: none; }
-  .tabbar-in {
-    max-width: var(--wrap);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
-  }
-  .tabbar button {
-    -webkit-appearance: none;
-    appearance: none;
-    background: none;
-    border: 0;
-    padding: .4rem .15rem .45rem;
-    min-height: var(--tabbar);
-    color: var(--ink-faint);
-    font-family: var(--f-body);
-    font-size: .62rem;
-    letter-spacing: .02em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: .15rem;
-    cursor: pointer;
-    touch-action: manipulation;
-    transition: color .15s;
-  }
-  .tabbar button svg { width: 1.35rem; height: 1.35rem; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-  .tabbar button[aria-selected="true"] { color: var(--soca); }
-  .tabbar button:active { opacity: .55; }
+/* ================= cartes generiques ================= */
+.cards { display: grid; gap: .6rem; }
+@media (min-width: 33rem) { .cards.two { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.card {
+  background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 5px; padding: .8rem .9rem;
+  box-shadow: var(--shadow); min-width: 0;
+}
+.card .k {
+  font-family: var(--f-data); font-size: .59rem; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--ink-faint); display: block; margin-bottom: .22rem;
+}
+.card .v { font-size: .93rem; line-height: 1.5; }
+.card .v strong { font-family: var(--f-data); font-weight: 600; }
 
-  main { padding-bottom: calc(var(--tabbar) + 1.5rem + env(safe-area-inset-bottom)); }
-  [data-app="off"] main { padding-bottom: 2rem; }
+.alert {
+  border-left: 3px solid var(--blaze); background: var(--blaze-soft);
+  border-radius: 0 5px 5px 0; padding: .75rem .9rem;
+  font-size: .9rem; line-height: 1.55; margin-top: .9rem;
+}
 
-  footer {
-    margin-top: 2.5rem;
-    padding: 1.6rem 0 1rem;
-    border-top: 1px solid var(--rule);
-    font-size: .78rem;
-    line-height: 1.55;
-    color: var(--ink-faint);
-  }
-  footer p { margin: .35rem 0; }
+/* ================= urgences ================= */
+.sos {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule); border-radius: 5px; overflow: hidden;
+}
+@media (min-width: 30rem) { .sos { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.sos a { background: var(--surface); padding: .6rem .7rem; text-decoration: none; display: block; min-height: var(--tap); touch-action: manipulation; }
+.sos a:active { background: var(--surface-2); }
+.sos .n { font-family: var(--f-data); font-size: 1.15rem; font-weight: 600; color: var(--blaze); font-variant-numeric: tabular-nums; }
+.sos .l { font-size: .68rem; line-height: 1.35; color: var(--ink-soft); }
 
-  a { color: var(--soca); }
-  :focus-visible { outline: 2px solid var(--soca); outline-offset: 2px; border-radius: 3px; }
+/* ================= tableaux ================= */
+.tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; max-width: 100%; }
+table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+th {
+  text-align: left; font-family: var(--f-data); font-size: .58rem;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint);
+  font-weight: 500; padding: .45rem .5rem .45rem 0; border-bottom: 1px solid var(--ink-faint);
+}
+td { padding: .5rem .5rem .5rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+td.num, th.num { font-family: var(--f-data); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; padding-right: 0; }
+tr.total td { border-bottom: none; border-top: 2px solid var(--ink); font-weight: 700; padding-top: .6rem; }
 
-  @media (min-width: 48rem) {
-    :root { --pad: 1.5rem; --pad-r: 1.5rem; }
-    body { font-size: 1.05rem; }
-  }
+/* ================= accordeons ================= */
+details.acc { border-top: 1px solid var(--rule); }
+details.acc:last-of-type { border-bottom: 1px solid var(--rule); }
+details.acc > summary {
+  list-style: none; cursor: pointer; touch-action: manipulation;
+  padding: .85rem 0; min-height: var(--tap);
+  display: flex; align-items: center; gap: .55rem;
+  font-family: var(--f-display); font-size: 1.05rem;
+}
+details.acc > summary::-webkit-details-marker { display: none; }
+details.acc > summary::after {
+  content: "+"; margin-left: auto;
+  font-family: var(--f-data); font-size: 1.1rem; color: var(--ink-faint);
+}
+details.acc[open] > summary::after { content: "-"; }
+details.acc[open] > summary { color: var(--soca); }
+.accbody { padding: 0 0 1.2rem; }
+
+/* ================= chips ================= */
+.chips { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .3rem; }
+.chip {
+  position: relative; display: inline-flex; align-items: center; gap: .4rem;
+  min-height: var(--tap); padding: .35rem .75rem;
+  border: 1px solid var(--rule); border-radius: 999px;
+  background: var(--surface); font-size: .83rem;
+  cursor: pointer; touch-action: manipulation; user-select: none; -webkit-user-select: none;
+}
+.chip input { position: absolute; opacity: 0; width: 0; height: 0; }
+.chip .price { font-family: var(--f-data); font-size: .72rem; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+.chip.is-on { border-color: var(--soca); background: var(--soca-lift); color: var(--soca); }
+.chip.is-on .price { color: var(--soca); }
+.chip:focus-within { outline: 2px solid var(--soca); outline-offset: 2px; }
+
+/* ================= lecture de valeurs ================= */
+.readout {
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 5px;
+  padding: .95rem; box-shadow: var(--shadow); margin-top: 1rem;
+}
+.readout .big {
+  font-family: var(--f-data); font-size: clamp(1.9rem, 10vw, 2.6rem);
+  font-weight: 600; letter-spacing: -.03em; line-height: 1; font-variant-numeric: tabular-nums;
+}
+.readout .cap {
+  font-family: var(--f-data); font-size: .6rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-faint); display: block; margin-bottom: .28rem;
+}
+.verdict { font-size: .87rem; margin-top: .45rem; font-weight: 600; }
+.verdict.ok { color: var(--soca); }
+.verdict.over { color: var(--blaze); }
+
+.meter { height: .45rem; border-radius: 999px; background: var(--surface-2); overflow: hidden; margin-top: .75rem; }
+.meter i { display: block; height: 100%; width: 0%; background: var(--soca); border-radius: 999px; transition: width .3s ease; }
+.meter.over i { background: var(--blaze); }
+
+.split {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .75rem; margin-top: .85rem; padding-top: .85rem;
+  border-top: 1px solid var(--rule-soft);
+}
+.split div { min-width: 0; }
+.split .k { font-family: var(--f-data); font-size: .58rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint); display: block; }
+.split .v { font-family: var(--f-data); font-size: 1.02rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+.field {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center; gap: .5rem;
+  padding: .55rem 0; border-bottom: 1px solid var(--rule-soft);
+}
+.field .lab { font-size: .92rem; line-height: 1.35; min-width: 0; }
+.field .lab small { display: block; font-size: .73rem; color: var(--ink-faint); }
+
+/* ================= depenses ================= */
+.spend .row {
+  display: grid; grid-template-columns: minmax(0, 1fr) 6.5rem;
+  align-items: center; gap: .55rem;
+  padding: .4rem 0; border-bottom: 1px solid var(--rule-soft);
+}
+.spend .row .lab { font-size: .89rem; min-width: 0; }
+.spend .row .lab small { display: block; font-family: var(--f-data); font-size: .63rem; color: var(--ink-faint); letter-spacing: .05em; }
+.spend input[type="number"] {
+  width: 100%; min-height: var(--tap);
+  font-family: var(--f-data); font-size: 1rem; /* 16 px minimum, sinon iOS zoome */
+  font-variant-numeric: tabular-nums; text-align: right;
+  padding: .3rem .5rem; border: 1px solid var(--rule); border-radius: 5px;
+  background: var(--surface); color: var(--ink); -moz-appearance: textfield;
+}
+.spend input[type="number"]::-webkit-outer-spin-button,
+.spend input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.spend input:focus { outline: 2px solid var(--soca); outline-offset: 1px; border-color: var(--soca); }
+
+/* ================= listes a cocher ================= */
+.progress {
+  display: flex; align-items: baseline; gap: .5rem;
+  font-family: var(--f-data); font-size: .66rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-faint); margin-bottom: .45rem;
+}
+.progress b { font-size: 1.02rem; color: var(--soca); font-variant-numeric: tabular-nums; letter-spacing: 0; }
+.check label {
+  display: flex; align-items: flex-start; gap: .6rem;
+  padding: .5rem .25rem; border-radius: 5px;
+  font-size: .92rem; line-height: 1.45; min-height: var(--tap);
+  cursor: pointer; touch-action: manipulation;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.check label:active { background: var(--surface-2); }
+.check input { accent-color: var(--soca); width: 1.3rem; height: 1.3rem; flex: none; margin: 0; transform: translateY(.06rem); }
+.check input:checked + span { color: var(--ink-faint); text-decoration: line-through; }
+.check span { min-width: 0; }
+
+.btn {
+  -webkit-appearance: none; appearance: none;
+  font-family: var(--f-data); font-size: .66rem; letter-spacing: .09em; text-transform: uppercase;
+  background: var(--surface); border: 1px solid var(--rule); color: var(--ink-soft);
+  border-radius: 999px; padding: .5rem .95rem; min-height: var(--tap);
+  cursor: pointer; touch-action: manipulation; margin-top: .9rem;
+}
+.btn:active { border-color: var(--blaze); color: var(--blaze); }
+
+/* ================= lexique ================= */
+.lex { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 5px; overflow: hidden; }
+.lex div { background: var(--surface); padding: .5rem .7rem; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .5rem; align-items: baseline; }
+.lex .sl { font-family: var(--f-display); font-size: .96rem; font-weight: 600; min-width: 0; }
+.lex .sl small { display: block; font-family: var(--f-data); font-size: .59rem; font-weight: 400; color: var(--ink-faint); letter-spacing: .03em; }
+.lex .fr { font-size: .84rem; color: var(--ink-soft); min-width: 0; }
+
+/* ================= barre d'onglets ================= */
+.tabbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
+  background: var(--glass);
+  -webkit-backdrop-filter: saturate(160%) blur(16px);
+  backdrop-filter: saturate(160%) blur(16px);
+  border-top: 1px solid var(--rule);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.tabbar-in {
+  max-width: var(--wrap); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+  padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);
+}
+.tabbar button {
+  -webkit-appearance: none; appearance: none;
+  background: none; border: 0; padding: .35rem .1rem .4rem;
+  min-height: var(--tabbar); color: var(--ink-faint);
+  font-family: var(--f-body); font-size: .6rem; letter-spacing: .02em;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .12rem;
+  cursor: pointer; touch-action: manipulation; transition: color .15s;
+}
+.tabbar button svg { width: 1.3rem; height: 1.3rem; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.tabbar button[aria-selected="true"] { color: var(--soca); }
+.tabbar button:active { opacity: .55; }
+
+main { padding-bottom: calc(var(--tabbar) + 1.4rem + env(safe-area-inset-bottom)); }
+
+footer {
+  margin-top: 2.2rem; padding: 1.5rem 0 1rem;
+  border-top: 1px solid var(--rule);
+  font-size: .77rem; line-height: 1.55; color: var(--ink-faint);
+}
+footer p { margin: .3rem 0; }
+
+@media (min-width: 48rem) {
+  :root { --pad: 1.5rem; --pad-r: 1.5rem; }
+  body { font-size: 1.04rem; }
+  .mm { height: clamp(260px, 46vh, 460px); }
+}
+
 </style>
+</head>
+<body>
 
 <div class="topbar">
   <div class="topbar-in">
@@ -808,786 +748,1869 @@
   </div>
 </div>
 
-<main id="app">
+<main>
 
-  <!-- =================== JOURS =================== -->
+  <!-- ============ JOURS ============ -->
   <div class="panel is-active" id="p-jours" role="tabpanel" aria-labelledby="t-jours">
+    <div class="dayrail"><div class="dayrail-in" id="dayrail"></div></div>
+    <div class="mapwrap"><div class="mm" id="daymap"></div></div>
+    <div class="wrap" id="daybody"></div>
+  </div>
 
-    <div class="hero">
-      <div class="wrap">
-        <p class="eyebrow"><span class="blaze"></span> Carnet de terrain</p>
-        <h1>Slovenie<br><em>en boucle</em></h1>
-        <p class="dek">Bled, Bohinj, le col du Vrsic, la Soca, Skocjan, Ljubljana. Sept jours, deux personnes, une petite voiture.</p>
-        <div class="stats">
-          <div class="stat"><b>7</b><span>jours</span></div>
-          <div class="stat"><b>700</b><span>km</span></div>
-          <div class="stat"><b>600 €</b><span>par pers.</span></div>
-        </div>
-      </div>
+  <!-- ============ CARTE ============ -->
+  <div class="panel" id="p-carte" role="tabpanel" aria-labelledby="t-carte">
+    <div class="mapwrap is-static"><div class="mm" id="allmap"></div></div>
+    <div class="maplegend" id="maplegend"></div>
+    <div id="allbody"></div>
+  </div>
+
+  <!-- ============ BUDGET ============ -->
+  <div class="panel" id="p-budget" role="tabpanel" aria-labelledby="t-budget">
+    <div id="budgetbody"></div>
+  </div>
+
+  <!-- ============ GUIDE ============ -->
+  <div class="panel" id="p-guide" role="tabpanel" aria-labelledby="t-guide">
+    <div id="guidebody"></div>
+  </div>
+
+  <!-- ============ SAC ============ -->
+  <div class="panel" id="p-sac" role="tabpanel" aria-labelledby="t-sac">
+    <div id="packbody"></div>
+  </div>
+
+  <noscript>
+    <div class="wrap block">
+      <h2>Le tableau de bord a besoin de JavaScript</h2>
+      <p class="sub">La version longue du carnet est lisible sans rien activer, directement sur GitHub :
+      itineraire, budget, randonnees, hebergements, valise et slovene de survie.</p>
+      <p><a href="README.md">Ouvrir le carnet en markdown</a></p>
     </div>
-
-    <section class="block wrap">
-      <h2><span class="blaze"></span> Les sept jours</h2>
-      <p class="sub">Touchez un jour pour l'ouvrir. Le jour en cours s'ouvre tout seul pendant le voyage.</p>
-
-      <details class="day" id="j1" data-day="0">
-        <summary>
-          <span class="daynum">J1</span>
-          <span class="daytitle">Arrivee et premier lac</span>
-          <span class="daydate">LUN 7</span>
-        </summary>
-        <div class="daybody">
-          <p class="daymeta"><span>35 km</span><span>35 min de route</span><span>Nuit : Bled / Bohinjska Bistrica</span></p>
-          <ol class="steps">
-            <li><span class="t">arrivee</span><span class="d">Aeroport <b>Joze Pucnik</b>. Recuperation de la voiture : <b>filmez-la avant de partir</b>, en gros plan sur chaque rayure. Demandez pour la vignette.</span></li>
-            <li><span class="t">+40 min</span><span class="d">Gros ravitaillement au <b>Hofer ou Lidl de Lesce</b>, sur la route de Bled. 30 a 40 € pour deux, ca tient trois jours.</span></li>
-            <li><span class="t">15h00</span><span class="d"><b>Tour du lac de Bled a pied.</b> 6 km, plat, 1h30. Dans le sens des aiguilles d'une montre pour garder l'ile en face.<span class="tag free">gratuit</span></span></li>
-            <li><span class="t">17h00</span><span class="d">Une <b>kremsnita</b> sur une terrasse. Le millefeuille invente au Park Hotel en 1953. Un pour deux, il est enorme.<span class="tag">6 €</span></span></li>
-            <li><span class="t">18h00</span><span class="d"><b>Montee a Ojstrica</b> depuis Velika Zaka. 25 min, raide, cordes sur la fin. Le lac, l'ile et le chateau dans le meme cadre.<span class="tag free">gratuit</span></span></li>
-            <li><span class="t">19h30</span><span class="d">Coucher de soleil. Enchainez sur <b>Mala Osojnica</b>, 15 min plus haut, si vous avez encore des jambes.</span></li>
-          </ol>
-        </div>
-      </details>
-
-      <details class="day" id="j2" data-day="1">
-        <summary>
-          <span class="daynum">J2</span>
-          <span class="daytitle">La riviere et les cascades</span>
-          <span class="daydate">MAR 8</span>
-        </summary>
-        <div class="daybody">
-          <p class="daymeta"><span>60 km</span><span>1h15 de route</span><span>Nuit : meme base</span></p>
-          <ol class="steps">
-            <li><span class="t">08h00</span><span class="d"><b>Gorges de Vintgar</b>, creneau reserve a l'avance. Parking central LIP, navette electrique, casque obligatoire. 1,6 km de passerelles au-dessus de la Radovna, jusqu'a la cascade de Sum.<span class="tag">15 €</span></span></li>
-            <li><span class="t">10h00</span><span class="d">Option : la <b>gorge de Pokljuka</b> juste a cote. Canyon sec, arche naturelle, personne.<span class="tag free">gratuit</span></span></li>
-            <li><span class="t">11h00</span><span class="d"><b>Radovljica.</b> Place medievale, musee de l'apiculture, et on y mange deux fois moins cher qu'a Bled.</span></li>
-            <li><span class="t">13h00</span><span class="d">Route vers le <b>lac de Bohinj</b>. Pique-nique cote Ribcev Laz, au pont de pierre.</span></li>
-            <li><span class="t">15h00</span><span class="d"><b>Gorge de Mostnica</b> depuis Stara Fuzina. Cherchez <b>l'Elephant</b>, la roche qui en dessine un exactement.<span class="tag">3 €</span></span></li>
-            <li><span class="t">17h30</span><span class="d"><b>Baignade dans le lac de Bohinj.</b> Plus froid qu'a Bled, transparent au point de voir le fond a 4 m.</span></li>
-          </ol>
-          <div class="alert">Mostnica est <b>gratuite avant 8h et apres 17h</b>, et gratuite avec la Bohinj Card que votre hebergement doit vous donner.</div>
-        </div>
-      </details>
-
-      <details class="day" id="j3" data-day="2">
-        <summary>
-          <span class="daynum">J3</span>
-          <span class="daytitle">La montagne</span>
-          <span class="daydate">MER 9</span>
-        </summary>
-        <div class="daybody">
-          <p class="daymeta"><span>40 km max</span><span>Journee de marche</span><span>Nuit : meme base</span></p>
-          <p style="font-size:.93rem;margin:0 0 .9rem">Deux versions. <b>Regardez la meteo la veille au soir et choisissez.</b></p>
-          <ol class="steps">
-            <li><span class="t">A</span><span class="d"><b>Telecabine de Vogel.</b> 1535 m en 4 minutes, panorama sur le Triglav et tout le lac. Puis rando facile vers <b>Sija</b> (1880 m, 1h30). Verifiez la webcam le matin : par nuages bas, vous payez pour du brouillard.<span class="tag">33 €</span></span></li>
-            <li><span class="t">B</span><span class="d"><b>Rando du Vogar</b> depuis Stara Fuzina. 550 m de denivele, 3h30 aller-retour, et une vue plongeante sur le lac qui vaut celle de la telecabine.<span class="tag free">gratuit</span></span></li>
-            <li><span class="t">15h30</span><span class="d"><b>Cascade de Savica.</b> 500 marches, 25 min de montee. 78 m qui jaillissent de la paroi en forme de A. C'est la source de la Sava.<span class="tag">4 € + 5 € parking</span></span></li>
-            <li><span class="t">17h30</span><span class="d">Retour au lac. Baignade, lecture, rien.</span></li>
-          </ol>
-        </div>
-      </details>
-
-      <details class="day" id="j4" data-day="3">
-        <summary>
-          <span class="daynum">J4</span>
-          <span class="daytitle">Le col et la source de la Soca</span>
-          <span class="daydate">JEU 10</span>
-        </summary>
-        <div class="daybody">
-          <p class="daymeta"><span>135 km</span><span>3h de route</span><span>Nuit : Kobarid</span><span>La journee du voyage</span></p>
-          <ol class="steps">
-            <li><span class="t">07h30</span><span class="d">Depart de Bohinj. <b>Partez tot</b> : le parking du sommet est plein a 9h30.</span></li>
-            <li><span class="t">09h00</span><span class="d"><b>Lac de Jasna</b>, a l'entree de Kranjska Gora. Bleu irreel, statue du bouquetin dore. <b>Plein d'essence ici</b>, il n'y a plus rien pendant 60 km.</span></li>
-            <li><span class="t">09h45</span><span class="d"><b>Chapelle russe</b>, lacet n°8. Batie en 1916 par des prisonniers de guerre russes pour leurs camarades ensevelis sous une avalanche pendant la construction de la route.</span></li>
-            <li><span class="t">10h30</span><span class="d"><b>Sommet du Vrsic, 1611 m.</b> Si vous avez de l'energie : <b>Slemenova Spica</b>, 2h30 aller-retour, une prairie d'altitude face au Jalovec. <b>La plus belle balade facile des Alpes juliennes.</b><span class="tag">parking 3 €/h</span></span></li>
-            <li><span class="t">13h00</span><span class="d"><b>Source de la Soca.</b> 15 min de marche, les 50 derniers metres sur cables fixes : rangez le telephone, il faut les deux mains.<span class="tag free">gratuit</span></span></li>
-            <li><span class="t">15h30</span><span class="d"><b>Velika korita.</b> La riviere dans une faille de 15 m de profondeur et 2 m de large. <b>Le moment photo du voyage.</b><span class="tag free">gratuit</span></span></li>
-            <li><span class="t">17h00</span><span class="d"><b>Cascade de Boka</b>, 106 m, la plus haute du pays. Le belvedere a 5 min du pont suffit : en septembre le debit est faible.<span class="tag free">gratuit</span></span></li>
-            <li><span class="t">18h00</span><span class="d">Arrivee a <b>Kobarid</b>, installation pour deux nuits.</span></li>
-          </ol>
-          <div class="alert">Dans les lacets, <b>la voiture qui monte a la priorite</b>. En descente, passez en 2e et laissez le frein moteur travailler sur les 24 lacets. Verifiez l'ouverture du col sur <b>promet.si</b> le matin meme.</div>
-        </div>
-      </details>
-
-      <details class="day" id="j5" data-day="4">
-        <summary>
-          <span class="daynum">J5</span>
-          <span class="daytitle">La vallee de la Soca a fond</span>
-          <span class="daydate">VEN 11</span>
-        </summary>
-        <div class="daybody">
-          <p class="daymeta"><span>50 km</span><span>Base a Kobarid</span></p>
-          <ol class="steps">
-            <li><span class="t">08h00</span><span class="d"><b>Cascade de Kozjak.</b> 30 min de marche depuis Kamp Koren. Elle tombe de 15 m dans une <b>chambre de pierre fermee</b>, une cavite ou la lumiere entre par le haut. <b>Y aller a 8h fait toute la difference</b> : apres 10h il y a la queue sur la passerelle.<span class="tag">5 €</span></span></li>
-            <li><span class="t">10h00</span><span class="d"><b>Pont Napoleon</b> sur la Soca turquoise, puis Kobarid.</span></li>
-            <li><span class="t">10h30</span><span class="d">Le <b>sentier historique de Kobarid</b> : 5 km, gratuit, par l'ossuaire italien et les tranchees du front de l'Isonzo. Ou le <b>musee de Kobarid</b>, un des meilleurs d'Europe sur 14-18.<span class="tag">8 €</span></span></li>
-            <li><span class="t">12h30</span><span class="d">Dejeuner. Gouter les <b>kobariski struklji</b>, roules aux noix et cannelle, specialite absolue de la ville.</span></li>
-            <li><span class="t">14h30</span><span class="d"><b>Gorges de Tolmin.</b> Tete d'ours, pont du Diable a 60 m, source thermale. Le point le plus bas du parc du Triglav.<span class="tag">8 €</span></span></li>
-            <li><span class="t">16h30</span><span class="d"><b>Baignade dans la Soca</b> sous le pont Napoleon. 11 °C : un choc, puis une euphorie. Ne sautez jamais sans avoir verifie le fond.</span></li>
-            <li><span class="t">18h00</span><span class="d"><b>Courses pour le week-end</b> a Kobarid ou Tolmin. Dimanche tout sera ferme.</span></li>
-          </ol>
-        </div>
-      </details>
-
-      <details class="day" id="j6" data-day="5">
-        <summary>
-          <span class="daynum">J6</span>
-          <span class="daytitle">La grotte, puis la ville</span>
-          <span class="daydate">SAM 12</span>
-        </summary>
-        <div class="daybody">
-          <p class="daymeta"><span>180 km</span><span>2h45 de route</span><span>Nuit : Ljubljana</span></p>
-          <ol class="steps">
-            <li><span class="t">08h30</span><span class="d"><b>Most na Soci</b>, le lac emeraude du barrage. Arret photo.</span></li>
-            <li><span class="t">09h30</span><span class="d"><b>Idrija</b> (option). Ville UNESCO du mercure. Meme sans visiter la mine, arretez-vous manger des <b>zlikrofi</b>, les raviolis de pomme de terre, premier plat slovene protege par l'UE.</span></li>
-            <li><span class="t">13h00</span><span class="d"><b>Grottes de Skocjan.</b> Un <b>canyon souterrain de 146 m de haut</b>, traverse sur une passerelle a 45 m au-dessus du torrent. Le plus grand connu au monde, UNESCO. Prevoyez un pull : il fait 12 °C. Photos interdites pendant la visite.<span class="tag">24 €</span></span></li>
-            <li><span class="t">15h30</span><span class="d">A la sortie, faites le <b>sentier du canyon exterieur</b>, 20 min, gratuit, et que presque personne ne fait.</span></li>
-            <li><span class="t">16h00</span><span class="d"><b>Chateau de Predjama</b>, encastre dans 123 m de falaise. La vue depuis le parking donne toute la photo : inutile d'entrer.<span class="tag free">gratuit dehors</span></span></li>
-            <li><span class="t">20h00</span><span class="d">Premiere soiree a <b>Ljubljana</b>, sur les quais de la Ljubljanica. C'est le soir que la ville est la meilleure.</span></li>
-          </ol>
-          <div class="alert"><b>Skocjan ou Postojna, jamais les deux.</b> Postojna coute 30,90 €, c'est un train touristique et des concretions. Skocjan coute 24 €, c'est un gouffre. Pour ce voyage, Skocjan gagne.</div>
-        </div>
-      </details>
-
-      <details class="day" id="j7" data-day="6">
-        <summary>
-          <span class="daynum">J7</span>
-          <span class="daytitle">Ljubljana et retour</span>
-          <span class="daydate">DIM 13</span>
-        </summary>
-        <div class="daybody">
-          <p class="daymeta"><span>26 km</span><span>Magasins fermes</span><span>Vol le soir</span></p>
-          <ol class="steps">
-            <li><span class="t">09h30</span><span class="d"><b>Montee au chateau a pied</b>, 15 min. Cour, remparts et vue sont <b>gratuits</b> : seuls le musee et la tour sont payants. Le funiculaire a 4 € ne sert a rien.<span class="tag free">gratuit</span></span></li>
-            <li><span class="t">11h00</span><span class="d">Le <b>marche aux puces du dimanche</b> sur les quais de Breg. Le bon endroit pour un souvenir qui ne soit pas un aimant de frigo.</span></li>
-            <li><span class="t">12h00</span><span class="d">Le centre a pied : place Preseren, <b>Triple Pont</b> de Plecnik, <b>pont des Dragons</b>, les portes de bronze de la cathedrale, les ruelles de Gornji trg. Tout tient dans 800 m.</span></li>
-            <li><span class="t">15h00</span><span class="d"><b>Parc Tivoli</b> et son allee de photos geantes, ou <b>Metelkova</b>, l'ancienne caserne devenue squat d'artistes, couverte de fresques du sol au toit.</span></li>
-            <li><span class="t">17h00</span><span class="d"><b>Restitution de la voiture.</b> Plein a Vodice ou Brnik juste avant. Comptez 30 min d'etat des lieux. Refilmez la voiture.</span></li>
-          </ol>
-        </div>
-      </details>
-
-      <h3>Les cinq choses</h3>
-      <ol class="steps" style="gap:1rem">
-        <li><span class="t">01</span><span class="d"><b>Ojstrica au coucher du soleil</b>, au-dessus du lac de Bled. 25 min de montee, zero euro.</span></li>
-        <li><span class="t">02</span><span class="d"><b>Les Velika korita de la Soca.</b> Ce vert n'existe nulle part ailleurs.</span></li>
-        <li><span class="t">03</span><span class="d"><b>La cascade de Kozjak a 8h</b>, seules dans sa chambre de pierre.</span></li>
-        <li><span class="t">04</span><span class="d"><b>Le canyon souterrain de Skocjan</b>, sur la passerelle a 45 m au-dessus du torrent.</span></li>
-        <li><span class="t">05</span><span class="d"><b>Le col du Vrsic dans la lumiere du matin</b>, avec la chapelle russe.</span></li>
-      </ol>
-    </section>
-  </div>
-
-  <!-- =================== ARGENT =================== -->
-  <div class="panel" id="p-argent" role="tabpanel" aria-labelledby="t-argent">
-    <section class="block wrap">
-      <h2><span class="blaze"></span> Simulateur de budget</h2>
-      <p class="sub">Reglez vos hypotheses, le total par personne se recalcule. Hors vol, a deux, tout partage.</p>
-
-      <div class="field">
-        <span class="lab">Nuit pour deux <small>6 nuits</small></span>
-        <span class="stepper">
-          <button type="button" data-step="-5" data-target="nuit" aria-label="Baisser le prix de la nuit">-</button>
-          <output id="out-nuit">50 €</output>
-          <button type="button" data-step="5" data-target="nuit" aria-label="Augmenter le prix de la nuit">+</button>
-        </span>
-      </div>
-      <div class="field">
-        <span class="lab">Nourriture par jour <small>et par personne, 7 jours</small></span>
-        <span class="stepper">
-          <button type="button" data-step="-2" data-target="food" aria-label="Baisser le budget nourriture">-</button>
-          <output id="out-food">20 €</output>
-          <button type="button" data-step="2" data-target="food" aria-label="Augmenter le budget nourriture">+</button>
-        </span>
-      </div>
-      <div class="field">
-        <span class="lab">Voiture pour la semaine <small>pour deux</small></span>
-        <span class="stepper">
-          <button type="button" data-step="-20" data-target="car" aria-label="Baisser le prix de la voiture">-</button>
-          <output id="out-car">250 €</output>
-          <button type="button" data-step="20" data-target="car" aria-label="Augmenter le prix de la voiture">+</button>
-        </span>
-      </div>
-
-      <h3>Les extras</h3>
-      <div class="chips" id="extras">
-        <label class="chip"><input type="checkbox" data-cost="33" data-k="x-vogel"> Vogel <span class="price">33 €</span></label>
-        <label class="chip"><input type="checkbox" data-cost="70" data-k="x-raft"> Rafting <span class="price">70 €</span></label>
-        <label class="chip"><input type="checkbox" data-cost="19" data-k="x-grad"> Chateau de Bled <span class="price">19 €</span></label>
-        <label class="chip"><input type="checkbox" data-cost="20" data-k="x-pletna"> Pletna <span class="price">20 €</span></label>
-        <label class="chip"><input type="checkbox" data-cost="8" data-k="x-musee"> Musee de Kobarid <span class="price">8 €</span></label>
-        <label class="chip"><input type="checkbox" data-cost="12" data-k="x-mine"> Mine d'Idrija <span class="price">12 €</span></label>
-        <label class="chip"><input type="checkbox" data-cost="17" data-k="x-predjama"> Predjama interieur <span class="price">17 €</span></label>
-      </div>
-
-      <div class="readout">
-        <span class="cap">Total par personne, hors vol</span>
-        <div class="big" id="total">578 €</div>
-        <div class="meter" id="meter"><i></i></div>
-        <p class="verdict ok" id="verdict">Dans la cible des 600 €.</p>
-        <div class="split">
-          <div><span class="k">Fixe (voiture, essence, vignette, parkings, taxe)</span><span class="v" id="s-fixe">198 €</span></div>
-          <div><span class="k">Hebergement</span><span class="v" id="s-lit">150 €</span></div>
-          <div><span class="k">Nourriture</span><span class="v" id="s-food">140 €</span></div>
-          <div><span class="k">Visites et extras</span><span class="v" id="s-vis">90 €</span></div>
-        </div>
-      </div>
-      <p class="sub" style="margin-top:.9rem;font-size:.83rem">Base fixe : essence 35 €, vignette 8 €, parkings 15 €, taxe de sejour 15 €, imprevu 30 €, visites du programme 61,50 €.</p>
-    </section>
-
-    <section class="block wrap">
-      <h2><span class="blaze"></span> Depenses du voyage</h2>
-      <p class="sub">A remplir chaque soir. Le total reste enregistre sur ce telephone.</p>
-
-      <div class="spend" id="spend">
-        <div class="row"><span class="lab">Jour 1 <small>LUN 7 . Bled</small></span><input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="d0" aria-label="Depenses du jour 1"></div>
-        <div class="row"><span class="lab">Jour 2 <small>MAR 8 . Vintgar</small></span><input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="d1" aria-label="Depenses du jour 2"></div>
-        <div class="row"><span class="lab">Jour 3 <small>MER 9 . Montagne</small></span><input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="d2" aria-label="Depenses du jour 3"></div>
-        <div class="row"><span class="lab">Jour 4 <small>JEU 10 . Vrsic</small></span><input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="d3" aria-label="Depenses du jour 4"></div>
-        <div class="row"><span class="lab">Jour 5 <small>VEN 11 . Soca</small></span><input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="d4" aria-label="Depenses du jour 5"></div>
-        <div class="row"><span class="lab">Jour 6 <small>SAM 12 . Skocjan</small></span><input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="d5" aria-label="Depenses du jour 6"></div>
-        <div class="row"><span class="lab">Jour 7 <small>DIM 13 . Ljubljana</small></span><input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="d6" aria-label="Depenses du jour 7"></div>
-        <div class="row"><span class="lab">Paye avant le depart <small>voiture, hebergements</small></span><input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="pre" aria-label="Depenses payees avant le depart"></div>
-      </div>
-
-      <div class="readout">
-        <span class="cap">Depense par personne</span>
-        <div class="big" id="spent">0 €</div>
-        <div class="meter" id="spentmeter"><i></i></div>
-        <p class="verdict ok" id="spentverdict">Il reste 600 € sur l'enveloppe.</p>
-      </div>
-      <button class="btn" id="resetSpend" type="button">Remettre a zero</button>
-    </section>
-
-    <section class="block wrap">
-      <h2><span class="blaze"></span> Les prix verifies</h2>
-      <p class="sub">Releves en juillet 2026. Revoyez Vintgar, Skocjan et Tolmin avant de partir.</p>
-
-      <h3>Entrees du circuit</h3>
-      <div class="tablewrap">
-        <table>
-          <thead><tr><th>Site</th><th class="num">Prix</th></tr></thead>
-          <tbody>
-            <tr><td>Vintgar, pass tout compris</td><td class="num">15 €</td></tr>
-            <tr><td>Mostnica</td><td class="num">3 €</td></tr>
-            <tr><td>Savica (+ parking)</td><td class="num">6,50 €</td></tr>
-            <tr><td>Kozjak</td><td class="num">5 €</td></tr>
-            <tr><td>Gorges de Tolmin, septembre</td><td class="num">8 €</td></tr>
-            <tr><td>Grottes de Skocjan</td><td class="num">24 €</td></tr>
-            <tr class="total"><td>Programme retenu</td><td class="num">61,50 €</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>Ce qu'on laisse de cote</h3>
-      <div class="tablewrap">
-        <table>
-          <thead><tr><th>Site</th><th class="num">Prix</th><th>Pourquoi</th></tr></thead>
-          <tbody>
-            <tr><td>Vogel</td><td class="num">33 €</td><td>La rando du Vogar donne la meme vue pour 0 €</td></tr>
-            <tr><td>Chateau de Bled</td><td class="num">19 €</td><td>La vue sur le chateau vaut mieux que la vue depuis</td></tr>
-            <tr><td>Barque pletna</td><td class="num">20 €</td><td>Une barque a rames a deux revient a 12,50 € chacune</td></tr>
-            <tr><td>Postojna</td><td class="num">30,90 €</td><td>Skocjan est moins cher et plus fort</td></tr>
-            <tr><td>Predjama, interieur</td><td class="num">16,90 €</td><td>La facade se voit entierement du parking</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>Frais courants</h3>
-      <div class="tablewrap">
-        <table>
-          <tbody>
-            <tr><td>Vignette 7 jours</td><td class="num">16 €</td></tr>
-            <tr><td>Essence SP95 / diesel</td><td class="num">1,56 / 1,63 €/L</td></tr>
-            <tr><td>Parking Savica</td><td class="num">5 € les 3h</td></tr>
-            <tr><td>Parking sommet du Vrsic</td><td class="num">3 €/h</td></tr>
-            <tr><td>Parking Skocjan</td><td class="num">gratuit</td></tr>
-            <tr><td>Taxe de sejour, Ljubljana</td><td class="num">3,91 €/nuit</td></tr>
-            <tr><td>Taxe de sejour, Bled</td><td class="num">3,13 €/nuit</td></tr>
-            <tr><td>Biere pression 0,5 L</td><td class="num">3 a 4 €</td></tr>
-            <tr><td>Burek</td><td class="num">3 a 4 €</td></tr>
-            <tr><td>Plat du jour, midi en semaine</td><td class="num">8 a 12 €</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-  </div>
-
-  <!-- =================== TERRAIN =================== -->
-  <div class="panel" id="p-terrain" role="tabpanel" aria-labelledby="t-terrain">
-    <section class="block wrap">
-      <h2><span class="blaze"></span> Urgences</h2>
-      <p class="sub">Touchez un numero pour appeler.</p>
-      <div class="sos">
-        <a href="tel:112"><span class="n">112</span><span class="l">Urgences, secours en montagne</span></a>
-        <a href="tel:113"><span class="n">113</span><span class="l">Police</span></a>
-        <a href="tel:1987"><span class="n">1987</span><span class="l">Depannage AMZS</span></a>
-        <a href="tel:1970"><span class="n">1970</span><span class="l">Info routiere</span></a>
-      </div>
-      <p class="sub" style="margin-top:.8rem;font-size:.85rem">Le 112 fonctionne sans reseau ni carte SIM, sur n'importe quel operateur disponible, et repond en anglais. Ambassade de France a Ljubljana : <a href="tel:+38614790400">+386 1 479 04 00</a>.</p>
-    </section>
-
-    <section class="block wrap">
-      <h2><span class="blaze"></span> A verifier le premier jour</h2>
-      <div class="cards two">
-        <div class="card">
-          <span class="k">Vignette autoroute</span>
-          <div class="v">Demandez au loueur si elle est incluse, puis verifiez la plaque sur <strong>evinjeta.dars.si</strong>. Sinon <strong>16 €</strong> pour 7 jours. Amende : <strong>300 a 800 €</strong>.</div>
-        </div>
-        <div class="card">
-          <span class="k">Feux de croisement</span>
-          <div class="v">Obligatoires <strong>jour et nuit, toute l'annee</strong>. Verifiez qu'ils sont allumes en sortant du parking.</div>
-        </div>
-        <div class="card">
-          <span class="k">Etat des lieux</span>
-          <div class="v">Filmez la voiture en tournant autour, jantes et pare-brise compris. Trois minutes qui evitent 400 € de litige.</div>
-        </div>
-        <div class="card">
-          <span class="k">Alcool au volant</span>
-          <div class="v"><strong>0,5 g/L</strong>, et <strong>0,0</strong> si moins de 21 ans ou moins de 3 ans de permis.</div>
-        </div>
-        <div class="card">
-          <span class="k">Carburant</span>
-          <div class="v">Plein obligatoire a <strong>Kranjska Gora</strong> avant le Vrsic : rien pendant 60 km de montagne.</div>
-        </div>
-        <div class="card">
-          <span class="k">Especes</span>
-          <div class="v">Carte partout, mais gardez <strong>50 a 80 €</strong> en liquide : barque de Bled, parkings de vallee, refuges, fermes.</div>
-        </div>
-      </div>
-      <div class="alert"><b>Dimanche 13, tout est ferme.</b> Les supermarches slovenes ne travaillent pas le dimanche. Faites les courses <b>samedi 12 avant 17h</b>, a Kobarid ou Tolmin. Restaurants, cafes et musees, eux, sont ouverts.</div>
-    </section>
-
-    <section class="block wrap">
-      <h2><span class="blaze"></span> Les points GPS</h2>
-      <p class="sub">Touchez pour ouvrir dans Plans. Les noms sont ecrits sans accents slovenes pour la saisie.</p>
-      <div class="waypoints">
-        <a href="https://maps.apple.com/?q=Vintgar%20Gorge%20Parking%20LIP%20Bled" target="_blank" rel="noopener"><span class="wn">Vintgar, parking central LIP<small>J2 . le parking, pas la gorge</small></span><span class="go">Plans</span></a>
-        <a href="https://maps.apple.com/?q=Ojstrica%20Bled%20viewpoint" target="_blank" rel="noopener"><span class="wn">Ojstrica, depart depuis Velika Zaka<small>J1 . le point de vue sur le lac</small></span><span class="go">Plans</span></a>
-        <a href="https://maps.apple.com/?q=Stara%20Fuzina%20Mostnica%20Gorge" target="_blank" rel="noopener"><span class="wn">Gorge de Mostnica, Stara Fuzina<small>J2</small></span><span class="go">Plans</span></a>
-        <a href="https://maps.apple.com/?q=Slap%20Savica%20Ukanc%20Bohinj" target="_blank" rel="noopener"><span class="wn">Cascade de Savica, Ukanc<small>J3</small></span><span class="go">Plans</span></a>
-        <a href="https://maps.apple.com/?q=Jasna%20Lake%20Kranjska%20Gora" target="_blank" rel="noopener"><span class="wn">Lac de Jasna, Kranjska Gora<small>J4 . dernier plein avant le col</small></span><span class="go">Plans</span></a>
-        <a href="https://maps.apple.com/?q=Russian%20Chapel%20Vrsic%20Pass" target="_blank" rel="noopener"><span class="wn">Chapelle russe, lacet n°8<small>J4</small></span><span class="go">Plans</span></a>
-        <a href="https://maps.apple.com/?q=Izvir%20Soce%20source%20of%20Soca" target="_blank" rel="noopener"><span class="wn">Source de la Soca, Trenta<small>J4</small></span><span class="go">Plans</span></a>
-        <a href="https://maps.apple.com/?q=Velika%20korita%20Soce%20Soca%20Slovenia" target="_blank" rel="noopener"><span class="wn">Velika korita de la Soca<small>J4 . le moment photo</small></span><span class="go">Plans</span></a>
-        <a href="https://maps.apple.com/?q=Kamp%20Koren%20Kobarid%20Slap%20Kozjak" target="_blank" rel="noopener"><span class="wn">Cascade de Kozjak, Kamp Koren<small>J5 . y etre a 8h</small></span><span class="go">Plans</span></a>
-        <a href="https://maps.apple.com/?q=Tolminska%20korita%20Zatolmin" target="_blank" rel="noopener"><span class="wn">Gorges de Tolmin, Zatolmin<small>J5</small></span><span class="go">Plans</span></a>
-        <a href="https://maps.apple.com/?q=Skocjan%20Caves%20Divaca%20Slovenia" target="_blank" rel="noopener"><span class="wn">Grottes de Skocjan<small>J6 . parking gratuit</small></span><span class="go">Plans</span></a>
-        <a href="https://maps.apple.com/?q=P%2BR%20Dolgi%20most%20Ljubljana" target="_blank" rel="noopener"><span class="wn">P+R Dolgi most, Ljubljana<small>J6 . 1,20 € la journee, bus compris</small></span><span class="go">Plans</span></a>
-      </div>
-    </section>
-
-    <section class="block wrap">
-      <h2><span class="blaze"></span> Meteo de septembre</h2>
-      <div class="tablewrap">
-        <table>
-          <thead><tr><th>Zone</th><th class="num">Jour</th><th class="num">Nuit</th><th class="num">Eau</th></tr></thead>
-          <tbody>
-            <tr><td>Ljubljana, Bled</td><td class="num">21 °C</td><td class="num">11 °C</td><td class="num">20-22 °C</td></tr>
-            <tr><td>Alpes, Vrsic, Bohinj</td><td class="num">17-19 °C</td><td class="num">8-10 °C</td><td class="num">18-20 °C</td></tr>
-            <tr><td>Karst, cote</td><td class="num">23-25 °C</td><td class="num">14-16 °C</td><td class="num">23 °C</td></tr>
-            <tr><td>La Soca</td><td class="num">-</td><td class="num">-</td><td class="num">10-13 °C</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="sub" style="margin-top:.8rem">Environ 12 jours de pluie sur le mois : comptez 1 ou 2 journees degradees. Le brouillard de fond de vallee se leve entre 9h et 11h. A consulter chaque soir : l'appli <strong>ARSO Vreme</strong>.</p>
-    </section>
-
-    <section class="block wrap">
-      <h2><span class="blaze"></span> S'il pleut</h2>
-      <p class="sub">On intervertit, on n'annule pas.</p>
-      <div class="tablewrap">
-        <table>
-          <thead><tr><th>Ce que vous voyez</th><th>Ce que vous faites</th></tr></thead>
-          <tbody>
-            <tr><td>Brouillard en fond de vallee, bleu au-dessus</td><td>Ne changez rien. Ca se leve entre 9h et 11h, et c'est le plus beau moment sur les lacs.</td></tr>
-            <tr><td>Nuages accroches aux sommets</td><td>Abandonnez l'altitude. Gorges, cascades, fonds de vallee. Surtout, ne payez pas Vogel.</td></tr>
-            <tr><td>Pluie fine continue</td><td>Les gorges sont meilleures sous la pluie : plus de debit, moins de monde. Attention, ca glisse.</td></tr>
-            <tr><td>Pluie forte et vent</td><td>Skocjan, le musee de Kobarid, Idrija, Radovljica, les musees de Ljubljana. Ou le Vodni park de Bohinjska Bistrica.</td></tr>
-            <tr><td>Orage annonce l'apres-midi</td><td>Rando le matin, redescendues a 15h. Sans discussion.</td></tr>
-            <tr><td>Col du Vrsic ferme</td><td>Le train-navette de Bohinjska Bistrica passe le tunnel <b>avec la voiture a bord</b> jusqu'a Most na Soci. Sinon, par Idrija, 2h15.</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-  </div>
-
-  <!-- =================== VALISE =================== -->
-  <div class="panel" id="p-valise" role="tabpanel" aria-labelledby="t-valise">
-    <section class="block wrap">
-      <h2><span class="blaze"></span> Valise</h2>
-      <p class="sub">Un sac cabine et un sac a dos de journee chacune. Les cases restent cochees sur ce telephone.</p>
-
-      <div class="progress"><b id="packcount">0/21</b> <span>prepare</span></div>
-      <div class="meter" id="packmeter"><i></i></div>
-
-      <h3>Indispensable</h3>
-      <div class="check">
-        <label><input type="checkbox" data-k="p1"><span><b>Chaussures de randonnee</b> ou bonnes baskets de trail</span></label>
-        <label><input type="checkbox" data-k="p2"><span><b>Veste impermeable</b> avec capuche</span></label>
-        <label><input type="checkbox" data-k="p3"><span><b>Polaire ou doudoune fine</b> : grottes, matins, altitude</span></label>
-        <label><input type="checkbox" data-k="p4"><span>Sandales de riviere ou vieilles baskets pour la Soca</span></label>
-        <label><input type="checkbox" data-k="p5"><span>Maillot de bain et serviette microfibre</span></label>
-        <label><input type="checkbox" data-k="p6"><span>Sac a dos 20-25 L et <b>deux gourdes</b></span></label>
-        <label><input type="checkbox" data-k="p7"><span>Batterie externe et cables</span></label>
-        <label><input type="checkbox" data-k="p8"><span>Creme solaire, lunettes, casquette</span></label>
-        <label><input type="checkbox" data-k="p9"><span>Pansements anti-ampoules, paracetamol, anti-nauseeux (50 lacets)</span></label>
-        <label><input type="checkbox" data-k="p10"><span>Bonnet leger ou buff : 6 °C possibles au Vrsic le matin</span></label>
-        <label><input type="checkbox" data-k="p11"><span>Couteau pliant et petite planche pour les pique-niques <b>(en soute)</b></span></label>
-        <label><input type="checkbox" data-k="p12"><span>Tote bag pliable : les sacs sont payants en supermarche</span></label>
-      </div>
-
-      <h3>Papiers</h3>
-      <div class="check">
-        <label><input type="checkbox" data-k="d1"><span>Carte d'identite ou passeport</span></label>
-        <label><input type="checkbox" data-k="d2"><span><b>Permis de conduire</b></span></label>
-        <label><input type="checkbox" data-k="d3"><span><b>Carte de credit au nom de la conductrice</b> pour la caution</span></label>
-        <label><input type="checkbox" data-k="d4"><span>CEAM, une chacune, commandee sur ameli</span></label>
-        <label><input type="checkbox" data-k="d5"><span>Voucher de location, billets, reservation Vintgar en PDF</span></label>
-        <label><input type="checkbox" data-k="d6"><span>50 a 80 € en especes</span></label>
-      </div>
-
-      <h3>A faire avant de partir</h3>
-      <div class="check">
-        <label><input type="checkbox" data-k="a1"><span><b>Reserver la voiture</b> : le poste qui double si on attend</span></label>
-        <label><input type="checkbox" data-k="a2"><span><b>Reserver le creneau de Vintgar</b> sur vintgar.si, premier creneau du matin</span></label>
-        <label><input type="checkbox" data-k="a3"><span>Telecharger la carte hors ligne de la Slovenie dans Plans et Google Maps</span></label>
-      </div>
-
-      <h3>Inutile d'emporter</h3>
-      <div class="check">
-        <label><input type="checkbox" data-k="n1"><span>Adaptateur de prise : les prises sont les memes qu'en France</span></label>
-        <label><input type="checkbox" data-k="n2"><span>Devises : c'est l'euro</span></label>
-        <label><input type="checkbox" data-k="n3"><span>Grande valise rigide : penible dans une petite voiture et dans les escaliers</span></label>
-      </div>
-
-      <button class="btn" id="resetPack" type="button">Tout decocher</button>
-    </section>
-  </div>
-
-  <!-- =================== MOTS =================== -->
-  <div class="panel" id="p-mots" role="tabpanel" aria-labelledby="t-mots">
-    <section class="block wrap">
-      <h2><span class="blaze"></span> Slovene de survie</h2>
-      <p class="sub">L'anglais suffit partout. Mais trois mots changent tout, parce que personne n'essaie jamais.</p>
-
-      <div class="lex">
-        <div><span class="sl">Dober dan<small>dober dane</small></span><span class="fr">Bonjour</span></div>
-        <div><span class="sl">Hvala<small>hvala</small></span><span class="fr">Merci</span></div>
-        <div><span class="sl">Prosim<small>prossim</small></span><span class="fr">S'il vous plait / pardon ?</span></div>
-        <div><span class="sl">Oprostite<small>oprostité</small></span><span class="fr">Excusez-moi</span></div>
-        <div><span class="sl">Nasvidenje<small>nasvidenié</small></span><span class="fr">Au revoir</span></div>
-        <div><span class="sl">Govorite anglesko?<small>govorité angléchko</small></span><span class="fr">Parlez-vous anglais ?</span></div>
-        <div><span class="sl">Koliko stane?<small>koliko stané</small></span><span class="fr">Combien ca coute ?</span></div>
-        <div><span class="sl">Racun, prosim<small>ratchoun prossim</small></span><span class="fr">L'addition</span></div>
-        <div><span class="sl">Brez mesa, prosim<small>brez messa</small></span><span class="fr">Sans viande</span></div>
-        <div><span class="sl">Na zdravje!<small>na zdravié</small></span><span class="fr">Sante ! en se regardant dans les yeux</span></div>
-      </div>
-
-      <h3>Les mots des panneaux</h3>
-      <div class="lex">
-        <div><span class="sl">Slap</span><span class="fr">Cascade</span></div>
-        <div><span class="sl">Korita / soteska</span><span class="fr">Gorges</span></div>
-        <div><span class="sl">Jama</span><span class="fr">Grotte</span></div>
-        <div><span class="sl">Jezero</span><span class="fr">Lac</span></div>
-        <div><span class="sl">Izvir</span><span class="fr">Source</span></div>
-        <div><span class="sl">Koca / dom</span><span class="fr">Refuge de montagne</span></div>
-        <div><span class="sl">Planina</span><span class="fr">Alpage</span></div>
-        <div><span class="sl">Vstopnina</span><span class="fr">Droit d'entree</span></div>
-        <div><span class="sl">Odprto / zaprto</span><span class="fr">Ouvert / ferme</span></div>
-        <div><span class="sl">Pitna voda</span><span class="fr">Eau potable</span></div>
-        <div><span class="sl">Pozor</span><span class="fr">Attention</span></div>
-        <div><span class="sl">Prepovedano</span><span class="fr">Interdit</span></div>
-        <div><span class="sl">Lekarna</span><span class="fr">Pharmacie</span></div>
-        <div><span class="sl">Pekarna</span><span class="fr">Boulangerie</span></div>
-        <div><span class="sl">Sobe / apartma</span><span class="fr">Chambres / appartement</span></div>
-        <div><span class="sl">Gostilna</span><span class="fr">Auberge-restaurant</span></div>
-      </div>
-
-      <h3>Prononciation, en trois regles</h3>
-      <div class="cards">
-        <div class="card"><span class="k">Le c</span><div class="v">se dit <strong>ts</strong>, et avec son accent <strong>tch</strong>. Soca se dit <strong>So-tcha</strong>, Skocjan <strong>Chkotch-yan</strong>.</div></div>
-        <div class="card"><span class="k">Le s accentue</span><div class="v">se dit <strong>ch</strong>. Vrsic se dit <strong>Veur-chitch</strong>.</div></div>
-        <div class="card"><span class="k">Le j</span><div class="v">se dit <strong>y</strong>. Ljubljana se dit <strong>Lyou-blia-na</strong>, Bohinj se dit <strong>Bo-hine</strong>.</div></div>
-      </div>
-
-      <h3>A gouter</h3>
-      <div class="lex">
-        <div><span class="sl">Burek</span><span class="fr">Chausson feuillete, viande ou fromage. 3 a 4 €, ca vaut un repas.</span></div>
-        <div><span class="sl">Kranjska klobasa</span><span class="fr">La saucisse de Carniole, AOP. Le plat national.</span></div>
-        <div><span class="sl">Kremsnita</span><span class="fr">Le millefeuille de Bled. Un pour deux.</span></div>
-        <div><span class="sl">Kobariski struklji</span><span class="fr">Roules aux noix et cannelle, a Kobarid.</span></div>
-        <div><span class="sl">Zlikrofi</span><span class="fr">Raviolis de pomme de terre d'Idrija.</span></div>
-        <div><span class="sl">Jota</span><span class="fr">Soupe de choucroute et haricots.</span></div>
-        <div><span class="sl">Bezgov sok</span><span class="fr">Sirop de fleur de sureau. La boisson du pays.</span></div>
-        <div><span class="sl">Teran</span><span class="fr">Le rouge tres sombre du Karst.</span></div>
-      </div>
-
-      <footer>
-        <p>Carnet de terrain, Slovenie, 7 au 13 septembre 2026.</p>
-        <p>Prix releves en juillet 2026. Les tarifs bougent d'une saison a l'autre : revoyez Vintgar, Skocjan et Tolmin sur leurs sites officiels avant de partir.</p>
-        <p>Le carnet complet, avec les fiches par zone, les randonnees, les hebergements et le carnet de bord, est dans le depot.</p>
-        <p>Sur iPhone : bouton Partager, puis "Sur l'ecran d'accueil" pour l'ouvrir comme une application, sans barre Safari.</p>
-      </footer>
-    </section>
-  </div>
+  </noscript>
 
 </main>
 
-<nav class="tabbar" role="tablist" aria-label="Sections du carnet">
+<nav class="tabbar" role="tablist" aria-label="Sections">
   <div class="tabbar-in">
     <button type="button" role="tab" id="t-jours" aria-controls="p-jours" aria-selected="true" data-tab="jours">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 19h19L14.6 7 11.4 12.4 9.2 9.6z"/></svg>
       Jours
     </button>
-    <button type="button" role="tab" id="t-argent" aria-controls="p-argent" aria-selected="false" data-tab="argent">
+    <button type="button" role="tab" id="t-carte" aria-controls="p-carte" aria-selected="false" data-tab="carte">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3.5 3.5 5.8v14.7L9 18.2l6 2.3 5.5-2.3V3.5L15 5.8z"/><path d="M9 3.5v14.7M15 5.8v14.7"/></svg>
+      Carte
+    </button>
+    <button type="button" role="tab" id="t-budget" aria-controls="p-budget" aria-selected="false" data-tab="budget">
       <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/><path d="M6 12h.01M18 12h.01"/></svg>
-      Argent
+      Budget
     </button>
-    <button type="button" role="tab" id="t-terrain" aria-controls="p-terrain" aria-selected="false" data-tab="terrain">
+    <button type="button" role="tab" id="t-guide" aria-controls="p-guide" aria-selected="false" data-tab="guide">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.2 4.8-4.8 2.2 2.2-4.8z"/></svg>
-      Terrain
+      Guide
     </button>
-    <button type="button" role="tab" id="t-valise" aria-controls="p-valise" aria-selected="false" data-tab="valise">
+    <button type="button" role="tab" id="t-sac" aria-controls="p-sac" aria-selected="false" data-tab="sac">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 10a6.5 6.5 0 0 1 13 0v8.5a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2z"/><path d="M9 9.5V7.5a3 3 0 0 1 6 0v2"/><path d="M9 14.5h6"/></svg>
-      Valise
-    </button>
-    <button type="button" role="tab" id="t-mots" aria-controls="p-mots" aria-selected="false" data-tab="mots">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 12a7.5 7.5 0 0 1-7.5 7.5H8.4L4 22.2V17A7.5 7.5 0 0 1 8.5 4.5h4.5A7.5 7.5 0 0 1 20.5 12z"/></svg>
-      Mots
+      Sac
     </button>
   </div>
 </nav>
 
 <script>
-(function () {
-  "use strict";
+/* =============================================================
+   Slovenie 2026 - donnees du voyage
+   7 au 13 septembre 2026, 2 personnes, voiture de location.
 
-  /* ---------- iPhone: viewport, safe areas, standalone ---------- */
-  function meta(name, content) {
-    var m = document.querySelector('meta[name="' + name + '"]');
-    if (!m) { m = document.createElement('meta'); m.setAttribute('name', name); document.head.appendChild(m); }
-    m.setAttribute('content', content);
+   Coordonnees : indicatives, a quelques centaines de metres pres.
+   Elles servent a tracer la carte et a lancer la navigation.
+   Les liens Google Maps et Tripadvisor partent du nom du lieu,
+   pour tomber sur la bonne fiche.
+
+   stay  = minutes prevues sur place
+   leg   = trajet vers l'etape suivante { km, min, via: [[lat,lon], ...] }
+   cost  = euros par personne
+   ============================================================= */
+
+const PALETTE = ['#147C7C', '#0F8F7A', '#3D9A57', '#96983B', '#C48A2E', '#C05F2C', '#B03A2E'];
+
+const TRIP = {
+  title: 'Slovenie',
+  from: '2026-09-07',
+  to: '2026-09-13',
+  people: 2,
+  target: 600,
+  days: [
+
+    /* ---------------------------------------------------- J1 */
+    {
+      n: 1, date: '2026-09-07', wd: 'lundi 7 septembre',
+      title: 'Arrivee et premier lac',
+      base: 'Bled ou Bohinjska Bistrica',
+      start: '11:30',
+      color: PALETTE[0],
+      brief: 'Prise de voiture, ravitaillement, et le lac de Bled a pied. On finit sur le point de vue d\'Ojstrica au coucher du soleil.',
+      stops: [
+        {
+          name: 'Aeroport de Ljubljana', sub: 'Joze Pucnik, Brnik', kind: 'transport',
+          lat: 46.2237, lon: 14.4576, stay: 40, cost: 0,
+          tip: 'Filmez la voiture en tournant autour avant de partir, jantes et pare-brise compris. Demandez si la vignette autoroute est incluse.',
+          leg: { km: 22, min: 22, via: [[46.2389, 14.3556], [46.3100, 14.2400]] }
+        },
+        {
+          name: 'Lidl Lesce', sub: 'Le gros ravitaillement', kind: 'courses',
+          lat: 46.3617, lon: 14.1550, stay: 35, cost: 18,
+          tip: 'Pain, fruits, fromage, jambon, cafe, eau. 30 a 40 € pour deux, ca tient trois jours.',
+          leg: { km: 7, min: 10, via: [[46.3660, 14.1250]] }
+        },
+        {
+          name: 'Lac de Bled', sub: 'Le tour du lac a pied, 6 km', kind: 'lac',
+          lat: 46.3625, lon: 14.0936, stay: 110, cost: 0, free: true,
+          tip: 'Dans le sens des aiguilles d\'une montre pour garder l\'ile en face de vous. Plat, praticable en baskets. Baignade possible, l\'eau est a 20-22 °C.',
+          site: 'https://www.bled.si/fr/',
+          leg: { km: 2, min: 6, via: [] }
+        },
+        {
+          name: 'Park Hotel Bled', sub: 'La kremsnita d\'origine', kind: 'repas',
+          lat: 46.3644, lon: 14.0994, stay: 40, cost: 6,
+          tip: 'Le millefeuille creme-vanille invente ici en 1953. Il est enorme : un pour deux.',
+          leg: { km: 3, min: 8, via: [] }
+        },
+        {
+          name: 'Ojstrica', sub: 'Le point de vue, depart de Velika Zaka', kind: 'montagne',
+          lat: 46.3607, lon: 14.0817, stay: 100, cost: 0, free: true,
+          tip: '25 min de montee raide, cordes fixes sur la fin. Le lac, l\'ile et le chateau dans le meme cadre. Coucher de soleil vers 19h30. Enchainez sur Mala Osojnica, 15 min plus haut.',
+          leg: { km: 20, min: 25, via: [[46.3400, 14.0700], [46.3000, 14.0300]] }
+        },
+        {
+          name: 'Bohinjska Bistrica', sub: 'Base des trois premieres nuits', kind: 'nuit',
+          lat: 46.2775, lon: 14.0064, stay: 0, cost: 0,
+          tip: '45 a 65 € la chambre double, contre 60 a 110 € a Bled. Demandez la Bohinj Card a l\'arrivee : elle est comprise dans la taxe de sejour et rend Mostnica gratuite.'
+        }
+      ]
+    },
+
+    /* ---------------------------------------------------- J2 */
+    {
+      n: 2, date: '2026-09-08', wd: 'mardi 8 septembre',
+      title: 'La riviere et les cascades',
+      base: 'Bohinjska Bistrica',
+      start: '07:30',
+      color: PALETTE[1],
+      brief: 'Vintgar au premier creneau, puis on bascule sur Bohinj, plus sauvage et beaucoup plus calme que Bled.',
+      stops: [
+        {
+          name: 'Bohinjska Bistrica', sub: 'Depart de la base', kind: 'depart',
+          lat: 46.2775, lon: 14.0064, stay: 0, cost: 0,
+          tip: 'Petit dejeuner rapide et route vers Vintgar. Le creneau de 8h est celui ou vous serez presque seules.',
+          leg: { km: 30, min: 35, via: [[46.3100, 14.0300], [46.3683, 14.1146]] }
+        },
+        {
+          name: 'Gorges de Vintgar', sub: 'Parking central VINTGAR LIP', kind: 'gorge',
+          lat: 46.3739, lon: 14.0917, stay: 115, cost: 15,
+          tip: 'Reservez le creneau de 8h en ligne : on ne vend plus de billet a l\'entree de la gorge. Le pass comprend le parking, la navette electrique et le casque obligatoire. 1,6 km de passerelles au-dessus de la Radovna, jusqu\'a la cascade de Sum.',
+          site: 'https://www.vintgar.si/en/',
+          booking: true,
+          leg: { km: 9, min: 15, via: [[46.3800, 14.0700]] }
+        },
+        {
+          name: 'Gorge de Pokljuka', sub: 'Canyon sec, gratuit, personne', kind: 'gorge',
+          lat: 46.3667, lon: 14.0556, stay: 80, cost: 0, free: true, optional: true,
+          tip: 'Le contraire de Vintgar : pas d\'eau, pas de billet, pas de monde. Arche naturelle et grotte. Boucle de 1h a 1h30.',
+          leg: { km: 16, min: 22, via: [[46.3550, 14.1100]] }
+        },
+        {
+          name: 'Radovljica', sub: 'Place medievale et musee de l\'apiculture', kind: 'ville',
+          lat: 46.3442, lon: 14.1731, stay: 75, cost: 5,
+          tip: 'Une seule rue pavee bordee de maisons peintes, et presque personne. On y mange deux fois moins cher qu\'a Bled. Le musee de l\'apiculture (5 €) est court et charmant.',
+          leg: { km: 32, min: 40, via: [[46.3200, 14.1000], [46.2900, 13.9500]] }
+        },
+        {
+          name: 'Lac de Bohinj', sub: 'Ribcev Laz, le pont de pierre', kind: 'lac',
+          lat: 46.2775, lon: 13.8875, stay: 60, cost: 0, free: true,
+          tip: 'Pique-nique au bord de l\'eau, avec l\'eglise Saint-Jean-Baptiste et son clocher blanc. C\'est la carte postale de Bohinj.',
+          leg: { km: 2, min: 5, via: [] }
+        },
+        {
+          name: 'Gorge de Mostnica', sub: 'Depart de Stara Fuzina', kind: 'gorge',
+          lat: 46.2894, lon: 13.8894, stay: 135, cost: 3,
+          tip: 'Cherchez l\'Elephant, la roche qui en dessine un exactement. Jusqu\'a la cascade de Voje, comptez 3h et une buvette d\'alpage a l\'arrivee. Gratuit avant 8h, apres 17h, ou avec la Bohinj Card.',
+          leg: { km: 3, min: 7, via: [] }
+        },
+        {
+          name: 'Baignade au lac de Bohinj', sub: 'Rive nord, sur les galets', kind: 'lac',
+          lat: 46.2800, lon: 13.8700, stay: 60, cost: 0, free: true,
+          tip: '18 a 20 °C en septembre. L\'eau est si claire qu\'on voit le fond a 4 m.',
+          leg: { km: 8, min: 12, via: [] }
+        },
+        {
+          name: 'Bohinjska Bistrica', sub: 'Nuit 2', kind: 'nuit',
+          lat: 46.2775, lon: 14.0064, stay: 0, cost: 0
+        }
+      ]
+    },
+
+    /* ---------------------------------------------------- J3 */
+    {
+      n: 3, date: '2026-09-09', wd: 'mercredi 9 septembre',
+      title: 'La montagne',
+      base: 'Bohinjska Bistrica',
+      start: '08:00',
+      color: PALETTE[2],
+      brief: 'La journee la plus dependante du ciel. Regardez la webcam de Vogel le matin : par nuages bas, prenez la version gratuite au sol.',
+      choice: {
+        label: 'Version du jour',
+        options: [
+          { key: 'B', title: 'Rando du Vogar', detail: 'Gratuit, 550 m de denivele, 3h30, la meme vue plongeante sur le lac. C\'est la version retenue dans le budget.' },
+          { key: 'A', title: 'Telecabine de Vogel', detail: '33 € par personne, 1535 m en 4 minutes, vue frontale sur le Triglav. Seulement si le ciel est degage.' }
+        ]
+      },
+      stops: [
+        {
+          name: 'Bohinjska Bistrica', sub: 'Depart de la base', kind: 'depart',
+          lat: 46.2775, lon: 14.0064, stay: 0, cost: 0,
+          tip: 'Journee sans route. Verifiez la webcam de Vogel avant de choisir la version du jour.',
+          leg: { km: 10, min: 16, via: [[46.2800, 13.9300]] }
+        },
+        {
+          name: 'Telecabine de Vogel', sub: 'Version A, depuis Ukanc', kind: 'montagne',
+          lat: 46.2814, lon: 13.8383, stay: 270, cost: 33, variant: 'A',
+          tip: 'Parking gratuit et telesiege vers Orlova Glava compris. En haut, rando facile vers Sija (1880 m, 1h30 aller-retour). Verifiez la webcam avant de monter : par nuages bas vous payez 33 € pour du brouillard.',
+          site: 'https://vogel.si/en/',
+          leg: { km: 4, min: 9, via: [] }
+        },
+        {
+          name: 'Rando du Vogar', sub: 'Version B, depuis Stara Fuzina', kind: 'montagne',
+          lat: 46.2894, lon: 13.8894, stay: 300, cost: 0, free: true, variant: 'B',
+          tip: '1h45 de montee, 550 m de denivele, et une vue plongeante sur tout le lac de Bohinj. Retour en boucle possible par la Planina Blato et la vallee de Voje.',
+          leg: { km: 8, min: 15, via: [] }
+        },
+        {
+          name: 'Cascade de Savica', sub: 'Au fond de la vallee d\'Ukanc', kind: 'cascade',
+          lat: 46.2942, lon: 13.8003, stay: 90, cost: 6.5,
+          tip: '4 € d\'entree plus 5 € de parking a partager. 500 marches, 25 min de montee. 78 m qui jaillissent de la paroi en forme de A : c\'est la source de la Sava.',
+          leg: { km: 12, min: 20, via: [[46.2800, 13.8600]] }
+        },
+        {
+          name: 'Bohinjska Bistrica', sub: 'Nuit 3, courses pour le lendemain', kind: 'nuit',
+          lat: 46.2775, lon: 14.0064, stay: 0, cost: 0,
+          tip: 'Le Vodni park de Bohinjska Bistrica (piscines et saunas, ~15 € les 3h) sauve une fin d\'apres-midi pluvieuse.'
+        }
+      ]
+    },
+
+    /* ---------------------------------------------------- J4 */
+    {
+      n: 4, date: '2026-09-10', wd: 'jeudi 10 septembre',
+      title: 'Le col et la source de la Soca',
+      base: 'Kobarid',
+      start: '07:30',
+      color: PALETTE[3],
+      brief: 'La journee du voyage. 50 lacets, une chapelle de bois, et la riviere la plus verte d\'Europe qui sort de la montagne.',
+      warn: 'Verifiez l\'ouverture du col sur promet.si le matin meme. Faites le plein a Kranjska Gora : il n\'y a plus rien pendant 60 km.',
+      stops: [
+        {
+          name: 'Bohinjska Bistrica', sub: 'Depart de la base', kind: 'depart',
+          lat: 46.2775, lon: 14.0064, stay: 0, cost: 0,
+          tip: 'Il faut redescendre par Bled et Jesenice pour rejoindre la vallee de la Sava. C\'est le plus long transfert de la semaine : partez a 7h30, le parking du sommet est plein a 9h30.',
+          leg: { km: 65, min: 75, via: [[46.3683, 14.1146], [46.4364, 14.0525], [46.4614, 13.9425], [46.4847, 13.7856]] }
+        },
+        {
+          name: 'Lac de Jasna', sub: 'Entree de Kranjska Gora', kind: 'lac',
+          lat: 46.4747, lon: 13.7856, stay: 30, cost: 0, free: true,
+          tip: 'Bleu irreel et la statue du bouquetin dore, le Zlatorog de la legende. Dernier plein d\'essence avant le col, juste a cote.',
+          leg: { km: 6, min: 18, via: [[46.4700, 13.7750], [46.4600, 13.7700]] }
+        },
+        {
+          name: 'Chapelle russe', sub: 'Lacet n°8, 1100 m', kind: 'culture',
+          lat: 46.4442, lon: 13.7639, stay: 25, cost: 0, free: true,
+          tip: 'Batie en 1916 par des prisonniers de guerre russes en memoire de leurs 300 camarades ensevelis par une avalanche pendant la construction de la route. L\'endroit le plus emouvant du col.',
+          leg: { km: 5, min: 20, via: [[46.4390, 13.7520]] }
+        },
+        {
+          name: 'Sommet du Vrsic', sub: '1611 m, le plus haut col du pays', kind: 'montagne',
+          lat: 46.4328, lon: 13.7469, stay: 165, cost: 6,
+          tip: 'Parking ~3 €/h, plein a partir de 9h30. Si vous avez de l\'energie : Slemenova Spica, 2h30 aller-retour, 300 m de denivele, une prairie d\'altitude face au Jalovec. La plus belle balade facile des Alpes juliennes.',
+          leg: { km: 13, min: 32, via: [[46.4200, 13.7350], [46.4120, 13.7300]] }
+        },
+        {
+          name: 'Source de la Soca', sub: 'Izvir Soce, Trenta', kind: 'riviere',
+          lat: 46.4067, lon: 13.7256, stay: 60, cost: 0, free: true,
+          tip: '15 min de marche, et les 50 derniers metres sur cables fixes dans la roche. Rangez le telephone, il faut les deux mains. L\'eau sort de la montagne dans une vasque emeraude.',
+          leg: { km: 13, min: 20, via: [[46.3722, 13.7392], [46.3500, 13.6900]] }
+        },
+        {
+          name: 'Velika korita de la Soca', sub: 'Pont de Kraselnica', kind: 'riviere',
+          lat: 46.3339, lon: 13.6636, stay: 75, cost: 0, free: true,
+          tip: '750 m de faille, 15 m de profondeur, parfois 2 m de large. Pont suspendu au-dessus. Ce vert n\'existe nulle part ailleurs : c\'est le moment photo du voyage. Baignade possible dans les vasques en aval, 11 °C.',
+          leg: { km: 13, min: 18, via: [[46.3383, 13.5522]] }
+        },
+        {
+          name: 'Cascade de Boka', sub: '106 m, la plus haute de Slovenie', kind: 'cascade',
+          lat: 46.3131, lon: 13.5606, stay: 40, cost: 0, free: true,
+          tip: 'Le belvedere a 5 min du pont donne deja la cascade entiere. La montee au pied prend 1h et c\'est raide : en septembre le debit est faible, le belvedere suffit.',
+          leg: { km: 12, min: 16, via: [[46.2800, 13.5700]] }
+        },
+        {
+          name: 'Kobarid', sub: 'Base des deux nuits suivantes', kind: 'nuit',
+          lat: 46.2472, lon: 13.5789, stay: 0, cost: 0,
+          tip: 'Petite ville gastronomique. Gouter les kobariski struklji, roules aux noix et cannelle. Hisa Polonka et Picerija Fedrig sont les bonnes adresses accessibles.'
+        }
+      ]
+    },
+
+    /* ---------------------------------------------------- J5 */
+    {
+      n: 5, date: '2026-09-11', wd: 'vendredi 11 septembre',
+      title: 'La vallee de la Soca a fond',
+      base: 'Kobarid',
+      start: '08:00',
+      color: PALETTE[4],
+      brief: 'Peu de route, beaucoup d\'eau. La plus belle cascade du pays au reveil, un canyon l\'apres-midi, et un bain glace entre les deux.',
+      stops: [
+        {
+          name: 'Kobarid', sub: 'Depart de la base', kind: 'depart',
+          lat: 46.2472, lon: 13.5789, stay: 0, cost: 0,
+          tip: 'Tout est a moins de 16 km aujourd\'hui. Le seul horaire qui compte est celui de Kozjak : y etre a 8h.',
+          leg: { km: 2, min: 5, via: [] }
+        },
+        {
+          name: 'Cascade de Kozjak', sub: 'Depart du camping Kamp Koren', kind: 'cascade',
+          lat: 46.2528, lon: 13.5825, stay: 105, cost: 5,
+          tip: '30 min de marche facile. Elle tombe de 15 m dans une chambre de pierre presque fermee, ou la lumiere entre par le haut. Y etre a 8h fait toute la difference : apres 10h il y a la queue sur la passerelle finale, qui ne laisse passer qu\'une personne.',
+          leg: { km: 1, min: 4, via: [] }
+        },
+        {
+          name: 'Pont Napoleon', sub: 'Sur la Soca turquoise', kind: 'riviere',
+          lat: 46.2531, lon: 13.5847, stay: 25, cost: 0, free: true,
+          tip: 'Beaucoup de gens sautent depuis le pont. Ce n\'est pas balise et l\'eau est a 11 °C : a vous de voir.',
+          leg: { km: 1, min: 4, via: [] }
+        },
+        {
+          name: 'Kobarid', sub: 'Musee, ossuaire, sentier historique', kind: 'culture',
+          lat: 46.2464, lon: 13.5786, stay: 150, cost: 8,
+          tip: 'Le front de l\'Isonzo, douze batailles entre 1915 et 1917, 300 000 morts dans cette vallee. Le musee (8 €) a recu le prix du musee europeen. Le sentier historique, gratuit, fait 5 km par l\'ossuaire italien, les tranchees et Kozjak.',
+          site: 'https://www.kobariski-muzej.si/',
+          leg: { km: 16, min: 21, via: [[46.2200, 13.6300]] }
+        },
+        {
+          name: 'Gorges de Tolmin', sub: 'Zatolmin, point le plus bas du parc', kind: 'gorge',
+          lat: 46.1878, lon: 13.7311, stay: 105, cost: 8,
+          tip: 'La Tete d\'ours, un rocher coince entre les deux parois. Le pont du Diable a 60 m au-dessus de l\'eau. Et la seule source thermale du parc national. Plus sauvage que Vintgar.',
+          site: 'https://www.soca-valley.com/',
+          leg: { km: 16, min: 21, via: [[46.2200, 13.6300]] }
+        },
+        {
+          name: 'Baignade dans la Soca', sub: 'Sous le pont Napoleon', kind: 'riviere',
+          lat: 46.2531, lon: 13.5847, stay: 70, cost: 0, free: true,
+          tip: '11 a 13 °C. Un choc, puis une euphorie. Entrez progressivement, ne plongez jamais sans avoir verifie le fond, le courant est plus fort qu\'il n\'y parait.',
+          leg: { km: 2, min: 5, via: [] }
+        },
+        {
+          name: 'Kobarid', sub: 'Nuit 5, courses du week-end', kind: 'nuit',
+          lat: 46.2472, lon: 13.5789, stay: 0, cost: 0,
+          tip: 'Faites les courses ce soir ou demain avant 17h. Dimanche, tous les supermarches slovenes sont fermes.'
+        }
+      ]
+    },
+
+    /* ---------------------------------------------------- J6 */
+    {
+      n: 6, date: '2026-09-12', wd: 'samedi 12 septembre',
+      title: 'La grotte, puis la ville',
+      base: 'Ljubljana',
+      start: '08:00',
+      color: PALETTE[5],
+      brief: 'On quitte les Alpes pour le Karst, ce plateau calcaire qui a donne son nom au relief karstique dans le monde entier. Puis Ljubljana le soir.',
+      stops: [
+        {
+          name: 'Kobarid', sub: 'Depart de la base', kind: 'depart',
+          lat: 46.2472, lon: 13.5789, stay: 0, cost: 0,
+          tip: 'La plus longue journee de route de la semaine. Faites le plein a Kobarid ou Tolmin avant de partir.',
+          leg: { km: 20, min: 25, via: [[46.1836, 13.7317]] }
+        },
+        {
+          name: 'Most na Soci', sub: 'Le lac emeraude du barrage', kind: 'riviere',
+          lat: 46.1450, lon: 13.7433, stay: 25, cost: 0, free: true,
+          tip: 'Arret photo au confluent de la Soca et de l\'Idrijca.',
+          leg: { km: 42, min: 55, via: [[46.1000, 13.8500], [46.0300, 13.9500]] }
+        },
+        {
+          name: 'Idrija', sub: 'Ville UNESCO du mercure', kind: 'ville',
+          lat: 46.0022, lon: 14.0286, stay: 75, cost: 0, optional: true,
+          tip: 'Deuxieme mine de mercure du monde, exploitee de 1490 a 1995. Meme sans visiter la mine (12 €), arretez-vous manger des zlikrofi, les raviolis de pomme de terre en forme de petit chapeau, premier plat slovene protege par l\'UE. Comptez 8 a 10 € l\'assiette.',
+          site: 'https://www.visit-idrija.si/en/',
+          leg: { km: 88, min: 80, via: [[45.9000, 13.9000], [45.8000, 13.9200], [45.7200, 13.9600]] }
+        },
+        {
+          name: 'Grottes de Skocjan', sub: 'Le plus grand canyon souterrain du monde', kind: 'grotte',
+          lat: 45.6636, lon: 13.9903, stay: 180, cost: 24,
+          tip: 'Une salle de 146 m de haut, traversee sur une passerelle a 45 m au-dessus du torrent. Classe UNESCO. Il fait 12 °C : prenez un pull. Chaussures fermees, ca ruisselle. Photos interdites pendant la visite. Departs a l\'heure ronde de 10h a 17h. A la sortie, faites le sentier du canyon exterieur, gratuit, que presque personne ne fait.',
+          site: 'https://www.park-skocjanske-jame.si/en/',
+          booking: true,
+          leg: { km: 30, min: 30, via: [[45.7200, 14.0500]] }
+        },
+        {
+          name: 'Chateau de Predjama', sub: 'Encastre dans 123 m de falaise', kind: 'culture',
+          lat: 45.8156, lon: 14.1272, stay: 40, cost: 0, free: true,
+          tip: 'Le plus grand chateau troglodyte du monde. La facade se voit entierement depuis la route et le parking : inutile de payer les 16,90 € d\'entree. Le brigand Erasme y a soutenu un siege d\'un an, ravitaille par un tunnel secret.',
+          leg: { km: 52, min: 45, via: [[45.8600, 14.2200], [45.9500, 14.3500]] }
+        },
+        {
+          name: 'Ljubljana', sub: 'Les quais de la Ljubljanica', kind: 'ville',
+          lat: 46.0514, lon: 14.5061, stay: 0, cost: 0,
+          tip: 'Garez-vous au P+R Dolgi most ou Stozice : 1,20 € la journee, ticket de bus compris. Le centre est entierement pietonnier. C\'est le soir que la ville est la meilleure, sur les terrasses au bord de l\'eau.'
+        }
+      ]
+    },
+
+    /* ---------------------------------------------------- J7 */
+    {
+      n: 7, date: '2026-09-13', wd: 'dimanche 13 septembre',
+      title: 'Ljubljana et retour',
+      base: 'Vol du soir',
+      start: '09:00',
+      color: PALETTE[6],
+      brief: 'Tout se fait a pied dans un carre de 800 m. Attention : dimanche, les magasins sont fermes, mais restaurants, cafes et musees sont ouverts.',
+      stops: [
+        {
+          name: 'Chateau de Ljubljana', sub: 'A pied, 15 min de montee', kind: 'culture',
+          lat: 46.0489, lon: 14.5083, stay: 90, cost: 0, free: true,
+          tip: 'La cour, les remparts et la vue sont gratuits : seuls le musee et la tour sont payants. Le funiculaire a 4 € ne sert a rien, la montee est agreable.',
+          site: 'https://www.ljubljanskigrad.si/en/',
+          leg: { km: 1, min: 12, via: [] }
+        },
+        {
+          name: 'Marche aux puces de Breg', sub: 'Uniquement le dimanche', kind: 'ville',
+          lat: 46.0497, lon: 14.5039, stay: 60, cost: 0, free: true,
+          tip: 'Le marche alimentaire est ferme le dimanche, mais les quais de Breg accueillent les antiquaires. Le bon endroit pour un souvenir qui ne soit pas un aimant de frigo.',
+          leg: { km: 1, min: 10, via: [] }
+        },
+        {
+          name: 'Centre historique', sub: 'Place Preseren et les trois ponts', kind: 'ville',
+          lat: 46.0514, lon: 14.5061, stay: 120, cost: 0, free: true,
+          tip: 'Le Triple Pont et le marche couvert de Plecnik, classes UNESCO. Le pont des Dragons. Les portes de bronze de la cathedrale, polies par des milliers de mains. Les ruelles de Stari trg et Gornji trg.',
+          leg: { km: 2, min: 18, via: [] }
+        },
+        {
+          name: 'Parc Tivoli ou Metelkova', sub: 'Au choix : le calme ou les fresques', kind: 'ville',
+          lat: 46.0556, lon: 14.4964, stay: 75, cost: 0, free: true,
+          tip: 'Tivoli : 5 km² de parc et l\'allee Jakopic bordee de photos geantes en plein air. Metelkova : l\'ancienne caserne de l\'armee yougoslave squattee par des artistes depuis 1993, couverte de fresques du sol au toit. C\'est l\'autre visage de la ville.',
+          leg: { km: 26, min: 28, via: [[46.1000, 14.5000], [46.1700, 14.4800]] }
+        },
+        {
+          name: 'Aeroport de Ljubljana', sub: 'Restitution et vol retour', kind: 'transport',
+          lat: 46.2237, lon: 14.4576, stay: 0, cost: 0,
+          tip: 'Refaites le plein a Vodice ou Brnik juste avant. Comptez 30 min pour l\'etat des lieux, et refilmez la voiture. Arrivez 2h avant le vol.'
+        }
+      ]
+    }
+  ]
+};
+
+/* ============================================================
+   Fiches pratiques
+   ============================================================ */
+
+const GUIDE = {
+  urgences: [
+    { n: '112', l: 'Urgences, secours en montagne', tel: '112' },
+    { n: '113', l: 'Police', tel: '113' },
+    { n: '1987', l: 'Depannage routier AMZS', tel: '1987' },
+    { n: '1970', l: 'Info routiere DARS', tel: '1970' }
+  ],
+
+  conduite: [
+    { k: 'Vignette autoroute', v: 'Demandez au loueur si elle est incluse, puis verifiez la plaque sur evinjeta.dars.si. Sinon 16 € pour 7 jours. Amende de 300 a 800 €.' },
+    { k: 'Feux de croisement', v: 'Obligatoires jour et nuit, toute l\'annee.' },
+    { k: 'Alcool', v: '0,5 g/L, et 0,0 g/L si moins de 21 ans ou moins de 3 ans de permis.' },
+    { k: 'Vitesses', v: '50 en ville, 90 sur route, 110 sur voie rapide, 130 sur autoroute.' },
+    { k: 'Obligatoire dans la voiture', v: 'Gilet jaune et triangle. Verifiez qu\'ils sont dans le coffre a la prise en charge.' },
+    { k: 'Carburant', v: 'SP95 environ 1,56 €/L, diesel 1,63 €/L. Reseau Petrol partout. Rien entre Kranjska Gora et Bovec.' },
+    { k: 'Lacets de montagne', v: 'La voiture qui monte a la priorite. En descente, passez en 2e et laissez le frein moteur travailler.' },
+    { k: 'Caution du loueur', v: '800 a 1500 € bloques sur une carte de credit au nom de la conductrice. C\'est le motif numero 1 de refus au comptoir.' }
+  ],
+
+  randos: [
+    { nom: 'Ojstrica', lieu: 'Bled', duree: '45 min A/R', deniv: '130 m', diff: 'Raide, cordes sur la fin', prix: 'gratuit', note: 'Le point de vue le plus celebre du pays.' },
+    { nom: 'Gorges de Vintgar', lieu: 'Bled', duree: '1h30', deniv: 'nul', diff: 'Facile, glissant sous la pluie', prix: '15 €', note: 'Passerelles au-dessus de la Radovna.' },
+    { nom: 'Gorge de Mostnica', lieu: 'Bohinj', duree: '2h a 3h30', deniv: '150 m', diff: 'Facile', prix: '3 €', note: 'Jusqu\'a l\'Elephant, ou jusqu\'a la cascade de Voje.' },
+    { nom: 'Cascade de Savica', lieu: 'Bohinj', duree: '50 min A/R', deniv: '130 m', diff: '500 marches', prix: '9,50 €', note: 'La source de la Sava.' },
+    { nom: 'Vogar', lieu: 'Bohinj', duree: '3h30 A/R', deniv: '550 m', diff: 'Moyenne', prix: 'gratuit', note: 'L\'alternative gratuite a Vogel, meme vue plongeante.' },
+    { nom: 'Sija depuis Vogel', lieu: 'Bohinj', duree: '1h30 A/R', deniv: '350 m', diff: 'Facile a moyenne', prix: '33 € (telecabine)', note: '1880 m, face au Triglav.' },
+    { nom: 'Slemenova Spica', lieu: 'Vrsic', duree: '2h30 A/R', deniv: '300 m', diff: 'Moyenne, sans exposition', prix: 'gratuit', note: 'La plus belle balade facile des Alpes juliennes. Prairie d\'altitude face au Jalovec.' },
+    { nom: 'Source de la Soca', lieu: 'Trenta', duree: '40 min A/R', deniv: '100 m', diff: 'Cables sur la fin', prix: 'gratuit', note: 'Les deux mains libres sur les derniers metres.' },
+    { nom: 'Velika korita', lieu: 'Soca', duree: '1h', deniv: 'nul', diff: 'Facile', prix: 'gratuit', note: 'La faille de 15 m et le pont suspendu.' },
+    { nom: 'Cascade de Kozjak', lieu: 'Kobarid', duree: '1h A/R', deniv: '100 m', diff: 'Facile', prix: '5 €', note: 'La chambre de pierre. Y etre a 8h.' },
+    { nom: 'Sentier historique de Kobarid', lieu: 'Kobarid', duree: '3h boucle', deniv: '250 m', diff: 'Facile', prix: 'gratuit', note: 'Ossuaire, tranchees de 14-18 et Kozjak.' },
+    { nom: 'Gorges de Tolmin', lieu: 'Tolmin', duree: '1h30 boucle', deniv: '200 m', diff: 'Escaliers', prix: '8 €', note: 'Tete d\'ours, pont du Diable, source thermale.' },
+    { nom: 'Debela Pec', lieu: 'Pokljuka', duree: '4h A/R', deniv: '600 m', diff: 'Moyenne', prix: 'gratuit', note: '2014 m sans materiel, face nord du Triglav.' }
+  ],
+
+  hebergements: [
+    { base: 'Bohinjska Bistrica', nuits: '1, 2, 3', prix: '45 a 65 €', note: 'Le meilleur rapport qualite-prix. 10 min du lac, supermarche, parking souvent gratuit. Preferez un logement avec kitchenette : c\'est 10 a 15 € par jour et par personne d\'economises.' },
+    { base: 'Bled', nuits: 'alternative 1, 2, 3', prix: '60 a 110 €', note: 'Plus cher et plus touristique, mais on va au lac a pied le soir. Parking payant partout.' },
+    { base: 'Kobarid', nuits: '4, 5', prix: '40 a 60 €', note: 'Plus central que Bovec pour Kozjak et Tolmin, et plus agreable le soir. Kamp Koren est au depart exact du sentier de Kozjak.' },
+    { base: 'Ljubljana', nuits: '6', prix: '25 a 35 € en dortoir, 60 a 90 € en double', note: 'La nuit la plus chere de la semaine. Pour une seule nuit, une auberge du centre suffit. Verifiez le parking ou la proximite d\'un P+R.' }
+  ],
+
+  manger: [
+    { p: 'Burek', d: 'Chausson feuillete a la viande ou au fromage. Un burek vaut un repas.', prix: '3 a 4 €' },
+    { p: 'Kranjska klobasa', d: 'La saucisse de Carniole, AOP, avec moutarde et raifort. Le plat national.', prix: '6 a 9 €' },
+    { p: 'Dnevno kosilo', d: 'Le plat du jour du midi en semaine, souvent soupe et plat. La meilleure affaire du pays.', prix: '8 a 12 €' },
+    { p: 'Kremsnita', d: 'Le millefeuille creme-vanille de Bled, invente au Park Hotel en 1953.', prix: '6 a 7 €' },
+    { p: 'Kobariski struklji', d: 'Petits roules aux noix, cannelle et raisins, avec chapelure beurree. A Kobarid.', prix: '5 a 7 €' },
+    { p: 'Zlikrofi', d: 'Raviolis d\'Idrija en forme de petit chapeau, pomme de terre et lard.', prix: '8 a 10 €' },
+    { p: 'Jota', d: 'Soupe epaisse de choucroute, haricots et lard.', prix: '5 a 8 €' },
+    { p: 'Bezgov sok', d: 'Sirop de fleur de sureau. La boisson nationale non alcoolisee.', prix: '2 a 3 €' },
+    { p: 'Lasko et Union', d: 'Les deux bieres nationales, rivalite historique.', prix: '3 a 4 € la pression' },
+    { p: 'Teran', d: 'Le rouge tres sombre du Karst, acide, cultive sur la terre rouge.', prix: '3 a 5 € le verre' }
+  ],
+
+  meteo: [
+    { z: 'Ljubljana, Bled', j: '21 °C', n: '11 °C', e: '20-22 °C' },
+    { z: 'Alpes, Vrsic, Bohinj', j: '17-19 °C', n: '8-10 °C', e: '18-20 °C' },
+    { z: 'Karst, cote', j: '23-25 °C', n: '14-16 °C', e: '23 °C' },
+    { z: 'La Soca', j: '-', n: '-', e: '10-13 °C' }
+  ],
+
+  pluie: [
+    { v: 'Brouillard en fond de vallee, bleu au-dessus', f: 'Ne changez rien. Ca se leve entre 9h et 11h, et c\'est le plus beau moment sur les lacs.' },
+    { v: 'Nuages accroches aux sommets', f: 'Abandonnez l\'altitude. Gorges, cascades, fonds de vallee. Surtout, ne payez pas Vogel.' },
+    { v: 'Pluie fine continue', f: 'Les gorges sont meilleures sous la pluie : plus de debit, moins de monde. Attention, ca glisse.' },
+    { v: 'Pluie forte et vent', f: 'Skocjan, le musee de Kobarid, Idrija, Radovljica, les musees de Ljubljana, le Vodni park de Bohinjska Bistrica.' },
+    { v: 'Orage annonce l\'apres-midi', f: 'Rando le matin, redescendues a 15h. Sans discussion.' },
+    { v: 'Col du Vrsic ferme', f: 'Le train-navette de Bohinjska Bistrica passe le tunnel avec la voiture a bord jusqu\'a Most na Soci. Sinon, par Idrija, 2h15.' }
+  ],
+
+  mots: [
+    ['Dober dan', 'dober dane', 'Bonjour'],
+    ['Hvala', 'hvala', 'Merci'],
+    ['Prosim', 'prossim', 'S\'il vous plait, ou pardon ?'],
+    ['Oprostite', 'oprostité', 'Excusez-moi'],
+    ['Nasvidenje', 'nasvidenié', 'Au revoir'],
+    ['Govorite anglesko?', 'govorité angléchko', 'Parlez-vous anglais ?'],
+    ['Koliko stane?', 'koliko stané', 'Combien ca coute ?'],
+    ['Racun, prosim', 'ratchoun prossim', 'L\'addition'],
+    ['Brez mesa, prosim', 'brez messa', 'Sans viande'],
+    ['Na zdravje!', 'na zdravié', 'Sante, en se regardant dans les yeux'],
+    ['Slap', '', 'Cascade'],
+    ['Korita, soteska', '', 'Gorges'],
+    ['Jama', '', 'Grotte'],
+    ['Jezero', '', 'Lac'],
+    ['Izvir', '', 'Source'],
+    ['Koca, dom', '', 'Refuge de montagne'],
+    ['Planina', '', 'Alpage'],
+    ['Vstopnina', '', 'Droit d\'entree'],
+    ['Odprto, zaprto', '', 'Ouvert, ferme'],
+    ['Pitna voda', '', 'Eau potable'],
+    ['Pozor', '', 'Attention'],
+    ['Prepovedano', '', 'Interdit'],
+    ['Lekarna', '', 'Pharmacie'],
+    ['Pekarna', '', 'Boulangerie'],
+    ['Sobe, apartma', '', 'Chambres, appartement'],
+    ['Gostilna', '', 'Auberge-restaurant']
+  ],
+
+  prononciation: [
+    ['Le c', 'se dit ts, et avec son accent tch. Soca se dit So-tcha, Skocjan Chkotch-yan.'],
+    ['Le s accentue', 'se dit ch. Vrsic se dit Veur-chitch.'],
+    ['Le j', 'se dit y. Ljubljana se dit Lyou-blia-na, Bohinj se dit Bo-hine.']
+  ]
+};
+
+/* ============================================================
+   Valise et preparatifs
+   ============================================================ */
+
+const PACK = [
+  {
+    titre: 'A faire avant de partir', items: [
+      ['a1', 'Reserver la voiture : le poste qui double si on attend'],
+      ['a2', 'Reserver le creneau de Vintgar sur vintgar.si, premier creneau du matin'],
+      ['a3', 'Commander la CEAM sur ameli, une chacune, 15 jours de delai'],
+      ['a4', 'Verifier que la carte bancaire couvre la franchise de location'],
+      ['a5', 'Telecharger les cartes hors ligne de la Slovenie'],
+      ['a6', 'Installer ARSO Vreme pour la meteo de montagne']
+    ]
+  },
+  {
+    titre: 'Indispensable', items: [
+      ['p1', 'Chaussures de randonnee ou bonnes baskets de trail'],
+      ['p2', 'Veste impermeable avec capuche'],
+      ['p3', 'Polaire ou doudoune fine : grottes, matins, altitude'],
+      ['p4', 'Sandales de riviere ou vieilles baskets pour la Soca'],
+      ['p5', 'Maillot de bain et serviette microfibre'],
+      ['p6', 'Sac a dos 20-25 L et deux gourdes'],
+      ['p7', 'Batterie externe et cables'],
+      ['p8', 'Creme solaire, lunettes, casquette'],
+      ['p9', 'Pansements anti-ampoules, paracetamol, anti-nauseeux pour les 50 lacets'],
+      ['p10', 'Bonnet leger ou buff : 6 °C possibles au Vrsic le matin'],
+      ['p11', 'Couteau pliant et petite planche pour les pique-niques, en soute'],
+      ['p12', 'Tote bag pliable : les sacs sont payants en supermarche']
+    ]
+  },
+  {
+    titre: 'Papiers', items: [
+      ['d1', 'Carte d\'identite ou passeport'],
+      ['d2', 'Permis de conduire'],
+      ['d3', 'Carte de credit au nom de la conductrice, pour la caution'],
+      ['d4', 'CEAM, une chacune'],
+      ['d5', 'Voucher de location, billets, reservation Vintgar en PDF'],
+      ['d6', '50 a 80 € en especes']
+    ]
+  },
+  {
+    titre: 'Inutile d\'emporter', items: [
+      ['n1', 'Adaptateur de prise : les prises sont les memes qu\'en France'],
+      ['n2', 'Devises : c\'est l\'euro'],
+      ['n3', 'Grande valise rigide : penible dans une petite voiture']
+    ]
   }
-  // viewport-fit=cover is what makes env(safe-area-inset-*) report real values
-  meta('viewport', 'width=device-width, initial-scale=1, viewport-fit=cover');
-  meta('apple-mobile-web-app-capable', 'yes');
-  meta('mobile-web-app-capable', 'yes');
-  meta('apple-mobile-web-app-title', 'Slovenie');
-  meta('format-detection', 'telephone=no');
+];
+
+/* ============================================================
+   Budget
+   ============================================================ */
+
+const BUDGET = {
+  cible: 600,
+  fixe: [
+    ['Essence, 700 km', 35],
+    ['Vignette 7 jours', 8],
+    ['Parkings hors etapes', 10],
+    ['Taxe de sejour', 15],
+    ['Imprevu', 30]
+  ],
+  extras: [
+    ['x-vogel', 'Telecabine de Vogel', 33],
+    ['x-raft', 'Rafting sur la Soca', 70],
+    ['x-grad', 'Chateau de Bled', 19],
+    ['x-pletna', 'Barque pletna', 20],
+    ['x-mine', 'Mine d\'Idrija', 12],
+    ['x-predjama', 'Predjama interieur', 17],
+    ['x-postojna', 'Grotte de Postojna', 31]
+  ],
+  ecartes: [
+    ['Telecabine de Vogel', '33 €', 'La rando du Vogar donne la meme vue pour 0 €'],
+    ['Chateau de Bled', '19 €', 'La vue sur le chateau vaut mieux que la vue depuis'],
+    ['Barque pletna', '20 €', 'Une barque a rames a deux revient a 12,50 € chacune'],
+    ['Grotte de Postojna', '30,90 €', 'Skocjan est moins cher, plus rare et plus fort'],
+    ['Predjama interieur', '16,90 €', 'La facade se voit entierement du parking']
+  ],
+  reference: [
+    ['Vignette 7 jours', '16 €'],
+    ['Essence SP95 / diesel', '1,56 / 1,63 €/L'],
+    ['Parking Savica', '5 € les 3h'],
+    ['Parking sommet du Vrsic', '3 €/h'],
+    ['Parking Skocjan', 'gratuit'],
+    ['P+R Ljubljana, bus compris', '1,20 € la journee'],
+    ['Taxe de sejour, Ljubljana', '3,91 € par nuit'],
+    ['Taxe de sejour, Bled', '3,13 € par nuit'],
+    ['Biere pression 0,5 L', '3 a 4 €'],
+    ['Plat du jour, midi en semaine', '8 a 12 €']
+  ]
+};
+
+</script>
+<script>
+/* =============================================================
+   Moteur de carte minimal, sans aucune dependance.
+
+   Tuiles raster OpenStreetMap en projection Web Mercator,
+   overlay SVG pour le trace et les marqueurs numerotes.
+   Gestes tactiles : glisser, pincer, double tap. Molette au bureau.
+
+   Si les tuiles ne chargent pas (pas de reseau dans une vallee),
+   le fond uni reste et le trace demeure lisible : c'est voulu.
+   ============================================================= */
+
+(function (global) {
+  'use strict';
+
+  var TILE = 256;
+  var TILE_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+  function project(lat, lon, z) {
+    var s = TILE * Math.pow(2, z);
+    var sin = Math.sin(lat * Math.PI / 180);
+    sin = Math.max(-0.9999, Math.min(0.9999, sin));
+    return [
+      (lon + 180) / 360 * s,
+      (0.5 - Math.log((1 + sin) / (1 - sin)) / (4 * Math.PI)) * s
+    ];
+  }
+
+  function unproject(x, y, z) {
+    var s = TILE * Math.pow(2, z);
+    var n = Math.PI - 2 * Math.PI * y / s;
+    return [
+      180 / Math.PI * Math.atan(0.5 * (Math.exp(n) - Math.exp(-n))),
+      x / s * 360 - 180
+    ];
+  }
+
+  function el(tag, cls) {
+    var e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    if (cls) { e.setAttribute('class', cls); }
+    return e;
+  }
+
+  function MiniMap(container, opts) {
+    opts = opts || {};
+    this.box = container;
+    this.minZoom = opts.minZoom || 6;
+    this.maxZoom = opts.maxZoom || 16;
+    this.z = opts.zoom || 9;
+    this.tilesOn = opts.tiles !== false;
+    this.onPick = opts.onPick || function () {};
+
+    this.box.classList.add('mm');
+    this.box.innerHTML = '';
+
+    this.inner = document.createElement('div');
+    this.inner.className = 'mm-inner';
+    this.box.appendChild(this.inner);
+
+    this.tileLayer = document.createElement('div');
+    this.tileLayer.className = 'mm-tiles';
+    this.inner.appendChild(this.tileLayer);
+
+    this.svg = el('svg', 'mm-svg');
+    this.svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    this.inner.appendChild(this.svg);
+
+    this.gRoutes = el('g', 'mm-routes');
+    this.gMarks = el('g', 'mm-marks');
+    this.svg.appendChild(this.gRoutes);
+    this.svg.appendChild(this.gMarks);
+
+    var attrib = document.createElement('a');
+    attrib.className = 'mm-attrib';
+    attrib.href = 'https://www.openstreetmap.org/copyright';
+    attrib.target = '_blank';
+    attrib.rel = 'noopener';
+    attrib.textContent = 'Fond de carte OpenStreetMap';
+    this.box.appendChild(attrib);
+
+    this.ctrl = document.createElement('div');
+    this.ctrl.className = 'mm-ctrl';
+    this.ctrl.innerHTML =
+      '<button type="button" data-mm="in" aria-label="Zoomer">+</button>' +
+      '<button type="button" data-mm="out" aria-label="Dezoomer">-</button>' +
+      '<button type="button" data-mm="fit" aria-label="Recadrer sur le trace">' +
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V5.5A1.5 1.5 0 0 1 5.5 4H9M15 4h3.5A1.5 1.5 0 0 1 20 5.5V9M20 15v3.5a1.5 1.5 0 0 1-1.5 1.5H15M9 20H5.5A1.5 1.5 0 0 1 4 18.5V15"/></svg></button>' +
+      '<button type="button" data-mm="layer" aria-label="Afficher ou masquer le fond de carte">' +
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 21 8l-9 4.5L3 8z"/><path d="M3 12.5 12 17l9-4.5"/></svg></button>';
+    this.box.appendChild(this.ctrl);
+
+    this.tiles = {};
+    this.pointers = {};
+    this.routes = [];
+    this.marks = [];
+    this.cx = 0; this.cy = 0;
+    this.renderOX = 0; this.renderOY = 0;
+
+    this._bind();
+    this.setCenter(46.25, 14.0, this.z);
+  }
+
+  MiniMap.prototype._size = function () {
+    var r = this.box.getBoundingClientRect();
+    this.W = Math.max(1, Math.round(r.width));
+    this.H = Math.max(1, Math.round(r.height));
+    return r;
+  };
+
+  MiniMap.prototype.setCenter = function (lat, lon, z) {
+    if (z != null) { this.z = Math.max(this.minZoom, Math.min(this.maxZoom, Math.round(z))); }
+    var p = project(lat, lon, this.z);
+    this.cx = p[0]; this.cy = p[1];
+    this.render();
+  };
+
+  /* ---------- contenu ---------- */
+
+  MiniMap.prototype.setRoutes = function (routes) { this.routes = routes || []; this.draw(); };
+  MiniMap.prototype.setMarks = function (marks) { this.marks = marks || []; this.draw(); };
+
+  MiniMap.prototype.bounds = function () {
+    var pts = [];
+    this.routes.forEach(function (r) { r.points.forEach(function (p) { pts.push(p); }); });
+    this.marks.forEach(function (m) { pts.push([m.lat, m.lon]); });
+    if (!pts.length) { return null; }
+    var la1 = 90, la2 = -90, lo1 = 180, lo2 = -180;
+    pts.forEach(function (p) {
+      la1 = Math.min(la1, p[0]); la2 = Math.max(la2, p[0]);
+      lo1 = Math.min(lo1, p[1]); lo2 = Math.max(lo2, p[1]);
+    });
+    return [la1, lo1, la2, lo2];
+  };
+
+  MiniMap.prototype.fit = function (pad) {
+    var b = this.bounds();
+    if (!b) { return; }
+    this._size();
+    pad = pad == null ? 46 : pad;
+    var W = Math.max(40, this.W - pad * 2), H = Math.max(40, this.H - pad * 2);
+    var z = this.maxZoom;
+    for (; z > this.minZoom; z--) {
+      var a = project(b[0], b[1], z), c = project(b[2], b[3], z);
+      if (Math.abs(c[0] - a[0]) <= W && Math.abs(c[1] - a[1]) <= H) { break; }
+    }
+    this.z = z;
+    var m1 = project(b[0], b[1], z), m2 = project(b[2], b[3], z);
+    this.cx = (m1[0] + m2[0]) / 2;
+    this.cy = (m1[1] + m2[1]) / 2;
+    this.render();
+  };
+
+  /* ---------- rendu ---------- */
+
+  MiniMap.prototype.render = function () {
+    this._size();
+    this.renderOX = this.cx - this.W / 2;
+    this.renderOY = this.cy - this.H / 2;
+    this.inner.style.transform = '';
+    this.tileLayer.style.transform = '';
+    this._tiles();
+    this.draw();
+  };
+
+  MiniMap.prototype._tiles = function () {
+    if (!this.tilesOn) {
+      this.tileLayer.innerHTML = '';
+      this.tiles = {};
+      return;
+    }
+    var z = this.z, n = Math.pow(2, z);
+    var ox = this.renderOX, oy = this.renderOY;
+    var x0 = Math.floor(ox / TILE) - 1, x1 = Math.floor((ox + this.W) / TILE) + 1;
+    var y0 = Math.floor(oy / TILE) - 1, y1 = Math.floor((oy + this.H) / TILE) + 1;
+    var need = {}, self = this;
+
+    for (var x = x0; x <= x1; x++) {
+      for (var y = y0; y <= y1; y++) {
+        if (y < 0 || y >= n) { continue; }
+        var tx = ((x % n) + n) % n;
+        var key = z + '/' + tx + '/' + y + '/' + x;
+        need[key] = 1;
+        if (!this.tiles[key]) {
+          var img = new Image();
+          img.className = 'mm-tile';
+          img.alt = '';
+          img.decoding = 'async';
+          img.loading = 'eager';
+          img.style.left = (x * TILE - ox) + 'px';
+          img.style.top = (y * TILE - oy) + 'px';
+          img.addEventListener('load', function () { this.classList.add('is-on'); });
+          img.addEventListener('error', function () { this.classList.add('is-dead'); });
+          img.src = TILE_URL.replace('{z}', z).replace('{x}', tx).replace('{y}', y);
+          this.tileLayer.appendChild(img);
+          this.tiles[key] = img;
+        } else {
+          this.tiles[key].style.left = (x * TILE - ox) + 'px';
+          this.tiles[key].style.top = (y * TILE - oy) + 'px';
+        }
+      }
+    }
+    Object.keys(this.tiles).forEach(function (k) {
+      if (!need[k]) {
+        var t = self.tiles[k];
+        if (t && t.parentNode) { t.parentNode.removeChild(t); }
+        delete self.tiles[k];
+      }
+    });
+  };
+
+  MiniMap.prototype.draw = function () {
+    if (!this.W) { this._size(); }
+    var z = this.z, self = this;
+    this.svg.setAttribute('width', this.W);
+    this.svg.setAttribute('height', this.H);
+    this._viewBox();
+
+    this.gRoutes.innerHTML = '';
+    this.gMarks.innerHTML = '';
+
+    this.routes.forEach(function (r) {
+      if (!r.points || r.points.length < 2) { return; }
+      var d = r.points.map(function (p, i) {
+        var q = project(p[0], p[1], z);
+        return (i ? 'L' : 'M') + q[0].toFixed(1) + ' ' + q[1].toFixed(1);
+      }).join(' ');
+
+      var halo = el('path', 'mm-halo');
+      halo.setAttribute('d', d);
+      self.gRoutes.appendChild(halo);
+
+      var line = el('path', 'mm-line' + (r.dim ? ' is-dim' : ''));
+      line.setAttribute('d', d);
+      line.setAttribute('stroke', r.color || '#0C7367');
+      if (r.dash) { line.setAttribute('stroke-dasharray', '2 7'); }
+      self.gRoutes.appendChild(line);
+    });
+
+    this.marks.forEach(function (m, i) {
+      var q = project(m.lat, m.lon, z);
+      var g = el('g', 'mm-mark' + (m.active ? ' is-active' : '') + (m.dim ? ' is-dim' : ''));
+      g.setAttribute('transform', 'translate(' + q[0].toFixed(1) + ',' + q[1].toFixed(1) + ')');
+      g.setAttribute('tabindex', '0');
+      g.setAttribute('role', 'button');
+      g.setAttribute('aria-label', m.label ? (m.label + '. ' + m.name) : m.name);
+
+      var ring = el('circle', 'mm-ring');
+      ring.setAttribute('r', m.active ? 15 : 12);
+      ring.setAttribute('fill', m.color || '#0C7367');
+      g.appendChild(ring);
+
+      if (m.label) {
+        var t = el('text', 'mm-num');
+        t.setAttribute('y', 4);
+        t.setAttribute('text-anchor', 'middle');
+        t.textContent = m.label;
+        g.appendChild(t);
+      }
+
+      var hit = el('circle', 'mm-hit');
+      hit.setAttribute('r', 22);
+      g.appendChild(hit);
+
+      g.addEventListener('click', function (ev) { ev.stopPropagation(); self.onPick(m, i); });
+      g.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); self.onPick(m, i); }
+      });
+      self.gMarks.appendChild(g);
+    });
+  };
+
+  MiniMap.prototype._viewBox = function () {
+    var ox = this.cx - this.W / 2, oy = this.cy - this.H / 2;
+    this.svg.setAttribute('viewBox', ox + ' ' + oy + ' ' + this.W + ' ' + this.H);
+  };
+
+  MiniMap.prototype._pan = function () {
+    var ox = this.cx - this.W / 2, oy = this.cy - this.H / 2;
+    var dx = this.renderOX - ox, dy = this.renderOY - oy;
+    this.tileLayer.style.transform = 'translate3d(' + dx + 'px,' + dy + 'px,0)';
+    this._viewBox();
+  };
+
+  /* ---------- gestes ---------- */
+
+  MiniMap.prototype.zoomAt = function (dz, px, py) {
+    var nz = Math.max(this.minZoom, Math.min(this.maxZoom, this.z + dz));
+    if (nz === this.z) { return; }
+    var ox = this.cx - this.W / 2, oy = this.cy - this.H / 2;
+    var ll = unproject(ox + px, oy + py, this.z);
+    this.z = nz;
+    var q = project(ll[0], ll[1], nz);
+    this.cx = q[0] - px + this.W / 2;
+    this.cy = q[1] - py + this.H / 2;
+    this.render();
+  };
+
+  MiniMap.prototype._bind = function () {
+    var self = this;
+    var mode = null, last = null, pinch = null, tapT = 0, tapX = 0, tapY = 0, moved = 0;
+
+    function local(ev) {
+      var r = self.box.getBoundingClientRect();
+      return [ev.clientX - r.left, ev.clientY - r.top];
+    }
+
+    this.box.addEventListener('pointerdown', function (ev) {
+      if (ev.target.closest && ev.target.closest('.mm-ctrl, .mm-attrib')) { return; }
+      self.box.setPointerCapture(ev.pointerId);
+      self.pointers[ev.pointerId] = local(ev);
+      var ids = Object.keys(self.pointers);
+      if (ids.length === 1) {
+        mode = 'pan'; last = self.pointers[ev.pointerId]; moved = 0;
+      } else if (ids.length === 2) {
+        var a = self.pointers[ids[0]], b = self.pointers[ids[1]];
+        pinch = {
+          d: Math.hypot(a[0] - b[0], a[1] - b[1]),
+          mx: (a[0] + b[0]) / 2, my: (a[1] + b[1]) / 2, s: 1
+        };
+        mode = 'pinch';
+        self.inner.style.transformOrigin = pinch.mx + 'px ' + pinch.my + 'px';
+      }
+    });
+
+    this.box.addEventListener('pointermove', function (ev) {
+      if (!self.pointers[ev.pointerId]) { return; }
+      self.pointers[ev.pointerId] = local(ev);
+      if (mode === 'pan') {
+        var p = self.pointers[ev.pointerId];
+        var dx = p[0] - last[0], dy = p[1] - last[1];
+        moved += Math.abs(dx) + Math.abs(dy);
+        self.cx -= dx; self.cy -= dy;
+        last = p;
+        self._pan();
+      } else if (mode === 'pinch') {
+        var ids = Object.keys(self.pointers);
+        if (ids.length < 2) { return; }
+        var a = self.pointers[ids[0]], b = self.pointers[ids[1]];
+        var d = Math.hypot(a[0] - b[0], a[1] - b[1]);
+        pinch.s = Math.max(0.4, Math.min(3.2, d / pinch.d));
+        self.inner.style.transform = 'scale(' + pinch.s + ')';
+      }
+    });
+
+    function end(ev) {
+      if (!self.pointers[ev.pointerId]) { return; }
+      delete self.pointers[ev.pointerId];
+      var ids = Object.keys(self.pointers);
+
+      if (mode === 'pinch' && ids.length < 2) {
+        var dz = Math.round(Math.log(pinch.s) / Math.LN2);
+        self.inner.style.transform = '';
+        mode = null;
+        if (dz) { self.zoomAt(dz, pinch.mx, pinch.my); } else { self.render(); }
+        return;
+      }
+
+      if (mode === 'pan' && ids.length === 0) {
+        mode = null;
+        // double tap : deuxieme appui court au meme endroit
+        var p = local(ev), now = Date.now();
+        if (moved < 12) {
+          if (now - tapT < 300 && Math.hypot(p[0] - tapX, p[1] - tapY) < 32) {
+            tapT = 0;
+            self.zoomAt(1, p[0], p[1]);
+            return;
+          }
+          tapT = now; tapX = p[0]; tapY = p[1];
+        }
+        self.render();
+      }
+    }
+
+    this.box.addEventListener('pointerup', end);
+    this.box.addEventListener('pointercancel', end);
+
+    this.box.addEventListener('wheel', function (ev) {
+      ev.preventDefault();
+      var p = local(ev);
+      self.zoomAt(ev.deltaY < 0 ? 1 : -1, p[0], p[1]);
+    }, { passive: false });
+
+    this.ctrl.addEventListener('click', function (ev) {
+      var b = ev.target.closest('button');
+      if (!b) { return; }
+      var a = b.dataset.mm;
+      if (a === 'in') { self.zoomAt(1, self.W / 2, self.H / 2); }
+      if (a === 'out') { self.zoomAt(-1, self.W / 2, self.H / 2); }
+      if (a === 'fit') { self.fit(); }
+      if (a === 'layer') {
+        self.tilesOn = !self.tilesOn;
+        self.box.classList.toggle('is-flat', !self.tilesOn);
+        b.setAttribute('aria-pressed', String(!self.tilesOn));
+        self.render();
+      }
+    });
+
+    var t = null;
+    window.addEventListener('resize', function () {
+      clearTimeout(t);
+      t = setTimeout(function () { self.render(); }, 150);
+    });
+  };
+
+  global.MiniMap = MiniMap;
+  global.mmProject = project;
+})(window);
+
+</script>
+<script>
+/* =============================================================
+   Slovenie 2026 - logique de l'application
+   ============================================================= */
+
+(function () {
+  'use strict';
+
+  /* ---------- utilitaires ---------- */
+
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function eur(n) {
+    var v = Math.round(n * 10) / 10;
+    return (Math.abs(v - Math.round(v)) < 0.05 ? Math.round(v) : v.toFixed(1).replace('.', ',')) + ' €';
+  }
+
+  function hm(mins) {
+    mins = Math.max(0, Math.round(mins));
+    var h = Math.floor(mins / 60), m = mins % 60;
+    if (!h) { return m + ' min'; }
+    return h + 'h' + (m ? String(m).padStart(2, '0') : '');
+  }
+
+  function clock(mins) {
+    mins = ((Math.round(mins) % 1440) + 1440) % 1440;
+    return String(Math.floor(mins / 60)).padStart(2, '0') + 'h' + String(mins % 60).padStart(2, '0');
+  }
+
+  function parseClock(s) {
+    var p = String(s).split(':');
+    return parseInt(p[0], 10) * 60 + parseInt(p[1] || '0', 10);
+  }
+
+  /* ---------- stockage ---------- */
+
+  var KEY = 'slo2026.dash';
+  var db = {};
+  try { db = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { db = {}; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(db)); } catch (e) {} }
+
+  /* ---------- couleur de la barre systeme iOS ---------- */
 
   function paintThemeColor() {
     var c = getComputedStyle(document.documentElement).getPropertyValue('--theme-color').trim();
     var m = document.querySelector('meta[name="theme-color"]');
-    if (!m) { m = document.createElement('meta'); m.setAttribute('name', 'theme-color'); document.head.appendChild(m); }
+    if (!m) { m = document.createElement('meta'); m.name = 'theme-color'; document.head.appendChild(m); }
     m.setAttribute('content', c || '#EAF1EC');
   }
   paintThemeColor();
   if (window.matchMedia) {
     var mq = window.matchMedia('(prefers-color-scheme: dark)');
-    if (mq.addEventListener) { mq.addEventListener('change', paintThemeColor); }
+    if (mq.addEventListener) { mq.addEventListener('change', function () { paintThemeColor(); redrawMaps(); }); }
   }
-  new MutationObserver(paintThemeColor).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  new MutationObserver(function () { paintThemeColor(); redrawMaps(); })
+    .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
-  /* ---------- storage, tolerant of private mode ---------- */
-  var KEY = 'slo2026.v2';
-  var db = {};
-  try { db = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { db = {}; }
-  function save() { try { localStorage.setItem(KEY, JSON.stringify(db)); } catch (e) {} }
+  /* ---------- liens externes ---------- */
 
-  var eur = function (n) {
-    return (Math.round(n * 100) / 100).toLocaleString('fr-FR', { maximumFractionDigits: 0 }) + ' €';
+  function gmaps(stop) {
+    return 'https://www.google.com/maps/search/?api=1&query=' +
+      encodeURIComponent(stop.name + ', Slovenie');
+  }
+  function waze(stop) {
+    return 'https://www.waze.com/ul?ll=' + stop.lat + '%2C' + stop.lon + '&navigate=yes&zoom=15';
+  }
+  function tripadvisor(stop) {
+    return 'https://www.tripadvisor.fr/Search?q=' + encodeURIComponent(stop.name + ' Slovenie');
+  }
+  function itineraire(a, b) {
+    return 'https://www.google.com/maps/dir/?api=1&origin=' + a.lat + ',' + a.lon +
+      '&destination=' + b.lat + ',' + b.lon + '&travelmode=driving';
+  }
+
+  var IC = {
+    map: '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+    nav: '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 21 3l-8 18-2-7z"/></svg>',
+    star: '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.7l5.9-.8z"/></svg>',
+    web: '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg>',
+    car: '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16.5h14M6.5 16.5v2M17.5 16.5v2"/><path d="M4.5 16.5 6 11h12l1.5 5.5z"/><circle cx="8" cy="13.8" r=".6"/><circle cx="16" cy="13.8" r=".6"/></svg>'
   };
 
-  /* ---------- tabs ---------- */
-  document.documentElement.setAttribute('data-app', 'on');
-  var panels = {};
-  ['jours', 'argent', 'terrain', 'valise', 'mots'].forEach(function (k) {
-    panels[k] = document.getElementById('p-' + k);
-  });
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabbar button'));
-
-  function show(name, push) {
-    if (!panels[name]) { name = 'jours'; }
-    Object.keys(panels).forEach(function (k) {
-      panels[k].classList.toggle('is-active', k === name);
-    });
-    tabs.forEach(function (b) {
-      b.setAttribute('aria-selected', b.dataset.tab === name ? 'true' : 'false');
-    });
-    window.scrollTo(0, 0);
-    if (push) {
-      try { history.replaceState(null, '', '#' + name); } catch (e) {}
+  function linkRow(stop) {
+    var out = '<div class="links">';
+    out += '<a href="' + gmaps(stop) + '" target="_blank" rel="noopener">' + IC.map + 'Fiche Maps</a>';
+    out += '<a href="' + waze(stop) + '" target="_blank" rel="noopener">' + IC.nav + 'Waze</a>';
+    out += '<a href="' + tripadvisor(stop) + '" target="_blank" rel="noopener">' + IC.star + 'Avis</a>';
+    if (stop.site) {
+      out += '<a href="' + esc(stop.site) + '" target="_blank" rel="noopener">' + IC.web + 'Site officiel</a>';
     }
-    db.tab = name; save();
+    out += '</div>';
+    return out;
   }
 
-  tabs.forEach(function (b) {
-    b.addEventListener('click', function () { show(b.dataset.tab, true); });
-  });
+  /* ---------- etat du voyage ---------- */
 
-  /* ---------- where are we in the trip ---------- */
-  var DAYS = ['lundi 7', 'mardi 8', 'mercredi 9', 'jeudi 10', 'vendredi 11', 'samedi 12', 'dimanche 13'];
-  var nowEl = document.getElementById('now');
-  var today = new Date();
-  var midnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-  var start = new Date(2026, 8, 7);
-  var offset = Math.round((midnight - start) / 86400000);
-  var currentDay = -1;
+  var START = new Date(2026, 8, 7);
+  var todayIdx = -1;
+  (function () {
+    var n = new Date();
+    var t = new Date(n.getFullYear(), n.getMonth(), n.getDate());
+    var off = Math.round((t - START) / 86400000);
+    var el = $('#now');
+    if (off < 0) { el.textContent = 'J-' + Math.abs(off); }
+    else if (off > 6) { el.textContent = 'termine'; }
+    else { todayIdx = off; el.textContent = 'Jour ' + (off + 1) + ' . ' + TRIP.days[off].wd.split(' ')[0]; }
+  })();
 
-  if (offset < 0) {
-    nowEl.textContent = 'J-' + Math.abs(offset);
-    nowEl.title = 'Jours avant le depart';
-  } else if (offset > 6) {
-    nowEl.textContent = 'termine';
-  } else {
-    currentDay = offset;
-    nowEl.textContent = 'Jour ' + (offset + 1) + ' . ' + DAYS[offset];
+  /* ---------- calcul d'une journee ---------- */
+
+  function variantOf(day) {
+    if (!day.choice) { return null; }
+    return db['var' + day.n] || day.choice.options[0].key;
   }
+  function isOptOff(day, name) { return !!db['off' + day.n + '|' + name]; }
+  function startOf(day) { return db['start' + day.n] != null ? db['start' + day.n] : parseClock(day.start); }
 
-  var dayEls = Array.prototype.slice.call(document.querySelectorAll('details.day'));
-  dayEls.forEach(function (d) {
-    if (parseInt(d.dataset.day, 10) === currentDay) {
-      d.classList.add('is-today');
-      d.open = true;
-      var meta2 = d.querySelector('.daymeta');
-      if (meta2) {
-        var s = document.createElement('span');
-        s.textContent = "Aujourd'hui";
-        s.style.color = 'var(--soca)';
-        s.style.fontWeight = '600';
-        meta2.insertBefore(s, meta2.firstChild);
+  function build(day) {
+    var v = variantOf(day);
+    var seq = day.stops.filter(function (s) { return !s.variant || s.variant === v; });
+
+    // Une etape retiree ne casse pas la chaine : ses deux troncons sont
+    // fusionnes, et le trajet resultant est signale comme approximatif.
+    var items = [], pend = null;
+    seq.forEach(function (s, idx) {
+      var skipped = !!(s.optional && isOptOff(day, s.name));
+      if (!skipped) {
+        items.push({ s: s, inLeg: pend });
+        pend = null;
+      } else if (pend) {
+        pend.via = pend.via.concat([[s.lat, s.lon]]);
+        pend.merged = true;
       }
-    }
-  });
-  if (currentDay < 0) { dayEls[0].open = true; }
+      if (s.leg && idx < seq.length - 1) {
+        if (!pend) { pend = { km: 0, min: 0, via: [], merged: false }; }
+        pend.km += s.leg.km;
+        pend.min += s.leg.min;
+        pend.via = pend.via.concat(s.leg.via || []);
+      }
+    });
 
-  /* ---------- budget simulator ---------- */
-  var sim = db.sim || { nuit: 50, food: 20, car: 250 };
-  var LIMITS = { nuit: [25, 160, 5], food: [8, 60, 2], car: [120, 600, 20] };
-  var FIXE_OTHER = 35 + 8 + 15 + 15 + 30;   // essence, vignette, parkings, taxe, imprevu
-  var VISITES_BASE = 61.5;
-  var CIBLE = 600;
+    var t = startOf(day);
+    var rows = [], km = 0, drive = 0, onsite = 0, cost = 0;
 
-  var outs = { nuit: document.getElementById('out-nuit'), food: document.getElementById('out-food'), car: document.getElementById('out-car') };
-  var extras = Array.prototype.slice.call(document.querySelectorAll('#extras input'));
+    items.forEach(function (it, i) {
+      var s = it.s;
+      var row = { s: s, arrive: t, depart: t + s.stay };
+      onsite += s.stay;
+      cost += (s.cost || 0);
+      t = row.depart;
+      var nxt = items[i + 1];
+      if (nxt && nxt.inLeg) {
+        row.leg = {
+          km: nxt.inLeg.km, min: nxt.inLeg.min, via: nxt.inLeg.via,
+          merged: nxt.inLeg.merged, to: nxt.s
+        };
+        km += nxt.inLeg.km; drive += nxt.inLeg.min; t += nxt.inLeg.min;
+      }
+      rows.push(row);
+    });
 
-  function paintChip(x) {
-    var chip = x.parentNode;
-    if (chip && chip.classList) { chip.classList.toggle('is-on', x.checked); }
+    return {
+      rows: rows, stops: items.map(function (x) { return x.s; }),
+      km: km, drive: drive, onsite: onsite, cost: cost, end: t, variant: v
+    };
   }
-  extras.forEach(function (x) {
-    if (db[x.dataset.k]) { x.checked = true; }
-    paintChip(x);
-    x.addEventListener('change', function () {
-      db[x.dataset.k] = x.checked; save(); paintChip(x); computeBudget();
-    });
-  });
 
-  document.querySelectorAll('.stepper button').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var t = b.dataset.target;
-      var lim = LIMITS[t];
-      sim[t] = Math.min(lim[1], Math.max(lim[0], sim[t] + parseInt(b.dataset.step, 10)));
-      db.sim = sim; save();
-      computeBudget();
+  function routeOf(day) {
+    var pts = [];
+    build(day).rows.forEach(function (r) {
+      pts.push([r.s.lat, r.s.lon]);
+      if (r.leg && r.leg.via) { r.leg.via.forEach(function (p) { pts.push(p); }); }
     });
-  });
+    return pts;
+  }
+
+  /* ---------- cartes ---------- */
+
+  var dayMap = null, allMap = null, curDay = 0, activeStop = -1;
+
+  function redrawMaps() {
+    if (dayMap) { dayMap.draw(); }
+    if (allMap) { allMap.draw(); }
+  }
+
+  function paintDayMap() {
+    if (!dayMap) { return; }
+    var day = TRIP.days[curDay];
+    var b = build(day);
+    dayMap.setRoutes([{ points: routeOf(day), color: day.color }]);
+    dayMap.setMarks(b.stops.map(function (s, i) {
+      return {
+        lat: s.lat, lon: s.lon, label: String(i + 1), name: s.name,
+        color: day.color, active: i === activeStop, idx: i
+      };
+    }));
+    dayMap.fit();
+  }
+
+  function paintAllMap() {
+    if (!allMap) { return; }
+    var routes = [], marks = [];
+    TRIP.days.forEach(function (day, i) {
+      routes.push({ points: routeOf(day), color: day.color, dim: false });
+      var b = build(day);
+      var mid = b.stops[Math.min(1, b.stops.length - 1)];
+      marks.push({
+        lat: mid.lat, lon: mid.lon, label: String(day.n), name: 'Jour ' + day.n + ' : ' + day.title,
+        color: day.color, day: i
+      });
+    });
+    allMap.setRoutes(routes);
+    allMap.setMarks(marks);
+    allMap.fit(34);
+  }
+
+  /* ---------- rendu du selecteur de jour ---------- */
+
+  function renderRail() {
+    var rail = $('#dayrail');
+    rail.innerHTML = TRIP.days.map(function (d, i) {
+      return '<button type="button" class="daybtn' + (i === todayIdx ? ' is-today' : '') +
+        '" style="--dc:' + d.color + '" data-d="' + i + '" aria-pressed="' + (i === curDay) + '">' +
+        '<b>J' + d.n + '</b><span>' + esc(d.wd.split(' ').slice(0, 2).join(' ')) + '</span></button>';
+    }).join('');
+    rail.addEventListener('click', function (ev) {
+      var b = ev.target.closest('.daybtn');
+      if (!b) { return; }
+      selectDay(parseInt(b.dataset.d, 10));
+    });
+  }
+
+  function syncRail() {
+    $$('#dayrail .daybtn').forEach(function (b) {
+      var on = parseInt(b.dataset.d, 10) === curDay;
+      b.setAttribute('aria-pressed', String(on));
+      if (on) { b.scrollIntoView({ block: 'nearest', inline: 'center' }); }
+    });
+  }
+
+  /* ---------- rendu d'une journee ---------- */
+
+  function renderDay() {
+    var day = TRIP.days[curDay];
+    var b = build(day);
+    var host = $('#daybody');
+    var out = '';
+
+    out += '<div class="dayhead">';
+    out += '<p class="kicker"><span class="blaze"></span> Jour ' + day.n + ' . ' + esc(day.wd) +
+      (curDay === todayIdx ? " . aujourd'hui" : '') + '</p>';
+    out += '<h2>' + esc(day.title) + '</h2>';
+    out += '<p class="brief">' + esc(day.brief) + '</p>';
+
+    out += '<div class="daystats">' +
+      '<div><b>' + b.km + '</b><span>km</span></div>' +
+      '<div><b>' + hm(b.drive) + '</b><span>conduite</span></div>' +
+      '<div><b>' + hm(b.onsite) + '</b><span>sur place</span></div>' +
+      '<div><b>' + eur(b.cost) + '</b><span>depense</span></div>' +
+      '</div>';
+
+    out += '<div class="startrow"><span class="lab">Depart de la journee<br><small style="color:var(--ink-faint)">Fin estimee ' +
+      clock(b.end) + ' . base ' + esc(day.base) + '</small></span>' +
+      '<span class="stepper">' +
+      '<button type="button" data-start="-15" aria-label="Partir 15 minutes plus tot">-</button>' +
+      '<output>' + clock(startOf(day)) + '</output>' +
+      '<button type="button" data-start="15" aria-label="Partir 15 minutes plus tard">+</button>' +
+      '</span></div>';
+
+    if (day.warn) { out += '<div class="warnbar">' + esc(day.warn) + '</div>'; }
+
+    if (day.choice) {
+      out += '<div class="choice"><span class="lab">' + esc(day.choice.label) + '</span><div class="opts">';
+      day.choice.options.forEach(function (o) {
+        out += '<button type="button" class="optbtn" data-var="' + o.key + '" aria-pressed="' +
+          (b.variant === o.key ? 'true' : 'false') + '"><b>' + esc(o.title) + '</b><span>' + esc(o.detail) + '</span></button>';
+      });
+      out += '</div></div>';
+    }
+    out += '</div>';
+
+    /* --- timeline --- */
+    out += '<div class="timeline">';
+    b.rows.forEach(function (r, i) {
+      var s = r.s;
+      out += '<div class="stop' + (s.optional ? ' is-opt' : '') + '" data-i="' + i + '">';
+      out += '<div class="gutter"><span class="pin" style="background:' + day.color + '">' + (i + 1) + '</span><span class="thread"></span></div>';
+      out += '<div class="stopcard' + (i === activeStop ? ' is-active' : '') + '">';
+
+      out += '<div class="stoptop"><span class="stoptime">' + clock(r.arrive) +
+        (s.stay ? ' - ' + clock(r.depart) : '') + '</span>';
+      if (s.stay) { out += '<span class="stopdur">' + hm(s.stay) + ' sur place</span>'; }
+      out += '</div>';
+
+      out += '<div class="stopname">' + esc(s.name) + '</div>';
+      if (s.sub) { out += '<div class="stopsub">' + esc(s.sub) + '</div>'; }
+
+      out += '<div class="badges"><span class="badge kind">' + esc(s.kind) + '</span>';
+      if (s.free) { out += '<span class="badge">gratuit</span>'; }
+      else if (s.cost) { out += '<span class="badge pay">' + eur(s.cost) + '</span>'; }
+      if (s.booking) { out += '<span class="badge book">a reserver</span>'; }
+      if (s.optional) { out += '<span class="badge">optionnel</span>'; }
+      out += '</div>';
+
+      if (s.tip) { out += '<p class="stoptip">' + esc(s.tip) + '</p>'; }
+
+      out += linkRow(s);
+
+      if (s.optional) {
+        out += '<div class="links"><button type="button" data-skip="' + esc(s.name) + '">Retirer de la journee</button></div>';
+      }
+      out += '</div></div>';
+
+      if (r.leg) {
+        out += '<div class="leg"><div class="legline"><i></i></div><div class="legbody">' +
+          IC.car + (r.leg.merged ? 'environ ' : '') + '<b>' + r.leg.km + ' km</b> . <b>' + hm(r.leg.min) +
+          '</b> vers ' + esc(r.leg.to.name) +
+          '<a href="' + itineraire(s, r.leg.to) + '" target="_blank" rel="noopener">' + IC.nav + 'Itineraire</a>' +
+          '</div></div>';
+      }
+    });
+
+    /* etapes optionnelles retirees */
+    var removed = day.stops.filter(function (s) {
+      return s.optional && isOptOff(day, s.name) && (!s.variant || s.variant === b.variant);
+    });
+    if (removed.length) {
+      out += '<h3>Retire de cette journee</h3><div class="links">';
+      removed.forEach(function (s) {
+        out += '<button type="button" data-add="' + esc(s.name) + '">Remettre ' + esc(s.name) + '</button>';
+      });
+      out += '</div>';
+    }
+    out += '</div>';
+
+    host.innerHTML = out;
+    paintDayMap();
+  }
+
+  function onDayClick(ev) {
+    var day = TRIP.days[curDay];
+    var t;
+
+    if ((t = ev.target.closest('[data-start]'))) {
+      var d = parseInt(t.dataset.start, 10);
+      db['start' + day.n] = Math.max(4 * 60, Math.min(14 * 60, startOf(day) + d));
+      save(); renderDay(); return;
+    }
+    if ((t = ev.target.closest('[data-var]'))) {
+      db['var' + day.n] = t.dataset.var; save(); activeStop = -1; renderDay(); return;
+    }
+    if ((t = ev.target.closest('[data-skip]'))) {
+      db['off' + day.n + '|' + t.dataset.skip] = true; save(); activeStop = -1; renderDay(); return;
+    }
+    if ((t = ev.target.closest('[data-add]'))) {
+      delete db['off' + day.n + '|' + t.dataset.add]; save(); activeStop = -1; renderDay(); return;
+    }
+    if ((t = ev.target.closest('.stop'))) {
+      if (ev.target.closest('a, button')) { return; }
+      var i = parseInt(t.dataset.i, 10);
+      activeStop = (activeStop === i) ? -1 : i;
+      $$('#daybody .stopcard').forEach(function (c, k) { c.classList.toggle('is-active', k === activeStop); });
+      if (dayMap && activeStop >= 0) {
+        var b = build(day), s = b.stops[activeStop];
+        dayMap.setCenter(s.lat, s.lon, Math.max(dayMap.z, 12));
+        paintDayMap();
+        $('#daymap').scrollIntoView({ block: 'nearest' });
+      } else { paintDayMap(); }
+    }
+  }
+
+  function selectDay(i) {
+    curDay = Math.max(0, Math.min(TRIP.days.length - 1, i));
+    activeStop = -1;
+    db.day = curDay; save();
+    syncRail();
+    renderDay();
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  /* ---------- onglet carte globale ---------- */
+
+  function renderAll() {
+    var host = $('#allbody');
+    var totalKm = 0, totalDrive = 0, totalCost = 0;
+    TRIP.days.forEach(function (d) { var b = build(d); totalKm += b.km; totalDrive += b.drive; totalCost += visitesOf(d); });
+
+    var out = '<div class="block wrap"><h2><span class="blaze"></span> Le circuit complet</h2>' +
+      '<p class="sub">Une boucle au depart de Ljubljana. Touchez un numero sur la carte pour ouvrir la journee.</p>' +
+      '<div class="daystats">' +
+      '<div><b>' + totalKm + '</b><span>km</span></div>' +
+      '<div><b>' + hm(totalDrive) + '</b><span>conduite</span></div>' +
+      '<div><b>7</b><span>jours</span></div>' +
+      '<div><b>' + eur(totalCost) + '</b><span>visites</span></div>' +
+      '</div>';
+
+    out += '<h3>Les sept etapes</h3><div class="tablewrap"><table><thead><tr>' +
+      '<th>Jour</th><th>Etape</th><th class="num">km</th><th class="num">Route</th></tr></thead><tbody>';
+    TRIP.days.forEach(function (d, i) {
+      var b = build(d);
+      out += '<tr data-open="' + i + '" style="cursor:pointer">' +
+        '<td><span style="display:inline-block;width:.6rem;height:.6rem;border-radius:2px;background:' + d.color + ';margin-right:.4rem"></span>J' + d.n + '</td>' +
+        '<td>' + esc(d.title) + '<br><span class="fine">' + esc(d.base) + '</span></td>' +
+        '<td class="num">' + b.km + '</td><td class="num">' + hm(b.drive) + '</td></tr>';
+    });
+    out += '</tbody></table></div>';
+
+    out += '<h3>Distances utiles</h3><div class="tablewrap"><table><tbody>' +
+      '<tr><td>Aeroport LJU vers Bled</td><td class="num">35 km . 35 min</td></tr>' +
+      '<tr><td>Bled vers lac de Bohinj</td><td class="num">30 km . 35 min</td></tr>' +
+      '<tr><td>Bohinj vers Kranjska Gora</td><td class="num">65 km . 1h15</td></tr>' +
+      '<tr><td>Kranjska Gora vers sommet du Vrsic</td><td class="num">13 km . 40 min</td></tr>' +
+      '<tr><td>Vrsic vers source de la Soca</td><td class="num">12 km . 30 min</td></tr>' +
+      '<tr><td>Bovec vers Kobarid</td><td class="num">21 km . 25 min</td></tr>' +
+      '<tr><td>Kobarid vers Skocjan</td><td class="num">145 km . 2h20</td></tr>' +
+      '<tr><td>Skocjan vers Ljubljana</td><td class="num">75 km . 55 min</td></tr>' +
+      '<tr><td>Ljubljana vers aeroport</td><td class="num">26 km . 28 min</td></tr>' +
+      '</tbody></table></div></div>';
+
+    host.innerHTML = out;
+    host.addEventListener('click', function (ev) {
+      var tr = ev.target.closest('[data-open]');
+      if (!tr) { return; }
+      selectDay(parseInt(tr.dataset.open, 10));
+      showTab('jours');
+    });
+
+    var leg = $('#maplegend');
+    leg.innerHTML = TRIP.days.map(function (d) {
+      return '<span><i style="background:' + d.color + '"></i>J' + d.n + '</span>';
+    }).join('');
+  }
+
+  /* ---------- budget ---------- */
+
+  var sim = db.sim || { nuit: 50, food: 20, car: 250 };
+  var LIM = { nuit: [25, 160, 5], food: [8, 60, 2], car: [120, 600, 20] };
+
+  // Les etapes "courses" et "repas" sont deja couvertes par la ligne
+  // nourriture du budget : les compter ici ferait un double comptage.
+  var FOOD_KINDS = { courses: 1, repas: 1 };
+
+  function visitesOf(day) {
+    var t = 0;
+    build(day).stops.forEach(function (s) {
+      if (!FOOD_KINDS[s.kind]) { t += (s.cost || 0); }
+    });
+    return t;
+  }
+
+  function visitesBase() {
+    var t = 0;
+    TRIP.days.forEach(function (d) { t += visitesOf(d); });
+    return t;
+  }
+
+  function renderBudget() {
+    var host = $('#budgetbody');
+    var out = '<div class="block wrap"><h2><span class="blaze"></span> Simulateur</h2>' +
+      '<p class="sub">Reglez vos hypotheses, le total par personne se recalcule. Hors vol, a deux, tout partage.</p>';
+
+    out += '<div class="field"><span class="lab">Nuit pour deux<small>6 nuits</small></span>' +
+      '<span class="stepper"><button type="button" data-sim="nuit" data-d="-5" aria-label="Moins">-</button>' +
+      '<output id="o-nuit"></output><button type="button" data-sim="nuit" data-d="5" aria-label="Plus">+</button></span></div>';
+    out += '<div class="field"><span class="lab">Nourriture par jour<small>par personne, 7 jours</small></span>' +
+      '<span class="stepper"><button type="button" data-sim="food" data-d="-2" aria-label="Moins">-</button>' +
+      '<output id="o-food"></output><button type="button" data-sim="food" data-d="2" aria-label="Plus">+</button></span></div>';
+    out += '<div class="field"><span class="lab">Voiture pour la semaine<small>pour deux</small></span>' +
+      '<span class="stepper"><button type="button" data-sim="car" data-d="-20" aria-label="Moins">-</button>' +
+      '<output id="o-car"></output><button type="button" data-sim="car" data-d="20" aria-label="Plus">+</button></span></div>';
+
+    out += '<h3>Les extras</h3><div class="chips" id="extras">';
+    BUDGET.extras.forEach(function (x) {
+      out += '<label class="chip"><input type="checkbox" data-cost="' + x[2] + '" data-k="' + x[0] + '"> ' +
+        esc(x[1]) + ' <span class="price">' + x[2] + ' €</span></label>';
+    });
+    out += '</div>';
+
+    out += '<div class="readout"><span class="cap">Total par personne, hors vol</span>' +
+      '<div class="big" id="b-total"></div><div class="meter" id="b-meter"><i></i></div>' +
+      '<p class="verdict ok" id="b-verdict"></p>' +
+      '<div class="split">' +
+      '<div><span class="k">Fixe</span><span class="v" id="b-fixe"></span></div>' +
+      '<div><span class="k">Hebergement</span><span class="v" id="b-lit"></span></div>' +
+      '<div><span class="k">Nourriture</span><span class="v" id="b-food"></span></div>' +
+      '<div><span class="k">Visites et extras</span><span class="v" id="b-vis"></span></div>' +
+      '</div></div>';
+    out += '<p class="fine" style="margin-top:.8rem">Base fixe : ' +
+      BUDGET.fixe.map(function (f) { return f[0].toLowerCase() + ' ' + f[1] + ' €'; }).join(', ') +
+      '. Les visites viennent de l\'itineraire : si vous retirez une etape, le budget suit.</p>';
+    out += '</div>';
+
+    /* depenses */
+    out += '<div class="block wrap"><h2><span class="blaze"></span> Depenses reelles</h2>' +
+      '<p class="sub">A remplir chaque soir. Enregistre sur ce telephone.</p><div class="spend" id="spend">';
+    TRIP.days.forEach(function (d) {
+      out += '<div class="row"><span class="lab">Jour ' + d.n + '<small>' + esc(d.wd) + '</small></span>' +
+        '<input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="s' + d.n +
+        '" aria-label="Depenses du jour ' + d.n + '"></div>';
+    });
+    out += '<div class="row"><span class="lab">Paye avant le depart<small>voiture, hebergements</small></span>' +
+      '<input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="spre" aria-label="Paye avant le depart"></div>';
+    out += '</div><div class="readout"><span class="cap">Depense par personne</span>' +
+      '<div class="big" id="s-total"></div><div class="meter" id="s-meter"><i></i></div>' +
+      '<p class="verdict ok" id="s-verdict"></p></div>' +
+      '<button class="btn" id="s-reset" type="button">Remettre a zero</button></div>';
+
+    /* tables */
+    out += '<div class="block wrap"><h2><span class="blaze"></span> Ce qu\'on laisse de cote</h2><div class="tablewrap"><table>' +
+      '<thead><tr><th>Site</th><th class="num">Prix</th><th>Pourquoi</th></tr></thead><tbody>';
+    BUDGET.ecartes.forEach(function (r) {
+      out += '<tr><td>' + esc(r[0]) + '</td><td class="num">' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td></tr>';
+    });
+    out += '</tbody></table></div><h3>Frais courants</h3><div class="tablewrap"><table><tbody>';
+    BUDGET.reference.forEach(function (r) {
+      out += '<tr><td>' + esc(r[0]) + '</td><td class="num">' + esc(r[1]) + '</td></tr>';
+    });
+    out += '</tbody></table></div></div>';
+
+    host.innerHTML = out;
+
+    $$('#extras input').forEach(function (x) {
+      if (db[x.dataset.k]) { x.checked = true; }
+      x.parentNode.classList.toggle('is-on', x.checked);
+      x.addEventListener('change', function () {
+        db[x.dataset.k] = x.checked; save();
+        x.parentNode.classList.toggle('is-on', x.checked);
+        computeBudget();
+      });
+    });
+
+    host.addEventListener('click', function (ev) {
+      var t = ev.target.closest('[data-sim]');
+      if (t) {
+        var k = t.dataset.sim, l = LIM[k];
+        sim[k] = Math.max(l[0], Math.min(l[1], sim[k] + parseInt(t.dataset.d, 10)));
+        db.sim = sim; save(); computeBudget();
+      }
+      if (ev.target.closest('#s-reset')) {
+        $$('#spend input').forEach(function (i) { i.value = ''; delete db[i.dataset.k]; });
+        save(); computeSpend();
+      }
+    });
+
+    $$('#spend input').forEach(function (i) {
+      if (db[i.dataset.k] != null) { i.value = db[i.dataset.k]; }
+      i.addEventListener('input', function () { db[i.dataset.k] = i.value; save(); computeSpend(); });
+    });
+
+    computeBudget();
+    computeSpend();
+  }
 
   function computeBudget() {
-    var fixe = sim.car / 2 + FIXE_OTHER;
+    var fixeOther = BUDGET.fixe.reduce(function (a, f) { return a + f[1]; }, 0);
+    var fixe = sim.car / 2 + fixeOther;
     var lit = (sim.nuit * 6) / 2;
     var food = sim.food * 7;
-    var vis = VISITES_BASE;
-    extras.forEach(function (x) { if (x.checked) { vis += parseFloat(x.dataset.cost); } });
+    var vis = visitesBase();
+    $$('#extras input').forEach(function (x) { if (x.checked) { vis += parseFloat(x.dataset.cost); } });
     var total = fixe + lit + food + vis;
 
-    outs.nuit.textContent = eur(sim.nuit);
-    outs.food.textContent = eur(sim.food);
-    outs.car.textContent = eur(sim.car);
+    $('#o-nuit').textContent = eur(sim.nuit);
+    $('#o-food').textContent = eur(sim.food);
+    $('#o-car').textContent = eur(sim.car);
+    $('#b-total').textContent = eur(total);
+    $('#b-fixe').textContent = eur(fixe);
+    $('#b-lit').textContent = eur(lit);
+    $('#b-food').textContent = eur(food);
+    $('#b-vis').textContent = eur(vis);
 
-    document.getElementById('total').textContent = eur(total);
-    document.getElementById('s-fixe').textContent = eur(fixe);
-    document.getElementById('s-lit').textContent = eur(lit);
-    document.getElementById('s-food').textContent = eur(food);
-    document.getElementById('s-vis').textContent = eur(vis);
-
-    var meterEl = document.getElementById('meter');
-    var pct = Math.min(100, (total / CIBLE) * 100);
-    meterEl.querySelector('i').style.width = pct + '%';
-    meterEl.classList.toggle('over', total > CIBLE);
-
-    var v = document.getElementById('verdict');
-    if (total > CIBLE) {
+    var m = $('#b-meter');
+    m.querySelector('i').style.width = Math.min(100, total / BUDGET.cible * 100) + '%';
+    m.classList.toggle('over', total > BUDGET.cible);
+    var v = $('#b-verdict');
+    if (total > BUDGET.cible) {
       v.className = 'verdict over';
-      v.textContent = eur(total - CIBLE) + ' au-dessus de la cible. Coupez un extra, ou une nuit en auberge.';
+      v.textContent = eur(total - BUDGET.cible) + ' au-dessus de la cible. Coupez un extra, ou une nuit en auberge.';
     } else {
       v.className = 'verdict ok';
-      v.textContent = 'Il reste ' + eur(CIBLE - total) + ' de marge sur les 600 €.';
+      v.textContent = 'Il reste ' + eur(BUDGET.cible - total) + ' de marge sur les 600 €.';
     }
   }
-  computeBudget();
-
-  /* ---------- expense tracker ---------- */
-  var spendInputs = Array.prototype.slice.call(document.querySelectorAll('#spend input'));
-  spendInputs.forEach(function (i) {
-    if (db[i.dataset.k] != null) { i.value = db[i.dataset.k]; }
-    i.addEventListener('input', function () {
-      db[i.dataset.k] = i.value; save(); computeSpend();
-    });
-  });
 
   function computeSpend() {
     var sum = 0;
-    spendInputs.forEach(function (i) {
+    $$('#spend input').forEach(function (i) {
       var n = parseFloat(String(i.value).replace(',', '.'));
       if (!isNaN(n) && n > 0) { sum += n; }
     });
-    document.getElementById('spent').textContent = eur(sum);
-    var m = document.getElementById('spentmeter');
-    m.querySelector('i').style.width = Math.min(100, (sum / CIBLE) * 100) + '%';
-    m.classList.toggle('over', sum > CIBLE);
-    var v = document.getElementById('spentverdict');
-    if (sum > CIBLE) {
+    $('#s-total').textContent = eur(sum);
+    var m = $('#s-meter');
+    m.querySelector('i').style.width = Math.min(100, sum / BUDGET.cible * 100) + '%';
+    m.classList.toggle('over', sum > BUDGET.cible);
+    var v = $('#s-verdict');
+    if (sum > BUDGET.cible) {
       v.className = 'verdict over';
-      v.textContent = eur(sum - CIBLE) + " au-dessus de l'enveloppe.";
+      v.textContent = eur(sum - BUDGET.cible) + ' au-dessus de l\'enveloppe.';
     } else {
       v.className = 'verdict ok';
-      v.textContent = 'Il reste ' + eur(CIBLE - sum) + " sur l'enveloppe.";
+      v.textContent = 'Il reste ' + eur(BUDGET.cible - sum) + ' sur l\'enveloppe.';
     }
   }
-  computeSpend();
 
-  document.getElementById('resetSpend').addEventListener('click', function () {
-    spendInputs.forEach(function (i) { i.value = ''; delete db[i.dataset.k]; });
-    save(); computeSpend();
-  });
+  /* ---------- guide ---------- */
 
-  /* ---------- packing checklist ---------- */
-  var boxes = Array.prototype.slice.call(document.querySelectorAll('#p-valise input[type="checkbox"]'));
-  boxes.forEach(function (b) {
-    if (db[b.dataset.k]) { b.checked = true; }
-    b.addEventListener('change', function () { db[b.dataset.k] = b.checked; save(); computePack(); });
-  });
-
-  function computePack() {
-    var n = boxes.filter(function (b) { return b.checked; }).length;
-    document.getElementById('packcount').textContent = n + '/' + boxes.length;
-    document.getElementById('packmeter').querySelector('i').style.width = (n / boxes.length * 100) + '%';
+  function acc(title, body, open) {
+    return '<details class="acc"' + (open ? ' open' : '') + '><summary>' + esc(title) + '</summary>' +
+      '<div class="accbody">' + body + '</div></details>';
   }
-  computePack();
 
-  document.getElementById('resetPack').addEventListener('click', function () {
-    boxes.forEach(function (b) { b.checked = false; delete db[b.dataset.k]; });
-    save(); computePack();
-  });
+  function renderGuide() {
+    var out = '<div class="block wrap"><h2><span class="blaze"></span> Le guide</h2>' +
+      '<p class="sub">Tout ce qui ne tient pas dans une journee. Touchez une section pour l\'ouvrir.</p>';
 
-  /* ---------- open on the right tab ---------- */
-  var hash = (location.hash || '').replace('#', '');
-  show(panels[hash] ? hash : (db.tab || 'jours'), false);
-  window.addEventListener('hashchange', function () {
+    var sos = '<div class="sos">' + GUIDE.urgences.map(function (u) {
+      return '<a href="tel:' + u.tel + '"><span class="n">' + u.n + '</span><span class="l">' + esc(u.l) + '</span></a>';
+    }).join('') + '</div><p class="fine" style="margin-top:.7rem">Le 112 fonctionne sans reseau ni carte SIM et repond en anglais. ' +
+      'Ambassade de France a Ljubljana : <a href="tel:+38614790400">+386 1 479 04 00</a>.</p>';
+    out += acc('Urgences', sos, true);
+
+    out += acc('Conduire en Slovenie', '<div class="cards">' + GUIDE.conduite.map(function (c) {
+      return '<div class="card"><span class="k">' + esc(c.k) + '</span><div class="v">' + esc(c.v) + '</div></div>';
+    }).join('') + '</div>');
+
+    out += acc('Randonnees', '<div class="tablewrap"><table><thead><tr><th>Rando</th><th>Duree</th>' +
+      '<th class="num">Deniv.</th><th class="num">Prix</th></tr></thead><tbody>' +
+      GUIDE.randos.map(function (r) {
+        return '<tr><td><b>' + esc(r.nom) + '</b><br><span class="fine">' + esc(r.lieu) + ' . ' + esc(r.note) + '</span></td>' +
+          '<td>' + esc(r.duree) + '<br><span class="fine">' + esc(r.diff) + '</span></td>' +
+          '<td class="num">' + esc(r.deniv) + '</td><td class="num">' + esc(r.prix) + '</td></tr>';
+      }).join('') + '</tbody></table></div>');
+
+    out += acc('Ou dormir', '<div class="cards">' + GUIDE.hebergements.map(function (h) {
+      return '<div class="card"><span class="k">' + esc(h.base) + ' . nuits ' + esc(h.nuits) + '</span>' +
+        '<div class="v"><strong>' + esc(h.prix) + '</strong> la chambre double. ' + esc(h.note) + '</div></div>';
+    }).join('') + '</div>');
+
+    out += acc('Manger et boire', '<div class="tablewrap"><table><tbody>' + GUIDE.manger.map(function (m) {
+      return '<tr><td><b>' + esc(m.p) + '</b><br><span class="fine">' + esc(m.d) + '</span></td>' +
+        '<td class="num">' + esc(m.prix) + '</td></tr>';
+    }).join('') + '</tbody></table></div>' +
+      '<p class="fine" style="margin-top:.7rem">Les supermarches (Hofer, Lidl, Mercator, Spar) ferment le samedi entre 13h et 17h et ' +
+      'sont fermes le dimanche. Faites les courses du week-end le samedi 12 avant 17h.</p>');
+
+    out += acc('Meteo de septembre', '<div class="tablewrap"><table><thead><tr><th>Zone</th>' +
+      '<th class="num">Jour</th><th class="num">Nuit</th><th class="num">Eau</th></tr></thead><tbody>' +
+      GUIDE.meteo.map(function (m) {
+        return '<tr><td>' + esc(m.z) + '</td><td class="num">' + esc(m.j) + '</td>' +
+          '<td class="num">' + esc(m.n) + '</td><td class="num">' + esc(m.e) + '</td></tr>';
+      }).join('') + '</tbody></table></div>' +
+      '<p class="fine" style="margin-top:.7rem">Environ 12 jours de pluie sur le mois. Le brouillard de fond de vallee se leve entre 9h et 11h. ' +
+      'Meteo officielle de montagne : <a href="https://meteo.arso.gov.si/met/en/" target="_blank" rel="noopener">ARSO Vreme</a>. ' +
+      'Etat des routes et du col du Vrsic : <a href="https://www.promet.si/en/" target="_blank" rel="noopener">promet.si</a>.</p>');
+
+    out += acc('S\'il pleut', '<div class="tablewrap"><table><thead><tr><th>Ce que vous voyez</th><th>Ce que vous faites</th></tr></thead><tbody>' +
+      GUIDE.pluie.map(function (p) {
+        return '<tr><td>' + esc(p.v) + '</td><td>' + esc(p.f) + '</td></tr>';
+      }).join('') + '</tbody></table></div>');
+
+    out += acc('Slovene de survie', '<div class="lex">' + GUIDE.mots.map(function (m) {
+      return '<div><span class="sl">' + esc(m[0]) + (m[1] ? '<small>' + esc(m[1]) + '</small>' : '') +
+        '</span><span class="fr">' + esc(m[2]) + '</span></div>';
+    }).join('') + '</div><h3>Prononciation</h3><div class="cards">' +
+      GUIDE.prononciation.map(function (p) {
+        return '<div class="card"><span class="k">' + esc(p[0]) + '</span><div class="v">' + esc(p[1]) + '</div></div>';
+      }).join('') + '</div>');
+
+    out += '</div>';
+    $('#guidebody').innerHTML = out;
+  }
+
+  /* ---------- valise ---------- */
+
+  function renderPack() {
+    var out = '<div class="block wrap"><h2><span class="blaze"></span> Le sac</h2>' +
+      '<p class="sub">Un sac cabine et un sac a dos de journee chacune. Les cases restent cochees sur ce telephone.</p>' +
+      '<div class="progress"><b id="p-count"></b><span>prepare</span></div><div class="meter" id="p-meter"><i></i></div>';
+
+    PACK.forEach(function (g) {
+      out += '<h3>' + esc(g.titre) + '</h3><div class="check">';
+      g.items.forEach(function (it) {
+        out += '<label><input type="checkbox" data-k="' + it[0] + '"><span>' + esc(it[1]) + '</span></label>';
+      });
+      out += '</div>';
+    });
+
+    out += '<button class="btn" id="p-reset" type="button">Tout decocher</button>';
+    out += '<footer><p>Carnet de terrain, Slovenie, 7 au 13 septembre 2026.</p>' +
+      '<p>Prix releves en juillet 2026. Revoyez Vintgar, Skocjan et Tolmin sur leurs sites officiels avant de partir.</p>' +
+      '<p>Coordonnees indicatives, a quelques centaines de metres pres : elles servent au trace et a lancer la navigation. ' +
+      'Les liens Maps et Tripadvisor partent du nom du lieu.</p>' +
+      '<p>Fond de carte <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>, ' +
+      'sous licence ODbL. Sur iPhone : bouton Partager, puis "Sur l\'ecran d\'accueil".</p></footer></div>';
+
+    var host = $('#packbody');
+    host.innerHTML = out;
+
+    var boxes = $$('#packbody input[type="checkbox"]');
+    boxes.forEach(function (b) {
+      if (db[b.dataset.k]) { b.checked = true; }
+      b.addEventListener('change', function () { db[b.dataset.k] = b.checked; save(); countPack(boxes); });
+    });
+    $('#p-reset').addEventListener('click', function () {
+      boxes.forEach(function (b) { b.checked = false; delete db[b.dataset.k]; });
+      save(); countPack(boxes);
+    });
+    countPack(boxes);
+  }
+
+  function countPack(boxes) {
+    var n = boxes.filter(function (b) { return b.checked; }).length;
+    $('#p-count').textContent = n + '/' + boxes.length;
+    $('#p-meter').querySelector('i').style.width = (n / boxes.length * 100) + '%';
+  }
+
+  /* ---------- onglets ---------- */
+
+  var TABS = ['jours', 'carte', 'budget', 'guide', 'sac'];
+
+  function showTab(name) {
+    if (TABS.indexOf(name) < 0) { name = 'jours'; }
+    TABS.forEach(function (k) {
+      $('#p-' + k).classList.toggle('is-active', k === name);
+      $('#t-' + k).setAttribute('aria-selected', String(k === name));
+    });
+    db.tab = name; save();
+    try { history.replaceState(null, '', '#' + name); } catch (e) {}
+    window.scrollTo(0, 0);
+
+    if (name === 'carte') {
+      if (!allMap) {
+        allMap = new MiniMap($('#allmap'), {
+          minZoom: 7, maxZoom: 14,
+          onPick: function (m) { if (m.day != null) { selectDay(m.day); showTab('jours'); } }
+        });
+      }
+      paintAllMap();
+    }
+    if (name === 'jours' && dayMap) { setTimeout(function () { dayMap.render(); paintDayMap(); }, 30); }
+  }
+
+  /* ---------- demarrage ---------- */
+
+  function boot() {
+    renderRail();
+    renderAll();
+    renderBudget();
+    renderGuide();
+    renderPack();
+
+    dayMap = new MiniMap($('#daymap'), {
+      minZoom: 8, maxZoom: 16,
+      onPick: function (m) {
+        activeStop = m.idx;
+        $$('#daybody .stopcard').forEach(function (c, k) { c.classList.toggle('is-active', k === activeStop); });
+        var card = $$('#daybody .stop')[activeStop];
+        if (card) { card.scrollIntoView({ block: 'center' }); }
+        paintDayMap();
+      }
+    });
+
+    curDay = (todayIdx >= 0) ? todayIdx : (db.day != null ? db.day : 0);
+    $('#daybody').addEventListener('click', onDayClick);
+    syncRail();
+    renderDay();
+
+    $$('.tabbar button').forEach(function (b) {
+      b.addEventListener('click', function () { showTab(b.dataset.tab); });
+    });
+
     var h = (location.hash || '').replace('#', '');
-    if (panels[h]) { show(h, false); }
-  });
+    showTab(TABS.indexOf(h) >= 0 ? h : (db.tab || 'jours'));
+    window.addEventListener('hashchange', function () {
+      var x = (location.hash || '').replace('#', '');
+      if (TABS.indexOf(x) >= 0) { showTab(x); }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else { boot(); }
 })();
+
 </script>
+</body>
+</html>

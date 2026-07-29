@@ -4,9 +4,45 @@
 
 ---
 
+## L'application
+
+Le coeur du projet est un **tableau de bord de voyage** : `index.html` plus le dossier `assets/`.
+Il se consulte au telephone, pendant le voyage.
+
+- **Carte OpenStreetMap** avec le trace de la journee, les etapes numerotees et le circuit complet des 7 jours
+- **Horaire calcule** : heure d'arrivee, temps sur place, temps de route vers l'etape suivante. Changez l'heure de depart, toute la journee se recalcule
+- **Liens directs** vers la fiche Google Maps, la navigation Waze, les avis Tripadvisor et le site officiel de chaque etape
+- **Simulateur de budget** et **suivi des depenses** face a la cible de 600 €
+- **Guide** (randonnees, hebergements, conduite, meteo, plan B pluie, slovene) et **valise** a cocher
+- Le jour en cours s'ouvre tout seul pendant le voyage, avec un compte a rebours avant le depart
+
+### Publier l'application sur GitHub Pages
+
+1. Poussez la branche, puis dans le depot : **Settings** puis **Pages**
+2. Dans **Source**, choisissez **Deploy from a branch**
+3. Branche : `claude/slovenie-travel-itinerary-krkcha` (ou `main` apres fusion), dossier : `/ (root)`
+4. **Save**. Au bout d'une minute, l'adresse est
+   `https://marckuuss.github.io/Slov-nie-2026/`
+
+Le depot ne contient que des fichiers statiques : ni build, ni dependance, ni compte a creer.
+Le fichier `.nojekyll` evite que GitHub ne retraite le dossier `assets/`.
+
+### La version en un seul fichier
+
+`carnet.html` est la meme application avec les styles et les scripts integres, pratique pour
+l'envoyer par message ou la garder hors ligne. Elle est **generee**, ne la modifiez pas a la main :
+
+```
+python3 build-single.py
+```
+
+Modifiez `index.html` et `assets/`, relancez le script, et les deux versions restent identiques.
+
+---
+
 ## Le voyage en un coup d'oeil
 
-Une boucle de 650 km au depart de Ljubljana qui enchaine exactement ce que vous vouliez :
+Une boucle de 611 km au depart de Ljubljana qui enchaine exactement ce que vous vouliez :
 la riviere et les cascades, la ville, la grotte, la montagne.
 
 ```
@@ -38,6 +74,9 @@ la riviere et les cascades, la ville, la grotte, la montagne.
 
 ## Sommaire du carnet
 
+La version longue, en markdown, lisible directement sur GitHub. L'application reprend l'essentiel,
+ces fichiers gardent le detail.
+
 | Fichier | Contenu |
 |---|---|
 | [01-avant-le-depart.md](01-avant-le-depart.md) | Retroplanning J-45 a J-1, papiers, vols, location de voiture, ce qu'il faut reserver a l'avance |
@@ -56,7 +95,15 @@ la riviere et les cascades, la ville, la grotte, la montagne.
 | [14-plan-b-meteo.md](14-plan-b-meteo.md) | Que faire s'il pleut, journee par journee |
 | [15-slovene-de-survie.md](15-slovene-de-survie.md) | Prononciation et 80 mots utiles |
 | [16-carnet-de-bord.md](16-carnet-de-bord.md) | Pages a remplir sur place : journal, depenses, souvenirs |
-| [carnet.html](carnet.html) | Version consultable sur telephone, hors ligne |
+
+| Fichier de l'application | Role |
+|---|---|
+| `index.html` | L'application. C'est le point d'entree de GitHub Pages. |
+| `assets/data.js` | Toutes les donnees du voyage : etapes, coordonnees, temps de route, prix |
+| `assets/map.js` | Le moteur de carte : tuiles OpenStreetMap, trace, marqueurs, gestes tactiles |
+| `assets/app.js` | Le calcul des horaires, le budget, le rendu |
+| `assets/app.css` | La feuille de style |
+| `carnet.html` | Version en un seul fichier, generee par `build-single.py` |
 
 ---
 

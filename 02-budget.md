@@ -16,36 +16,40 @@ Tout est calcule **pour deux personnes qui partagent la voiture et la chambre**,
 | Poste | Total pour 2 | Par personne | Commentaire |
 |---|---|---|---|
 | Location de voiture, 7 jours | 250 € | **125 €** | Petite citadine, reservee tot, loueur local |
-| Carburant, ~700 km | 70 € | **35 €** | ~6,5 L/100 a 1,56 €/L |
+| Carburant, 611 km | 70 € | **35 €** | ~6,5 L/100 a 1,56 €/L |
 | Vignette autoroute 7 jours | 16 € | **8 €** | Souvent deja incluse dans la location : 0 € |
-| Parkings du sejour | 30 € | **15 €** | Bohinj, Savica, Vrsic, Ljubljana |
+| Parkings hors etapes | 20 € | **10 €** | Bled, Bohinj, P+R de Ljubljana. Les parkings de Savica et du Vrsic sont deja comptes dans les visites. |
 | Hebergement, 6 nuits | 300 € | **150 €** | 50 €/nuit la chambre double |
 | Taxe de sejour | 30 € | **15 €** | 2 a 3,90 €/personne/nuit selon la commune |
 | Nourriture, 7 jours | 280 € | **140 €** | 20 €/jour/personne, courses + 2 ou 3 restos |
-| Visites et entrees | 120 € | **60 €** | Voir le detail plus bas |
+| Visites et entrees | 161 € | **80,50 €** | Voir le detail plus bas |
 | Imprevu / plaisir | 60 € | **30 €** | Un cafe, une glace, un souvenir |
-| **TOTAL** | **1156 €** | **578 €** | |
+| **TOTAL** | **1187 €** | **593,50 €** | |
 
-Il vous reste 22 € de marge. Ce n'est pas beaucoup, donc lisez la section "leviers".
+Il vous reste 6,50 € de marge. Autant dire rien, donc lisez la section "leviers".
+Le simulateur de l'application recalcule ce tableau en direct quand vous changez une hypothese.
 
 **A ajouter :** le vol, 120 a 180 € aller-retour par personne. Budget total du voyage : **700 a 760 € par personne.**
 
 ---
 
-## Detail des visites : le programme a 60 €
+## Detail des visites : le programme a 80,50 €
 
 C'est la selection qui donne le maximum de riviere, cascade, grotte et montagne pour le minimum d'argent.
 
 | Site | Prix / personne | Jour | Vaut le coup ? |
 |---|---|---|---|
 | Gorges de Vintgar (pass tout compris : entree + parking + navette + casque) | 15 € | J2 | Oui. Le plus beau canyon accessible du pays. |
+| Musee de l'apiculture, Radovljica | 5 € | J2 | Court et charmant. Sautable si le budget serre. |
 | Gorge de Mostnica | 3 € | J2 | Oui. Gratuit avant 8h ou apres 17h, et gratuit avec la Bohinj Card. |
 | Cascade de Savica (entree 4 € + parking 5 € a partager) | 6,50 € | J3 | Oui, si le debit est bon. 20 min de montee. |
-| Gorges de Tolmin (tarif septembre) | 8 € | J5 | Oui. Le plus sauvage des trois canyons. |
+| Parking du sommet du Vrsic | 6 € | J4 | Incontournable : c'est le seul parking du col. |
 | Cascade de Kozjak | 5 € | J5 | Oui. La plus photogenique de Slovenie. |
+| Musee de Kobarid | 8 € | J5 | Excellent, mais le sentier historique est gratuit et couvre le meme sujet. |
+| Gorges de Tolmin (tarif septembre) | 8 € | J5 | Oui. Le plus sauvage des trois canyons. |
 | **Grottes de Skocjan** | 24 € | J6 | **Oui, sans hesiter.** Le clou du voyage souterrain. |
-| Divers (chateau de Ljubljana a pied, etc.) | ~0 € | J7 | La colline se monte a pied gratuitement. |
-| **TOTAL** | **~61,50 €** | | |
+| Divers (chateau de Ljubljana a pied, etc.) | 0 € | J7 | La colline se monte a pied gratuitement. |
+| **TOTAL** | **80,50 €** | | |
 
 ### Ce que ce budget ne contient pas, et pourquoi
 
@@ -144,7 +148,8 @@ Dans l'ordre : du moins douloureux au plus douloureux.
 | Rendre la voiture 1 jour plus tot et finir Ljubljana a pied | 35 € | Peu de choses, Ljubljana se fait sans voiture |
 | Passer a 5 nuits au lieu de 6 | 50 € | Une journee de voyage |
 
-Si vous appliquez les 3 premiers, vous descendez a **480 € par personne** sans casser le voyage.
+Si vous appliquez les 3 premiers, vous descendez autour de **500 € par personne** sans casser le voyage.
+Le musee de Kobarid (8 €) et celui de Radovljica (5 €) ont chacun une alternative gratuite : le sentier historique et la place Linhart.
 
 ---
 
