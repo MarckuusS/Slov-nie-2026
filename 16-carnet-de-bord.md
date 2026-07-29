@@ -2,12 +2,12 @@
 
 Retour au [sommaire](README.md)
 
-Les pages a remplir sur place. Imprimez-les, ou recopiez-les dans un carnet papier :
+Les pages à remplir sur place. Imprimez-les, ou recopiez-les dans un carnet papier :
 dans dix ans, ce sont ces lignes-la que vous relirez, pas les tarifs de parking.
 
 ---
 
-## Fiche d'identite du voyage
+## Fiche d'identité du voyage
 
 ```
 DESTINATION       Slovenie
@@ -26,7 +26,7 @@ KM PARCOURUS      ................
 
 ## Journal de bord
 
-### J1 - Lundi 7 septembre : arrivee, Bled
+### J1 - Lundi 7 septembre : arrivée, Bled
 
 ```
 Meteo :                                    Km :
@@ -152,7 +152,7 @@ Depenses :                                 Note du jour   /10
 
 ---
 
-## Suivi des depenses
+## Suivi des dépenses
 
 | Jour | Logement | Nourriture | Essence + parking | Visites | Autre | Total |
 |---|---|---|---|---|---|---|
@@ -165,13 +165,13 @@ Depenses :                                 Note du jour   /10
 | J7 | | | | | | |
 | **Cumul** | | | | | | |
 
-**Postes payes avant le depart :**
+**Postes payes avant le départ :**
 
 | Poste | Montant | Qui a paye |
 |---|---|---|
 | Vols | | |
 | Voiture | | |
-| Hebergements | | |
+| Hébergements | | |
 | **Total** | | |
 
 **Regularisation finale entre nous deux :** ......................
@@ -180,9 +180,9 @@ Depenses :                                 Note du jour   /10
 
 ## La checklist des choses vues
 
-Cochez au fur et a mesure. C'est bete, c'est satisfaisant.
+Cochez au fur et à mesure. C'est bete, c'est satisfaisant.
 
-**Les lacs et les rivieres**
+**Les lacs et les rivières**
 - [ ] Le lac de Bled depuis Ojstrica
 - [ ] L'ile de Bled
 - [ ] Le lac de Bohinj
@@ -213,17 +213,17 @@ Cochez au fur et a mesure. C'est bete, c'est satisfaisant.
 
 **Le souterrain**
 - [ ] Les grottes de Skocjan
-- [ ] La passerelle a 45 m au-dessus de la riviere
+- [ ] La passerelle à 45 m au-dessus de la rivière
 
 **Les villes**
 - [ ] Ljubljana : place Preseren, Triple Pont, pont des Dragons
-- [ ] Le chateau de Ljubljana
+- [ ] Le château de Ljubljana
 - [ ] Kobarid et l'ossuaire
 - [ ] Radovljica
-- [ ] Le chateau de Predjama
+- [ ] Le château de Predjama
 
-**A manger et a boire**
-- [ ] Une kremsnita a Bled
+**A manger et à boire**
+- [ ] Une kremsnita à Bled
 - [ ] Un burek
 - [ ] Une kranjska klobasa
 - [ ] Des kobariski struklji
@@ -235,9 +235,9 @@ Cochez au fur et a mesure. C'est bete, c'est satisfaisant.
 
 ---
 
-## Les questions a se poser le dernier soir
+## Les questions à se poser le dernier soir
 
-A remplir a deux, sur les quais de Ljubljana, avec un verre.
+A remplir à deux, sur les quais de Ljubljana, avec un verre.
 
 ```
 Le meilleur moment du voyage :

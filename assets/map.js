@@ -1,14 +1,14 @@
 /* =============================================================
-   Moteur de carte minimal, sans aucune dependance.
+   Moteur de carte minimal, sans aucune dépendance.
 
    Tuiles raster en projection Web Mercator, overlay SVG pour le
-   trace et les marqueurs numerotes. Gestes tactiles : glisser,
+   tracé et les marqueurs numérotés. Gestes tactiles : glisser,
    pincer, double tap. Molette au bureau.
 
    Quatre fonds : Plan (OpenStreetMap), Relief (OpenTopoMap),
    Satellite (Esri) et Fond uni. Le fond uni n'est pas une panne,
-   c'est un choix : le trace y est plus lisible, et c'est ce qui
-   reste quand il n'y a pas de reseau dans une vallee.
+   c'est un choix : le tracé y est plus lisible, et c'est ce qui
+   reste quand il n'y a pas de reseau dans une vallée.
    ============================================================= */
 
 (function (global) {
@@ -26,7 +26,7 @@
     {
       key: 'relief', name: 'Relief',
       url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
-      sub: ['a', 'b', 'c'], max: 16,
+      sub: ['à', 'b', 'c'], max: 16,
       credit: 'OpenTopoMap, CC-BY-SA', creditUrl: 'https://opentopomap.org/'
     },
     {
@@ -110,7 +110,7 @@
     this.svg.appendChild(this.gRoutes);
     this.svg.appendChild(this.gMarks);
 
-    this.attrib = document.createElement('a');
+    this.attrib = document.createElement('à');
     this.attrib.className = 'mm-attrib';
     this.attrib.target = '_blank';
     this.attrib.rel = 'noopener';
@@ -121,9 +121,9 @@
     this.ctrl.innerHTML =
       '<button type="button" data-mm="in" aria-label="Zoomer">+</button>' +
       '<button type="button" data-mm="out" aria-label="Dezoomer">-</button>' +
-      '<button type="button" data-mm="fit" aria-label="Recadrer sur le trace">' + ICON.fit + '</button>' +
+      '<button type="button" data-mm="fit" aria-label="Recadrer sur le tracé">' + ICON.fit + '</button>' +
       '<button type="button" data-mm="layer" aria-label="Changer de fond de carte" aria-expanded="false">' + ICON.layer + '</button>' +
-      (this.onFull ? '<button type="button" data-mm="full" aria-label="Carte en plein ecran">' + ICON.full + '</button>' : '');
+      (this.onFull ? '<button type="button" data-mm="full" aria-label="Carte en plein écran">' + ICON.full + '</button>' : '');
     this.box.appendChild(this.ctrl);
 
     this.menu = document.createElement('div');
@@ -179,7 +179,7 @@
     return u;
   };
 
-  /* ---------- geometrie ---------- */
+  /* ---------- géométrie ---------- */
 
   MiniMap.prototype._size = function () {
     var r = this.box.getBoundingClientRect();
@@ -496,4 +496,5 @@
   MiniMap.prototype.styles = function () { return STYLES; };
 
   global.MiniMap = MiniMap;
+  global.MAP_STYLES = STYLES;
 })(window);

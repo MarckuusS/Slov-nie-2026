@@ -1,0 +1,17 @@
+{
+  "name": "Slovénie 2026",
+  "short_name": "Slovénie",
+  "description": "Tableau de bord du voyage en Slovénie, du 7 au 13 septembre 2026 : itinéraire cartographié, horaires, budget et guide.",
+  "lang": "fr",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F1F4EF",
+  "theme_color": "#EAF1EC",
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

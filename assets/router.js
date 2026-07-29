@@ -1,23 +1,23 @@
 /* =============================================================
-   Traces routiers reels.
+   Tracés routiers réels.
 
-   Le trace entre deux etapes suit les vraies routes, pas une ligne
-   droite. La geometrie vient d'OSRM, le moteur de calcul d'itineraire
-   d'OpenStreetMap, interroge par le navigateur.
+   Le tracé entre deux étapes suit les vraies routes, pas une ligne
+   droite. La géométrie vient d'OSRM, le moteur de calcul d'itinéraire
+   d'OpenStreetMap, interrogé par le navigateur.
 
-   Comment ca marche :
-   1. assets/routes.js peut contenir des traces deja figes. S'ils y
+   Comment ça marché :
+   1. assets/routes.js peut contenir des tracés déjà figés. S'ils y
       sont, rien n'est demande au reseau, l'application est autonome.
-   2. Sinon, chaque tronçon est demande une fois, simplifie, puis
-      garde dans le stockage local du telephone. Les fois suivantes,
-      c'est instantane et ca marche sans reseau.
-   3. Si le reseau ne repond pas, on retombe sur la ligne reperee par
-      les points de passage saisis a la main : moins fidele, mais
-      lisible, et signalee en pointille dans l'application.
+   2. Sinon, chaque tronçon est demande une fois, simplifié, puis
+      garde dans le stockage local du téléphone. Les fois suivantes,
+      c'est instantané et ça marché sans reseau.
+   3. Si le reseau ne répond pas, on retombe sur la ligne repérée par
+      les points de passage saisis à la main : moins fidèle, mais
+      lisible, et signalée en pointille dans l'application.
 
-   Pour figer les traces dans le depot : onglet Carte, bouton
-   "Exporter les traces", puis remplacer assets/routes.js par le
-   fichier telecharge.
+   Pour figer les tracés dans le dépôt : onglet Carte, bouton
+   "Exporter les tracés", puis remplacer assets/routes.js par le
+   fichier téléchargé.
    ============================================================= */
 
 (function (global) {
@@ -31,15 +31,15 @@
   var mem = {};
   var pending = false;
 
-  // 1. traces figes livres avec le depot
+  // 1. tracés figés livres avec le dépôt
   if (global.ROUTES) {
     Object.keys(global.ROUTES).forEach(function (k) { mem[k] = global.ROUTES[k]; });
   }
-  // 2. traces deja recuperes sur cet appareil
+  // 2. tracés déjà recuperes sur cet appareil
   try {
     var stored = JSON.parse(localStorage.getItem(CACHE_KEY) || '{}');
     Object.keys(stored).forEach(function (k) { if (!mem[k]) { mem[k] = stored[k]; } });
-  } catch (e) { /* mode prive, navigation restreinte : tant pis */ }
+  } catch (e) { /* mode privé, navigation restreinte : tant pis */ }
 
   function key(a, b) {
     return a.lat.toFixed(4) + ',' + a.lon.toFixed(4) + '>' + b.lat.toFixed(4) + ',' + b.lon.toFixed(4);
@@ -52,7 +52,7 @@
         if (!global.ROUTES || !global.ROUTES[k]) { out[k] = mem[k]; }
       });
       localStorage.setItem(CACHE_KEY, JSON.stringify(out));
-    } catch (e) { /* quota plein : le trace reste en memoire pour la session */ }
+    } catch (e) { /* quota plein : le tracé reste en mémoire pour la session */ }
   }
 
   /* --- Ramer-Douglas-Peucker, pour ne pas stocker 2000 points par tronçon --- */
@@ -103,27 +103,27 @@
         pts = simplify(pts, EPS).map(function (p) {
           return [Math.round(p[0] * 1e5) / 1e5, Math.round(p[1] * 1e5) / 1e5];
         });
-        if (pts.length < 2) { throw new Error('trace vide'); }
+        if (pts.length < 2) { throw new Error('tracé vide'); }
         mem[key(a, b)] = pts;
         return pts;
       });
   }
 
   var Router = {
-    /** Trace reel entre deux etapes, ou null s'il n'est pas encore connu. */
+    /** Tracé réel entre deux étapes, ou null s'il n'est pas encore connu. */
     get: function (a, b) { return mem[key(a, b)] || null; },
 
     has: function (a, b) { return !!mem[key(a, b)]; },
 
-    /** Nombre de troncons encore a recuperer dans la liste donnee. */
+    /** Nombre de tronçons encore à récupérer dans la liste donnée. */
     missing: function (pairs) {
       return pairs.filter(function (p) { return !mem[key(p[0], p[1])]; }).length;
     },
 
     /**
-     * Recupere les troncons manquants, un par un.
-     * onStep(fait, total) est appele apres chaque tronçon obtenu,
-     * pour redessiner la carte au fur et a mesure.
+     * Récupéré les tronçons manquants, un par un.
+     * onStep(fait, total) est appelé après chaque tronçon obtenu,
+     * pour redessiner la carte au fur et à mesure.
      */
     ensure: function (pairs, onStep) {
       if (pending || !global.fetch) { return; }
@@ -149,20 +149,20 @@
       next();
     },
 
-    /** Contenu de assets/routes.js, pour figer les traces dans le depot. */
+    /** Contenu de assets/routes.js, pour figer les tracés dans le dépôt. */
     exportFile: function () {
       var keys = Object.keys(mem).sort();
       var lines = keys.map(function (k) {
         return '  ' + JSON.stringify(k) + ': ' + JSON.stringify(mem[k]) + ',';
       });
       return '/* =============================================================\n' +
-        '   Traces routiers figes, generes depuis l\'application.\n' +
-        '   ' + keys.length + ' troncons. Geometrie OSRM, donnees OpenStreetMap (ODbL).\n' +
+        '   Tracés routiers figés, generes depuis l\'application.\n' +
+        '   ' + keys.length + ' tronçons. Géométrie OSRM, données OpenStreetMap (ODbL).\n' +
         '\n' +
         '   Tant que ce fichier est rempli, l\'application n\'a plus besoin\n' +
-        '   du reseau pour dessiner les itineraires.\n' +
+        '   du reseau pour dessiner les itinéraires.\n' +
         '\n' +
-        '   Pour le regenerer : onglet Carte, bouton Exporter les traces.\n' +
+        '   Pour le regenerer : onglet Carte, bouton Exporter les tracés.\n' +
         '   ============================================================= */\n\n' +
         'window.ROUTES = {\n' + lines.join('\n') + '\n};\n';
     },

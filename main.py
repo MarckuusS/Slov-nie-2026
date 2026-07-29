@@ -5,14 +5,14 @@ Lance le tableau de bord du voyage en local.
     python3 main.py
 
 Le script sert le dossier, ouvre le navigateur, et affiche en plus une
-adresse reseau : tapez-la dans Safari sur l'iPhone, connecte au meme
-wifi, pour essayer l'application sur le telephone avant le depart.
+adresse reseau : tapez-la dans Safari sur l'iPhone, connecte au même
+wifi, pour essayer l'application sur le téléphone avant le départ.
 
-Aucune dependance : uniquement la bibliotheque standard de Python 3.
+Aucune dépendance : uniquement la bibliotheque standard de Python 3.
 
-Rappel : ce fichier n'est pas necessaire pour publier sur GitHub Pages.
-Un site web n'a pas de fichier "main", son point d'entree est index.html,
-et le deploiement est fait par .github/workflows/pages.yml.
+Rappel : ce fichier n'est pas nécessaire pour publier sur GitHub Pages.
+Un site web n'a pas de fichier "main", son point d'entrée est index.html,
+et le déploiement est fait par .github/workflows/pages.yml.
 """
 
 import argparse
@@ -50,7 +50,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
 
 def ip_locale():
-    """Adresse du poste sur le reseau local, pour ouvrir depuis le telephone."""
+    """Adresse du poste sur le reseau local, pour ouvrir depuis le téléphone."""
     with contextlib.closing(socket.socket(socket.AF_INET, socket.SOCK_DGRAM)) as s:
         try:
             s.connect(("192.168.1.1", 1))
@@ -75,7 +75,7 @@ def verifier():
     ]
     if manquants:
         print("Fichiers manquants : " + ", ".join(manquants))
-        print("Lancez le script depuis la racine du depot.")
+        print("Lancez le script depuis la racine du dépôt.")
         return False
     return True
 
@@ -103,15 +103,15 @@ def main():
         ip = ip_locale()
 
         print()
-        print("  Carnet de voyage Slovenie 2026")
+        print("  Carnet de voyage Slovénie 2026")
         print("  " + "-" * 44)
         print(f"  Sur cet ordinateur : {local}")
         if ip:
             print(f"  Sur l'iPhone       : http://{ip}:{port}/")
-            print("                       (meme wifi ; bouton Partager,")
-            print("                        puis Sur l'ecran d'accueil)")
+            print("                       (même wifi ; bouton Partager,")
+            print("                        puis Sur l'écran d'accueil)")
         print()
-        print("  Ctrl+C pour arreter.")
+        print("  Ctrl+C pour arrêter.")
         print()
 
         if not args.no_browser:
@@ -120,7 +120,7 @@ def main():
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:
-            print("\n  Arret.")
+            print("\n  Arrêt.")
     return 0
 
 

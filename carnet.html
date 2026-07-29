@@ -3,22 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Slovenie 2026 - tableau de bord</title>
-<!-- Fichier genere par build-single.py. Ne pas editer a la main :
+<title>Slovénie 2026 - tableau de bord</title>
+<!-- Fichier généré par build-single.py. Ne pas editer à la main :
      modifiez index.html et assets/, puis relancez le script. -->
-<meta name="description" content="Tableau de bord du voyage en Slovenie, 7 au 13 septembre 2026 : itineraire cartographie jour par jour, temps de route, budget, guide et valise.">
+<meta name="description" content="Tableau de bord du voyage en Slovénie, 7 au 13 septembre 2026 : itinéraire cartographie jour par jour, temps de route, budget, guide et valise.">
 <meta name="theme-color" content="#EAF1EC">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Slovenie">
-<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-title" content="Slovénie">
+<meta name="format-detection" content="téléphone=no">
 <meta name="color-scheme" content="light dark">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23BB3728'/%3E%3Ccircle cx='16' cy='16' r='5.5' fill='%23fff'/%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%23F1F4EF'/%3E%3Ccircle cx='90' cy='90' r='58' fill='%23BB3728'/%3E%3Ccircle cx='90' cy='90' r='21' fill='%23F1F4EF'/%3E%3C/svg%3E">
+<!-- Safari sur iPhone n'accepte que du PNG pour apple-touch-icon.
+     Un SVG, meme valide, donne une icone vide sur l'ecran d'accueil. -->
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icon-180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
 <style>
 /* =============================================================
-   Slovenie 2026 - feuille de style
-   Mobile d'abord, pensee pour iPhone : zones sures, cibles de
+   Slovénie 2026 - feuille de style
+   Mobile d'abord, pensée pour iPhone : zones sures, cibles de
    44 px, typographie fluide, aucun debordement horizontal.
    ============================================================= */
 
@@ -48,7 +52,7 @@
   --wrap: 44rem;
   /* Marge de base, toujours appliquee. Les encoches s'ajoutent par-dessus
      via --safe-*, definis plus bas sous @supports : si env() n'est pas
-     reconnu, ils restent a 0px et la marge de base tient quand meme. */
+     reconnu, ils restent à 0px et la marge de base tient quand même. */
   --gutter: 1.25rem;
   --safe-t: 0px;
   --safe-b: 0px;
@@ -304,11 +308,11 @@ h3 {
 .mapwrap.is-static { position: static; }
 .mapwrap.is-static .mm { height: clamp(240px, 52vh, 520px); }
 
-/* --- carte repliee : on rend toute la hauteur a l'itineraire --- */
+/* --- carte repliée : on rend toute la hauteur à l'itinéraire --- */
 .mapwrap.is-folded .mm { height: 0; border-bottom: 0; }
 .mapwrap.is-folded .mm-ctrl, .mapwrap.is-folded .mm-attrib, .mapwrap.is-folded .mm-styles { display: none; }
 
-/* --- barre sous la carte : pli et etat du trace --- */
+/* --- barre sous la carte : pli et état du tracé --- */
 .maptools {
   max-width: var(--wrap); margin: 0 auto;
   display: flex; align-items: center; gap: .6rem;
@@ -336,7 +340,7 @@ h3 {
   text-align: right; min-width: 0;
 }
 
-/* --- plein ecran --- */
+/* --- plein écran --- */
 .mapwrap.is-full {
   position: fixed; inset: 0; z-index: 90;
   display: flex; flex-direction: column;
@@ -378,7 +382,7 @@ body.has-full .tabbar { display: none; }
 .mm-halo { fill: none; stroke: var(--paper); stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
 .mm-line { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
 .mm-line.is-dim { stroke-width: 2.5; opacity: .3; }
-/* tronçon dont l'itineraire routier n'est pas encore calcule */
+/* tronçon dont l'itinéraire routier n'est pas encore calculé */
 .mm-line.is-rough { stroke-dasharray: 3 7; stroke-width: 3; opacity: .75; }
 .mm-mark { cursor: pointer; }
 .mm-ring { stroke: var(--paper); stroke-width: 2.5; }
@@ -434,8 +438,8 @@ body.has-full .tabbar { display: none; }
 .mm-styles button[aria-pressed="true"] { background: var(--soca-lift); color: var(--soca); }
 .mm-styles button:active { background: var(--surface-2); }
 
-/* Le filtre depend du fond : desature sur le plan et le relief pour que
-   le trace ressorte, laisse tel quel sur la vue satellite. */
+/* Le filtre dépend du fond : désature sur le plan et le relief pour que
+   le tracé ressorte, laisse tel quel sur la vue satellite. */
 .mm[data-style="satellite"] .mm-tile { filter: none; }
 .mm[data-style="relief"] .mm-tile { filter: saturate(.6) contrast(.95) brightness(1.03); }
 :root[data-theme="dark"] .mm[data-style="relief"] .mm-tile,
@@ -590,7 +594,7 @@ body.has-full .tabbar { display: none; }
   white-space: nowrap;
 }
 .links a:active, .links button:active { border-color: var(--soca); color: var(--soca); background: var(--soca-lift); }
-/* toute icone inline generee par le script : sans taille explicite,
+/* toute icone inline générée par le script : sans taille explicite,
    un SVG sans width/height retombe sur 300x150 et se remplit de noir */
 .ic {
   width: .85rem; height: .85rem; flex: none;
@@ -736,7 +740,7 @@ details.acc[open] > summary { color: var(--soca); }
 .field .lab { font-size: .92rem; line-height: 1.35; min-width: 0; }
 .field .lab small { display: block; font-size: .73rem; color: var(--ink-faint); }
 
-/* ================= depenses ================= */
+/* ================= dépenses ================= */
 .spend .row {
   display: grid; grid-template-columns: minmax(0, 1fr) 6.5rem;
   align-items: center; gap: .55rem;
@@ -755,7 +759,7 @@ details.acc[open] > summary { color: var(--soca); }
 .spend input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 .spend input:focus { outline: 2px solid var(--soca); outline-offset: 1px; border-color: var(--soca); }
 
-/* ================= listes a cocher ================= */
+/* ================= listes à cocher ================= */
 .progress {
   display: flex; align-items: baseline; gap: .5rem;
   font-family: var(--f-data); font-size: .66rem; letter-spacing: .1em;
@@ -837,7 +841,7 @@ footer p { margin: .3rem 0; }
 
 <div class="topbar">
   <div class="topbar-in">
-    <span class="mark"><span class="blaze"></span> Slovenie . 7-13 sept 2026</span>
+    <span class="mark"><span class="blaze"></span> Slovénie . 7-13 sept 2026</span>
     <span class="now" id="now">chargement</span>
   </div>
 </div>
@@ -884,9 +888,9 @@ footer p { margin: .3rem 0; }
 
   <noscript>
     <div class="wrap block">
-      <h2>Le tableau de bord a besoin de JavaScript</h2>
+      <h2>Le tableau de bord à besoin de JavaScript</h2>
       <p class="sub">La version longue du carnet est lisible sans rien activer, directement sur GitHub :
-      itineraire, budget, randonnees, hebergements, valise et slovene de survie.</p>
+      itinéraire, budget, randonnées, hébergements, valise et slovène de survie.</p>
       <p><a href="README.md">Ouvrir le carnet en markdown</a></p>
     </div>
   </noscript>
@@ -920,23 +924,23 @@ footer p { margin: .3rem 0; }
 
 <script>
 /* =============================================================
-   Slovenie 2026 - donnees du voyage
+   Slovénie 2026 - données du voyage
    7 au 13 septembre 2026, 2 personnes, voiture de location.
 
-   Coordonnees : indicatives, a quelques centaines de metres pres.
-   Elles servent a tracer la carte et a lancer la navigation.
+   Coordonnées : indicatives, à quelques centaines de mètres pres.
+   Elles servent à tracer la carte et à lancer la navigation.
    Les liens Google Maps et Tripadvisor partent du nom du lieu,
    pour tomber sur la bonne fiche.
 
-   stay  = minutes prevues sur place
-   leg   = trajet vers l'etape suivante { km, min, via: [[lat,lon], ...] }
+   stay  = minutes prévues sur place
+   leg   = trajet vers l'étape suivante { km, min, via: [[lat,lon], ...] }
    cost  = euros par personne
    ============================================================= */
 
 const PALETTE = ['#147C7C', '#0F8F7A', '#3D9A57', '#96983B', '#C48A2E', '#C05F2C', '#B03A2E'];
 
 const TRIP = {
-  title: 'Slovenie',
+  title: 'Slovénie',
   from: '2026-09-07',
   to: '2026-09-13',
   people: 2,
@@ -946,14 +950,14 @@ const TRIP = {
     /* ---------------------------------------------------- J1 */
     {
       n: 1, date: '2026-09-07', wd: 'lundi 7 septembre',
-      title: 'Arrivee et premier lac',
+      title: 'Arrivée et premier lac',
       base: 'Bled ou Bohinjska Bistrica',
       start: '11:30',
       color: PALETTE[0],
-      brief: 'Prise de voiture, ravitaillement, et le lac de Bled a pied. On finit sur le point de vue d\'Ojstrica au coucher du soleil.',
+      brief: 'Prise de voiture, ravitaillement, et le lac de Bled à pied. On finit sur le point de vue d\'Ojstrica au coucher du soleil.',
       stops: [
         {
-          name: 'Aeroport de Ljubljana', sub: 'Joze Pucnik, Brnik', kind: 'transport',
+          name: 'Aéroport de Ljubljana', sub: 'Joze Pucnik, Brnik', kind: 'transport',
           lat: 46.2237, lon: 14.4576, stay: 40, cost: 0,
           tip: 'Filmez la voiture en tournant autour avant de partir, jantes et pare-brise compris. Demandez si la vignette autoroute est incluse.',
           leg: { km: 22, min: 22, via: [[46.2389, 14.3556], [46.3100, 14.2400]] }
@@ -961,32 +965,32 @@ const TRIP = {
         {
           name: 'Lidl Lesce', sub: 'Le gros ravitaillement', kind: 'courses',
           lat: 46.3617, lon: 14.1550, stay: 35, cost: 18,
-          tip: 'Pain, fruits, fromage, jambon, cafe, eau. 30 a 40 € pour deux, ca tient trois jours.',
+          tip: 'Pain, fruits, fromage, jambon, cafe, eau. 30 à 40 € pour deux, ça tient trois jours.',
           leg: { km: 7, min: 10, via: [[46.3660, 14.1250]] }
         },
         {
-          name: 'Lac de Bled', sub: 'Le tour du lac a pied, 6 km', kind: 'lac',
+          name: 'Lac de Bled', sub: 'Le tour du lac à pied, 6 km', kind: 'lac',
           lat: 46.3625, lon: 14.0936, stay: 110, cost: 0, free: true,
-          tip: 'Dans le sens des aiguilles d\'une montre pour garder l\'ile en face de vous. Plat, praticable en baskets. Baignade possible, l\'eau est a 20-22 °C.',
+          tip: 'Dans le sens des aiguilles d\'une montre pour garder l\'ile en face de vous. Plat, praticable en baskets. Baignade possible, l\'eau est à 20-22 °C.',
           site: 'https://www.bled.si/fr/',
           leg: { km: 2, min: 6, via: [] }
         },
         {
-          name: 'Park Hotel Bled', sub: 'La kremsnita d\'origine', kind: 'repas',
+          name: 'Park Hôtel Bled', sub: 'La kremsnita d\'origine', kind: 'repas',
           lat: 46.3644, lon: 14.0994, stay: 40, cost: 6,
-          tip: 'Le millefeuille creme-vanille invente ici en 1953. Il est enorme : un pour deux.',
+          tip: 'Le millefeuille creme-vanille inventé ici en 1953. Il est énorme : un pour deux.',
           leg: { km: 3, min: 8, via: [] }
         },
         {
-          name: 'Ojstrica', sub: 'Le point de vue, depart de Velika Zaka', kind: 'montagne',
+          name: 'Ojstrica', sub: 'Le point de vue, départ de Velika Zaka', kind: 'montagne',
           lat: 46.3607, lon: 14.0817, stay: 100, cost: 0, free: true,
-          tip: '25 min de montee raide, cordes fixes sur la fin. Le lac, l\'ile et le chateau dans le meme cadre. Coucher de soleil vers 19h30. Enchainez sur Mala Osojnica, 15 min plus haut.',
+          tip: '25 min de montée raide, cordes fixes sur la fin. Le lac, l\'ile et le château dans le même cadre. Coucher de soleil vers 19h30. Enchaînez sur Mala Osojnica, 15 min plus haut.',
           leg: { km: 20, min: 25, via: [[46.3400, 14.0700], [46.3000, 14.0300]] }
         },
         {
-          name: 'Bohinjska Bistrica', sub: 'Base des trois premieres nuits', kind: 'nuit',
+          name: 'Bohinjska Bistrica', sub: 'Base des trois premières nuits', kind: 'nuit',
           lat: 46.2775, lon: 14.0064, stay: 0, cost: 0,
-          tip: '45 a 65 € la chambre double, contre 60 a 110 € a Bled. Demandez la Bohinj Card a l\'arrivee : elle est comprise dans la taxe de sejour et rend Mostnica gratuite.'
+          tip: '45 à 65 € la chambre double, contre 60 à 110 € à Bled. Demandez la Bohinj Card à l\'arrivée : elle est comprise dans la taxe de séjour et rend Mostnica gratuite.'
         }
       ]
     },
@@ -994,22 +998,22 @@ const TRIP = {
     /* ---------------------------------------------------- J2 */
     {
       n: 2, date: '2026-09-08', wd: 'mardi 8 septembre',
-      title: 'La riviere et les cascades',
+      title: 'La rivière et les cascades',
       base: 'Bohinjska Bistrica',
       start: '07:30',
       color: PALETTE[1],
-      brief: 'Vintgar au premier creneau, puis on bascule sur Bohinj, plus sauvage et beaucoup plus calme que Bled.',
+      brief: 'Vintgar au premier créneau, puis on bascule sur Bohinj, plus sauvage et beaucoup plus calme que Bled.',
       stops: [
         {
-          name: 'Bohinjska Bistrica', sub: 'Depart de la base', kind: 'depart',
+          name: 'Bohinjska Bistrica', sub: 'Départ de la base', kind: 'départ',
           lat: 46.2775, lon: 14.0064, stay: 0, cost: 0,
-          tip: 'Petit dejeuner rapide et route vers Vintgar. Le creneau de 8h est celui ou vous serez presque seules.',
+          tip: 'Petit déjeuner rapide et route vers Vintgar. Le créneau de 8h est celui où vous serez presque seules.',
           leg: { km: 30, min: 35, via: [[46.3100, 14.0300], [46.3683, 14.1146]] }
         },
         {
           name: 'Gorges de Vintgar', sub: 'Parking central VINTGAR LIP', kind: 'gorge',
           lat: 46.3739, lon: 14.0917, stay: 115, cost: 15,
-          tip: 'Reservez le creneau de 8h en ligne : on ne vend plus de billet a l\'entree de la gorge. Le pass comprend le parking, la navette electrique et le casque obligatoire. 1,6 km de passerelles au-dessus de la Radovna, jusqu\'a la cascade de Sum.',
+          tip: 'Réservez le créneau de 8h en ligne : on ne vend plus de billet à l\'entrée de la gorge. Le pass comprend le parking, la navette électrique et le casque obligatoire. 1,6 km de passerelles au-dessus de la Radovna, jusqu\'a la cascade de Sum.',
           site: 'https://www.vintgar.si/en/',
           booking: true,
           leg: { km: 9, min: 15, via: [[46.3800, 14.0700]] }
@@ -1017,31 +1021,31 @@ const TRIP = {
         {
           name: 'Gorge de Pokljuka', sub: 'Canyon sec, gratuit, personne', kind: 'gorge',
           lat: 46.3667, lon: 14.0556, stay: 80, cost: 0, free: true, optional: true,
-          tip: 'Le contraire de Vintgar : pas d\'eau, pas de billet, pas de monde. Arche naturelle et grotte. Boucle de 1h a 1h30.',
+          tip: 'Le contraire de Vintgar : pas d\'eau, pas de billet, pas de monde. Arche naturelle et grotte. Boucle de 1h à 1h30.',
           leg: { km: 16, min: 22, via: [[46.3550, 14.1100]] }
         },
         {
-          name: 'Radovljica', sub: 'Place medievale et musee de l\'apiculture', kind: 'ville',
+          name: 'Radovljica', sub: 'Place médiévale et musée de l\'apiculture', kind: 'ville',
           lat: 46.3442, lon: 14.1731, stay: 75, cost: 5,
-          tip: 'Une seule rue pavee bordee de maisons peintes, et presque personne. On y mange deux fois moins cher qu\'a Bled. Le musee de l\'apiculture (5 €) est court et charmant.',
+          tip: 'Une seule rue pavée bordée de maisons peintes, et presque personne. On y mange deux fois moins cher qu\'a Bled. Le musée de l\'apiculture (5 €) est court et charmant.',
           leg: { km: 32, min: 40, via: [[46.3200, 14.1000], [46.2900, 13.9500]] }
         },
         {
           name: 'Lac de Bohinj', sub: 'Ribcev Laz, le pont de pierre', kind: 'lac',
           lat: 46.2775, lon: 13.8875, stay: 60, cost: 0, free: true,
-          tip: 'Pique-nique au bord de l\'eau, avec l\'eglise Saint-Jean-Baptiste et son clocher blanc. C\'est la carte postale de Bohinj.',
+          tip: 'Pique-nique au bord de l\'eau, avec l\'église Saint-Jean-Baptiste et son clocher blanc. C\'est la carte postale de Bohinj.',
           leg: { km: 2, min: 5, via: [] }
         },
         {
-          name: 'Gorge de Mostnica', sub: 'Depart de Stara Fuzina', kind: 'gorge',
+          name: 'Gorge de Mostnica', sub: 'Départ de Stara Fuzina', kind: 'gorge',
           lat: 46.2894, lon: 13.8894, stay: 135, cost: 3,
-          tip: 'Cherchez l\'Elephant, la roche qui en dessine un exactement. Jusqu\'a la cascade de Voje, comptez 3h et une buvette d\'alpage a l\'arrivee. Gratuit avant 8h, apres 17h, ou avec la Bohinj Card.',
+          tip: 'Cherchez l\'Éléphant, la roche qui en dessine un exactement. Jusqu\'a la cascade de Voje, comptez 3h et une buvette d\'alpage à l\'arrivée. Gratuit avant 8h, après 17h, ou avec la Bohinj Card.',
           leg: { km: 3, min: 7, via: [] }
         },
         {
           name: 'Baignade au lac de Bohinj', sub: 'Rive nord, sur les galets', kind: 'lac',
           lat: 46.2800, lon: 13.8700, stay: 60, cost: 0, free: true,
-          tip: '18 a 20 °C en septembre. L\'eau est si claire qu\'on voit le fond a 4 m.',
+          tip: '18 à 20 °C en septembre. L\'eau est si claire qu\'on voit le fond à 4 m.',
           leg: { km: 8, min: 12, via: [] }
         },
         {
@@ -1058,38 +1062,38 @@ const TRIP = {
       base: 'Bohinjska Bistrica',
       start: '08:00',
       color: PALETTE[2],
-      brief: 'La journee la plus dependante du ciel. Regardez la webcam de Vogel le matin : par nuages bas, prenez la version gratuite au sol.',
+      brief: 'La journée la plus dépendante du ciel. Regardez la webcam de Vogel le matin : par nuages bas, prenez la version gratuite au sol.',
       choice: {
         label: 'Version du jour',
         options: [
-          { key: 'B', title: 'Rando du Vogar', detail: 'Gratuit, 550 m de denivele, 3h30, la meme vue plongeante sur le lac. C\'est la version retenue dans le budget.' },
-          { key: 'A', title: 'Telecabine de Vogel', detail: '33 € par personne, 1535 m en 4 minutes, vue frontale sur le Triglav. Seulement si le ciel est degage.' }
+          { key: 'B', title: 'Rando du Vogar', detail: 'Gratuit, 550 m de dénivelé, 3h30, la même vue plongeante sur le lac. C\'est la version retenue dans le budget.' },
+          { key: 'A', title: 'Télécabine de Vogel', detail: '33 € par personne, 1535 m en 4 minutes, vue frontale sur le Triglav. Seulement si le ciel est dégagé.' }
         ]
       },
       stops: [
         {
-          name: 'Bohinjska Bistrica', sub: 'Depart de la base', kind: 'depart',
+          name: 'Bohinjska Bistrica', sub: 'Départ de la base', kind: 'départ',
           lat: 46.2775, lon: 14.0064, stay: 0, cost: 0,
-          tip: 'Journee sans route. Verifiez la webcam de Vogel avant de choisir la version du jour.',
+          tip: 'Journée sans route. Vérifiez la webcam de Vogel avant de choisir la version du jour.',
           leg: { km: 10, min: 16, via: [[46.2800, 13.9300]] }
         },
         {
-          name: 'Telecabine de Vogel', sub: 'Version A, depuis Ukanc', kind: 'montagne',
+          name: 'Télécabine de Vogel', sub: 'Version A, depuis Ukanc', kind: 'montagne',
           lat: 46.2814, lon: 13.8383, stay: 270, cost: 33, variant: 'A',
-          tip: 'Parking gratuit et telesiege vers Orlova Glava compris. En haut, rando facile vers Sija (1880 m, 1h30 aller-retour). Verifiez la webcam avant de monter : par nuages bas vous payez 33 € pour du brouillard.',
+          tip: 'Parking gratuit et télésiège vers Orlova Glava compris. En haut, rando facile vers Sija (1880 m, 1h30 aller-retour). Vérifiez la webcam avant de monter : par nuages bas vous payez 33 € pour du brouillard.',
           site: 'https://vogel.si/en/',
           leg: { km: 4, min: 9, via: [] }
         },
         {
           name: 'Rando du Vogar', sub: 'Version B, depuis Stara Fuzina', kind: 'montagne',
           lat: 46.2894, lon: 13.8894, stay: 300, cost: 0, free: true, variant: 'B',
-          tip: '1h45 de montee, 550 m de denivele, et une vue plongeante sur tout le lac de Bohinj. Retour en boucle possible par la Planina Blato et la vallee de Voje.',
+          tip: '1h45 de montée, 550 m de dénivelé, et une vue plongeante sur tout le lac de Bohinj. Retour en boucle possible par la Planina Blato et la vallée de Voje.',
           leg: { km: 8, min: 15, via: [] }
         },
         {
-          name: 'Cascade de Savica', sub: 'Au fond de la vallee d\'Ukanc', kind: 'cascade',
+          name: 'Cascade de Savica', sub: 'Au fond de la vallée d\'Ukanc', kind: 'cascade',
           lat: 46.2942, lon: 13.8003, stay: 90, cost: 6.5,
-          tip: '4 € d\'entree plus 5 € de parking a partager. 500 marches, 25 min de montee. 78 m qui jaillissent de la paroi en forme de A : c\'est la source de la Sava.',
+          tip: '4 € d\'entrée plus 5 € de parking à partager. 500 marchés, 25 min de montée. 78 m qui jaillissent de la paroi en forme de A : c\'est la source de la Sava.',
           leg: { km: 12, min: 20, via: [[46.2800, 13.8600]] }
         },
         {
@@ -1107,55 +1111,55 @@ const TRIP = {
       base: 'Kobarid',
       start: '07:30',
       color: PALETTE[3],
-      brief: 'La journee du voyage. 50 lacets, une chapelle de bois, et la riviere la plus verte d\'Europe qui sort de la montagne.',
-      warn: 'Verifiez l\'ouverture du col sur promet.si le matin meme. Faites le plein a Kranjska Gora : il n\'y a plus rien pendant 60 km.',
+      brief: 'La journée du voyage. 50 lacets, une chapelle de bois, et la rivière la plus verte d\'Europe qui sort de la montagne.',
+      warn: 'Vérifiez l\'ouverture du col sur promet.si le matin même. Faites le plein à Kranjska Gora : il n\'y à plus rien pendant 60 km.',
       stops: [
         {
-          name: 'Bohinjska Bistrica', sub: 'Depart de la base', kind: 'depart',
+          name: 'Bohinjska Bistrica', sub: 'Départ de la base', kind: 'départ',
           lat: 46.2775, lon: 14.0064, stay: 0, cost: 0,
-          tip: 'Il faut redescendre par Bled et Jesenice pour rejoindre la vallee de la Sava. C\'est le plus long transfert de la semaine : partez a 7h30, le parking du sommet est plein a 9h30.',
+          tip: 'Il faut redescendre par Bled et Jesenice pour rejoindre la vallée de la Sava. C\'est le plus long transfert de la semaine : partez à 7h30, le parking du sommet est plein à 9h30.',
           leg: { km: 65, min: 75, via: [[46.3683, 14.1146], [46.4364, 14.0525], [46.4614, 13.9425], [46.4847, 13.7856]] }
         },
         {
-          name: 'Lac de Jasna', sub: 'Entree de Kranjska Gora', kind: 'lac',
+          name: 'Lac de Jasna', sub: 'Entrée de Kranjska Gora', kind: 'lac',
           lat: 46.4747, lon: 13.7856, stay: 30, cost: 0, free: true,
-          tip: 'Bleu irreel et la statue du bouquetin dore, le Zlatorog de la legende. Dernier plein d\'essence avant le col, juste a cote.',
+          tip: 'Bleu irréel et la statue du bouquetin dore, le Zlatorog de la légende. Dernier plein d\'essence avant le col, juste à côté.',
           leg: { km: 6, min: 18, via: [[46.4700, 13.7750], [46.4600, 13.7700]] }
         },
         {
           name: 'Chapelle russe', sub: 'Lacet n°8, 1100 m', kind: 'culture',
           lat: 46.4442, lon: 13.7639, stay: 25, cost: 0, free: true,
-          tip: 'Batie en 1916 par des prisonniers de guerre russes en memoire de leurs 300 camarades ensevelis par une avalanche pendant la construction de la route. L\'endroit le plus emouvant du col.',
+          tip: 'Bâtie en 1916 par des prisonniers de guerre russes en mémoire de leurs 300 camarades ensevelis par une avalanche pendant la construction de la route. L\'endroit le plus émouvant du col.',
           leg: { km: 5, min: 20, via: [[46.4390, 13.7520]] }
         },
         {
           name: 'Sommet du Vrsic', sub: '1611 m, le plus haut col du pays', kind: 'montagne',
           lat: 46.4328, lon: 13.7469, stay: 165, cost: 6,
-          tip: 'Parking ~3 €/h, plein a partir de 9h30. Si vous avez de l\'energie : Slemenova Spica, 2h30 aller-retour, 300 m de denivele, une prairie d\'altitude face au Jalovec. La plus belle balade facile des Alpes juliennes.',
+          tip: 'Parking ~3 €/h, plein à partir de 9h30. Si vous avez de l\'énergie : Slemenova Spica, 2h30 aller-retour, 300 m de dénivelé, une prairie d\'altitude face au Jalovec. La plus belle balade facile des Alpes juliennes.',
           leg: { km: 13, min: 32, via: [[46.4200, 13.7350], [46.4120, 13.7300]] }
         },
         {
-          name: 'Source de la Soca', sub: 'Izvir Soce, Trenta', kind: 'riviere',
+          name: 'Source de la Soca', sub: 'Izvir Soce, Trenta', kind: 'rivière',
           lat: 46.4067, lon: 13.7256, stay: 60, cost: 0, free: true,
-          tip: '15 min de marche, et les 50 derniers metres sur cables fixes dans la roche. Rangez le telephone, il faut les deux mains. L\'eau sort de la montagne dans une vasque emeraude.',
+          tip: '15 min de marché, et les 50 derniers mètres sur câbles fixes dans la roche. Rangez le téléphone, il faut les deux mains. L\'eau sort de la montagne dans une vasque émeraude.',
           leg: { km: 13, min: 20, via: [[46.3722, 13.7392], [46.3500, 13.6900]] }
         },
         {
-          name: 'Velika korita de la Soca', sub: 'Pont de Kraselnica', kind: 'riviere',
+          name: 'Velika korita de la Soca', sub: 'Pont de Kraselnica', kind: 'rivière',
           lat: 46.3339, lon: 13.6636, stay: 75, cost: 0, free: true,
           tip: '750 m de faille, 15 m de profondeur, parfois 2 m de large. Pont suspendu au-dessus. Ce vert n\'existe nulle part ailleurs : c\'est le moment photo du voyage. Baignade possible dans les vasques en aval, 11 °C.',
           leg: { km: 13, min: 18, via: [[46.3383, 13.5522]] }
         },
         {
-          name: 'Cascade de Boka', sub: '106 m, la plus haute de Slovenie', kind: 'cascade',
+          name: 'Cascade de Boka', sub: '106 m, la plus haute de Slovénie', kind: 'cascade',
           lat: 46.3131, lon: 13.5606, stay: 40, cost: 0, free: true,
-          tip: 'Le belvedere a 5 min du pont donne deja la cascade entiere. La montee au pied prend 1h et c\'est raide : en septembre le debit est faible, le belvedere suffit.',
+          tip: 'Le belvedere à 5 min du pont donne déjà la cascade entière. La montée au pied prend 1h et c\'est raide : en septembre le debit est faible, le belvedere suffit.',
           leg: { km: 12, min: 16, via: [[46.2800, 13.5700]] }
         },
         {
           name: 'Kobarid', sub: 'Base des deux nuits suivantes', kind: 'nuit',
           lat: 46.2472, lon: 13.5789, stay: 0, cost: 0,
-          tip: 'Petite ville gastronomique. Gouter les kobariski struklji, roules aux noix et cannelle. Hisa Polonka et Picerija Fedrig sont les bonnes adresses accessibles.'
+          tip: 'Petite ville gastronomique. Goûter les kobariski struklji, roules aux noix et cannelle. Hisa Polonka et Picerija Fedrig sont les bonnes adresses accessibles.'
         }
       ]
     },
@@ -1163,54 +1167,54 @@ const TRIP = {
     /* ---------------------------------------------------- J5 */
     {
       n: 5, date: '2026-09-11', wd: 'vendredi 11 septembre',
-      title: 'La vallee de la Soca a fond',
+      title: 'La vallée de la Soca à fond',
       base: 'Kobarid',
       start: '08:00',
       color: PALETTE[4],
-      brief: 'Peu de route, beaucoup d\'eau. La plus belle cascade du pays au reveil, un canyon l\'apres-midi, et un bain glace entre les deux.',
+      brief: 'Peu de route, beaucoup d\'eau. La plus belle cascade du pays au réveil, un canyon l\'apres-midi, et un bain glacé entre les deux.',
       stops: [
         {
-          name: 'Kobarid', sub: 'Depart de la base', kind: 'depart',
+          name: 'Kobarid', sub: 'Départ de la base', kind: 'départ',
           lat: 46.2472, lon: 13.5789, stay: 0, cost: 0,
-          tip: 'Tout est a moins de 16 km aujourd\'hui. Le seul horaire qui compte est celui de Kozjak : y etre a 8h.',
+          tip: 'Tout est à moins de 16 km aujourd\'hui. Le seul horaire qui compte est celui de Kozjak : y être à 8h.',
           leg: { km: 2, min: 5, via: [] }
         },
         {
-          name: 'Cascade de Kozjak', sub: 'Depart du camping Kamp Koren', kind: 'cascade',
+          name: 'Cascade de Kozjak', sub: 'Départ du camping Kamp Koren', kind: 'cascade',
           lat: 46.2528, lon: 13.5825, stay: 105, cost: 5,
-          tip: '30 min de marche facile. Elle tombe de 15 m dans une chambre de pierre presque fermee, ou la lumiere entre par le haut. Y etre a 8h fait toute la difference : apres 10h il y a la queue sur la passerelle finale, qui ne laisse passer qu\'une personne.',
+          tip: '30 min de marché facile. Elle tombe de 15 m dans une chambre de pierre presque fermée, où la lumière entre par le haut. Y être à 8h fait toute la difference : après 10h il y a la queue sur la passerelle finale, qui ne laisse passer qu\'une personne.',
           leg: { km: 1, min: 4, via: [] }
         },
         {
-          name: 'Pont Napoleon', sub: 'Sur la Soca turquoise', kind: 'riviere',
+          name: 'Pont Napoleon', sub: 'Sur la Soca turquoise', kind: 'rivière',
           lat: 46.2531, lon: 13.5847, stay: 25, cost: 0, free: true,
-          tip: 'Beaucoup de gens sautent depuis le pont. Ce n\'est pas balise et l\'eau est a 11 °C : a vous de voir.',
+          tip: 'Beaucoup de gens sautent depuis le pont. Ce n\'est pas balise et l\'eau est à 11 °C : à vous de voir.',
           leg: { km: 1, min: 4, via: [] }
         },
         {
-          name: 'Kobarid', sub: 'Musee, ossuaire, sentier historique', kind: 'culture',
+          name: 'Kobarid', sub: 'Musée, ossuaire, sentier historique', kind: 'culture',
           lat: 46.2464, lon: 13.5786, stay: 150, cost: 8,
-          tip: 'Le front de l\'Isonzo, douze batailles entre 1915 et 1917, 300 000 morts dans cette vallee. Le musee (8 €) a recu le prix du musee europeen. Le sentier historique, gratuit, fait 5 km par l\'ossuaire italien, les tranchees et Kozjak.',
+          tip: 'Le front de l\'Isonzo, douze batailles entre 1915 et 1917, 300 000 morts dans cette vallée. Le musée (8 €) à reçu le prix du musée européen. Le sentier historique, gratuit, fait 5 km par l\'ossuaire italien, les tranchees et Kozjak.',
           site: 'https://www.kobariski-muzej.si/',
           leg: { km: 16, min: 21, via: [[46.2200, 13.6300]] }
         },
         {
           name: 'Gorges de Tolmin', sub: 'Zatolmin, point le plus bas du parc', kind: 'gorge',
           lat: 46.1878, lon: 13.7311, stay: 105, cost: 8,
-          tip: 'La Tete d\'ours, un rocher coince entre les deux parois. Le pont du Diable a 60 m au-dessus de l\'eau. Et la seule source thermale du parc national. Plus sauvage que Vintgar.',
+          tip: 'La Tête d\'ours, un rocher coincé entre les deux parois. Le pont du Diable à 60 m au-dessus de l\'eau. Et la seule source thermale du parc national. Plus sauvage que Vintgar.',
           site: 'https://www.soca-valley.com/',
           leg: { km: 16, min: 21, via: [[46.2200, 13.6300]] }
         },
         {
-          name: 'Baignade dans la Soca', sub: 'Sous le pont Napoleon', kind: 'riviere',
+          name: 'Baignade dans la Soca', sub: 'Sous le pont Napoleon', kind: 'rivière',
           lat: 46.2531, lon: 13.5847, stay: 70, cost: 0, free: true,
-          tip: '11 a 13 °C. Un choc, puis une euphorie. Entrez progressivement, ne plongez jamais sans avoir verifie le fond, le courant est plus fort qu\'il n\'y parait.',
+          tip: '11 à 13 °C. Un choc, puis une euphorie. Entrez progressivement, ne plongez jamais sans avoir vérifié le fond, le courant est plus fort qu\'il n\'y parait.',
           leg: { km: 2, min: 5, via: [] }
         },
         {
           name: 'Kobarid', sub: 'Nuit 5, courses du week-end', kind: 'nuit',
           lat: 46.2472, lon: 13.5789, stay: 0, cost: 0,
-          tip: 'Faites les courses ce soir ou demain avant 17h. Dimanche, tous les supermarches slovenes sont fermes.'
+          tip: 'Faites les courses ce soir ou demain avant 17h. Dimanche, tous les supermarches slovènes sont fermés.'
         }
       ]
     },
@@ -1222,45 +1226,45 @@ const TRIP = {
       base: 'Ljubljana',
       start: '08:00',
       color: PALETTE[5],
-      brief: 'On quitte les Alpes pour le Karst, ce plateau calcaire qui a donne son nom au relief karstique dans le monde entier. Puis Ljubljana le soir.',
+      brief: 'On quitte les Alpes pour le Karst, ce plateau calcaire qui a donné son nom au relief karstique dans le monde entier. Puis Ljubljana le soir.',
       stops: [
         {
-          name: 'Kobarid', sub: 'Depart de la base', kind: 'depart',
+          name: 'Kobarid', sub: 'Départ de la base', kind: 'départ',
           lat: 46.2472, lon: 13.5789, stay: 0, cost: 0,
-          tip: 'La plus longue journee de route de la semaine. Faites le plein a Kobarid ou Tolmin avant de partir.',
+          tip: 'La plus longue journée de route de la semaine. Faites le plein à Kobarid ou Tolmin avant de partir.',
           leg: { km: 20, min: 25, via: [[46.1836, 13.7317]] }
         },
         {
-          name: 'Most na Soci', sub: 'Le lac emeraude du barrage', kind: 'riviere',
+          name: 'Most na Soci', sub: 'Le lac émeraude du barrage', kind: 'rivière',
           lat: 46.1450, lon: 13.7433, stay: 25, cost: 0, free: true,
-          tip: 'Arret photo au confluent de la Soca et de l\'Idrijca.',
+          tip: 'Arrêt photo au confluent de la Soca et de l\'Idrijca.',
           leg: { km: 42, min: 55, via: [[46.1000, 13.8500], [46.0300, 13.9500]] }
         },
         {
           name: 'Idrija', sub: 'Ville UNESCO du mercure', kind: 'ville',
           lat: 46.0022, lon: 14.0286, stay: 75, cost: 0, optional: true,
-          tip: 'Deuxieme mine de mercure du monde, exploitee de 1490 a 1995. Meme sans visiter la mine (12 €), arretez-vous manger des zlikrofi, les raviolis de pomme de terre en forme de petit chapeau, premier plat slovene protege par l\'UE. Comptez 8 a 10 € l\'assiette.',
+          tip: 'Deuxième mine de mercure du monde, exploitée de 1490 à 1995. Même sans visiter la mine (12 €), arretez-vous manger des zlikrofi, les raviolis de pomme de terre en forme de petit chapeau, premier plat slovène protégé par l\'UE. Comptez 8 à 10 € l\'assiette.',
           site: 'https://www.visit-idrija.si/en/',
           leg: { km: 88, min: 80, via: [[45.9000, 13.9000], [45.8000, 13.9200], [45.7200, 13.9600]] }
         },
         {
           name: 'Grottes de Skocjan', sub: 'Le plus grand canyon souterrain du monde', kind: 'grotte',
           lat: 45.6636, lon: 13.9903, stay: 180, cost: 24,
-          tip: 'Une salle de 146 m de haut, traversee sur une passerelle a 45 m au-dessus du torrent. Classe UNESCO. Il fait 12 °C : prenez un pull. Chaussures fermees, ca ruisselle. Photos interdites pendant la visite. Departs a l\'heure ronde de 10h a 17h. A la sortie, faites le sentier du canyon exterieur, gratuit, que presque personne ne fait.',
+          tip: 'Une salle de 146 m de haut, traversée sur une passerelle à 45 m au-dessus du torrent. Classe UNESCO. Il fait 12 °C : prenez un pull. Chaussures fermées, ça ruisselle. Photos interdites pendant la visite. Départs à l\'heure ronde de 10h à 17h. A la sortie, faites le sentier du canyon exterieur, gratuit, que presque personne ne fait.',
           site: 'https://www.park-skocjanske-jame.si/en/',
           booking: true,
           leg: { km: 30, min: 30, via: [[45.7200, 14.0500]] }
         },
         {
-          name: 'Chateau de Predjama', sub: 'Encastre dans 123 m de falaise', kind: 'culture',
+          name: 'Château de Predjama', sub: 'Encastre dans 123 m de falaise', kind: 'culture',
           lat: 45.8156, lon: 14.1272, stay: 40, cost: 0, free: true,
-          tip: 'Le plus grand chateau troglodyte du monde. La facade se voit entierement depuis la route et le parking : inutile de payer les 16,90 € d\'entree. Le brigand Erasme y a soutenu un siege d\'un an, ravitaille par un tunnel secret.',
+          tip: 'Le plus grand château troglodyte du monde. La façade se voit entièrement depuis la route et le parking : inutile de payer les 16,90 € d\'entrée. Le brigand Erasme y a soutenu un siege d\'un an, ravitaille par un tunnel secret.',
           leg: { km: 52, min: 45, via: [[45.8600, 14.2200], [45.9500, 14.3500]] }
         },
         {
           name: 'Ljubljana', sub: 'Les quais de la Ljubljanica', kind: 'ville',
           lat: 46.0514, lon: 14.5061, stay: 0, cost: 0,
-          tip: 'Garez-vous au P+R Dolgi most ou Stozice : 1,20 € la journee, ticket de bus compris. Le centre est entierement pietonnier. C\'est le soir que la ville est la meilleure, sur les terrasses au bord de l\'eau.'
+          tip: 'Garez-vous au P+R Dolgi most ou Stozice : 1,20 € la journée, ticket de bus compris. Le centre est entièrement piétonnier. C\'est le soir que la ville est la meilleure, sur les terrasses au bord de l\'eau.'
         }
       ]
     },
@@ -1272,37 +1276,37 @@ const TRIP = {
       base: 'Vol du soir',
       start: '09:00',
       color: PALETTE[6],
-      brief: 'Tout se fait a pied dans un carre de 800 m. Attention : dimanche, les magasins sont fermes, mais restaurants, cafes et musees sont ouverts.',
+      brief: 'Tout se fait à pied dans un carre de 800 m. Attention : dimanche, les magasins sont fermés, mais restaurants, cafes et musées sont ouverts.',
       stops: [
         {
-          name: 'Chateau de Ljubljana', sub: 'A pied, 15 min de montee', kind: 'culture',
+          name: 'Château de Ljubljana', sub: 'A pied, 15 min de montée', kind: 'culture',
           lat: 46.0489, lon: 14.5083, stay: 90, cost: 0, free: true,
-          tip: 'La cour, les remparts et la vue sont gratuits : seuls le musee et la tour sont payants. Le funiculaire a 4 € ne sert a rien, la montee est agreable.',
+          tip: 'La cour, les remparts et la vue sont gratuits : seuls le musée et la tour sont payants. Le funiculaire à 4 € ne sert à rien, la montée est agréable.',
           site: 'https://www.ljubljanskigrad.si/en/',
           leg: { km: 1, min: 12, via: [] }
         },
         {
-          name: 'Marche aux puces de Breg', sub: 'Uniquement le dimanche', kind: 'ville',
+          name: 'Marché aux puces de Breg', sub: 'Uniquement le dimanche', kind: 'ville',
           lat: 46.0497, lon: 14.5039, stay: 60, cost: 0, free: true,
-          tip: 'Le marche alimentaire est ferme le dimanche, mais les quais de Breg accueillent les antiquaires. Le bon endroit pour un souvenir qui ne soit pas un aimant de frigo.',
+          tip: 'Le marché alimentaire est fermé le dimanche, mais les quais de Breg accueillent les antiquaires. Le bon endroit pour un souvenir qui ne soit pas un aimant de frigo.',
           leg: { km: 1, min: 10, via: [] }
         },
         {
           name: 'Centre historique', sub: 'Place Preseren et les trois ponts', kind: 'ville',
           lat: 46.0514, lon: 14.5061, stay: 120, cost: 0, free: true,
-          tip: 'Le Triple Pont et le marche couvert de Plecnik, classes UNESCO. Le pont des Dragons. Les portes de bronze de la cathedrale, polies par des milliers de mains. Les ruelles de Stari trg et Gornji trg.',
+          tip: 'Le Triple Pont et le marché couvert de Plecnik, classes UNESCO. Le pont des Dragons. Les portes de bronze de la cathédrale, polies par des milliers de mains. Les ruelles de Stari trg et Gornji trg.',
           leg: { km: 2, min: 18, via: [] }
         },
         {
-          name: 'Parc Tivoli ou Metelkova', sub: 'Au choix : le calme ou les fresques', kind: 'ville',
+          name: 'Parc Tivoli ou Metelkova', sub: 'Au choix : le calme où les fresques', kind: 'ville',
           lat: 46.0556, lon: 14.4964, stay: 75, cost: 0, free: true,
-          tip: 'Tivoli : 5 km² de parc et l\'allee Jakopic bordee de photos geantes en plein air. Metelkova : l\'ancienne caserne de l\'armee yougoslave squattee par des artistes depuis 1993, couverte de fresques du sol au toit. C\'est l\'autre visage de la ville.',
+          tip: 'Tivoli : 5 km² de parc et l\'allée Jakopic bordée de photos geantes en plein air. Metelkova : l\'ancienne caserne de l\'armée yougoslave squattée par des artistes depuis 1993, couverte de fresques du sol au toit. C\'est l\'autre visage de la ville.',
           leg: { km: 26, min: 28, via: [[46.1000, 14.5000], [46.1700, 14.4800]] }
         },
         {
-          name: 'Aeroport de Ljubljana', sub: 'Restitution et vol retour', kind: 'transport',
+          name: 'Aéroport de Ljubljana', sub: 'Restitution et vol retour', kind: 'transport',
           lat: 46.2237, lon: 14.4576, stay: 0, cost: 0,
-          tip: 'Refaites le plein a Vodice ou Brnik juste avant. Comptez 30 min pour l\'etat des lieux, et refilmez la voiture. Arrivez 2h avant le vol.'
+          tip: 'Refaites le plein à Vodice ou Brnik juste avant. Comptez 30 min pour l\'état des lieux, et refilmez la voiture. Arrivez 2h avant le vol.'
         }
       ]
     }
@@ -1318,70 +1322,70 @@ const GUIDE = {
     { n: '112', l: 'Urgences, secours en montagne', tel: '112' },
     { n: '113', l: 'Police', tel: '113' },
     { n: '1987', l: 'Depannage routier AMZS', tel: '1987' },
-    { n: '1970', l: 'Info routiere DARS', tel: '1970' }
+    { n: '1970', l: 'Info routière DARS', tel: '1970' }
   ],
 
   conduite: [
-    { k: 'Vignette autoroute', v: 'Demandez au loueur si elle est incluse, puis verifiez la plaque sur evinjeta.dars.si. Sinon 16 € pour 7 jours. Amende de 300 a 800 €.' },
-    { k: 'Feux de croisement', v: 'Obligatoires jour et nuit, toute l\'annee.' },
+    { k: 'Vignette autoroute', v: 'Demandez au loueur si elle est incluse, puis vérifiez la plaque sur evinjeta.dars.si. Sinon 16 € pour 7 jours. Amende de 300 à 800 €.' },
+    { k: 'Feux de croisement', v: 'Obligatoires jour et nuit, toute l\'année.' },
     { k: 'Alcool', v: '0,5 g/L, et 0,0 g/L si moins de 21 ans ou moins de 3 ans de permis.' },
     { k: 'Vitesses', v: '50 en ville, 90 sur route, 110 sur voie rapide, 130 sur autoroute.' },
-    { k: 'Obligatoire dans la voiture', v: 'Gilet jaune et triangle. Verifiez qu\'ils sont dans le coffre a la prise en charge.' },
+    { k: 'Obligatoire dans la voiture', v: 'Gilet jaune et triangle. Vérifiez qu\'ils sont dans le coffre à la prise en chargé.' },
     { k: 'Carburant', v: 'SP95 environ 1,56 €/L, diesel 1,63 €/L. Reseau Petrol partout. Rien entre Kranjska Gora et Bovec.' },
-    { k: 'Lacets de montagne', v: 'La voiture qui monte a la priorite. En descente, passez en 2e et laissez le frein moteur travailler.' },
-    { k: 'Caution du loueur', v: '800 a 1500 € bloques sur une carte de credit au nom de la conductrice. C\'est le motif numero 1 de refus au comptoir.' }
+    { k: 'Lacets de montagne', v: 'La voiture qui monte à la priorité. En descente, passez en 2e et laissez le frein moteur travailler.' },
+    { k: 'Caution du loueur', v: '800 à 1500 € bloques sur une carte de credit au nom de la conductrice. C\'est le motif numéro 1 de refus au comptoir.' }
   ],
 
   randos: [
-    { nom: 'Ojstrica', lieu: 'Bled', duree: '45 min A/R', deniv: '130 m', diff: 'Raide, cordes sur la fin', prix: 'gratuit', note: 'Le point de vue le plus celebre du pays.' },
+    { nom: 'Ojstrica', lieu: 'Bled', duree: '45 min A/R', deniv: '130 m', diff: 'Raide, cordes sur la fin', prix: 'gratuit', note: 'Le point de vue le plus célèbre du pays.' },
     { nom: 'Gorges de Vintgar', lieu: 'Bled', duree: '1h30', deniv: 'nul', diff: 'Facile, glissant sous la pluie', prix: '15 €', note: 'Passerelles au-dessus de la Radovna.' },
-    { nom: 'Gorge de Mostnica', lieu: 'Bohinj', duree: '2h a 3h30', deniv: '150 m', diff: 'Facile', prix: '3 €', note: 'Jusqu\'a l\'Elephant, ou jusqu\'a la cascade de Voje.' },
-    { nom: 'Cascade de Savica', lieu: 'Bohinj', duree: '50 min A/R', deniv: '130 m', diff: '500 marches', prix: '9,50 €', note: 'La source de la Sava.' },
-    { nom: 'Vogar', lieu: 'Bohinj', duree: '3h30 A/R', deniv: '550 m', diff: 'Moyenne', prix: 'gratuit', note: 'L\'alternative gratuite a Vogel, meme vue plongeante.' },
-    { nom: 'Sija depuis Vogel', lieu: 'Bohinj', duree: '1h30 A/R', deniv: '350 m', diff: 'Facile a moyenne', prix: '33 € (telecabine)', note: '1880 m, face au Triglav.' },
+    { nom: 'Gorge de Mostnica', lieu: 'Bohinj', duree: '2h à 3h30', deniv: '150 m', diff: 'Facile', prix: '3 €', note: 'Jusqu\'a l\'Éléphant, ou jusqu\'a la cascade de Voje.' },
+    { nom: 'Cascade de Savica', lieu: 'Bohinj', duree: '50 min A/R', deniv: '130 m', diff: '500 marchés', prix: '9,50 €', note: 'La source de la Sava.' },
+    { nom: 'Vogar', lieu: 'Bohinj', duree: '3h30 A/R', deniv: '550 m', diff: 'Moyenne', prix: 'gratuit', note: 'L\'alternative gratuite à Vogel, même vue plongeante.' },
+    { nom: 'Sija depuis Vogel', lieu: 'Bohinj', duree: '1h30 A/R', deniv: '350 m', diff: 'Facile à moyenne', prix: '33 € (télécabine)', note: '1880 m, face au Triglav.' },
     { nom: 'Slemenova Spica', lieu: 'Vrsic', duree: '2h30 A/R', deniv: '300 m', diff: 'Moyenne, sans exposition', prix: 'gratuit', note: 'La plus belle balade facile des Alpes juliennes. Prairie d\'altitude face au Jalovec.' },
-    { nom: 'Source de la Soca', lieu: 'Trenta', duree: '40 min A/R', deniv: '100 m', diff: 'Cables sur la fin', prix: 'gratuit', note: 'Les deux mains libres sur les derniers metres.' },
+    { nom: 'Source de la Soca', lieu: 'Trenta', duree: '40 min A/R', deniv: '100 m', diff: 'Câbles sur la fin', prix: 'gratuit', note: 'Les deux mains libres sur les derniers mètres.' },
     { nom: 'Velika korita', lieu: 'Soca', duree: '1h', deniv: 'nul', diff: 'Facile', prix: 'gratuit', note: 'La faille de 15 m et le pont suspendu.' },
-    { nom: 'Cascade de Kozjak', lieu: 'Kobarid', duree: '1h A/R', deniv: '100 m', diff: 'Facile', prix: '5 €', note: 'La chambre de pierre. Y etre a 8h.' },
+    { nom: 'Cascade de Kozjak', lieu: 'Kobarid', duree: '1h A/R', deniv: '100 m', diff: 'Facile', prix: '5 €', note: 'La chambre de pierre. Y être à 8h.' },
     { nom: 'Sentier historique de Kobarid', lieu: 'Kobarid', duree: '3h boucle', deniv: '250 m', diff: 'Facile', prix: 'gratuit', note: 'Ossuaire, tranchees de 14-18 et Kozjak.' },
-    { nom: 'Gorges de Tolmin', lieu: 'Tolmin', duree: '1h30 boucle', deniv: '200 m', diff: 'Escaliers', prix: '8 €', note: 'Tete d\'ours, pont du Diable, source thermale.' },
-    { nom: 'Debela Pec', lieu: 'Pokljuka', duree: '4h A/R', deniv: '600 m', diff: 'Moyenne', prix: 'gratuit', note: '2014 m sans materiel, face nord du Triglav.' }
+    { nom: 'Gorges de Tolmin', lieu: 'Tolmin', duree: '1h30 boucle', deniv: '200 m', diff: 'Escaliers', prix: '8 €', note: 'Tête d\'ours, pont du Diable, source thermale.' },
+    { nom: 'Debela Pec', lieu: 'Pokljuka', duree: '4h A/R', deniv: '600 m', diff: 'Moyenne', prix: 'gratuit', note: '2014 m sans matériel, face nord du Triglav.' }
   ],
 
   hebergements: [
-    { base: 'Bohinjska Bistrica', nuits: '1, 2, 3', prix: '45 a 65 €', note: 'Le meilleur rapport qualite-prix. 10 min du lac, supermarche, parking souvent gratuit. Preferez un logement avec kitchenette : c\'est 10 a 15 € par jour et par personne d\'economises.' },
-    { base: 'Bled', nuits: 'alternative 1, 2, 3', prix: '60 a 110 €', note: 'Plus cher et plus touristique, mais on va au lac a pied le soir. Parking payant partout.' },
-    { base: 'Kobarid', nuits: '4, 5', prix: '40 a 60 €', note: 'Plus central que Bovec pour Kozjak et Tolmin, et plus agreable le soir. Kamp Koren est au depart exact du sentier de Kozjak.' },
-    { base: 'Ljubljana', nuits: '6', prix: '25 a 35 € en dortoir, 60 a 90 € en double', note: 'La nuit la plus chere de la semaine. Pour une seule nuit, une auberge du centre suffit. Verifiez le parking ou la proximite d\'un P+R.' }
+    { base: 'Bohinjska Bistrica', nuits: '1, 2, 3', prix: '45 à 65 €', note: 'Le meilleur rapport qualite-prix. 10 min du lac, supermarche, parking souvent gratuit. Préférez un logement avec kitchenette : c\'est 10 à 15 € par jour et par personne d\'economises.' },
+    { base: 'Bled', nuits: 'alternative 1, 2, 3', prix: '60 à 110 €', note: 'Plus cher et plus touristique, mais on va au lac à pied le soir. Parking payant partout.' },
+    { base: 'Kobarid', nuits: '4, 5', prix: '40 à 60 €', note: 'Plus central que Bovec pour Kozjak et Tolmin, et plus agréable le soir. Kamp Koren est au départ exact du sentier de Kozjak.' },
+    { base: 'Ljubljana', nuits: '6', prix: '25 à 35 € en dortoir, 60 à 90 € en double', note: 'La nuit la plus chère de la semaine. Pour une seule nuit, une auberge du centre suffit. Vérifiez le parking où la proximité d\'un P+R.' }
   ],
 
   manger: [
-    { p: 'Burek', d: 'Chausson feuillete a la viande ou au fromage. Un burek vaut un repas.', prix: '3 a 4 €' },
-    { p: 'Kranjska klobasa', d: 'La saucisse de Carniole, AOP, avec moutarde et raifort. Le plat national.', prix: '6 a 9 €' },
-    { p: 'Dnevno kosilo', d: 'Le plat du jour du midi en semaine, souvent soupe et plat. La meilleure affaire du pays.', prix: '8 a 12 €' },
-    { p: 'Kremsnita', d: 'Le millefeuille creme-vanille de Bled, invente au Park Hotel en 1953.', prix: '6 a 7 €' },
-    { p: 'Kobariski struklji', d: 'Petits roules aux noix, cannelle et raisins, avec chapelure beurree. A Kobarid.', prix: '5 a 7 €' },
-    { p: 'Zlikrofi', d: 'Raviolis d\'Idrija en forme de petit chapeau, pomme de terre et lard.', prix: '8 a 10 €' },
-    { p: 'Jota', d: 'Soupe epaisse de choucroute, haricots et lard.', prix: '5 a 8 €' },
-    { p: 'Bezgov sok', d: 'Sirop de fleur de sureau. La boisson nationale non alcoolisee.', prix: '2 a 3 €' },
-    { p: 'Lasko et Union', d: 'Les deux bieres nationales, rivalite historique.', prix: '3 a 4 € la pression' },
-    { p: 'Teran', d: 'Le rouge tres sombre du Karst, acide, cultive sur la terre rouge.', prix: '3 a 5 € le verre' }
+    { p: 'Burek', d: 'Chausson feuillete à la viande ou au fromage. Un burek vaut un repas.', prix: '3 à 4 €' },
+    { p: 'Kranjska klobasa', d: 'La saucisse de Carniole, AOP, avec moutarde et raifort. Le plat national.', prix: '6 à 9 €' },
+    { p: 'Dnevno kosilo', d: 'Le plat du jour du midi en semaine, souvent soupe et plat. La meilleure affaire du pays.', prix: '8 à 12 €' },
+    { p: 'Kremsnita', d: 'Le millefeuille creme-vanille de Bled, inventé au Park Hôtel en 1953.', prix: '6 à 7 €' },
+    { p: 'Kobariski struklji', d: 'Petits roules aux noix, cannelle et raisins, avec chapelure beurrée. A Kobarid.', prix: '5 à 7 €' },
+    { p: 'Zlikrofi', d: 'Raviolis d\'Idrija en forme de petit chapeau, pomme de terre et lard.', prix: '8 à 10 €' },
+    { p: 'Jota', d: 'Soupe épaisse de choucroute, haricots et lard.', prix: '5 à 8 €' },
+    { p: 'Bezgov sok', d: 'Sirop de fleur de sureau. La boisson nationale non alcoolisée.', prix: '2 à 3 €' },
+    { p: 'Lasko et Union', d: 'Les deux bières nationales, rivalite historique.', prix: '3 à 4 € la pression' },
+    { p: 'Teran', d: 'Le rouge très sombre du Karst, acide, cultive sur la terre rouge.', prix: '3 à 5 € le verre' }
   ],
 
   meteo: [
     { z: 'Ljubljana, Bled', j: '21 °C', n: '11 °C', e: '20-22 °C' },
     { z: 'Alpes, Vrsic, Bohinj', j: '17-19 °C', n: '8-10 °C', e: '18-20 °C' },
-    { z: 'Karst, cote', j: '23-25 °C', n: '14-16 °C', e: '23 °C' },
+    { z: 'Karst, côté', j: '23-25 °C', n: '14-16 °C', e: '23 °C' },
     { z: 'La Soca', j: '-', n: '-', e: '10-13 °C' }
   ],
 
   pluie: [
-    { v: 'Brouillard en fond de vallee, bleu au-dessus', f: 'Ne changez rien. Ca se leve entre 9h et 11h, et c\'est le plus beau moment sur les lacs.' },
-    { v: 'Nuages accroches aux sommets', f: 'Abandonnez l\'altitude. Gorges, cascades, fonds de vallee. Surtout, ne payez pas Vogel.' },
-    { v: 'Pluie fine continue', f: 'Les gorges sont meilleures sous la pluie : plus de debit, moins de monde. Attention, ca glisse.' },
-    { v: 'Pluie forte et vent', f: 'Skocjan, le musee de Kobarid, Idrija, Radovljica, les musees de Ljubljana, le Vodni park de Bohinjska Bistrica.' },
-    { v: 'Orage annonce l\'apres-midi', f: 'Rando le matin, redescendues a 15h. Sans discussion.' },
-    { v: 'Col du Vrsic ferme', f: 'Le train-navette de Bohinjska Bistrica passe le tunnel avec la voiture a bord jusqu\'a Most na Soci. Sinon, par Idrija, 2h15.' }
+    { v: 'Brouillard en fond de vallée, bleu au-dessus', f: 'Ne changez rien. Ça se leve entre 9h et 11h, et c\'est le plus beau moment sur les lacs.' },
+    { v: 'Nuages accrochés aux sommets', f: 'Abandonnez l\'altitude. Gorges, cascades, fonds de vallée. Surtout, ne payez pas Vogel.' },
+    { v: 'Pluie fine continue', f: 'Les gorges sont meilleures sous la pluie : plus de debit, moins de monde. Attention, ça glisse.' },
+    { v: 'Pluie forte et vent', f: 'Skocjan, le musée de Kobarid, Idrija, Radovljica, les musées de Ljubljana, le Vodni park de Bohinjska Bistrica.' },
+    { v: 'Orage annonce l\'apres-midi', f: 'Rando le matin, redescendues à 15h. Sans discussion.' },
+    { v: 'Col du Vrsic fermé', f: 'Le train-navette de Bohinjska Bistrica passe le tunnel avec la voiture à bord jusqu\'a Most na Soci. Sinon, par Idrija, 2h15.' }
   ],
 
   mots: [
@@ -1391,10 +1395,10 @@ const GUIDE = {
     ['Oprostite', 'oprostité', 'Excusez-moi'],
     ['Nasvidenje', 'nasvidenié', 'Au revoir'],
     ['Govorite anglesko?', 'govorité angléchko', 'Parlez-vous anglais ?'],
-    ['Koliko stane?', 'koliko stané', 'Combien ca coute ?'],
+    ['Koliko stane?', 'koliko stané', 'Combien ça coûte ?'],
     ['Racun, prosim', 'ratchoun prossim', 'L\'addition'],
     ['Brez mesa, prosim', 'brez messa', 'Sans viande'],
-    ['Na zdravje!', 'na zdravié', 'Sante, en se regardant dans les yeux'],
+    ['Na zdravje!', 'na zdravié', 'Santé, en se regardant dans les yeux'],
     ['Slap', '', 'Cascade'],
     ['Korita, soteska', '', 'Gorges'],
     ['Jama', '', 'Grotte'],
@@ -1402,8 +1406,8 @@ const GUIDE = {
     ['Izvir', '', 'Source'],
     ['Koca, dom', '', 'Refuge de montagne'],
     ['Planina', '', 'Alpage'],
-    ['Vstopnina', '', 'Droit d\'entree'],
-    ['Odprto, zaprto', '', 'Ouvert, ferme'],
+    ['Vstopnina', '', 'Droit d\'entrée'],
+    ['Odprto, zaprto', '', 'Ouvert, fermé'],
     ['Pitna voda', '', 'Eau potable'],
     ['Pozor', '', 'Attention'],
     ['Prepovedano', '', 'Interdit'],
@@ -1421,51 +1425,51 @@ const GUIDE = {
 };
 
 /* ============================================================
-   Valise et preparatifs
+   Valise et préparatifs
    ============================================================ */
 
 const PACK = [
   {
     titre: 'A faire avant de partir', items: [
-      ['a1', 'Reserver la voiture : le poste qui double si on attend'],
-      ['a2', 'Reserver le creneau de Vintgar sur vintgar.si, premier creneau du matin'],
-      ['a3', 'Commander la CEAM sur ameli, une chacune, 15 jours de delai'],
-      ['a4', 'Verifier que la carte bancaire couvre la franchise de location'],
-      ['a5', 'Telecharger les cartes hors ligne de la Slovenie'],
-      ['a6', 'Installer ARSO Vreme pour la meteo de montagne']
+      ['a1', 'Réserver la voiture : le poste qui double si on attend'],
+      ['a2', 'Réserver le créneau de Vintgar sur vintgar.si, premier créneau du matin'],
+      ['a3', 'Commander la CEAM sur ameli, une chacune, 15 jours de délai'],
+      ['a4', 'Vérifier que la carte bancaire couvre la franchise de location'],
+      ['a5', 'Télécharger les cartes hors ligne de la Slovénie'],
+      ['a6', 'Installer ARSO Vreme pour la météo de montagne']
     ]
   },
   {
     titre: 'Indispensable', items: [
-      ['p1', 'Chaussures de randonnee ou bonnes baskets de trail'],
-      ['p2', 'Veste impermeable avec capuche'],
+      ['p1', 'Chaussures de randonnée ou bonnes baskets de trail'],
+      ['p2', 'Veste imperméable avec capuche'],
       ['p3', 'Polaire ou doudoune fine : grottes, matins, altitude'],
-      ['p4', 'Sandales de riviere ou vieilles baskets pour la Soca'],
+      ['p4', 'Sandales de rivière ou vieilles baskets pour la Soca'],
       ['p5', 'Maillot de bain et serviette microfibre'],
-      ['p6', 'Sac a dos 20-25 L et deux gourdes'],
-      ['p7', 'Batterie externe et cables'],
-      ['p8', 'Creme solaire, lunettes, casquette'],
+      ['p6', 'Sac à dos 20-25 L et deux gourdes'],
+      ['p7', 'Batterie externe et câbles'],
+      ['p8', 'Crème solaire, lunettes, casquette'],
       ['p9', 'Pansements anti-ampoules, paracetamol, anti-nauseeux pour les 50 lacets'],
-      ['p10', 'Bonnet leger ou buff : 6 °C possibles au Vrsic le matin'],
+      ['p10', 'Bonnet léger ou buff : 6 °C possibles au Vrsic le matin'],
       ['p11', 'Couteau pliant et petite planche pour les pique-niques, en soute'],
       ['p12', 'Tote bag pliable : les sacs sont payants en supermarche']
     ]
   },
   {
     titre: 'Papiers', items: [
-      ['d1', 'Carte d\'identite ou passeport'],
+      ['d1', 'Carte d\'identité ou passeport'],
       ['d2', 'Permis de conduire'],
       ['d3', 'Carte de credit au nom de la conductrice, pour la caution'],
       ['d4', 'CEAM, une chacune'],
-      ['d5', 'Voucher de location, billets, reservation Vintgar en PDF'],
-      ['d6', '50 a 80 € en especes']
+      ['d5', 'Voucher de location, billets, réservation Vintgar en PDF'],
+      ['d6', '50 à 80 € en especes']
     ]
   },
   {
     titre: 'Inutile d\'emporter', items: [
-      ['n1', 'Adaptateur de prise : les prises sont les memes qu\'en France'],
+      ['n1', 'Adaptateur de prise : les prises sont les mêmes qu\'en France'],
       ['n2', 'Devises : c\'est l\'euro'],
-      ['n3', 'Grande valise rigide : penible dans une petite voiture']
+      ['n3', 'Grande valise rigide : pénible dans une petite voiture']
     ]
   }
 ];
@@ -1479,25 +1483,25 @@ const BUDGET = {
   fixe: [
     ['Essence, 700 km', 35],
     ['Vignette 7 jours', 8],
-    ['Parkings hors etapes', 10],
-    ['Taxe de sejour', 15],
-    ['Imprevu', 30]
+    ['Parkings hors étapes', 10],
+    ['Taxe de séjour', 15],
+    ['Imprévu', 30]
   ],
   extras: [
-    ['x-vogel', 'Telecabine de Vogel', 33],
+    ['x-vogel', 'Télécabine de Vogel', 33],
     ['x-raft', 'Rafting sur la Soca', 70],
-    ['x-grad', 'Chateau de Bled', 19],
+    ['x-grad', 'Château de Bled', 19],
     ['x-pletna', 'Barque pletna', 20],
     ['x-mine', 'Mine d\'Idrija', 12],
-    ['x-predjama', 'Predjama interieur', 17],
+    ['x-predjama', 'Predjama intérieur', 17],
     ['x-postojna', 'Grotte de Postojna', 31]
   ],
   ecartes: [
-    ['Telecabine de Vogel', '33 €', 'La rando du Vogar donne la meme vue pour 0 €'],
-    ['Chateau de Bled', '19 €', 'La vue sur le chateau vaut mieux que la vue depuis'],
-    ['Barque pletna', '20 €', 'Une barque a rames a deux revient a 12,50 € chacune'],
+    ['Télécabine de Vogel', '33 €', 'La rando du Vogar donne la même vue pour 0 €'],
+    ['Château de Bled', '19 €', 'La vue sur le château vaut mieux que la vue depuis'],
+    ['Barque pletna', '20 €', 'Une barque à rames à deux revient à 12,50 € chacune'],
     ['Grotte de Postojna', '30,90 €', 'Skocjan est moins cher, plus rare et plus fort'],
-    ['Predjama interieur', '16,90 €', 'La facade se voit entierement du parking']
+    ['Predjama intérieur', '16,90 €', 'La façade se voit entièrement du parking']
   ],
   reference: [
     ['Vignette 7 jours', '16 €'],
@@ -1505,11 +1509,11 @@ const BUDGET = {
     ['Parking Savica', '5 € les 3h'],
     ['Parking sommet du Vrsic', '3 €/h'],
     ['Parking Skocjan', 'gratuit'],
-    ['P+R Ljubljana, bus compris', '1,20 € la journee'],
-    ['Taxe de sejour, Ljubljana', '3,91 € par nuit'],
-    ['Taxe de sejour, Bled', '3,13 € par nuit'],
-    ['Biere pression 0,5 L', '3 a 4 €'],
-    ['Plat du jour, midi en semaine', '8 a 12 €']
+    ['P+R Ljubljana, bus compris', '1,20 € la journée'],
+    ['Taxe de séjour, Ljubljana', '3,91 € par nuit'],
+    ['Taxe de séjour, Bled', '3,13 € par nuit'],
+    ['Bière pression 0,5 L', '3 à 4 €'],
+    ['Plat du jour, midi en semaine', '8 à 12 €']
   ]
 };
 
@@ -1536,25 +1540,25 @@ window.ROUTES = {};
 </script>
 <script>
 /* =============================================================
-   Traces routiers reels.
+   Tracés routiers réels.
 
-   Le trace entre deux etapes suit les vraies routes, pas une ligne
-   droite. La geometrie vient d'OSRM, le moteur de calcul d'itineraire
-   d'OpenStreetMap, interroge par le navigateur.
+   Le tracé entre deux étapes suit les vraies routes, pas une ligne
+   droite. La géométrie vient d'OSRM, le moteur de calcul d'itinéraire
+   d'OpenStreetMap, interrogé par le navigateur.
 
-   Comment ca marche :
-   1. assets/routes.js peut contenir des traces deja figes. S'ils y
+   Comment ça marché :
+   1. assets/routes.js peut contenir des tracés déjà figés. S'ils y
       sont, rien n'est demande au reseau, l'application est autonome.
-   2. Sinon, chaque tronçon est demande une fois, simplifie, puis
-      garde dans le stockage local du telephone. Les fois suivantes,
-      c'est instantane et ca marche sans reseau.
-   3. Si le reseau ne repond pas, on retombe sur la ligne reperee par
-      les points de passage saisis a la main : moins fidele, mais
-      lisible, et signalee en pointille dans l'application.
+   2. Sinon, chaque tronçon est demande une fois, simplifié, puis
+      garde dans le stockage local du téléphone. Les fois suivantes,
+      c'est instantané et ça marché sans reseau.
+   3. Si le reseau ne répond pas, on retombe sur la ligne repérée par
+      les points de passage saisis à la main : moins fidèle, mais
+      lisible, et signalée en pointille dans l'application.
 
-   Pour figer les traces dans le depot : onglet Carte, bouton
-   "Exporter les traces", puis remplacer assets/routes.js par le
-   fichier telecharge.
+   Pour figer les tracés dans le dépôt : onglet Carte, bouton
+   "Exporter les tracés", puis remplacer assets/routes.js par le
+   fichier téléchargé.
    ============================================================= */
 
 (function (global) {
@@ -1568,15 +1572,15 @@ window.ROUTES = {};
   var mem = {};
   var pending = false;
 
-  // 1. traces figes livres avec le depot
+  // 1. tracés figés livres avec le dépôt
   if (global.ROUTES) {
     Object.keys(global.ROUTES).forEach(function (k) { mem[k] = global.ROUTES[k]; });
   }
-  // 2. traces deja recuperes sur cet appareil
+  // 2. tracés déjà recuperes sur cet appareil
   try {
     var stored = JSON.parse(localStorage.getItem(CACHE_KEY) || '{}');
     Object.keys(stored).forEach(function (k) { if (!mem[k]) { mem[k] = stored[k]; } });
-  } catch (e) { /* mode prive, navigation restreinte : tant pis */ }
+  } catch (e) { /* mode privé, navigation restreinte : tant pis */ }
 
   function key(a, b) {
     return a.lat.toFixed(4) + ',' + a.lon.toFixed(4) + '>' + b.lat.toFixed(4) + ',' + b.lon.toFixed(4);
@@ -1589,7 +1593,7 @@ window.ROUTES = {};
         if (!global.ROUTES || !global.ROUTES[k]) { out[k] = mem[k]; }
       });
       localStorage.setItem(CACHE_KEY, JSON.stringify(out));
-    } catch (e) { /* quota plein : le trace reste en memoire pour la session */ }
+    } catch (e) { /* quota plein : le tracé reste en mémoire pour la session */ }
   }
 
   /* --- Ramer-Douglas-Peucker, pour ne pas stocker 2000 points par tronçon --- */
@@ -1640,27 +1644,27 @@ window.ROUTES = {};
         pts = simplify(pts, EPS).map(function (p) {
           return [Math.round(p[0] * 1e5) / 1e5, Math.round(p[1] * 1e5) / 1e5];
         });
-        if (pts.length < 2) { throw new Error('trace vide'); }
+        if (pts.length < 2) { throw new Error('tracé vide'); }
         mem[key(a, b)] = pts;
         return pts;
       });
   }
 
   var Router = {
-    /** Trace reel entre deux etapes, ou null s'il n'est pas encore connu. */
+    /** Tracé réel entre deux étapes, ou null s'il n'est pas encore connu. */
     get: function (a, b) { return mem[key(a, b)] || null; },
 
     has: function (a, b) { return !!mem[key(a, b)]; },
 
-    /** Nombre de troncons encore a recuperer dans la liste donnee. */
+    /** Nombre de tronçons encore à récupérer dans la liste donnée. */
     missing: function (pairs) {
       return pairs.filter(function (p) { return !mem[key(p[0], p[1])]; }).length;
     },
 
     /**
-     * Recupere les troncons manquants, un par un.
-     * onStep(fait, total) est appele apres chaque tronçon obtenu,
-     * pour redessiner la carte au fur et a mesure.
+     * Récupéré les tronçons manquants, un par un.
+     * onStep(fait, total) est appelé après chaque tronçon obtenu,
+     * pour redessiner la carte au fur et à mesure.
      */
     ensure: function (pairs, onStep) {
       if (pending || !global.fetch) { return; }
@@ -1686,20 +1690,20 @@ window.ROUTES = {};
       next();
     },
 
-    /** Contenu de assets/routes.js, pour figer les traces dans le depot. */
+    /** Contenu de assets/routes.js, pour figer les tracés dans le dépôt. */
     exportFile: function () {
       var keys = Object.keys(mem).sort();
       var lines = keys.map(function (k) {
         return '  ' + JSON.stringify(k) + ': ' + JSON.stringify(mem[k]) + ',';
       });
       return '/* =============================================================\n' +
-        '   Traces routiers figes, generes depuis l\'application.\n' +
-        '   ' + keys.length + ' troncons. Geometrie OSRM, donnees OpenStreetMap (ODbL).\n' +
+        '   Tracés routiers figés, generes depuis l\'application.\n' +
+        '   ' + keys.length + ' tronçons. Géométrie OSRM, données OpenStreetMap (ODbL).\n' +
         '\n' +
         '   Tant que ce fichier est rempli, l\'application n\'a plus besoin\n' +
-        '   du reseau pour dessiner les itineraires.\n' +
+        '   du reseau pour dessiner les itinéraires.\n' +
         '\n' +
-        '   Pour le regenerer : onglet Carte, bouton Exporter les traces.\n' +
+        '   Pour le regenerer : onglet Carte, bouton Exporter les tracés.\n' +
         '   ============================================================= */\n\n' +
         'window.ROUTES = {\n' + lines.join('\n') + '\n};\n';
     },
@@ -1713,16 +1717,16 @@ window.ROUTES = {};
 </script>
 <script>
 /* =============================================================
-   Moteur de carte minimal, sans aucune dependance.
+   Moteur de carte minimal, sans aucune dépendance.
 
    Tuiles raster en projection Web Mercator, overlay SVG pour le
-   trace et les marqueurs numerotes. Gestes tactiles : glisser,
+   tracé et les marqueurs numérotés. Gestes tactiles : glisser,
    pincer, double tap. Molette au bureau.
 
    Quatre fonds : Plan (OpenStreetMap), Relief (OpenTopoMap),
    Satellite (Esri) et Fond uni. Le fond uni n'est pas une panne,
-   c'est un choix : le trace y est plus lisible, et c'est ce qui
-   reste quand il n'y a pas de reseau dans une vallee.
+   c'est un choix : le tracé y est plus lisible, et c'est ce qui
+   reste quand il n'y a pas de reseau dans une vallée.
    ============================================================= */
 
 (function (global) {
@@ -1740,7 +1744,7 @@ window.ROUTES = {};
     {
       key: 'relief', name: 'Relief',
       url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
-      sub: ['a', 'b', 'c'], max: 16,
+      sub: ['à', 'b', 'c'], max: 16,
       credit: 'OpenTopoMap, CC-BY-SA', creditUrl: 'https://opentopomap.org/'
     },
     {
@@ -1824,7 +1828,7 @@ window.ROUTES = {};
     this.svg.appendChild(this.gRoutes);
     this.svg.appendChild(this.gMarks);
 
-    this.attrib = document.createElement('a');
+    this.attrib = document.createElement('à');
     this.attrib.className = 'mm-attrib';
     this.attrib.target = '_blank';
     this.attrib.rel = 'noopener';
@@ -1835,9 +1839,9 @@ window.ROUTES = {};
     this.ctrl.innerHTML =
       '<button type="button" data-mm="in" aria-label="Zoomer">+</button>' +
       '<button type="button" data-mm="out" aria-label="Dezoomer">-</button>' +
-      '<button type="button" data-mm="fit" aria-label="Recadrer sur le trace">' + ICON.fit + '</button>' +
+      '<button type="button" data-mm="fit" aria-label="Recadrer sur le tracé">' + ICON.fit + '</button>' +
       '<button type="button" data-mm="layer" aria-label="Changer de fond de carte" aria-expanded="false">' + ICON.layer + '</button>' +
-      (this.onFull ? '<button type="button" data-mm="full" aria-label="Carte en plein ecran">' + ICON.full + '</button>' : '');
+      (this.onFull ? '<button type="button" data-mm="full" aria-label="Carte en plein écran">' + ICON.full + '</button>' : '');
     this.box.appendChild(this.ctrl);
 
     this.menu = document.createElement('div');
@@ -1893,7 +1897,7 @@ window.ROUTES = {};
     return u;
   };
 
-  /* ---------- geometrie ---------- */
+  /* ---------- géométrie ---------- */
 
   MiniMap.prototype._size = function () {
     var r = this.box.getBoundingClientRect();
@@ -2210,12 +2214,13 @@ window.ROUTES = {};
   MiniMap.prototype.styles = function () { return STYLES; };
 
   global.MiniMap = MiniMap;
+  global.MAP_STYLES = STYLES;
 })(window);
 
 </script>
 <script>
 /* =============================================================
-   Slovenie 2026 - logique de l'application
+   Slovénie 2026 - logique de l'application
    ============================================================= */
 
 (function (global) {
@@ -2261,7 +2266,7 @@ window.ROUTES = {};
   try { db = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { db = {}; }
   function save() { try { localStorage.setItem(KEY, JSON.stringify(db)); } catch (e) {} }
 
-  /* ---------- couleur de la barre systeme iOS ---------- */
+  /* ---------- couleur de la barre système iOS ---------- */
 
   function paintThemeColor() {
     var c = getComputedStyle(document.documentElement).getPropertyValue('--theme-color').trim();
@@ -2281,13 +2286,13 @@ window.ROUTES = {};
 
   function gmaps(stop) {
     return 'https://www.google.com/maps/search/?api=1&query=' +
-      encodeURIComponent(stop.name + ', Slovenie');
+      encodeURIComponent(stop.name + ', Slovénie');
   }
   function waze(stop) {
     return 'https://www.waze.com/ul?ll=' + stop.lat + '%2C' + stop.lon + '&navigate=yes&zoom=15';
   }
   function tripadvisor(stop) {
-    return 'https://www.tripadvisor.fr/Search?q=' + encodeURIComponent(stop.name + ' Slovenie');
+    return 'https://www.tripadvisor.fr/Search?q=' + encodeURIComponent(stop.name + ' Slovénie');
   }
   function itineraire(a, b) {
     return 'https://www.google.com/maps/dir/?api=1&origin=' + a.lat + ',' + a.lon +
@@ -2314,7 +2319,7 @@ window.ROUTES = {};
     return out;
   }
 
-  /* ---------- etat du voyage ---------- */
+  /* ---------- état du voyage ---------- */
 
   var START = new Date(2026, 8, 7);
   var todayIdx = -1;
@@ -2324,11 +2329,11 @@ window.ROUTES = {};
     var off = Math.round((t - START) / 86400000);
     var el = $('#now');
     if (off < 0) { el.textContent = 'J-' + Math.abs(off); }
-    else if (off > 6) { el.textContent = 'termine'; }
+    else if (off > 6) { el.textContent = 'terminé'; }
     else { todayIdx = off; el.textContent = 'Jour ' + (off + 1) + ' . ' + TRIP.days[off].wd.split(' ')[0]; }
   })();
 
-  /* ---------- calcul d'une journee ---------- */
+  /* ---------- calcul d'une journée ---------- */
 
   function variantOf(day) {
     if (!day.choice) { return null; }
@@ -2341,8 +2346,8 @@ window.ROUTES = {};
     var v = variantOf(day);
     var seq = day.stops.filter(function (s) { return !s.variant || s.variant === v; });
 
-    // Une etape retiree ne casse pas la chaine : ses deux troncons sont
-    // fusionnes, et le trajet resultant est signale comme approximatif.
+    // Une étape retirée ne casse pas la chaîne : ses deux tronçons sont
+    // fusionnés, et le trajet résultant est signalé comme approximatif.
     var items = [], pend = null;
     seq.forEach(function (s, idx) {
       var skipped = !!(s.optional && isOptOff(day, s.name));
@@ -2387,8 +2392,8 @@ window.ROUTES = {};
     };
   }
 
-  // Un objet trace par troncon : la vraie geometrie routiere si elle est
-  // connue, sinon la ligne reperee par les points de passage, signalee
+  // Un objet tracé par tronçon : la vraie géométrie routière si elle est
+  // connue, sinon la ligne repérée par les points de passage, signalée
   // en pointille pour que la difference se voie.
   function routesOf(day, dim) {
     var out = [];
@@ -2455,7 +2460,7 @@ window.ROUTES = {};
     majEtatTrace();
   }
 
-  /* ---------- recuperation des traces routiers ---------- */
+  /* ---------- récupération des tracés routiers ---------- */
 
   function toutesLesPaires() {
     var out = [];
@@ -2470,19 +2475,19 @@ window.ROUTES = {};
     if (!global.Router) { el.textContent = ''; return; }
     var reste = Router.missing(legPairs(TRIP.days[curDay]));
     el.textContent = reste
-      ? reste + ' troncon' + (reste > 1 ? 's' : '') + ' approximatif' + (reste > 1 ? 's' : '')
-      : 'Itineraire routier reel';
+      ? reste + ' tronçon' + (reste > 1 ? 's' : '') + ' approximatif' + (reste > 1 ? 's' : '')
+      : 'Itinéraire routier réel';
   }
 
   function chercherTraces(pairs, repeindre) {
     if (!global.Router) { return; }
     var reste = Router.missing(pairs);
     if (!reste) { majEtatTrace(); return; }
-    majEtatTrace('Calcul des itineraires, 0/' + reste);
+    majEtatTrace('Calcul des itinéraires, 0/' + reste);
     Router.ensure(pairs, function (fait, total, fini) {
       if (fini) { repeindre(true); majEtatTrace(); }
       else {
-        majEtatTrace('Calcul des itineraires, ' + fait + '/' + total);
+        majEtatTrace('Calcul des itinéraires, ' + fait + '/' + total);
         repeindre(true);
       }
     });
@@ -2512,7 +2517,7 @@ window.ROUTES = {};
     });
   }
 
-  /* ---------- rendu d'une journee ---------- */
+  /* ---------- rendu d'une journée ---------- */
 
   function renderDay() {
     var day = TRIP.days[curDay];
@@ -2530,13 +2535,13 @@ window.ROUTES = {};
       '<div><b>' + b.km + '</b><span>km</span></div>' +
       '<div><b>' + hm(b.drive) + '</b><span>conduite</span></div>' +
       '<div><b>' + hm(b.onsite) + '</b><span>sur place</span></div>' +
-      '<div><b>' + eur(b.cost) + '</b><span>depense</span></div>' +
+      '<div><b>' + eur(b.cost) + '</b><span>dépense</span></div>' +
       '</div>';
 
-    out += '<div class="startrow"><span class="lab">Depart de la journee<br><small style="color:var(--ink-faint)">Fin estimee ' +
+    out += '<div class="startrow"><span class="lab">Départ de la journée<br><small style="color:var(--ink-faint)">Fin estimée ' +
       clock(b.end) + ' . base ' + esc(day.base) + '</small></span>' +
       '<span class="stepper">' +
-      '<button type="button" data-start="-15" aria-label="Partir 15 minutes plus tot">-</button>' +
+      '<button type="button" data-start="-15" aria-label="Partir 15 minutes plus tôt">-</button>' +
       '<output>' + clock(startOf(day)) + '</output>' +
       '<button type="button" data-start="15" aria-label="Partir 15 minutes plus tard">+</button>' +
       '</span></div>';
@@ -2572,7 +2577,7 @@ window.ROUTES = {};
       out += '<div class="badges"><span class="badge kind">' + esc(s.kind) + '</span>';
       if (s.free) { out += '<span class="badge">gratuit</span>'; }
       else if (s.cost) { out += '<span class="badge pay">' + eur(s.cost) + '</span>'; }
-      if (s.booking) { out += '<span class="badge book">a reserver</span>'; }
+      if (s.booking) { out += '<span class="badge book">à réserver</span>'; }
       if (s.optional) { out += '<span class="badge">optionnel</span>'; }
       out += '</div>';
 
@@ -2581,7 +2586,7 @@ window.ROUTES = {};
       out += linkRow(s);
 
       if (s.optional) {
-        out += '<div class="links"><button type="button" data-skip="' + esc(s.name) + '">Retirer de la journee</button></div>';
+        out += '<div class="links"><button type="button" data-skip="' + esc(s.name) + '">Retirer de la journée</button></div>';
       }
       out += '</div></div>';
 
@@ -2589,17 +2594,17 @@ window.ROUTES = {};
         out += '<div class="leg"><div class="legline"><i></i></div><div class="legbody">' +
           IC.car + (r.leg.merged ? 'environ ' : '') + '<b>' + r.leg.km + ' km</b> . <b>' + hm(r.leg.min) +
           '</b> vers ' + esc(r.leg.to.name) +
-          '<a href="' + itineraire(s, r.leg.to) + '" target="_blank" rel="noopener">' + IC.nav + 'Itineraire</a>' +
+          '<a href="' + itineraire(s, r.leg.to) + '" target="_blank" rel="noopener">' + IC.nav + 'Itinéraire</a>' +
           '</div></div>';
       }
     });
 
-    /* etapes optionnelles retirees */
+    /* étapes optionnelles retirées */
     var removed = day.stops.filter(function (s) {
       return s.optional && isOptOff(day, s.name) && (!s.variant || s.variant === b.variant);
     });
     if (removed.length) {
-      out += '<h3>Retire de cette journee</h3><div class="links">';
+      out += '<h3>Retiré de cette journée</h3><div class="links">';
       removed.forEach(function (s) {
         out += '<button type="button" data-add="' + esc(s.name) + '">Remettre ' + esc(s.name) + '</button>';
       });
@@ -2630,7 +2635,7 @@ window.ROUTES = {};
       delete db['off' + day.n + '|' + t.dataset.add]; save(); activeStop = -1; renderDay(); return;
     }
     if ((t = ev.target.closest('.stop'))) {
-      if (ev.target.closest('a, button')) { return; }
+      if (ev.target.closest('à, button')) { return; }
       var i = parseInt(t.dataset.i, 10);
       activeStop = (activeStop === i) ? -1 : i;
       $$('#daybody .stopcard').forEach(function (c, k) { c.classList.toggle('is-active', k === activeStop); });
@@ -2661,7 +2666,7 @@ window.ROUTES = {};
     TRIP.days.forEach(function (d) { var b = build(d); totalKm += b.km; totalDrive += b.drive; totalCost += visitesOf(d); });
 
     var out = '<div class="block wrap"><h2><span class="blaze"></span> Le circuit complet</h2>' +
-      '<p class="sub">Une boucle au depart de Ljubljana. Touchez un numero sur la carte pour ouvrir la journee.</p>' +
+      '<p class="sub">Une boucle au départ de Ljubljana. Touchez un numéro sur la carte pour ouvrir la journée.</p>' +
       '<div class="daystats">' +
       '<div><b>' + totalKm + '</b><span>km</span></div>' +
       '<div><b>' + hm(totalDrive) + '</b><span>conduite</span></div>' +
@@ -2669,8 +2674,8 @@ window.ROUTES = {};
       '<div><b>' + eur(totalCost) + '</b><span>visites</span></div>' +
       '</div>';
 
-    out += '<h3>Les sept etapes</h3><div class="tablewrap"><table><thead><tr>' +
-      '<th>Jour</th><th>Etape</th><th class="num">km</th><th class="num">Route</th></tr></thead><tbody>';
+    out += '<h3>Les sept étapes</h3><div class="tablewrap"><table><thead><tr>' +
+      '<th>Jour</th><th>Étape</th><th class="num">km</th><th class="num">Route</th></tr></thead><tbody>';
     TRIP.days.forEach(function (d, i) {
       var b = build(d);
       out += '<tr data-open="' + i + '" style="cursor:pointer">' +
@@ -2681,7 +2686,7 @@ window.ROUTES = {};
     out += '</tbody></table></div>';
 
     out += '<h3>Distances utiles</h3><div class="tablewrap"><table><tbody>' +
-      '<tr><td>Aeroport LJU vers Bled</td><td class="num">35 km . 35 min</td></tr>' +
+      '<tr><td>Aéroport LJU vers Bled</td><td class="num">35 km . 35 min</td></tr>' +
       '<tr><td>Bled vers lac de Bohinj</td><td class="num">30 km . 35 min</td></tr>' +
       '<tr><td>Bohinj vers Kranjska Gora</td><td class="num">65 km . 1h15</td></tr>' +
       '<tr><td>Kranjska Gora vers sommet du Vrsic</td><td class="num">13 km . 40 min</td></tr>' +
@@ -2689,17 +2694,35 @@ window.ROUTES = {};
       '<tr><td>Bovec vers Kobarid</td><td class="num">21 km . 25 min</td></tr>' +
       '<tr><td>Kobarid vers Skocjan</td><td class="num">145 km . 2h20</td></tr>' +
       '<tr><td>Skocjan vers Ljubljana</td><td class="num">75 km . 55 min</td></tr>' +
-      '<tr><td>Ljubljana vers aeroport</td><td class="num">26 km . 28 min</td></tr>' +
+      '<tr><td>Ljubljana vers aéroport</td><td class="num">26 km . 28 min</td></tr>' +
       '</tbody></table></div>';
 
-    out += '<h3>Les traces routiers</h3>' +
-      '<p class="fine">Les itineraires suivent les vraies routes. Ils sont calcules une fois par OSRM, ' +
-      'le moteur d\'itineraire d\'OpenStreetMap, puis gardes sur ce telephone : ensuite ca marche sans reseau. ' +
-      'Un troncon en pointille signifie qu\'il n\'a pas encore ete calcule.</p>' +
-      '<p class="fine">Pour les figer dans le depot et ne plus jamais dependre du reseau : exportez le fichier, ' +
-      'puis remplacez assets/routes.js par celui qui est telecharge.</p>' +
-      '<button class="btn" id="export-routes" type="button">Exporter les traces</button> ' +
-      '<span class="fine" id="export-etat"></span></div>';
+    out += '<h3>Les tracés routiers</h3>' +
+      '<p class="fine">Les itinéraires suivent les vraies routes. Ils sont calculés une fois par OSRM, ' +
+      'le moteur d\'itinéraire d\'OpenStreetMap, puis gardes sur ce téléphone : ensuite ça marché sans reseau. ' +
+      'Un tronçon en pointille signifie qu\'il n\'a pas encore été calculé.</p>' +
+      '<p class="fine">Pour les figer dans le dépôt et ne plus jamais dépendre du reseau : exportez le fichier, ' +
+      'puis remplacez assets/routes.js par celui qui est téléchargé.</p>' +
+      '<button class="btn" id="export-routes" type="button">Exporter les tracés</button> ' +
+      '<span class="fine" id="export-etat"></span>';
+
+    out += '<h3>Carte hors ligne</h3>' +
+      '<p class="fine">Les tuiles déjà affichées sont gardées automatiquement : ce que vous avez regarde ' +
+      'reste visible sans reseau. Vous pouvez aussi télécharger d\'un coup tout le corridor du voyage, ' +
+      'pour ne pas être aveugles dans la vallée de la Soca ou sur le Vrsic.</p>' +
+      '<div class="chips">' +
+      '<button type="button" class="chip" data-off="12">Le tracé</button>' +
+      '<button type="button" class="chip" data-off="13">Détaillé</button>' +
+      '</div>' +
+      '<div class="meter" id="off-meter"><i></i></div>' +
+      '<p class="fine" id="off-avancee"></p>' +
+      '<p class="fine" id="off-etat"></p>' +
+      '<button class="btn" id="off-vider" type="button">Vider le cache des tuiles</button>' +
+      '<p class="fine" style="margin-top:.8rem">A faire chez vous, en wifi, avant de partir. ' +
+      'Le téléchargement se limité au corridor de l\'itinéraire et au fond de carte choisi. ' +
+      'Les serveurs de tuiles sont mis à disposition gracieusement : c\'est prévu pour être lance une fois.</p>';
+
+    out += '</div>';
 
     host.innerHTML = out;
     host.addEventListener('click', function (ev) {
@@ -2709,8 +2732,19 @@ window.ROUTES = {};
         showTab('jours');
         return;
       }
-      if (ev.target.closest('#export-routes')) { exporterTraces(); }
+      if (ev.target.closest('#export-routes')) { exporterTraces(); return; }
+      var off = ev.target.closest('[data-off]');
+      if (off) { telechargerHorsLigne(parseInt(off.dataset.off, 10)); return; }
+      if (ev.target.closest('#off-vider')) {
+        envoyerSW({ type: 'VIDER' });
+        $('#off-meter').querySelector('i').style.width = '0%';
+        $('#off-avancee').textContent = '';
+        return;
+      }
     });
+
+    if (swDisponible()) { demanderEtat(); }
+    else { var e = $('#off-etat'); if (e) { e.textContent = 'Le cache hors ligne demande une adresse https : ouvrez l\'application depuis GitHub Pages.'; } }
 
     var leg = $('#maplegend');
     leg.innerHTML = TRIP.days.map(function (d) {
@@ -2721,16 +2755,148 @@ window.ROUTES = {};
   function exporterTraces() {
     var etat = $('#export-etat');
     if (!global.Router || !Router.count()) {
-      etat.textContent = 'Aucun trace calcule pour l\'instant.';
+      etat.textContent = 'Aucun tracé calculé pour l\'instant.';
       return;
     }
     var blob = new Blob([Router.exportFile()], { type: 'text/javascript' });
     var url = URL.createObjectURL(blob);
-    var lien = document.createElement('a');
+    var lien = document.createElement('à');
     lien.href = url; lien.download = 'routes.js';
     document.body.appendChild(lien); lien.click(); lien.remove();
     setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
-    etat.textContent = Router.count() + ' troncons exportes.';
+    etat.textContent = Router.count() + ' tronçons exportes.';
+  }
+
+  /* ---------- carte hors ligne ---------- */
+
+  var sw = null;
+
+  function styleCourant() {
+    var k = db.style || 'plan';
+    var liste = global.MAP_STYLES || [];
+    for (var i = 0; i < liste.length; i++) { if (liste[i].key === k) { return liste[i]; } }
+    return liste[0];
+  }
+
+  function tuileXY(lat, lon, z) {
+    var n = Math.pow(2, z);
+    var r = lat * Math.PI / 180;
+    return [
+      Math.floor((lon + 180) / 360 * n),
+      Math.floor((1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2 * n)
+    ];
+  }
+
+  // Échantillonné le tracé tous les ~1 km pour ne pas laisser de trous
+  // entre deux points éloignés, puis liste les tuiles du corridor.
+  function tuilesDuVoyage(zMax) {
+    var st = styleCourant();
+    if (!st || !st.url) { return []; }
+
+    var pts = [];
+    TRIP.days.forEach(function (d) {
+      routesOf(d, false).forEach(function (r) {
+        for (var i = 0; i < r.points.length - 1; i++) {
+          var a = r.points[i], b = r.points[i + 1];
+          var d2 = Math.max(Math.abs(b[0] - a[0]), Math.abs(b[1] - a[1]));
+          var pas = Math.max(1, Math.ceil(d2 / 0.01));
+          for (var k = 0; k < pas; k++) {
+            pts.push([a[0] + (b[0] - a[0]) * k / pas, a[1] + (b[1] - a[1]) * k / pas]);
+          }
+        }
+        if (r.points.length) { pts.push(r.points[r.points.length - 1]); }
+      });
+    });
+
+    var vues = {}, urls = [];
+    for (var z = 8; z <= Math.min(zMax, st.max); z++) {
+      var marge = z >= 12 ? 1 : 2;
+      var n = Math.pow(2, z);
+      for (var i = 0; i < pts.length; i++) {
+        var t = tuileXY(pts[i][0], pts[i][1], z);
+        for (var dx = -marge; dx <= marge; dx++) {
+          for (var dy = -marge; dy <= marge; dy++) {
+            var x = t[0] + dx, y = t[1] + dy;
+            if (y < 0 || y >= n) { continue; }
+            x = ((x % n) + n) % n;
+            var cle = z + '/' + x + '/' + y;
+            if (vues[cle]) { continue; }
+            vues[cle] = 1;
+            var u = st.url.replace('{z}', z).replace('{x}', x).replace('{y}', y);
+            if (st.sub) { u = u.replace('{s}', st.sub[(x + y) % st.sub.length]); }
+            urls.push(u);
+          }
+        }
+      }
+    }
+    return urls;
+  }
+
+  function swDisponible() {
+    return 'serviceWorker' in navigator &&
+      (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1');
+  }
+
+  function enregistrerSW() {
+    if (!swDisponible()) { return; }
+    navigator.serviceWorker.register('sw.js', { scope: './' }).catch(function () {});
+    navigator.serviceWorker.ready.then(function (reg) {
+      sw = reg.active || reg.waiting || reg.installing;
+      demanderEtat();
+    }).catch(function () {});
+    navigator.serviceWorker.addEventListener('message', function (ev) {
+      var m = ev.data || {};
+      if (m.type === 'ÉTAT') { majHorsLigne(m.tuiles); }
+      if (m.type === 'PRECACHE_AVANCEE') { avanceeHorsLigne(m.fait, m.total); }
+      if (m.type === 'PRECACHE_FINI') {
+        avanceeHorsLigne(m.total, m.total);
+        majHorsLigne(m.tuiles, m.echecs);
+      }
+    });
+  }
+
+  function envoyerSW(msg) {
+    var c = navigator.serviceWorker && navigator.serviceWorker.controller;
+    if (c) { c.postMessage(msg); return true; }
+    if (sw) { sw.postMessage(msg); return true; }
+    return false;
+  }
+
+  function demanderEtat() { envoyerSW({ type: 'ÉTAT' }); }
+
+  function majHorsLigne(tuiles, echecs) {
+    var e = $('#off-etat');
+    if (!e) { return; }
+    var mo = Math.round(tuiles * 18 / 1024 * 10) / 10;
+    e.textContent = tuiles
+      ? tuiles + ' tuiles en cache, environ ' + String(mo).replace('.', ',') + ' Mo.' +
+        (echecs ? ' ' + echecs + ' non récupérées.' : '')
+      : 'Aucune tuile en cache pour l\'instant.';
+  }
+
+  function avanceeHorsLigne(fait, total) {
+    var m = $('#off-meter');
+    if (m) { m.querySelector('i').style.width = (fait / Math.max(1, total) * 100) + '%'; }
+    var e = $('#off-avancee');
+    if (e) { e.textContent = fait < total ? 'Téléchargement ' + fait + '/' + total : 'Téléchargement terminé.'; }
+  }
+
+  function telechargerHorsLigne(zMax) {
+    var e = $('#off-avancee');
+    if (!swDisponible()) {
+      e.textContent = 'Le cache hors ligne demande une adresse https. Ouvrez l\'application depuis GitHub Pages.';
+      return;
+    }
+    var urls = tuilesDuVoyage(zMax);
+    if (!urls.length) {
+      e.textContent = 'Choisissez d\'abord un fond de carte autre que le fond uni.';
+      return;
+    }
+    if (!envoyerSW({ type: 'PRECACHE', urls: urls })) {
+      e.textContent = 'Le cache se préparé, reessayez dans quelques secondes.';
+      return;
+    }
+    e.textContent = 'Téléchargement 0/' + urls.length;
   }
 
   /* ---------- budget ---------- */
@@ -2738,7 +2904,7 @@ window.ROUTES = {};
   var sim = db.sim || { nuit: 50, food: 20, car: 250 };
   var LIM = { nuit: [25, 160, 5], food: [8, 60, 2], car: [120, 600, 20] };
 
-  // Les etapes "courses" et "repas" sont deja couvertes par la ligne
+  // Les étapes "courses" et "repas" sont déjà couvertes par la ligne
   // nourriture du budget : les compter ici ferait un double comptage.
   var FOOD_KINDS = { courses: 1, repas: 1 };
 
@@ -2759,7 +2925,7 @@ window.ROUTES = {};
   function renderBudget() {
     var host = $('#budgetbody');
     var out = '<div class="block wrap"><h2><span class="blaze"></span> Simulateur</h2>' +
-      '<p class="sub">Reglez vos hypotheses, le total par personne se recalcule. Hors vol, a deux, tout partage.</p>';
+      '<p class="sub">Réglez vos hypotheses, le total par personne se recalculé. Hors vol, à deux, tout partage.</p>';
 
     out += '<div class="field"><span class="lab">Nuit pour deux<small>6 nuits</small></span>' +
       '<span class="stepper"><button type="button" data-sim="nuit" data-d="-5" aria-label="Moins">-</button>' +
@@ -2783,32 +2949,32 @@ window.ROUTES = {};
       '<p class="verdict ok" id="b-verdict"></p>' +
       '<div class="split">' +
       '<div><span class="k">Fixe</span><span class="v" id="b-fixe"></span></div>' +
-      '<div><span class="k">Hebergement</span><span class="v" id="b-lit"></span></div>' +
+      '<div><span class="k">Hébergement</span><span class="v" id="b-lit"></span></div>' +
       '<div><span class="k">Nourriture</span><span class="v" id="b-food"></span></div>' +
       '<div><span class="k">Visites et extras</span><span class="v" id="b-vis"></span></div>' +
       '</div></div>';
     out += '<p class="fine" style="margin-top:.8rem">Base fixe : ' +
       BUDGET.fixe.map(function (f) { return f[0].toLowerCase() + ' ' + f[1] + ' €'; }).join(', ') +
-      '. Les visites viennent de l\'itineraire : si vous retirez une etape, le budget suit.</p>';
+      '. Les visites viennent de l\'itinéraire : si vous retirez une étape, le budget suit.</p>';
     out += '</div>';
 
-    /* depenses */
-    out += '<div class="block wrap"><h2><span class="blaze"></span> Depenses reelles</h2>' +
-      '<p class="sub">A remplir chaque soir. Enregistre sur ce telephone.</p><div class="spend" id="spend">';
+    /* dépenses */
+    out += '<div class="block wrap"><h2><span class="blaze"></span> Dépenses réelles</h2>' +
+      '<p class="sub">A remplir chaque soir. Enregistre sur ce téléphone.</p><div class="spend" id="spend">';
     TRIP.days.forEach(function (d) {
       out += '<div class="row"><span class="lab">Jour ' + d.n + '<small>' + esc(d.wd) + '</small></span>' +
         '<input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="s' + d.n +
-        '" aria-label="Depenses du jour ' + d.n + '"></div>';
+        '" aria-label="Dépenses du jour ' + d.n + '"></div>';
     });
-    out += '<div class="row"><span class="lab">Paye avant le depart<small>voiture, hebergements</small></span>' +
-      '<input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="spre" aria-label="Paye avant le depart"></div>';
-    out += '</div><div class="readout"><span class="cap">Depense par personne</span>' +
+    out += '<div class="row"><span class="lab">Paye avant le départ<small>voiture, hébergements</small></span>' +
+      '<input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="spre" aria-label="Paye avant le départ"></div>';
+    out += '</div><div class="readout"><span class="cap">Dépense par personne</span>' +
       '<div class="big" id="s-total"></div><div class="meter" id="s-meter"><i></i></div>' +
       '<p class="verdict ok" id="s-verdict"></p></div>' +
-      '<button class="btn" id="s-reset" type="button">Remettre a zero</button></div>';
+      '<button class="btn" id="s-reset" type="button">Remettre à zero</button></div>';
 
     /* tables */
-    out += '<div class="block wrap"><h2><span class="blaze"></span> Ce qu\'on laisse de cote</h2><div class="tablewrap"><table>' +
+    out += '<div class="block wrap"><h2><span class="blaze"></span> Ce qu\'on laisse de côté</h2><div class="tablewrap"><table>' +
       '<thead><tr><th>Site</th><th class="num">Prix</th><th>Pourquoi</th></tr></thead><tbody>';
     BUDGET.ecartes.forEach(function (r) {
       out += '<tr><td>' + esc(r[0]) + '</td><td class="num">' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td></tr>';
@@ -2913,19 +3079,19 @@ window.ROUTES = {};
 
   function renderGuide() {
     var out = '<div class="block wrap"><h2><span class="blaze"></span> Le guide</h2>' +
-      '<p class="sub">Tout ce qui ne tient pas dans une journee. Touchez une section pour l\'ouvrir.</p>';
+      '<p class="sub">Tout ce qui ne tient pas dans une journée. Touchez une section pour l\'ouvrir.</p>';
 
     var sos = '<div class="sos">' + GUIDE.urgences.map(function (u) {
       return '<a href="tel:' + u.tel + '"><span class="n">' + u.n + '</span><span class="l">' + esc(u.l) + '</span></a>';
-    }).join('') + '</div><p class="fine" style="margin-top:.7rem">Le 112 fonctionne sans reseau ni carte SIM et repond en anglais. ' +
-      'Ambassade de France a Ljubljana : <a href="tel:+38614790400">+386 1 479 04 00</a>.</p>';
+    }).join('') + '</div><p class="fine" style="margin-top:.7rem">Le 112 fonctionne sans reseau ni carte SIM et répond en anglais. ' +
+      'Ambassade de France à Ljubljana : <a href="tel:+38614790400">+386 1 479 04 00</a>.</p>';
     out += acc('Urgences', sos, true);
 
-    out += acc('Conduire en Slovenie', '<div class="cards">' + GUIDE.conduite.map(function (c) {
+    out += acc('Conduire en Slovénie', '<div class="cards">' + GUIDE.conduite.map(function (c) {
       return '<div class="card"><span class="k">' + esc(c.k) + '</span><div class="v">' + esc(c.v) + '</div></div>';
     }).join('') + '</div>');
 
-    out += acc('Randonnees', '<div class="tablewrap"><table><thead><tr><th>Rando</th><th>Duree</th>' +
+    out += acc('Randonnées', '<div class="tablewrap"><table><thead><tr><th>Rando</th><th>Durée</th>' +
       '<th class="num">Deniv.</th><th class="num">Prix</th></tr></thead><tbody>' +
       GUIDE.randos.map(function (r) {
         return '<tr><td><b>' + esc(r.nom) + '</b><br><span class="fine">' + esc(r.lieu) + ' . ' + esc(r.note) + '</span></td>' +
@@ -2933,7 +3099,7 @@ window.ROUTES = {};
           '<td class="num">' + esc(r.deniv) + '</td><td class="num">' + esc(r.prix) + '</td></tr>';
       }).join('') + '</tbody></table></div>');
 
-    out += acc('Ou dormir', '<div class="cards">' + GUIDE.hebergements.map(function (h) {
+    out += acc('Où dormir', '<div class="cards">' + GUIDE.hebergements.map(function (h) {
       return '<div class="card"><span class="k">' + esc(h.base) + ' . nuits ' + esc(h.nuits) + '</span>' +
         '<div class="v"><strong>' + esc(h.prix) + '</strong> la chambre double. ' + esc(h.note) + '</div></div>';
     }).join('') + '</div>');
@@ -2943,24 +3109,24 @@ window.ROUTES = {};
         '<td class="num">' + esc(m.prix) + '</td></tr>';
     }).join('') + '</tbody></table></div>' +
       '<p class="fine" style="margin-top:.7rem">Les supermarches (Hofer, Lidl, Mercator, Spar) ferment le samedi entre 13h et 17h et ' +
-      'sont fermes le dimanche. Faites les courses du week-end le samedi 12 avant 17h.</p>');
+      'sont fermés le dimanche. Faites les courses du week-end le samedi 12 avant 17h.</p>');
 
-    out += acc('Meteo de septembre', '<div class="tablewrap"><table><thead><tr><th>Zone</th>' +
+    out += acc('Météo de septembre', '<div class="tablewrap"><table><thead><tr><th>Zone</th>' +
       '<th class="num">Jour</th><th class="num">Nuit</th><th class="num">Eau</th></tr></thead><tbody>' +
       GUIDE.meteo.map(function (m) {
         return '<tr><td>' + esc(m.z) + '</td><td class="num">' + esc(m.j) + '</td>' +
           '<td class="num">' + esc(m.n) + '</td><td class="num">' + esc(m.e) + '</td></tr>';
       }).join('') + '</tbody></table></div>' +
-      '<p class="fine" style="margin-top:.7rem">Environ 12 jours de pluie sur le mois. Le brouillard de fond de vallee se leve entre 9h et 11h. ' +
-      'Meteo officielle de montagne : <a href="https://meteo.arso.gov.si/met/en/" target="_blank" rel="noopener">ARSO Vreme</a>. ' +
-      'Etat des routes et du col du Vrsic : <a href="https://www.promet.si/en/" target="_blank" rel="noopener">promet.si</a>.</p>');
+      '<p class="fine" style="margin-top:.7rem">Environ 12 jours de pluie sur le mois. Le brouillard de fond de vallée se leve entre 9h et 11h. ' +
+      'Météo officielle de montagne : <a href="https://meteo.arso.gov.si/met/en/" target="_blank" rel="noopener">ARSO Vreme</a>. ' +
+      'État des routes et du col du Vrsic : <a href="https://www.promet.si/en/" target="_blank" rel="noopener">promet.si</a>.</p>');
 
     out += acc('S\'il pleut', '<div class="tablewrap"><table><thead><tr><th>Ce que vous voyez</th><th>Ce que vous faites</th></tr></thead><tbody>' +
       GUIDE.pluie.map(function (p) {
         return '<tr><td>' + esc(p.v) + '</td><td>' + esc(p.f) + '</td></tr>';
       }).join('') + '</tbody></table></div>');
 
-    out += acc('Slovene de survie', '<div class="lex">' + GUIDE.mots.map(function (m) {
+    out += acc('Slovène de survie', '<div class="lex">' + GUIDE.mots.map(function (m) {
       return '<div><span class="sl">' + esc(m[0]) + (m[1] ? '<small>' + esc(m[1]) + '</small>' : '') +
         '</span><span class="fr">' + esc(m[2]) + '</span></div>';
     }).join('') + '</div><h3>Prononciation</h3><div class="cards">' +
@@ -2976,8 +3142,8 @@ window.ROUTES = {};
 
   function renderPack() {
     var out = '<div class="block wrap"><h2><span class="blaze"></span> Le sac</h2>' +
-      '<p class="sub">Un sac cabine et un sac a dos de journee chacune. Les cases restent cochees sur ce telephone.</p>' +
-      '<div class="progress"><b id="p-count"></b><span>prepare</span></div><div class="meter" id="p-meter"><i></i></div>';
+      '<p class="sub">Un sac cabine et un sac à dos de journée chacune. Les cases restent cochees sur ce téléphone.</p>' +
+      '<div class="progress"><b id="p-count"></b><span>préparé</span></div><div class="meter" id="p-meter"><i></i></div>';
 
     PACK.forEach(function (g) {
       out += '<h3>' + esc(g.titre) + '</h3><div class="check">';
@@ -2988,12 +3154,12 @@ window.ROUTES = {};
     });
 
     out += '<button class="btn" id="p-reset" type="button">Tout decocher</button>';
-    out += '<footer><p>Carnet de terrain, Slovenie, 7 au 13 septembre 2026.</p>' +
-      '<p>Prix releves en juillet 2026. Revoyez Vintgar, Skocjan et Tolmin sur leurs sites officiels avant de partir.</p>' +
-      '<p>Coordonnees indicatives, a quelques centaines de metres pres : elles servent au trace et a lancer la navigation. ' +
+    out += '<footer><p>Carnet de terrain, Slovénie, 7 au 13 septembre 2026.</p>' +
+      '<p>Prix relevés en juillet 2026. Revoyez Vintgar, Skocjan et Tolmin sur leurs sites officiels avant de partir.</p>' +
+      '<p>Coordonnées indicatives, à quelques centaines de mètres pres : elles servent au tracé et à lancer la navigation. ' +
       'Les liens Maps et Tripadvisor partent du nom du lieu.</p>' +
       '<p>Fond de carte <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>, ' +
-      'sous licence ODbL. Sur iPhone : bouton Partager, puis "Sur l\'ecran d\'accueil".</p></footer></div>';
+      'sous licence ODbL. Sur iPhone : bouton Partager, puis "Sur l\'écran d\'accueil".</p></footer></div>';
 
     var host = $('#packbody');
     host.innerHTML = out;
@@ -3016,7 +3182,7 @@ window.ROUTES = {};
     $('#p-meter').querySelector('i').style.width = (n / boxes.length * 100) + '%';
   }
 
-  /* ---------- pli et plein ecran de la carte ---------- */
+  /* ---------- pli et plein écran de la carte ---------- */
 
   function majBoutonPli() {
     var plie = $('#mapwrap').classList.contains('is-folded');
@@ -3072,9 +3238,10 @@ window.ROUTES = {};
     }
   }
 
-  /* ---------- demarrage ---------- */
+  /* ---------- démarrage ---------- */
 
   function boot() {
+    enregistrerSW();
     renderRail();
     renderAll();
     renderBudget();
@@ -3095,7 +3262,7 @@ window.ROUTES = {};
     });
     dayMap.onStyle = function (k) { db.style = k; save(); if (allMap) { allMap.setStyle(k); } };
 
-    // replier la carte pour lire l'itineraire en plus grand
+    // replier la carte pour lire l'itinéraire en plus grand
     if (db.folded) { $('#mapwrap').classList.add('is-folded'); }
     majBoutonPli();
     $('#mapfold').addEventListener('click', function () {

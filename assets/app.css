@@ -1,6 +1,6 @@
 /* =============================================================
-   Slovenie 2026 - feuille de style
-   Mobile d'abord, pensee pour iPhone : zones sures, cibles de
+   Slovénie 2026 - feuille de style
+   Mobile d'abord, pensée pour iPhone : zones sures, cibles de
    44 px, typographie fluide, aucun debordement horizontal.
    ============================================================= */
 
@@ -30,7 +30,7 @@
   --wrap: 44rem;
   /* Marge de base, toujours appliquee. Les encoches s'ajoutent par-dessus
      via --safe-*, definis plus bas sous @supports : si env() n'est pas
-     reconnu, ils restent a 0px et la marge de base tient quand meme. */
+     reconnu, ils restent à 0px et la marge de base tient quand même. */
   --gutter: 1.25rem;
   --safe-t: 0px;
   --safe-b: 0px;
@@ -286,11 +286,11 @@ h3 {
 .mapwrap.is-static { position: static; }
 .mapwrap.is-static .mm { height: clamp(240px, 52vh, 520px); }
 
-/* --- carte repliee : on rend toute la hauteur a l'itineraire --- */
+/* --- carte repliée : on rend toute la hauteur à l'itinéraire --- */
 .mapwrap.is-folded .mm { height: 0; border-bottom: 0; }
 .mapwrap.is-folded .mm-ctrl, .mapwrap.is-folded .mm-attrib, .mapwrap.is-folded .mm-styles { display: none; }
 
-/* --- barre sous la carte : pli et etat du trace --- */
+/* --- barre sous la carte : pli et état du tracé --- */
 .maptools {
   max-width: var(--wrap); margin: 0 auto;
   display: flex; align-items: center; gap: .6rem;
@@ -318,7 +318,7 @@ h3 {
   text-align: right; min-width: 0;
 }
 
-/* --- plein ecran --- */
+/* --- plein écran --- */
 .mapwrap.is-full {
   position: fixed; inset: 0; z-index: 90;
   display: flex; flex-direction: column;
@@ -360,7 +360,7 @@ body.has-full .tabbar { display: none; }
 .mm-halo { fill: none; stroke: var(--paper); stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
 .mm-line { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
 .mm-line.is-dim { stroke-width: 2.5; opacity: .3; }
-/* tronçon dont l'itineraire routier n'est pas encore calcule */
+/* tronçon dont l'itinéraire routier n'est pas encore calculé */
 .mm-line.is-rough { stroke-dasharray: 3 7; stroke-width: 3; opacity: .75; }
 .mm-mark { cursor: pointer; }
 .mm-ring { stroke: var(--paper); stroke-width: 2.5; }
@@ -416,8 +416,8 @@ body.has-full .tabbar { display: none; }
 .mm-styles button[aria-pressed="true"] { background: var(--soca-lift); color: var(--soca); }
 .mm-styles button:active { background: var(--surface-2); }
 
-/* Le filtre depend du fond : desature sur le plan et le relief pour que
-   le trace ressorte, laisse tel quel sur la vue satellite. */
+/* Le filtre dépend du fond : désature sur le plan et le relief pour que
+   le tracé ressorte, laisse tel quel sur la vue satellite. */
 .mm[data-style="satellite"] .mm-tile { filter: none; }
 .mm[data-style="relief"] .mm-tile { filter: saturate(.6) contrast(.95) brightness(1.03); }
 :root[data-theme="dark"] .mm[data-style="relief"] .mm-tile,
@@ -572,7 +572,7 @@ body.has-full .tabbar { display: none; }
   white-space: nowrap;
 }
 .links a:active, .links button:active { border-color: var(--soca); color: var(--soca); background: var(--soca-lift); }
-/* toute icone inline generee par le script : sans taille explicite,
+/* toute icone inline générée par le script : sans taille explicite,
    un SVG sans width/height retombe sur 300x150 et se remplit de noir */
 .ic {
   width: .85rem; height: .85rem; flex: none;
@@ -718,7 +718,7 @@ details.acc[open] > summary { color: var(--soca); }
 .field .lab { font-size: .92rem; line-height: 1.35; min-width: 0; }
 .field .lab small { display: block; font-size: .73rem; color: var(--ink-faint); }
 
-/* ================= depenses ================= */
+/* ================= dépenses ================= */
 .spend .row {
   display: grid; grid-template-columns: minmax(0, 1fr) 6.5rem;
   align-items: center; gap: .55rem;
@@ -737,7 +737,7 @@ details.acc[open] > summary { color: var(--soca); }
 .spend input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 .spend input:focus { outline: 2px solid var(--soca); outline-offset: 1px; border-color: var(--soca); }
 
-/* ================= listes a cocher ================= */
+/* ================= listes à cocher ================= */
 .progress {
   display: flex; align-items: baseline; gap: .5rem;
   font-family: var(--f-data); font-size: .66rem; letter-spacing: .1em;

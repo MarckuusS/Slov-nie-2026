@@ -1,5 +1,5 @@
 /* =============================================================
-   Slovenie 2026 - logique de l'application
+   Slovénie 2026 - logique de l'application
    ============================================================= */
 
 (function (global) {
@@ -45,7 +45,7 @@
   try { db = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { db = {}; }
   function save() { try { localStorage.setItem(KEY, JSON.stringify(db)); } catch (e) {} }
 
-  /* ---------- couleur de la barre systeme iOS ---------- */
+  /* ---------- couleur de la barre système iOS ---------- */
 
   function paintThemeColor() {
     var c = getComputedStyle(document.documentElement).getPropertyValue('--theme-color').trim();
@@ -65,13 +65,13 @@
 
   function gmaps(stop) {
     return 'https://www.google.com/maps/search/?api=1&query=' +
-      encodeURIComponent(stop.name + ', Slovenie');
+      encodeURIComponent(stop.name + ', Slovénie');
   }
   function waze(stop) {
     return 'https://www.waze.com/ul?ll=' + stop.lat + '%2C' + stop.lon + '&navigate=yes&zoom=15';
   }
   function tripadvisor(stop) {
-    return 'https://www.tripadvisor.fr/Search?q=' + encodeURIComponent(stop.name + ' Slovenie');
+    return 'https://www.tripadvisor.fr/Search?q=' + encodeURIComponent(stop.name + ' Slovénie');
   }
   function itineraire(a, b) {
     return 'https://www.google.com/maps/dir/?api=1&origin=' + a.lat + ',' + a.lon +
@@ -98,7 +98,7 @@
     return out;
   }
 
-  /* ---------- etat du voyage ---------- */
+  /* ---------- état du voyage ---------- */
 
   var START = new Date(2026, 8, 7);
   var todayIdx = -1;
@@ -108,11 +108,11 @@
     var off = Math.round((t - START) / 86400000);
     var el = $('#now');
     if (off < 0) { el.textContent = 'J-' + Math.abs(off); }
-    else if (off > 6) { el.textContent = 'termine'; }
+    else if (off > 6) { el.textContent = 'terminé'; }
     else { todayIdx = off; el.textContent = 'Jour ' + (off + 1) + ' . ' + TRIP.days[off].wd.split(' ')[0]; }
   })();
 
-  /* ---------- calcul d'une journee ---------- */
+  /* ---------- calcul d'une journée ---------- */
 
   function variantOf(day) {
     if (!day.choice) { return null; }
@@ -125,8 +125,8 @@
     var v = variantOf(day);
     var seq = day.stops.filter(function (s) { return !s.variant || s.variant === v; });
 
-    // Une etape retiree ne casse pas la chaine : ses deux troncons sont
-    // fusionnes, et le trajet resultant est signale comme approximatif.
+    // Une étape retirée ne casse pas la chaîne : ses deux tronçons sont
+    // fusionnés, et le trajet résultant est signalé comme approximatif.
     var items = [], pend = null;
     seq.forEach(function (s, idx) {
       var skipped = !!(s.optional && isOptOff(day, s.name));
@@ -171,8 +171,8 @@
     };
   }
 
-  // Un objet trace par troncon : la vraie geometrie routiere si elle est
-  // connue, sinon la ligne reperee par les points de passage, signalee
+  // Un objet tracé par tronçon : la vraie géométrie routière si elle est
+  // connue, sinon la ligne repérée par les points de passage, signalée
   // en pointille pour que la difference se voie.
   function routesOf(day, dim) {
     var out = [];
@@ -239,7 +239,7 @@
     majEtatTrace();
   }
 
-  /* ---------- recuperation des traces routiers ---------- */
+  /* ---------- récupération des tracés routiers ---------- */
 
   function toutesLesPaires() {
     var out = [];
@@ -254,19 +254,19 @@
     if (!global.Router) { el.textContent = ''; return; }
     var reste = Router.missing(legPairs(TRIP.days[curDay]));
     el.textContent = reste
-      ? reste + ' troncon' + (reste > 1 ? 's' : '') + ' approximatif' + (reste > 1 ? 's' : '')
-      : 'Itineraire routier reel';
+      ? reste + ' tronçon' + (reste > 1 ? 's' : '') + ' approximatif' + (reste > 1 ? 's' : '')
+      : 'Itinéraire routier réel';
   }
 
   function chercherTraces(pairs, repeindre) {
     if (!global.Router) { return; }
     var reste = Router.missing(pairs);
     if (!reste) { majEtatTrace(); return; }
-    majEtatTrace('Calcul des itineraires, 0/' + reste);
+    majEtatTrace('Calcul des itinéraires, 0/' + reste);
     Router.ensure(pairs, function (fait, total, fini) {
       if (fini) { repeindre(true); majEtatTrace(); }
       else {
-        majEtatTrace('Calcul des itineraires, ' + fait + '/' + total);
+        majEtatTrace('Calcul des itinéraires, ' + fait + '/' + total);
         repeindre(true);
       }
     });
@@ -296,7 +296,7 @@
     });
   }
 
-  /* ---------- rendu d'une journee ---------- */
+  /* ---------- rendu d'une journée ---------- */
 
   function renderDay() {
     var day = TRIP.days[curDay];
@@ -314,13 +314,13 @@
       '<div><b>' + b.km + '</b><span>km</span></div>' +
       '<div><b>' + hm(b.drive) + '</b><span>conduite</span></div>' +
       '<div><b>' + hm(b.onsite) + '</b><span>sur place</span></div>' +
-      '<div><b>' + eur(b.cost) + '</b><span>depense</span></div>' +
+      '<div><b>' + eur(b.cost) + '</b><span>dépense</span></div>' +
       '</div>';
 
-    out += '<div class="startrow"><span class="lab">Depart de la journee<br><small style="color:var(--ink-faint)">Fin estimee ' +
+    out += '<div class="startrow"><span class="lab">Départ de la journée<br><small style="color:var(--ink-faint)">Fin estimée ' +
       clock(b.end) + ' . base ' + esc(day.base) + '</small></span>' +
       '<span class="stepper">' +
-      '<button type="button" data-start="-15" aria-label="Partir 15 minutes plus tot">-</button>' +
+      '<button type="button" data-start="-15" aria-label="Partir 15 minutes plus tôt">-</button>' +
       '<output>' + clock(startOf(day)) + '</output>' +
       '<button type="button" data-start="15" aria-label="Partir 15 minutes plus tard">+</button>' +
       '</span></div>';
@@ -356,7 +356,7 @@
       out += '<div class="badges"><span class="badge kind">' + esc(s.kind) + '</span>';
       if (s.free) { out += '<span class="badge">gratuit</span>'; }
       else if (s.cost) { out += '<span class="badge pay">' + eur(s.cost) + '</span>'; }
-      if (s.booking) { out += '<span class="badge book">a reserver</span>'; }
+      if (s.booking) { out += '<span class="badge book">à réserver</span>'; }
       if (s.optional) { out += '<span class="badge">optionnel</span>'; }
       out += '</div>';
 
@@ -365,7 +365,7 @@
       out += linkRow(s);
 
       if (s.optional) {
-        out += '<div class="links"><button type="button" data-skip="' + esc(s.name) + '">Retirer de la journee</button></div>';
+        out += '<div class="links"><button type="button" data-skip="' + esc(s.name) + '">Retirer de la journée</button></div>';
       }
       out += '</div></div>';
 
@@ -373,17 +373,17 @@
         out += '<div class="leg"><div class="legline"><i></i></div><div class="legbody">' +
           IC.car + (r.leg.merged ? 'environ ' : '') + '<b>' + r.leg.km + ' km</b> . <b>' + hm(r.leg.min) +
           '</b> vers ' + esc(r.leg.to.name) +
-          '<a href="' + itineraire(s, r.leg.to) + '" target="_blank" rel="noopener">' + IC.nav + 'Itineraire</a>' +
+          '<a href="' + itineraire(s, r.leg.to) + '" target="_blank" rel="noopener">' + IC.nav + 'Itinéraire</a>' +
           '</div></div>';
       }
     });
 
-    /* etapes optionnelles retirees */
+    /* étapes optionnelles retirées */
     var removed = day.stops.filter(function (s) {
       return s.optional && isOptOff(day, s.name) && (!s.variant || s.variant === b.variant);
     });
     if (removed.length) {
-      out += '<h3>Retire de cette journee</h3><div class="links">';
+      out += '<h3>Retiré de cette journée</h3><div class="links">';
       removed.forEach(function (s) {
         out += '<button type="button" data-add="' + esc(s.name) + '">Remettre ' + esc(s.name) + '</button>';
       });
@@ -414,7 +414,7 @@
       delete db['off' + day.n + '|' + t.dataset.add]; save(); activeStop = -1; renderDay(); return;
     }
     if ((t = ev.target.closest('.stop'))) {
-      if (ev.target.closest('a, button')) { return; }
+      if (ev.target.closest('à, button')) { return; }
       var i = parseInt(t.dataset.i, 10);
       activeStop = (activeStop === i) ? -1 : i;
       $$('#daybody .stopcard').forEach(function (c, k) { c.classList.toggle('is-active', k === activeStop); });
@@ -445,7 +445,7 @@
     TRIP.days.forEach(function (d) { var b = build(d); totalKm += b.km; totalDrive += b.drive; totalCost += visitesOf(d); });
 
     var out = '<div class="block wrap"><h2><span class="blaze"></span> Le circuit complet</h2>' +
-      '<p class="sub">Une boucle au depart de Ljubljana. Touchez un numero sur la carte pour ouvrir la journee.</p>' +
+      '<p class="sub">Une boucle au départ de Ljubljana. Touchez un numéro sur la carte pour ouvrir la journée.</p>' +
       '<div class="daystats">' +
       '<div><b>' + totalKm + '</b><span>km</span></div>' +
       '<div><b>' + hm(totalDrive) + '</b><span>conduite</span></div>' +
@@ -453,8 +453,8 @@
       '<div><b>' + eur(totalCost) + '</b><span>visites</span></div>' +
       '</div>';
 
-    out += '<h3>Les sept etapes</h3><div class="tablewrap"><table><thead><tr>' +
-      '<th>Jour</th><th>Etape</th><th class="num">km</th><th class="num">Route</th></tr></thead><tbody>';
+    out += '<h3>Les sept étapes</h3><div class="tablewrap"><table><thead><tr>' +
+      '<th>Jour</th><th>Étape</th><th class="num">km</th><th class="num">Route</th></tr></thead><tbody>';
     TRIP.days.forEach(function (d, i) {
       var b = build(d);
       out += '<tr data-open="' + i + '" style="cursor:pointer">' +
@@ -465,7 +465,7 @@
     out += '</tbody></table></div>';
 
     out += '<h3>Distances utiles</h3><div class="tablewrap"><table><tbody>' +
-      '<tr><td>Aeroport LJU vers Bled</td><td class="num">35 km . 35 min</td></tr>' +
+      '<tr><td>Aéroport LJU vers Bled</td><td class="num">35 km . 35 min</td></tr>' +
       '<tr><td>Bled vers lac de Bohinj</td><td class="num">30 km . 35 min</td></tr>' +
       '<tr><td>Bohinj vers Kranjska Gora</td><td class="num">65 km . 1h15</td></tr>' +
       '<tr><td>Kranjska Gora vers sommet du Vrsic</td><td class="num">13 km . 40 min</td></tr>' +
@@ -473,17 +473,35 @@
       '<tr><td>Bovec vers Kobarid</td><td class="num">21 km . 25 min</td></tr>' +
       '<tr><td>Kobarid vers Skocjan</td><td class="num">145 km . 2h20</td></tr>' +
       '<tr><td>Skocjan vers Ljubljana</td><td class="num">75 km . 55 min</td></tr>' +
-      '<tr><td>Ljubljana vers aeroport</td><td class="num">26 km . 28 min</td></tr>' +
+      '<tr><td>Ljubljana vers aéroport</td><td class="num">26 km . 28 min</td></tr>' +
       '</tbody></table></div>';
 
-    out += '<h3>Les traces routiers</h3>' +
-      '<p class="fine">Les itineraires suivent les vraies routes. Ils sont calcules une fois par OSRM, ' +
-      'le moteur d\'itineraire d\'OpenStreetMap, puis gardes sur ce telephone : ensuite ca marche sans reseau. ' +
-      'Un troncon en pointille signifie qu\'il n\'a pas encore ete calcule.</p>' +
-      '<p class="fine">Pour les figer dans le depot et ne plus jamais dependre du reseau : exportez le fichier, ' +
-      'puis remplacez assets/routes.js par celui qui est telecharge.</p>' +
-      '<button class="btn" id="export-routes" type="button">Exporter les traces</button> ' +
-      '<span class="fine" id="export-etat"></span></div>';
+    out += '<h3>Les tracés routiers</h3>' +
+      '<p class="fine">Les itinéraires suivent les vraies routes. Ils sont calculés une fois par OSRM, ' +
+      'le moteur d\'itinéraire d\'OpenStreetMap, puis gardes sur ce téléphone : ensuite ça marché sans reseau. ' +
+      'Un tronçon en pointille signifie qu\'il n\'a pas encore été calculé.</p>' +
+      '<p class="fine">Pour les figer dans le dépôt et ne plus jamais dépendre du reseau : exportez le fichier, ' +
+      'puis remplacez assets/routes.js par celui qui est téléchargé.</p>' +
+      '<button class="btn" id="export-routes" type="button">Exporter les tracés</button> ' +
+      '<span class="fine" id="export-etat"></span>';
+
+    out += '<h3>Carte hors ligne</h3>' +
+      '<p class="fine">Les tuiles déjà affichées sont gardées automatiquement : ce que vous avez regarde ' +
+      'reste visible sans reseau. Vous pouvez aussi télécharger d\'un coup tout le corridor du voyage, ' +
+      'pour ne pas être aveugles dans la vallée de la Soca ou sur le Vrsic.</p>' +
+      '<div class="chips">' +
+      '<button type="button" class="chip" data-off="12">Le tracé</button>' +
+      '<button type="button" class="chip" data-off="13">Détaillé</button>' +
+      '</div>' +
+      '<div class="meter" id="off-meter"><i></i></div>' +
+      '<p class="fine" id="off-avancee"></p>' +
+      '<p class="fine" id="off-etat"></p>' +
+      '<button class="btn" id="off-vider" type="button">Vider le cache des tuiles</button>' +
+      '<p class="fine" style="margin-top:.8rem">A faire chez vous, en wifi, avant de partir. ' +
+      'Le téléchargement se limité au corridor de l\'itinéraire et au fond de carte choisi. ' +
+      'Les serveurs de tuiles sont mis à disposition gracieusement : c\'est prévu pour être lance une fois.</p>';
+
+    out += '</div>';
 
     host.innerHTML = out;
     host.addEventListener('click', function (ev) {
@@ -493,8 +511,19 @@
         showTab('jours');
         return;
       }
-      if (ev.target.closest('#export-routes')) { exporterTraces(); }
+      if (ev.target.closest('#export-routes')) { exporterTraces(); return; }
+      var off = ev.target.closest('[data-off]');
+      if (off) { telechargerHorsLigne(parseInt(off.dataset.off, 10)); return; }
+      if (ev.target.closest('#off-vider')) {
+        envoyerSW({ type: 'VIDER' });
+        $('#off-meter').querySelector('i').style.width = '0%';
+        $('#off-avancee').textContent = '';
+        return;
+      }
     });
+
+    if (swDisponible()) { demanderEtat(); }
+    else { var e = $('#off-etat'); if (e) { e.textContent = 'Le cache hors ligne demande une adresse https : ouvrez l\'application depuis GitHub Pages.'; } }
 
     var leg = $('#maplegend');
     leg.innerHTML = TRIP.days.map(function (d) {
@@ -505,16 +534,148 @@
   function exporterTraces() {
     var etat = $('#export-etat');
     if (!global.Router || !Router.count()) {
-      etat.textContent = 'Aucun trace calcule pour l\'instant.';
+      etat.textContent = 'Aucun tracé calculé pour l\'instant.';
       return;
     }
     var blob = new Blob([Router.exportFile()], { type: 'text/javascript' });
     var url = URL.createObjectURL(blob);
-    var lien = document.createElement('a');
+    var lien = document.createElement('à');
     lien.href = url; lien.download = 'routes.js';
     document.body.appendChild(lien); lien.click(); lien.remove();
     setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
-    etat.textContent = Router.count() + ' troncons exportes.';
+    etat.textContent = Router.count() + ' tronçons exportes.';
+  }
+
+  /* ---------- carte hors ligne ---------- */
+
+  var sw = null;
+
+  function styleCourant() {
+    var k = db.style || 'plan';
+    var liste = global.MAP_STYLES || [];
+    for (var i = 0; i < liste.length; i++) { if (liste[i].key === k) { return liste[i]; } }
+    return liste[0];
+  }
+
+  function tuileXY(lat, lon, z) {
+    var n = Math.pow(2, z);
+    var r = lat * Math.PI / 180;
+    return [
+      Math.floor((lon + 180) / 360 * n),
+      Math.floor((1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2 * n)
+    ];
+  }
+
+  // Échantillonné le tracé tous les ~1 km pour ne pas laisser de trous
+  // entre deux points éloignés, puis liste les tuiles du corridor.
+  function tuilesDuVoyage(zMax) {
+    var st = styleCourant();
+    if (!st || !st.url) { return []; }
+
+    var pts = [];
+    TRIP.days.forEach(function (d) {
+      routesOf(d, false).forEach(function (r) {
+        for (var i = 0; i < r.points.length - 1; i++) {
+          var a = r.points[i], b = r.points[i + 1];
+          var d2 = Math.max(Math.abs(b[0] - a[0]), Math.abs(b[1] - a[1]));
+          var pas = Math.max(1, Math.ceil(d2 / 0.01));
+          for (var k = 0; k < pas; k++) {
+            pts.push([a[0] + (b[0] - a[0]) * k / pas, a[1] + (b[1] - a[1]) * k / pas]);
+          }
+        }
+        if (r.points.length) { pts.push(r.points[r.points.length - 1]); }
+      });
+    });
+
+    var vues = {}, urls = [];
+    for (var z = 8; z <= Math.min(zMax, st.max); z++) {
+      var marge = z >= 12 ? 1 : 2;
+      var n = Math.pow(2, z);
+      for (var i = 0; i < pts.length; i++) {
+        var t = tuileXY(pts[i][0], pts[i][1], z);
+        for (var dx = -marge; dx <= marge; dx++) {
+          for (var dy = -marge; dy <= marge; dy++) {
+            var x = t[0] + dx, y = t[1] + dy;
+            if (y < 0 || y >= n) { continue; }
+            x = ((x % n) + n) % n;
+            var cle = z + '/' + x + '/' + y;
+            if (vues[cle]) { continue; }
+            vues[cle] = 1;
+            var u = st.url.replace('{z}', z).replace('{x}', x).replace('{y}', y);
+            if (st.sub) { u = u.replace('{s}', st.sub[(x + y) % st.sub.length]); }
+            urls.push(u);
+          }
+        }
+      }
+    }
+    return urls;
+  }
+
+  function swDisponible() {
+    return 'serviceWorker' in navigator &&
+      (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1');
+  }
+
+  function enregistrerSW() {
+    if (!swDisponible()) { return; }
+    navigator.serviceWorker.register('sw.js', { scope: './' }).catch(function () {});
+    navigator.serviceWorker.ready.then(function (reg) {
+      sw = reg.active || reg.waiting || reg.installing;
+      demanderEtat();
+    }).catch(function () {});
+    navigator.serviceWorker.addEventListener('message', function (ev) {
+      var m = ev.data || {};
+      if (m.type === 'ÉTAT') { majHorsLigne(m.tuiles); }
+      if (m.type === 'PRECACHE_AVANCEE') { avanceeHorsLigne(m.fait, m.total); }
+      if (m.type === 'PRECACHE_FINI') {
+        avanceeHorsLigne(m.total, m.total);
+        majHorsLigne(m.tuiles, m.echecs);
+      }
+    });
+  }
+
+  function envoyerSW(msg) {
+    var c = navigator.serviceWorker && navigator.serviceWorker.controller;
+    if (c) { c.postMessage(msg); return true; }
+    if (sw) { sw.postMessage(msg); return true; }
+    return false;
+  }
+
+  function demanderEtat() { envoyerSW({ type: 'ÉTAT' }); }
+
+  function majHorsLigne(tuiles, echecs) {
+    var e = $('#off-etat');
+    if (!e) { return; }
+    var mo = Math.round(tuiles * 18 / 1024 * 10) / 10;
+    e.textContent = tuiles
+      ? tuiles + ' tuiles en cache, environ ' + String(mo).replace('.', ',') + ' Mo.' +
+        (echecs ? ' ' + echecs + ' non récupérées.' : '')
+      : 'Aucune tuile en cache pour l\'instant.';
+  }
+
+  function avanceeHorsLigne(fait, total) {
+    var m = $('#off-meter');
+    if (m) { m.querySelector('i').style.width = (fait / Math.max(1, total) * 100) + '%'; }
+    var e = $('#off-avancee');
+    if (e) { e.textContent = fait < total ? 'Téléchargement ' + fait + '/' + total : 'Téléchargement terminé.'; }
+  }
+
+  function telechargerHorsLigne(zMax) {
+    var e = $('#off-avancee');
+    if (!swDisponible()) {
+      e.textContent = 'Le cache hors ligne demande une adresse https. Ouvrez l\'application depuis GitHub Pages.';
+      return;
+    }
+    var urls = tuilesDuVoyage(zMax);
+    if (!urls.length) {
+      e.textContent = 'Choisissez d\'abord un fond de carte autre que le fond uni.';
+      return;
+    }
+    if (!envoyerSW({ type: 'PRECACHE', urls: urls })) {
+      e.textContent = 'Le cache se préparé, reessayez dans quelques secondes.';
+      return;
+    }
+    e.textContent = 'Téléchargement 0/' + urls.length;
   }
 
   /* ---------- budget ---------- */
@@ -522,7 +683,7 @@
   var sim = db.sim || { nuit: 50, food: 20, car: 250 };
   var LIM = { nuit: [25, 160, 5], food: [8, 60, 2], car: [120, 600, 20] };
 
-  // Les etapes "courses" et "repas" sont deja couvertes par la ligne
+  // Les étapes "courses" et "repas" sont déjà couvertes par la ligne
   // nourriture du budget : les compter ici ferait un double comptage.
   var FOOD_KINDS = { courses: 1, repas: 1 };
 
@@ -543,7 +704,7 @@
   function renderBudget() {
     var host = $('#budgetbody');
     var out = '<div class="block wrap"><h2><span class="blaze"></span> Simulateur</h2>' +
-      '<p class="sub">Reglez vos hypotheses, le total par personne se recalcule. Hors vol, a deux, tout partage.</p>';
+      '<p class="sub">Réglez vos hypotheses, le total par personne se recalculé. Hors vol, à deux, tout partage.</p>';
 
     out += '<div class="field"><span class="lab">Nuit pour deux<small>6 nuits</small></span>' +
       '<span class="stepper"><button type="button" data-sim="nuit" data-d="-5" aria-label="Moins">-</button>' +
@@ -567,32 +728,32 @@
       '<p class="verdict ok" id="b-verdict"></p>' +
       '<div class="split">' +
       '<div><span class="k">Fixe</span><span class="v" id="b-fixe"></span></div>' +
-      '<div><span class="k">Hebergement</span><span class="v" id="b-lit"></span></div>' +
+      '<div><span class="k">Hébergement</span><span class="v" id="b-lit"></span></div>' +
       '<div><span class="k">Nourriture</span><span class="v" id="b-food"></span></div>' +
       '<div><span class="k">Visites et extras</span><span class="v" id="b-vis"></span></div>' +
       '</div></div>';
     out += '<p class="fine" style="margin-top:.8rem">Base fixe : ' +
       BUDGET.fixe.map(function (f) { return f[0].toLowerCase() + ' ' + f[1] + ' €'; }).join(', ') +
-      '. Les visites viennent de l\'itineraire : si vous retirez une etape, le budget suit.</p>';
+      '. Les visites viennent de l\'itinéraire : si vous retirez une étape, le budget suit.</p>';
     out += '</div>';
 
-    /* depenses */
-    out += '<div class="block wrap"><h2><span class="blaze"></span> Depenses reelles</h2>' +
-      '<p class="sub">A remplir chaque soir. Enregistre sur ce telephone.</p><div class="spend" id="spend">';
+    /* dépenses */
+    out += '<div class="block wrap"><h2><span class="blaze"></span> Dépenses réelles</h2>' +
+      '<p class="sub">A remplir chaque soir. Enregistre sur ce téléphone.</p><div class="spend" id="spend">';
     TRIP.days.forEach(function (d) {
       out += '<div class="row"><span class="lab">Jour ' + d.n + '<small>' + esc(d.wd) + '</small></span>' +
         '<input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="s' + d.n +
-        '" aria-label="Depenses du jour ' + d.n + '"></div>';
+        '" aria-label="Dépenses du jour ' + d.n + '"></div>';
     });
-    out += '<div class="row"><span class="lab">Paye avant le depart<small>voiture, hebergements</small></span>' +
-      '<input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="spre" aria-label="Paye avant le depart"></div>';
-    out += '</div><div class="readout"><span class="cap">Depense par personne</span>' +
+    out += '<div class="row"><span class="lab">Paye avant le départ<small>voiture, hébergements</small></span>' +
+      '<input type="number" inputmode="decimal" step="0.5" min="0" placeholder="0" data-k="spre" aria-label="Paye avant le départ"></div>';
+    out += '</div><div class="readout"><span class="cap">Dépense par personne</span>' +
       '<div class="big" id="s-total"></div><div class="meter" id="s-meter"><i></i></div>' +
       '<p class="verdict ok" id="s-verdict"></p></div>' +
-      '<button class="btn" id="s-reset" type="button">Remettre a zero</button></div>';
+      '<button class="btn" id="s-reset" type="button">Remettre à zero</button></div>';
 
     /* tables */
-    out += '<div class="block wrap"><h2><span class="blaze"></span> Ce qu\'on laisse de cote</h2><div class="tablewrap"><table>' +
+    out += '<div class="block wrap"><h2><span class="blaze"></span> Ce qu\'on laisse de côté</h2><div class="tablewrap"><table>' +
       '<thead><tr><th>Site</th><th class="num">Prix</th><th>Pourquoi</th></tr></thead><tbody>';
     BUDGET.ecartes.forEach(function (r) {
       out += '<tr><td>' + esc(r[0]) + '</td><td class="num">' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td></tr>';
@@ -697,19 +858,19 @@
 
   function renderGuide() {
     var out = '<div class="block wrap"><h2><span class="blaze"></span> Le guide</h2>' +
-      '<p class="sub">Tout ce qui ne tient pas dans une journee. Touchez une section pour l\'ouvrir.</p>';
+      '<p class="sub">Tout ce qui ne tient pas dans une journée. Touchez une section pour l\'ouvrir.</p>';
 
     var sos = '<div class="sos">' + GUIDE.urgences.map(function (u) {
       return '<a href="tel:' + u.tel + '"><span class="n">' + u.n + '</span><span class="l">' + esc(u.l) + '</span></a>';
-    }).join('') + '</div><p class="fine" style="margin-top:.7rem">Le 112 fonctionne sans reseau ni carte SIM et repond en anglais. ' +
-      'Ambassade de France a Ljubljana : <a href="tel:+38614790400">+386 1 479 04 00</a>.</p>';
+    }).join('') + '</div><p class="fine" style="margin-top:.7rem">Le 112 fonctionne sans reseau ni carte SIM et répond en anglais. ' +
+      'Ambassade de France à Ljubljana : <a href="tel:+38614790400">+386 1 479 04 00</a>.</p>';
     out += acc('Urgences', sos, true);
 
-    out += acc('Conduire en Slovenie', '<div class="cards">' + GUIDE.conduite.map(function (c) {
+    out += acc('Conduire en Slovénie', '<div class="cards">' + GUIDE.conduite.map(function (c) {
       return '<div class="card"><span class="k">' + esc(c.k) + '</span><div class="v">' + esc(c.v) + '</div></div>';
     }).join('') + '</div>');
 
-    out += acc('Randonnees', '<div class="tablewrap"><table><thead><tr><th>Rando</th><th>Duree</th>' +
+    out += acc('Randonnées', '<div class="tablewrap"><table><thead><tr><th>Rando</th><th>Durée</th>' +
       '<th class="num">Deniv.</th><th class="num">Prix</th></tr></thead><tbody>' +
       GUIDE.randos.map(function (r) {
         return '<tr><td><b>' + esc(r.nom) + '</b><br><span class="fine">' + esc(r.lieu) + ' . ' + esc(r.note) + '</span></td>' +
@@ -717,7 +878,7 @@
           '<td class="num">' + esc(r.deniv) + '</td><td class="num">' + esc(r.prix) + '</td></tr>';
       }).join('') + '</tbody></table></div>');
 
-    out += acc('Ou dormir', '<div class="cards">' + GUIDE.hebergements.map(function (h) {
+    out += acc('Où dormir', '<div class="cards">' + GUIDE.hebergements.map(function (h) {
       return '<div class="card"><span class="k">' + esc(h.base) + ' . nuits ' + esc(h.nuits) + '</span>' +
         '<div class="v"><strong>' + esc(h.prix) + '</strong> la chambre double. ' + esc(h.note) + '</div></div>';
     }).join('') + '</div>');
@@ -727,24 +888,24 @@
         '<td class="num">' + esc(m.prix) + '</td></tr>';
     }).join('') + '</tbody></table></div>' +
       '<p class="fine" style="margin-top:.7rem">Les supermarches (Hofer, Lidl, Mercator, Spar) ferment le samedi entre 13h et 17h et ' +
-      'sont fermes le dimanche. Faites les courses du week-end le samedi 12 avant 17h.</p>');
+      'sont fermés le dimanche. Faites les courses du week-end le samedi 12 avant 17h.</p>');
 
-    out += acc('Meteo de septembre', '<div class="tablewrap"><table><thead><tr><th>Zone</th>' +
+    out += acc('Météo de septembre', '<div class="tablewrap"><table><thead><tr><th>Zone</th>' +
       '<th class="num">Jour</th><th class="num">Nuit</th><th class="num">Eau</th></tr></thead><tbody>' +
       GUIDE.meteo.map(function (m) {
         return '<tr><td>' + esc(m.z) + '</td><td class="num">' + esc(m.j) + '</td>' +
           '<td class="num">' + esc(m.n) + '</td><td class="num">' + esc(m.e) + '</td></tr>';
       }).join('') + '</tbody></table></div>' +
-      '<p class="fine" style="margin-top:.7rem">Environ 12 jours de pluie sur le mois. Le brouillard de fond de vallee se leve entre 9h et 11h. ' +
-      'Meteo officielle de montagne : <a href="https://meteo.arso.gov.si/met/en/" target="_blank" rel="noopener">ARSO Vreme</a>. ' +
-      'Etat des routes et du col du Vrsic : <a href="https://www.promet.si/en/" target="_blank" rel="noopener">promet.si</a>.</p>');
+      '<p class="fine" style="margin-top:.7rem">Environ 12 jours de pluie sur le mois. Le brouillard de fond de vallée se leve entre 9h et 11h. ' +
+      'Météo officielle de montagne : <a href="https://meteo.arso.gov.si/met/en/" target="_blank" rel="noopener">ARSO Vreme</a>. ' +
+      'État des routes et du col du Vrsic : <a href="https://www.promet.si/en/" target="_blank" rel="noopener">promet.si</a>.</p>');
 
     out += acc('S\'il pleut', '<div class="tablewrap"><table><thead><tr><th>Ce que vous voyez</th><th>Ce que vous faites</th></tr></thead><tbody>' +
       GUIDE.pluie.map(function (p) {
         return '<tr><td>' + esc(p.v) + '</td><td>' + esc(p.f) + '</td></tr>';
       }).join('') + '</tbody></table></div>');
 
-    out += acc('Slovene de survie', '<div class="lex">' + GUIDE.mots.map(function (m) {
+    out += acc('Slovène de survie', '<div class="lex">' + GUIDE.mots.map(function (m) {
       return '<div><span class="sl">' + esc(m[0]) + (m[1] ? '<small>' + esc(m[1]) + '</small>' : '') +
         '</span><span class="fr">' + esc(m[2]) + '</span></div>';
     }).join('') + '</div><h3>Prononciation</h3><div class="cards">' +
@@ -760,8 +921,8 @@
 
   function renderPack() {
     var out = '<div class="block wrap"><h2><span class="blaze"></span> Le sac</h2>' +
-      '<p class="sub">Un sac cabine et un sac a dos de journee chacune. Les cases restent cochees sur ce telephone.</p>' +
-      '<div class="progress"><b id="p-count"></b><span>prepare</span></div><div class="meter" id="p-meter"><i></i></div>';
+      '<p class="sub">Un sac cabine et un sac à dos de journée chacune. Les cases restent cochees sur ce téléphone.</p>' +
+      '<div class="progress"><b id="p-count"></b><span>préparé</span></div><div class="meter" id="p-meter"><i></i></div>';
 
     PACK.forEach(function (g) {
       out += '<h3>' + esc(g.titre) + '</h3><div class="check">';
@@ -772,12 +933,12 @@
     });
 
     out += '<button class="btn" id="p-reset" type="button">Tout decocher</button>';
-    out += '<footer><p>Carnet de terrain, Slovenie, 7 au 13 septembre 2026.</p>' +
-      '<p>Prix releves en juillet 2026. Revoyez Vintgar, Skocjan et Tolmin sur leurs sites officiels avant de partir.</p>' +
-      '<p>Coordonnees indicatives, a quelques centaines de metres pres : elles servent au trace et a lancer la navigation. ' +
+    out += '<footer><p>Carnet de terrain, Slovénie, 7 au 13 septembre 2026.</p>' +
+      '<p>Prix relevés en juillet 2026. Revoyez Vintgar, Skocjan et Tolmin sur leurs sites officiels avant de partir.</p>' +
+      '<p>Coordonnées indicatives, à quelques centaines de mètres pres : elles servent au tracé et à lancer la navigation. ' +
       'Les liens Maps et Tripadvisor partent du nom du lieu.</p>' +
       '<p>Fond de carte <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>, ' +
-      'sous licence ODbL. Sur iPhone : bouton Partager, puis "Sur l\'ecran d\'accueil".</p></footer></div>';
+      'sous licence ODbL. Sur iPhone : bouton Partager, puis "Sur l\'écran d\'accueil".</p></footer></div>';
 
     var host = $('#packbody');
     host.innerHTML = out;
@@ -800,7 +961,7 @@
     $('#p-meter').querySelector('i').style.width = (n / boxes.length * 100) + '%';
   }
 
-  /* ---------- pli et plein ecran de la carte ---------- */
+  /* ---------- pli et plein écran de la carte ---------- */
 
   function majBoutonPli() {
     var plie = $('#mapwrap').classList.contains('is-folded');
@@ -856,9 +1017,10 @@
     }
   }
 
-  /* ---------- demarrage ---------- */
+  /* ---------- démarrage ---------- */
 
   function boot() {
+    enregistrerSW();
     renderRail();
     renderAll();
     renderBudget();
@@ -879,7 +1041,7 @@
     });
     dayMap.onStyle = function (k) { db.style = k; save(); if (allMap) { allMap.setStyle(k); } };
 
-    // replier la carte pour lire l'itineraire en plus grand
+    // replier la carte pour lire l'itinéraire en plus grand
     if (db.folded) { $('#mapwrap').classList.add('is-folded'); }
     majBoutonPli();
     $('#mapfold').addEventListener('click', function () {

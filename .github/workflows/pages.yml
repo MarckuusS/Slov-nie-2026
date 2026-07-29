@@ -1,13 +1,13 @@
 name: Publier sur GitHub Pages
 
-# Publie le site a chaque push. Le site est le depot lui-meme :
-# index.html a la racine, plus le dossier assets/. Rien a compiler.
+# Publié le site à chaque push. Le site est le dépôt lui-même :
+# index.html à la racine, plus le dossier assets/. Rien à compiler.
 #
-# A faire une seule fois dans le depot :
+# A faire une seule fois dans le dépôt :
 #   Settings  ->  Pages  ->  Source  ->  GitHub Actions
 #
-# Ensuite, chaque push declenche le deploiement, et l'adresse du site
-# s'affiche dans l'onglet Actions, a la fin du job.
+# Ensuite, chaque push déclenche le déploiement, et l'adresse du site
+# s'affiche dans l'onglet Actions, à la fin du job.
 
 on:
   push:
@@ -21,7 +21,7 @@ permissions:
   pages: write
   id-token: write
 
-# Un seul deploiement a la fois, sans annuler celui qui est en cours.
+# Un seul déploiement à la fois, sans annuler celui qui est en cours.
 concurrency:
   group: pages
   cancel-in-progress: false
