@@ -2,7 +2,7 @@
    Slovenie 2026 - logique de l'application
    ============================================================= */
 
-(function () {
+(function (global) {
   'use strict';
 
   /* ---------- utilitaires ---------- */
@@ -171,13 +171,30 @@
     };
   }
 
-  function routeOf(day) {
-    var pts = [];
+  // Un objet trace par troncon : la vraie geometrie routiere si elle est
+  // connue, sinon la ligne reperee par les points de passage, signalee
+  // en pointille pour que la difference se voie.
+  function routesOf(day, dim) {
+    var out = [];
     build(day).rows.forEach(function (r) {
-      pts.push([r.s.lat, r.s.lon]);
-      if (r.leg && r.leg.via) { r.leg.via.forEach(function (p) { pts.push(p); }); }
+      if (!r.leg) { return; }
+      var reel = global.Router ? Router.get(r.s, r.leg.to) : null;
+      if (reel) {
+        out.push({ points: reel, color: day.color, dim: dim, rough: false });
+      } else {
+        var pts = [[r.s.lat, r.s.lon]]
+          .concat(r.leg.via || [])
+          .concat([[r.leg.to.lat, r.leg.to.lon]]);
+        out.push({ points: pts, color: day.color, dim: dim, rough: true });
+      }
     });
-    return pts;
+    return out;
+  }
+
+  function legPairs(day) {
+    var out = [];
+    build(day).rows.forEach(function (r) { if (r.leg) { out.push([r.s, r.leg.to]); } });
+    return out;
   }
 
   /* ---------- cartes ---------- */
@@ -189,25 +206,26 @@
     if (allMap) { allMap.draw(); }
   }
 
-  function paintDayMap() {
+  function paintDayMap(garderCadre) {
     if (!dayMap) { return; }
     var day = TRIP.days[curDay];
     var b = build(day);
-    dayMap.setRoutes([{ points: routeOf(day), color: day.color }]);
+    dayMap.setRoutes(routesOf(day, false));
     dayMap.setMarks(b.stops.map(function (s, i) {
       return {
         lat: s.lat, lon: s.lon, label: String(i + 1), name: s.name,
         color: day.color, active: i === activeStop, idx: i
       };
     }));
-    dayMap.fit();
+    if (!garderCadre) { dayMap.fit(); }
+    majEtatTrace();
   }
 
-  function paintAllMap() {
+  function paintAllMap(garderCadre) {
     if (!allMap) { return; }
     var routes = [], marks = [];
     TRIP.days.forEach(function (day, i) {
-      routes.push({ points: routeOf(day), color: day.color, dim: false });
+      routes = routes.concat(routesOf(day, false));
       var b = build(day);
       var mid = b.stops[Math.min(1, b.stops.length - 1)];
       marks.push({
@@ -217,7 +235,41 @@
     });
     allMap.setRoutes(routes);
     allMap.setMarks(marks);
-    allMap.fit(34);
+    if (!garderCadre) { allMap.fit(34); }
+    majEtatTrace();
+  }
+
+  /* ---------- recuperation des traces routiers ---------- */
+
+  function toutesLesPaires() {
+    var out = [];
+    TRIP.days.forEach(function (d) { out = out.concat(legPairs(d)); });
+    return out;
+  }
+
+  function majEtatTrace(msg) {
+    var el = document.getElementById('maproute');
+    if (!el) { return; }
+    if (msg) { el.textContent = msg; return; }
+    if (!global.Router) { el.textContent = ''; return; }
+    var reste = Router.missing(legPairs(TRIP.days[curDay]));
+    el.textContent = reste
+      ? reste + ' troncon' + (reste > 1 ? 's' : '') + ' approximatif' + (reste > 1 ? 's' : '')
+      : 'Itineraire routier reel';
+  }
+
+  function chercherTraces(pairs, repeindre) {
+    if (!global.Router) { return; }
+    var reste = Router.missing(pairs);
+    if (!reste) { majEtatTrace(); return; }
+    majEtatTrace('Calcul des itineraires, 0/' + reste);
+    Router.ensure(pairs, function (fait, total, fini) {
+      if (fini) { repeindre(true); majEtatTrace(); }
+      else {
+        majEtatTrace('Calcul des itineraires, ' + fait + '/' + total);
+        repeindre(true);
+      }
+    });
   }
 
   /* ---------- rendu du selecteur de jour ---------- */
@@ -381,6 +433,7 @@
     db.day = curDay; save();
     syncRail();
     renderDay();
+    chercherTraces(legPairs(TRIP.days[curDay]), function () { paintDayMap(true); });
     window.scrollTo({ top: 0, behavior: 'auto' });
   }
 
@@ -421,20 +474,47 @@
       '<tr><td>Kobarid vers Skocjan</td><td class="num">145 km . 2h20</td></tr>' +
       '<tr><td>Skocjan vers Ljubljana</td><td class="num">75 km . 55 min</td></tr>' +
       '<tr><td>Ljubljana vers aeroport</td><td class="num">26 km . 28 min</td></tr>' +
-      '</tbody></table></div></div>';
+      '</tbody></table></div>';
+
+    out += '<h3>Les traces routiers</h3>' +
+      '<p class="fine">Les itineraires suivent les vraies routes. Ils sont calcules une fois par OSRM, ' +
+      'le moteur d\'itineraire d\'OpenStreetMap, puis gardes sur ce telephone : ensuite ca marche sans reseau. ' +
+      'Un troncon en pointille signifie qu\'il n\'a pas encore ete calcule.</p>' +
+      '<p class="fine">Pour les figer dans le depot et ne plus jamais dependre du reseau : exportez le fichier, ' +
+      'puis remplacez assets/routes.js par celui qui est telecharge.</p>' +
+      '<button class="btn" id="export-routes" type="button">Exporter les traces</button> ' +
+      '<span class="fine" id="export-etat"></span></div>';
 
     host.innerHTML = out;
     host.addEventListener('click', function (ev) {
       var tr = ev.target.closest('[data-open]');
-      if (!tr) { return; }
-      selectDay(parseInt(tr.dataset.open, 10));
-      showTab('jours');
+      if (tr) {
+        selectDay(parseInt(tr.dataset.open, 10));
+        showTab('jours');
+        return;
+      }
+      if (ev.target.closest('#export-routes')) { exporterTraces(); }
     });
 
     var leg = $('#maplegend');
     leg.innerHTML = TRIP.days.map(function (d) {
       return '<span><i style="background:' + d.color + '"></i>J' + d.n + '</span>';
     }).join('');
+  }
+
+  function exporterTraces() {
+    var etat = $('#export-etat');
+    if (!global.Router || !Router.count()) {
+      etat.textContent = 'Aucun trace calcule pour l\'instant.';
+      return;
+    }
+    var blob = new Blob([Router.exportFile()], { type: 'text/javascript' });
+    var url = URL.createObjectURL(blob);
+    var lien = document.createElement('a');
+    lien.href = url; lien.download = 'routes.js';
+    document.body.appendChild(lien); lien.click(); lien.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+    etat.textContent = Router.count() + ' troncons exportes.';
   }
 
   /* ---------- budget ---------- */
@@ -720,6 +800,29 @@
     $('#p-meter').querySelector('i').style.width = (n / boxes.length * 100) + '%';
   }
 
+  /* ---------- pli et plein ecran de la carte ---------- */
+
+  function majBoutonPli() {
+    var plie = $('#mapwrap').classList.contains('is-folded');
+    var b = $('#mapfold');
+    b.setAttribute('aria-expanded', String(!plie));
+    b.querySelector('span').textContent = plie ? 'Afficher' : 'Replier';
+    b.classList.toggle('is-folded', plie);
+  }
+
+  function plierDeplier(sel, mode, carte) {
+    var w = $(sel);
+    var on = !w.classList.contains('is-' + mode);
+    w.classList.toggle('is-' + mode, on);
+    document.body.classList.toggle('has-full', on);
+    if (on) { w.classList.remove('is-folded'); }
+    if (sel === '#mapwrap') { majBoutonPli(); }
+    setTimeout(function () {
+      carte.render();
+      if (carte === dayMap) { paintDayMap(true); } else { paintAllMap(true); }
+    }, 40);
+  }
+
   /* ---------- onglets ---------- */
 
   var TABS = ['jours', 'carte', 'budget', 'guide', 'sac'];
@@ -738,12 +841,19 @@
       if (!allMap) {
         allMap = new MiniMap($('#allmap'), {
           minZoom: 7, maxZoom: 14,
+          style: db.style || 'plan',
+          onFull: function () { plierDeplier('#allwrap', 'full', allMap); },
           onPick: function (m) { if (m.day != null) { selectDay(m.day); showTab('jours'); } }
         });
+        allMap.onStyle = function (k) { db.style = k; save(); if (dayMap) { dayMap.setStyle(k); } };
       }
       paintAllMap();
+      chercherTraces(toutesLesPaires(), function () { paintAllMap(true); });
     }
-    if (name === 'jours' && dayMap) { setTimeout(function () { dayMap.render(); paintDayMap(); }, 30); }
+    if (name === 'jours' && dayMap) {
+      setTimeout(function () { dayMap.render(); paintDayMap(true); }, 30);
+      chercherTraces(legPairs(TRIP.days[curDay]), function () { paintDayMap(true); });
+    }
   }
 
   /* ---------- demarrage ---------- */
@@ -757,13 +867,27 @@
 
     dayMap = new MiniMap($('#daymap'), {
       minZoom: 8, maxZoom: 16,
+      style: db.style || 'plan',
+      onFull: function () { plierDeplier('#mapwrap', 'full', dayMap); },
       onPick: function (m) {
         activeStop = m.idx;
         $$('#daybody .stopcard').forEach(function (c, k) { c.classList.toggle('is-active', k === activeStop); });
         var card = $$('#daybody .stop')[activeStop];
         if (card) { card.scrollIntoView({ block: 'center' }); }
-        paintDayMap();
+        paintDayMap(true);
       }
+    });
+    dayMap.onStyle = function (k) { db.style = k; save(); if (allMap) { allMap.setStyle(k); } };
+
+    // replier la carte pour lire l'itineraire en plus grand
+    if (db.folded) { $('#mapwrap').classList.add('is-folded'); }
+    majBoutonPli();
+    $('#mapfold').addEventListener('click', function () {
+      var w = $('#mapwrap');
+      w.classList.toggle('is-folded');
+      db.folded = w.classList.contains('is-folded'); save();
+      majBoutonPli();
+      if (!db.folded) { setTimeout(function () { dayMap.render(); paintDayMap(true); }, 30); }
     });
 
     curDay = (todayIdx >= 0) ? todayIdx : (db.day != null ? db.day : 0);
@@ -786,4 +910,4 @@
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot);
   } else { boot(); }
-})();
+})(window);

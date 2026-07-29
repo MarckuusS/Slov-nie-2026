@@ -9,7 +9,14 @@
 Le coeur du projet est un **tableau de bord de voyage** : `index.html` plus le dossier `assets/`.
 Il se consulte au telephone, pendant le voyage.
 
-- **Carte OpenStreetMap** avec le trace de la journee, les etapes numerotees et le circuit complet des 7 jours
+- **Carte** avec le trace de la journee, les etapes numerotees et le circuit complet des 7 jours.
+  Quatre fonds au choix : Plan (OpenStreetMap), Relief (OpenTopoMap), Satellite (Esri) et Fond uni.
+  La carte se replie pour lire l'itineraire en plein ecran, et s'ouvre en plein ecran pour lire la carte.
+- **Itineraires routiers reels** : le trace suit les vraies routes, pas une ligne droite. La geometrie
+  vient d'OSRM, le moteur d'itineraire d'OpenStreetMap. Elle est calculee une fois puis gardee sur
+  l'appareil, donc ca marche ensuite sans reseau. Un tronçon en pointille n'a pas encore ete calcule.
+  Le bouton "Exporter les traces" de l'onglet Carte permet de les figer dans `assets/routes.js` :
+  une fois ce fichier commite, l'application ne fait plus aucun appel reseau pour les routes.
 - **Horaire calcule** : heure d'arrivee, temps sur place, temps de route vers l'etape suivante. Changez l'heure de depart, toute la journee se recalcule
 - **Liens directs** vers la fiche Google Maps, la navigation Waze, les avis Tripadvisor et le site officiel de chaque etape
 - **Simulateur de budget** et **suivi des depenses** face a la cible de 600 €
@@ -131,7 +138,9 @@ ces fichiers gardent le detail.
 | `.github/workflows/pages.yml` | Publie le site a chaque push, une fois Pages regle sur GitHub Actions |
 | `main.py` | Lance le site en local et donne l'adresse a ouvrir sur l'iPhone |
 | `assets/data.js` | Toutes les donnees du voyage : etapes, coordonnees, temps de route, prix |
-| `assets/map.js` | Le moteur de carte : tuiles OpenStreetMap, trace, marqueurs, gestes tactiles |
+| `assets/map.js` | Le moteur de carte : tuiles, fonds, trace, marqueurs, gestes tactiles |
+| `assets/router.js` | Recuperation et mise en cache des itineraires routiers reels |
+| `assets/routes.js` | Traces figes. Vide au depart, a remplacer par l'export de l'onglet Carte. |
 | `assets/app.js` | Le calcul des horaires, le budget, le rendu |
 | `assets/app.css` | La feuille de style |
 | `carnet.html` | Version en un seul fichier, generee par `build-single.py` |

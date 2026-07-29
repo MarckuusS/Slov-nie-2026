@@ -46,11 +46,19 @@
   --f-data: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 
   --wrap: 44rem;
-  --pad: max(1.1rem, env(safe-area-inset-left));
-  --pad-r: max(1.1rem, env(safe-area-inset-right));
+  /* Marge de base, toujours appliquee. Les encoches s'ajoutent par-dessus
+     via --safe-*, definis plus bas sous @supports : si env() n'est pas
+     reconnu, ils restent a 0px et la marge de base tient quand meme. */
+  --gutter: 1.25rem;
+  --safe-t: 0px;
+  --safe-b: 0px;
+  --safe-l: 0px;
+  --safe-r: 0px;
+  --pad: calc(var(--gutter) + var(--safe-l));
+  --pad-r: calc(var(--gutter) + var(--safe-r));
   --tabbar: 3.55rem;
   --tap: 2.75rem;
-  --top-h: calc(env(safe-area-inset-top) + 2.85rem);
+  --top-h: calc(var(--safe-t) + 2.85rem);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -115,6 +123,15 @@
   --map-void:   #E4E9E0;
 }
 
+@supports (padding-left: env(safe-area-inset-left)) {
+  :root {
+    --safe-t: env(safe-area-inset-top);
+    --safe-b: env(safe-area-inset-bottom);
+    --safe-l: env(safe-area-inset-left);
+    --safe-r: env(safe-area-inset-right);
+  }
+}
+
 * { box-sizing: border-box; }
 
 html {
@@ -169,7 +186,7 @@ a { color: var(--soca); }
   -webkit-backdrop-filter: saturate(160%) blur(14px);
   backdrop-filter: saturate(160%) blur(14px);
   border-bottom: 1px solid var(--rule);
-  padding-top: env(safe-area-inset-top);
+  padding-top: var(--safe-t);
 }
 .topbar-in {
   max-width: var(--wrap);
@@ -286,6 +303,51 @@ h3 {
 }
 .mapwrap.is-static { position: static; }
 .mapwrap.is-static .mm { height: clamp(240px, 52vh, 520px); }
+
+/* --- carte repliee : on rend toute la hauteur a l'itineraire --- */
+.mapwrap.is-folded .mm { height: 0; border-bottom: 0; }
+.mapwrap.is-folded .mm-ctrl, .mapwrap.is-folded .mm-attrib, .mapwrap.is-folded .mm-styles { display: none; }
+
+/* --- barre sous la carte : pli et etat du trace --- */
+.maptools {
+  max-width: var(--wrap); margin: 0 auto;
+  display: flex; align-items: center; gap: .6rem;
+  padding: .25rem var(--pad-r) .3rem var(--pad);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+.foldbtn {
+  -webkit-appearance: none; appearance: none;
+  display: inline-flex; align-items: center; gap: .4rem;
+  min-height: var(--tap); padding: .3rem .55rem .3rem .3rem;
+  background: none; border: 0; color: var(--ink-soft);
+  font-family: var(--f-data); font-size: .64rem;
+  letter-spacing: .09em; text-transform: uppercase;
+  cursor: pointer; touch-action: manipulation;
+  white-space: nowrap; flex: none;
+}
+.foldbtn:active { color: var(--soca); }
+.foldbtn .ic { width: 1rem; height: 1rem; transition: transform .2s ease; }
+.foldbtn.is-folded .ic { transform: rotate(180deg); }
+.maproute {
+  margin-left: auto;
+  font-family: var(--f-data); font-size: .6rem;
+  letter-spacing: .05em; color: var(--ink-faint);
+  text-align: right; min-width: 0;
+}
+
+/* --- plein ecran --- */
+.mapwrap.is-full {
+  position: fixed; inset: 0; z-index: 90;
+  display: flex; flex-direction: column;
+  background: var(--paper);
+  padding-top: var(--safe-t);
+  top: 0;
+}
+.mapwrap.is-full .mm { flex: 1 1 auto; height: auto; border-top: 0; }
+.mapwrap.is-full .maptools { padding-bottom: calc(.3rem + var(--safe-b)); border-bottom: 0; border-top: 1px solid var(--rule); }
+body.has-full { overflow: hidden; }
+body.has-full .tabbar { display: none; }
 .mm {
   position: relative;
   height: clamp(180px, 38vh, 360px);
@@ -316,6 +378,8 @@ h3 {
 .mm-halo { fill: none; stroke: var(--paper); stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
 .mm-line { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
 .mm-line.is-dim { stroke-width: 2.5; opacity: .3; }
+/* tronçon dont l'itineraire routier n'est pas encore calcule */
+.mm-line.is-rough { stroke-dasharray: 3 7; stroke-width: 3; opacity: .75; }
 .mm-mark { cursor: pointer; }
 .mm-ring { stroke: var(--paper); stroke-width: 2.5; }
 .mm-mark.is-dim .mm-ring { opacity: .35; }
@@ -350,6 +414,36 @@ h3 {
 }
 .mm-ctrl button:active { background: var(--soca-lift); border-color: var(--soca); }
 .mm-ctrl svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.mm-ctrl button[aria-expanded="true"] { border-color: var(--soca); color: var(--soca); }
+
+.mm-styles {
+  position: absolute; right: 2.9rem; top: .5rem; z-index: 6;
+  display: grid; gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule); border-radius: 5px; overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.mm-styles[hidden] { display: none; }
+.mm-styles button {
+  -webkit-appearance: none; appearance: none;
+  background: var(--surface); border: 0; color: var(--ink);
+  font-family: var(--f-data); font-size: .66rem; letter-spacing: .06em;
+  padding: 0 .9rem; min-height: var(--tap); text-align: left;
+  white-space: nowrap; cursor: pointer; touch-action: manipulation;
+}
+.mm-styles button[aria-pressed="true"] { background: var(--soca-lift); color: var(--soca); }
+.mm-styles button:active { background: var(--surface-2); }
+
+/* Le filtre depend du fond : desature sur le plan et le relief pour que
+   le trace ressorte, laisse tel quel sur la vue satellite. */
+.mm[data-style="satellite"] .mm-tile { filter: none; }
+.mm[data-style="relief"] .mm-tile { filter: saturate(.6) contrast(.95) brightness(1.03); }
+:root[data-theme="dark"] .mm[data-style="relief"] .mm-tile,
+:root[data-theme="dark"] .mm[data-style="satellite"] .mm-tile { filter: brightness(.78) saturate(.8); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .mm[data-style="relief"] .mm-tile,
+  :root:not([data-theme="light"]) .mm[data-style="satellite"] .mm-tile { filter: brightness(.78) saturate(.8); }
+}
 
 .maplegend {
   display: flex; flex-wrap: wrap; gap: .3rem .8rem;
@@ -703,12 +797,12 @@ details.acc[open] > summary { color: var(--soca); }
   -webkit-backdrop-filter: saturate(160%) blur(16px);
   backdrop-filter: saturate(160%) blur(16px);
   border-top: 1px solid var(--rule);
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: var(--safe-b);
 }
 .tabbar-in {
   max-width: var(--wrap); margin: 0 auto;
   display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
-  padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);
+  padding-left: var(--safe-l); padding-right: var(--safe-r);
 }
 .tabbar button {
   -webkit-appearance: none; appearance: none;
@@ -722,7 +816,7 @@ details.acc[open] > summary { color: var(--soca); }
 .tabbar button[aria-selected="true"] { color: var(--soca); }
 .tabbar button:active { opacity: .55; }
 
-main { padding-bottom: calc(var(--tabbar) + 1.4rem + env(safe-area-inset-bottom)); }
+main { padding-bottom: calc(var(--tabbar) + 1.4rem + var(--safe-b)); }
 
 footer {
   margin-top: 2.2rem; padding: 1.5rem 0 1rem;
@@ -732,7 +826,7 @@ footer {
 footer p { margin: .3rem 0; }
 
 @media (min-width: 48rem) {
-  :root { --pad: 1.5rem; --pad-r: 1.5rem; }
+  :root { --gutter: 1.6rem; }
   body { font-size: 1.04rem; }
   .mm { height: clamp(260px, 46vh, 460px); }
 }
@@ -753,13 +847,22 @@ footer p { margin: .3rem 0; }
   <!-- ============ JOURS ============ -->
   <div class="panel is-active" id="p-jours" role="tabpanel" aria-labelledby="t-jours">
     <div class="dayrail"><div class="dayrail-in" id="dayrail"></div></div>
-    <div class="mapwrap"><div class="mm" id="daymap"></div></div>
+    <div class="mapwrap" id="mapwrap">
+      <div class="mm" id="daymap"></div>
+      <div class="maptools">
+        <button type="button" id="mapfold" class="foldbtn" aria-expanded="true" aria-controls="daymap">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 14 6-6 6 6"/></svg>
+          <span>Replier</span>
+        </button>
+        <span class="maproute" id="maproute"></span>
+      </div>
+    </div>
     <div class="wrap" id="daybody"></div>
   </div>
 
   <!-- ============ CARTE ============ -->
   <div class="panel" id="p-carte" role="tabpanel" aria-labelledby="t-carte">
-    <div class="mapwrap is-static"><div class="mm" id="allmap"></div></div>
+    <div class="mapwrap is-static" id="allwrap"><div class="mm" id="allmap"></div></div>
     <div class="maplegend" id="maplegend"></div>
     <div id="allbody"></div>
   </div>
@@ -1413,21 +1516,250 @@ const BUDGET = {
 </script>
 <script>
 /* =============================================================
+   Traces routiers figes.
+
+   Ce fichier est vide pour l'instant : l'application calcule les
+   itineraires au premier affichage, en interrogeant OSRM, puis les
+   garde dans le stockage local du telephone.
+
+   Pour les figer ici et rendre l'application totalement autonome :
+   ouvrez l'onglet Carte, laissez le calcul se terminer, appuyez sur
+   "Exporter les traces", et remplacez ce fichier par celui qui est
+   telecharge. Un commit plus tard, plus aucun appel reseau n'est
+   necessaire pour dessiner les routes.
+
+   Geometrie OSRM, donnees OpenStreetMap, licence ODbL.
+   ============================================================= */
+
+window.ROUTES = {};
+
+</script>
+<script>
+/* =============================================================
+   Traces routiers reels.
+
+   Le trace entre deux etapes suit les vraies routes, pas une ligne
+   droite. La geometrie vient d'OSRM, le moteur de calcul d'itineraire
+   d'OpenStreetMap, interroge par le navigateur.
+
+   Comment ca marche :
+   1. assets/routes.js peut contenir des traces deja figes. S'ils y
+      sont, rien n'est demande au reseau, l'application est autonome.
+   2. Sinon, chaque tronçon est demande une fois, simplifie, puis
+      garde dans le stockage local du telephone. Les fois suivantes,
+      c'est instantane et ca marche sans reseau.
+   3. Si le reseau ne repond pas, on retombe sur la ligne reperee par
+      les points de passage saisis a la main : moins fidele, mais
+      lisible, et signalee en pointille dans l'application.
+
+   Pour figer les traces dans le depot : onglet Carte, bouton
+   "Exporter les traces", puis remplacer assets/routes.js par le
+   fichier telecharge.
+   ============================================================= */
+
+(function (global) {
+  'use strict';
+
+  var CACHE_KEY = 'slo2026.routes.v1';
+  var ENDPOINT = 'https://router.project-osrm.org/route/v1/driving/';
+  var PAUSE = 250;      // ms entre deux appels, pour rester poli
+  var EPS = 0.00005;    // simplification, environ 5 m
+
+  var mem = {};
+  var pending = false;
+
+  // 1. traces figes livres avec le depot
+  if (global.ROUTES) {
+    Object.keys(global.ROUTES).forEach(function (k) { mem[k] = global.ROUTES[k]; });
+  }
+  // 2. traces deja recuperes sur cet appareil
+  try {
+    var stored = JSON.parse(localStorage.getItem(CACHE_KEY) || '{}');
+    Object.keys(stored).forEach(function (k) { if (!mem[k]) { mem[k] = stored[k]; } });
+  } catch (e) { /* mode prive, navigation restreinte : tant pis */ }
+
+  function key(a, b) {
+    return a.lat.toFixed(4) + ',' + a.lon.toFixed(4) + '>' + b.lat.toFixed(4) + ',' + b.lon.toFixed(4);
+  }
+
+  function persist() {
+    try {
+      var out = {};
+      Object.keys(mem).forEach(function (k) {
+        if (!global.ROUTES || !global.ROUTES[k]) { out[k] = mem[k]; }
+      });
+      localStorage.setItem(CACHE_KEY, JSON.stringify(out));
+    } catch (e) { /* quota plein : le trace reste en memoire pour la session */ }
+  }
+
+  /* --- Ramer-Douglas-Peucker, pour ne pas stocker 2000 points par tronçon --- */
+  function segDist(p, a, b) {
+    var x = a[0], y = a[1], dx = b[0] - x, dy = b[1] - y;
+    if (dx || dy) {
+      var t = ((p[0] - x) * dx + (p[1] - y) * dy) / (dx * dx + dy * dy);
+      if (t > 1) { x = b[0]; y = b[1]; }
+      else if (t > 0) { x += dx * t; y += dy * t; }
+    }
+    dx = p[0] - x; dy = p[1] - y;
+    return dx * dx + dy * dy;
+  }
+
+  function simplify(pts, eps) {
+    if (pts.length < 3) { return pts.slice(); }
+    var sq = eps * eps;
+    var keep = new Array(pts.length);
+    keep[0] = keep[pts.length - 1] = true;
+    var stack = [[0, pts.length - 1]];
+    while (stack.length) {
+      var seg = stack.pop(), first = seg[0], last = seg[1];
+      var maxD = 0, idx = -1;
+      for (var i = first + 1; i < last; i++) {
+        var d = segDist(pts[i], pts[first], pts[last]);
+        if (d > maxD) { maxD = d; idx = i; }
+      }
+      if (maxD > sq && idx > 0) {
+        keep[idx] = true;
+        stack.push([first, idx], [idx, last]);
+      }
+    }
+    return pts.filter(function (p, i) { return keep[i]; });
+  }
+
+  function fetchLeg(a, b) {
+    var url = ENDPOINT + a.lon + ',' + a.lat + ';' + b.lon + ',' + b.lat +
+      '?overview=full&geometries=geojson&alternatives=false&steps=false';
+    return fetch(url, { mode: 'cors' })
+      .then(function (r) {
+        if (!r.ok) { throw new Error('http ' + r.status); }
+        return r.json();
+      })
+      .then(function (d) {
+        if (d.code !== 'Ok' || !d.routes || !d.routes.length) { throw new Error('pas de route'); }
+        var coords = d.routes[0].geometry.coordinates;   // [lon, lat]
+        var pts = coords.map(function (c) { return [c[1], c[0]]; });
+        pts = simplify(pts, EPS).map(function (p) {
+          return [Math.round(p[0] * 1e5) / 1e5, Math.round(p[1] * 1e5) / 1e5];
+        });
+        if (pts.length < 2) { throw new Error('trace vide'); }
+        mem[key(a, b)] = pts;
+        return pts;
+      });
+  }
+
+  var Router = {
+    /** Trace reel entre deux etapes, ou null s'il n'est pas encore connu. */
+    get: function (a, b) { return mem[key(a, b)] || null; },
+
+    has: function (a, b) { return !!mem[key(a, b)]; },
+
+    /** Nombre de troncons encore a recuperer dans la liste donnee. */
+    missing: function (pairs) {
+      return pairs.filter(function (p) { return !mem[key(p[0], p[1])]; }).length;
+    },
+
+    /**
+     * Recupere les troncons manquants, un par un.
+     * onStep(fait, total) est appele apres chaque tronçon obtenu,
+     * pour redessiner la carte au fur et a mesure.
+     */
+    ensure: function (pairs, onStep) {
+      if (pending || !global.fetch) { return; }
+      var todo = pairs.filter(function (p) { return !mem[key(p[0], p[1])]; });
+      if (!todo.length) { return; }
+
+      pending = true;
+      var total = todo.length, done = 0;
+
+      function next() {
+        if (!todo.length) {
+          pending = false;
+          persist();
+          if (onStep) { onStep(done, total, true); }
+          return;
+        }
+        var p = todo.shift();
+        fetchLeg(p[0], p[1])
+          .then(function () { done++; if (onStep) { onStep(done, total, false); } })
+          .catch(function () { /* on garde la ligne de repli pour ce tronçon */ })
+          .then(function () { setTimeout(next, PAUSE); });
+      }
+      next();
+    },
+
+    /** Contenu de assets/routes.js, pour figer les traces dans le depot. */
+    exportFile: function () {
+      var keys = Object.keys(mem).sort();
+      var lines = keys.map(function (k) {
+        return '  ' + JSON.stringify(k) + ': ' + JSON.stringify(mem[k]) + ',';
+      });
+      return '/* =============================================================\n' +
+        '   Traces routiers figes, generes depuis l\'application.\n' +
+        '   ' + keys.length + ' troncons. Geometrie OSRM, donnees OpenStreetMap (ODbL).\n' +
+        '\n' +
+        '   Tant que ce fichier est rempli, l\'application n\'a plus besoin\n' +
+        '   du reseau pour dessiner les itineraires.\n' +
+        '\n' +
+        '   Pour le regenerer : onglet Carte, bouton Exporter les traces.\n' +
+        '   ============================================================= */\n\n' +
+        'window.ROUTES = {\n' + lines.join('\n') + '\n};\n';
+    },
+
+    count: function () { return Object.keys(mem).length; }
+  };
+
+  global.Router = Router;
+})(window);
+
+</script>
+<script>
+/* =============================================================
    Moteur de carte minimal, sans aucune dependance.
 
-   Tuiles raster OpenStreetMap en projection Web Mercator,
-   overlay SVG pour le trace et les marqueurs numerotes.
-   Gestes tactiles : glisser, pincer, double tap. Molette au bureau.
+   Tuiles raster en projection Web Mercator, overlay SVG pour le
+   trace et les marqueurs numerotes. Gestes tactiles : glisser,
+   pincer, double tap. Molette au bureau.
 
-   Si les tuiles ne chargent pas (pas de reseau dans une vallee),
-   le fond uni reste et le trace demeure lisible : c'est voulu.
+   Quatre fonds : Plan (OpenStreetMap), Relief (OpenTopoMap),
+   Satellite (Esri) et Fond uni. Le fond uni n'est pas une panne,
+   c'est un choix : le trace y est plus lisible, et c'est ce qui
+   reste quand il n'y a pas de reseau dans une vallee.
    ============================================================= */
 
 (function (global) {
   'use strict';
 
   var TILE = 256;
-  var TILE_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+  var STYLES = [
+    {
+      key: 'plan', name: 'Plan',
+      url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+      max: 18,
+      credit: 'OpenStreetMap', creditUrl: 'https://www.openstreetmap.org/copyright'
+    },
+    {
+      key: 'relief', name: 'Relief',
+      url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+      sub: ['a', 'b', 'c'], max: 16,
+      credit: 'OpenTopoMap, CC-BY-SA', creditUrl: 'https://opentopomap.org/'
+    },
+    {
+      key: 'satellite', name: 'Satellite',
+      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      max: 18,
+      credit: 'Esri, Maxar, Earthstar Geographics', creditUrl: 'https://www.esri.com/'
+    },
+    {
+      key: 'uni', name: 'Fond uni',
+      url: null, max: 18,
+      credit: null, creditUrl: null
+    }
+  ];
+
+  function styleOf(key) {
+    for (var i = 0; i < STYLES.length; i++) { if (STYLES[i].key === key) { return STYLES[i]; } }
+    return STYLES[0];
+  }
 
   function project(lat, lon, z) {
     var s = TILE * Math.pow(2, z);
@@ -1454,17 +1786,26 @@ const BUDGET = {
     return e;
   }
 
+  var ICON = {
+    fit: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V5.5A1.5 1.5 0 0 1 5.5 4H9M15 4h3.5A1.5 1.5 0 0 1 20 5.5V9M20 15v3.5a1.5 1.5 0 0 1-1.5 1.5H15M9 20H5.5A1.5 1.5 0 0 1 4 18.5V15"/></svg>',
+    layer: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 21 8l-9 4.5L3 8z"/><path d="M3 12.5 12 17l9-4.5"/></svg>',
+    full: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>',
+    close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>'
+  };
+
   function MiniMap(container, opts) {
     opts = opts || {};
     this.box = container;
     this.minZoom = opts.minZoom || 6;
     this.maxZoom = opts.maxZoom || 16;
     this.z = opts.zoom || 9;
-    this.tilesOn = opts.tiles !== false;
     this.onPick = opts.onPick || function () {};
+    this.onFull = opts.onFull || null;
+    this.styleKey = opts.style || 'plan';
 
     this.box.classList.add('mm');
     this.box.innerHTML = '';
+    this.box.setAttribute('data-style', this.styleKey);
 
     this.inner = document.createElement('div');
     this.inner.className = 'mm-inner';
@@ -1483,24 +1824,29 @@ const BUDGET = {
     this.svg.appendChild(this.gRoutes);
     this.svg.appendChild(this.gMarks);
 
-    var attrib = document.createElement('a');
-    attrib.className = 'mm-attrib';
-    attrib.href = 'https://www.openstreetmap.org/copyright';
-    attrib.target = '_blank';
-    attrib.rel = 'noopener';
-    attrib.textContent = 'Fond de carte OpenStreetMap';
-    this.box.appendChild(attrib);
+    this.attrib = document.createElement('a');
+    this.attrib.className = 'mm-attrib';
+    this.attrib.target = '_blank';
+    this.attrib.rel = 'noopener';
+    this.box.appendChild(this.attrib);
 
     this.ctrl = document.createElement('div');
     this.ctrl.className = 'mm-ctrl';
     this.ctrl.innerHTML =
       '<button type="button" data-mm="in" aria-label="Zoomer">+</button>' +
       '<button type="button" data-mm="out" aria-label="Dezoomer">-</button>' +
-      '<button type="button" data-mm="fit" aria-label="Recadrer sur le trace">' +
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V5.5A1.5 1.5 0 0 1 5.5 4H9M15 4h3.5A1.5 1.5 0 0 1 20 5.5V9M20 15v3.5a1.5 1.5 0 0 1-1.5 1.5H15M9 20H5.5A1.5 1.5 0 0 1 4 18.5V15"/></svg></button>' +
-      '<button type="button" data-mm="layer" aria-label="Afficher ou masquer le fond de carte">' +
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 21 8l-9 4.5L3 8z"/><path d="M3 12.5 12 17l9-4.5"/></svg></button>';
+      '<button type="button" data-mm="fit" aria-label="Recadrer sur le trace">' + ICON.fit + '</button>' +
+      '<button type="button" data-mm="layer" aria-label="Changer de fond de carte" aria-expanded="false">' + ICON.layer + '</button>' +
+      (this.onFull ? '<button type="button" data-mm="full" aria-label="Carte en plein ecran">' + ICON.full + '</button>' : '');
     this.box.appendChild(this.ctrl);
+
+    this.menu = document.createElement('div');
+    this.menu.className = 'mm-styles';
+    this.menu.hidden = true;
+    this.menu.innerHTML = STYLES.map(function (st) {
+      return '<button type="button" data-style="' + st.key + '">' + st.name + '</button>';
+    }).join('');
+    this.box.appendChild(this.menu);
 
     this.tiles = {};
     this.pointers = {};
@@ -1510,8 +1856,44 @@ const BUDGET = {
     this.renderOX = 0; this.renderOY = 0;
 
     this._bind();
+    this.setStyle(this.styleKey, true);
     this.setCenter(46.25, 14.0, this.z);
   }
+
+  /* ---------- fonds de carte ---------- */
+
+  MiniMap.prototype.setStyle = function (key, quiet) {
+    var st = styleOf(key);
+    this.styleKey = st.key;
+    this.box.setAttribute('data-style', st.key);
+    this.maxZoom = Math.min(this.maxZoom, st.max);
+    if (this.z > st.max) { this.z = st.max; }
+
+    if (st.credit) {
+      this.attrib.hidden = false;
+      this.attrib.href = st.creditUrl;
+      this.attrib.textContent = 'Fond ' + st.credit;
+    } else {
+      this.attrib.hidden = true;
+    }
+
+    Array.prototype.forEach.call(this.menu.children, function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.style === st.key));
+    });
+
+    // on repart de zero : les tuiles de l'ancien fond ne sont pas reutilisables
+    this.tileLayer.innerHTML = '';
+    this.tiles = {};
+    if (!quiet) { this.render(); }
+  };
+
+  MiniMap.prototype._tileUrl = function (st, z, x, y) {
+    var u = st.url.replace('{z}', z).replace('{x}', x).replace('{y}', y);
+    if (st.sub) { u = u.replace('{s}', st.sub[(x + y) % st.sub.length]); }
+    return u;
+  };
+
+  /* ---------- geometrie ---------- */
 
   MiniMap.prototype._size = function () {
     var r = this.box.getBoundingClientRect();
@@ -1526,8 +1908,6 @@ const BUDGET = {
     this.cx = p[0]; this.cy = p[1];
     this.render();
   };
-
-  /* ---------- contenu ---------- */
 
   MiniMap.prototype.setRoutes = function (routes) { this.routes = routes || []; this.draw(); };
   MiniMap.prototype.setMarks = function (marks) { this.marks = marks || []; this.draw(); };
@@ -1576,7 +1956,8 @@ const BUDGET = {
   };
 
   MiniMap.prototype._tiles = function () {
-    if (!this.tilesOn) {
+    var st = styleOf(this.styleKey);
+    if (!st.url) {
       this.tileLayer.innerHTML = '';
       this.tiles = {};
       return;
@@ -1591,19 +1972,18 @@ const BUDGET = {
       for (var y = y0; y <= y1; y++) {
         if (y < 0 || y >= n) { continue; }
         var tx = ((x % n) + n) % n;
-        var key = z + '/' + tx + '/' + y + '/' + x;
+        var key = st.key + '/' + z + '/' + tx + '/' + y + '/' + x;
         need[key] = 1;
         if (!this.tiles[key]) {
           var img = new Image();
           img.className = 'mm-tile';
           img.alt = '';
           img.decoding = 'async';
-          img.loading = 'eager';
           img.style.left = (x * TILE - ox) + 'px';
           img.style.top = (y * TILE - oy) + 'px';
           img.addEventListener('load', function () { this.classList.add('is-on'); });
           img.addEventListener('error', function () { this.classList.add('is-dead'); });
-          img.src = TILE_URL.replace('{z}', z).replace('{x}', tx).replace('{y}', y);
+          img.src = this._tileUrl(st, z, tx, y);
           this.tileLayer.appendChild(img);
           this.tiles[key] = img;
         } else {
@@ -1642,10 +2022,9 @@ const BUDGET = {
       halo.setAttribute('d', d);
       self.gRoutes.appendChild(halo);
 
-      var line = el('path', 'mm-line' + (r.dim ? ' is-dim' : ''));
+      var line = el('path', 'mm-line' + (r.dim ? ' is-dim' : '') + (r.rough ? ' is-rough' : ''));
       line.setAttribute('d', d);
       line.setAttribute('stroke', r.color || '#0C7367');
-      if (r.dash) { line.setAttribute('stroke-dasharray', '2 7'); }
       self.gRoutes.appendChild(line);
     });
 
@@ -1689,12 +2068,10 @@ const BUDGET = {
 
   MiniMap.prototype._pan = function () {
     var ox = this.cx - this.W / 2, oy = this.cy - this.H / 2;
-    var dx = this.renderOX - ox, dy = this.renderOY - oy;
-    this.tileLayer.style.transform = 'translate3d(' + dx + 'px,' + dy + 'px,0)';
+    this.tileLayer.style.transform =
+      'translate3d(' + (this.renderOX - ox) + 'px,' + (this.renderOY - oy) + 'px,0)';
     this._viewBox();
   };
-
-  /* ---------- gestes ---------- */
 
   MiniMap.prototype.zoomAt = function (dz, px, py) {
     var nz = Math.max(this.minZoom, Math.min(this.maxZoom, this.z + dz));
@@ -1708,6 +2085,14 @@ const BUDGET = {
     this.render();
   };
 
+  /* ---------- gestes et commandes ---------- */
+
+  MiniMap.prototype.closeMenu = function () {
+    this.menu.hidden = true;
+    var b = this.ctrl.querySelector('[data-mm="layer"]');
+    if (b) { b.setAttribute('aria-expanded', 'false'); }
+  };
+
   MiniMap.prototype._bind = function () {
     var self = this;
     var mode = null, last = null, pinch = null, tapT = 0, tapX = 0, tapY = 0, moved = 0;
@@ -1716,9 +2101,13 @@ const BUDGET = {
       var r = self.box.getBoundingClientRect();
       return [ev.clientX - r.left, ev.clientY - r.top];
     }
+    function inChrome(ev) {
+      return ev.target.closest && ev.target.closest('.mm-ctrl, .mm-attrib, .mm-styles');
+    }
 
     this.box.addEventListener('pointerdown', function (ev) {
-      if (ev.target.closest && ev.target.closest('.mm-ctrl, .mm-attrib')) { return; }
+      if (inChrome(ev)) { return; }
+      self.closeMenu();
       self.box.setPointerCapture(ev.pointerId);
       self.pointers[ev.pointerId] = local(ev);
       var ids = Object.keys(self.pointers);
@@ -1726,10 +2115,7 @@ const BUDGET = {
         mode = 'pan'; last = self.pointers[ev.pointerId]; moved = 0;
       } else if (ids.length === 2) {
         var a = self.pointers[ids[0]], b = self.pointers[ids[1]];
-        pinch = {
-          d: Math.hypot(a[0] - b[0], a[1] - b[1]),
-          mx: (a[0] + b[0]) / 2, my: (a[1] + b[1]) / 2, s: 1
-        };
+        pinch = { d: Math.hypot(a[0] - b[0], a[1] - b[1]), mx: (a[0] + b[0]) / 2, my: (a[1] + b[1]) / 2, s: 1 };
         mode = 'pinch';
         self.inner.style.transformOrigin = pinch.mx + 'px ' + pinch.my + 'px';
       }
@@ -1770,7 +2156,6 @@ const BUDGET = {
 
       if (mode === 'pan' && ids.length === 0) {
         mode = null;
-        // double tap : deuxieme appui court au meme endroit
         var p = local(ev), now = Date.now();
         if (moved < 12) {
           if (now - tapT < 300 && Math.hypot(p[0] - tapX, p[1] - tapY) < 32) {
@@ -1797,15 +2182,22 @@ const BUDGET = {
       var b = ev.target.closest('button');
       if (!b) { return; }
       var a = b.dataset.mm;
-      if (a === 'in') { self.zoomAt(1, self.W / 2, self.H / 2); }
-      if (a === 'out') { self.zoomAt(-1, self.W / 2, self.H / 2); }
-      if (a === 'fit') { self.fit(); }
+      if (a === 'in') { self.closeMenu(); self.zoomAt(1, self.W / 2, self.H / 2); }
+      if (a === 'out') { self.closeMenu(); self.zoomAt(-1, self.W / 2, self.H / 2); }
+      if (a === 'fit') { self.closeMenu(); self.fit(); }
+      if (a === 'full') { self.closeMenu(); self.onFull(); }
       if (a === 'layer') {
-        self.tilesOn = !self.tilesOn;
-        self.box.classList.toggle('is-flat', !self.tilesOn);
-        b.setAttribute('aria-pressed', String(!self.tilesOn));
-        self.render();
+        self.menu.hidden = !self.menu.hidden;
+        b.setAttribute('aria-expanded', String(!self.menu.hidden));
       }
+    });
+
+    this.menu.addEventListener('click', function (ev) {
+      var b = ev.target.closest('button');
+      if (!b) { return; }
+      self.setStyle(b.dataset.style);
+      self.closeMenu();
+      if (self.onStyle) { self.onStyle(b.dataset.style); }
     });
 
     var t = null;
@@ -1815,8 +2207,9 @@ const BUDGET = {
     });
   };
 
+  MiniMap.prototype.styles = function () { return STYLES; };
+
   global.MiniMap = MiniMap;
-  global.mmProject = project;
 })(window);
 
 </script>
@@ -1825,7 +2218,7 @@ const BUDGET = {
    Slovenie 2026 - logique de l'application
    ============================================================= */
 
-(function () {
+(function (global) {
   'use strict';
 
   /* ---------- utilitaires ---------- */
@@ -1994,13 +2387,30 @@ const BUDGET = {
     };
   }
 
-  function routeOf(day) {
-    var pts = [];
+  // Un objet trace par troncon : la vraie geometrie routiere si elle est
+  // connue, sinon la ligne reperee par les points de passage, signalee
+  // en pointille pour que la difference se voie.
+  function routesOf(day, dim) {
+    var out = [];
     build(day).rows.forEach(function (r) {
-      pts.push([r.s.lat, r.s.lon]);
-      if (r.leg && r.leg.via) { r.leg.via.forEach(function (p) { pts.push(p); }); }
+      if (!r.leg) { return; }
+      var reel = global.Router ? Router.get(r.s, r.leg.to) : null;
+      if (reel) {
+        out.push({ points: reel, color: day.color, dim: dim, rough: false });
+      } else {
+        var pts = [[r.s.lat, r.s.lon]]
+          .concat(r.leg.via || [])
+          .concat([[r.leg.to.lat, r.leg.to.lon]]);
+        out.push({ points: pts, color: day.color, dim: dim, rough: true });
+      }
     });
-    return pts;
+    return out;
+  }
+
+  function legPairs(day) {
+    var out = [];
+    build(day).rows.forEach(function (r) { if (r.leg) { out.push([r.s, r.leg.to]); } });
+    return out;
   }
 
   /* ---------- cartes ---------- */
@@ -2012,25 +2422,26 @@ const BUDGET = {
     if (allMap) { allMap.draw(); }
   }
 
-  function paintDayMap() {
+  function paintDayMap(garderCadre) {
     if (!dayMap) { return; }
     var day = TRIP.days[curDay];
     var b = build(day);
-    dayMap.setRoutes([{ points: routeOf(day), color: day.color }]);
+    dayMap.setRoutes(routesOf(day, false));
     dayMap.setMarks(b.stops.map(function (s, i) {
       return {
         lat: s.lat, lon: s.lon, label: String(i + 1), name: s.name,
         color: day.color, active: i === activeStop, idx: i
       };
     }));
-    dayMap.fit();
+    if (!garderCadre) { dayMap.fit(); }
+    majEtatTrace();
   }
 
-  function paintAllMap() {
+  function paintAllMap(garderCadre) {
     if (!allMap) { return; }
     var routes = [], marks = [];
     TRIP.days.forEach(function (day, i) {
-      routes.push({ points: routeOf(day), color: day.color, dim: false });
+      routes = routes.concat(routesOf(day, false));
       var b = build(day);
       var mid = b.stops[Math.min(1, b.stops.length - 1)];
       marks.push({
@@ -2040,7 +2451,41 @@ const BUDGET = {
     });
     allMap.setRoutes(routes);
     allMap.setMarks(marks);
-    allMap.fit(34);
+    if (!garderCadre) { allMap.fit(34); }
+    majEtatTrace();
+  }
+
+  /* ---------- recuperation des traces routiers ---------- */
+
+  function toutesLesPaires() {
+    var out = [];
+    TRIP.days.forEach(function (d) { out = out.concat(legPairs(d)); });
+    return out;
+  }
+
+  function majEtatTrace(msg) {
+    var el = document.getElementById('maproute');
+    if (!el) { return; }
+    if (msg) { el.textContent = msg; return; }
+    if (!global.Router) { el.textContent = ''; return; }
+    var reste = Router.missing(legPairs(TRIP.days[curDay]));
+    el.textContent = reste
+      ? reste + ' troncon' + (reste > 1 ? 's' : '') + ' approximatif' + (reste > 1 ? 's' : '')
+      : 'Itineraire routier reel';
+  }
+
+  function chercherTraces(pairs, repeindre) {
+    if (!global.Router) { return; }
+    var reste = Router.missing(pairs);
+    if (!reste) { majEtatTrace(); return; }
+    majEtatTrace('Calcul des itineraires, 0/' + reste);
+    Router.ensure(pairs, function (fait, total, fini) {
+      if (fini) { repeindre(true); majEtatTrace(); }
+      else {
+        majEtatTrace('Calcul des itineraires, ' + fait + '/' + total);
+        repeindre(true);
+      }
+    });
   }
 
   /* ---------- rendu du selecteur de jour ---------- */
@@ -2204,6 +2649,7 @@ const BUDGET = {
     db.day = curDay; save();
     syncRail();
     renderDay();
+    chercherTraces(legPairs(TRIP.days[curDay]), function () { paintDayMap(true); });
     window.scrollTo({ top: 0, behavior: 'auto' });
   }
 
@@ -2244,20 +2690,47 @@ const BUDGET = {
       '<tr><td>Kobarid vers Skocjan</td><td class="num">145 km . 2h20</td></tr>' +
       '<tr><td>Skocjan vers Ljubljana</td><td class="num">75 km . 55 min</td></tr>' +
       '<tr><td>Ljubljana vers aeroport</td><td class="num">26 km . 28 min</td></tr>' +
-      '</tbody></table></div></div>';
+      '</tbody></table></div>';
+
+    out += '<h3>Les traces routiers</h3>' +
+      '<p class="fine">Les itineraires suivent les vraies routes. Ils sont calcules une fois par OSRM, ' +
+      'le moteur d\'itineraire d\'OpenStreetMap, puis gardes sur ce telephone : ensuite ca marche sans reseau. ' +
+      'Un troncon en pointille signifie qu\'il n\'a pas encore ete calcule.</p>' +
+      '<p class="fine">Pour les figer dans le depot et ne plus jamais dependre du reseau : exportez le fichier, ' +
+      'puis remplacez assets/routes.js par celui qui est telecharge.</p>' +
+      '<button class="btn" id="export-routes" type="button">Exporter les traces</button> ' +
+      '<span class="fine" id="export-etat"></span></div>';
 
     host.innerHTML = out;
     host.addEventListener('click', function (ev) {
       var tr = ev.target.closest('[data-open]');
-      if (!tr) { return; }
-      selectDay(parseInt(tr.dataset.open, 10));
-      showTab('jours');
+      if (tr) {
+        selectDay(parseInt(tr.dataset.open, 10));
+        showTab('jours');
+        return;
+      }
+      if (ev.target.closest('#export-routes')) { exporterTraces(); }
     });
 
     var leg = $('#maplegend');
     leg.innerHTML = TRIP.days.map(function (d) {
       return '<span><i style="background:' + d.color + '"></i>J' + d.n + '</span>';
     }).join('');
+  }
+
+  function exporterTraces() {
+    var etat = $('#export-etat');
+    if (!global.Router || !Router.count()) {
+      etat.textContent = 'Aucun trace calcule pour l\'instant.';
+      return;
+    }
+    var blob = new Blob([Router.exportFile()], { type: 'text/javascript' });
+    var url = URL.createObjectURL(blob);
+    var lien = document.createElement('a');
+    lien.href = url; lien.download = 'routes.js';
+    document.body.appendChild(lien); lien.click(); lien.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+    etat.textContent = Router.count() + ' troncons exportes.';
   }
 
   /* ---------- budget ---------- */
@@ -2543,6 +3016,29 @@ const BUDGET = {
     $('#p-meter').querySelector('i').style.width = (n / boxes.length * 100) + '%';
   }
 
+  /* ---------- pli et plein ecran de la carte ---------- */
+
+  function majBoutonPli() {
+    var plie = $('#mapwrap').classList.contains('is-folded');
+    var b = $('#mapfold');
+    b.setAttribute('aria-expanded', String(!plie));
+    b.querySelector('span').textContent = plie ? 'Afficher' : 'Replier';
+    b.classList.toggle('is-folded', plie);
+  }
+
+  function plierDeplier(sel, mode, carte) {
+    var w = $(sel);
+    var on = !w.classList.contains('is-' + mode);
+    w.classList.toggle('is-' + mode, on);
+    document.body.classList.toggle('has-full', on);
+    if (on) { w.classList.remove('is-folded'); }
+    if (sel === '#mapwrap') { majBoutonPli(); }
+    setTimeout(function () {
+      carte.render();
+      if (carte === dayMap) { paintDayMap(true); } else { paintAllMap(true); }
+    }, 40);
+  }
+
   /* ---------- onglets ---------- */
 
   var TABS = ['jours', 'carte', 'budget', 'guide', 'sac'];
@@ -2561,12 +3057,19 @@ const BUDGET = {
       if (!allMap) {
         allMap = new MiniMap($('#allmap'), {
           minZoom: 7, maxZoom: 14,
+          style: db.style || 'plan',
+          onFull: function () { plierDeplier('#allwrap', 'full', allMap); },
           onPick: function (m) { if (m.day != null) { selectDay(m.day); showTab('jours'); } }
         });
+        allMap.onStyle = function (k) { db.style = k; save(); if (dayMap) { dayMap.setStyle(k); } };
       }
       paintAllMap();
+      chercherTraces(toutesLesPaires(), function () { paintAllMap(true); });
     }
-    if (name === 'jours' && dayMap) { setTimeout(function () { dayMap.render(); paintDayMap(); }, 30); }
+    if (name === 'jours' && dayMap) {
+      setTimeout(function () { dayMap.render(); paintDayMap(true); }, 30);
+      chercherTraces(legPairs(TRIP.days[curDay]), function () { paintDayMap(true); });
+    }
   }
 
   /* ---------- demarrage ---------- */
@@ -2580,13 +3083,27 @@ const BUDGET = {
 
     dayMap = new MiniMap($('#daymap'), {
       minZoom: 8, maxZoom: 16,
+      style: db.style || 'plan',
+      onFull: function () { plierDeplier('#mapwrap', 'full', dayMap); },
       onPick: function (m) {
         activeStop = m.idx;
         $$('#daybody .stopcard').forEach(function (c, k) { c.classList.toggle('is-active', k === activeStop); });
         var card = $$('#daybody .stop')[activeStop];
         if (card) { card.scrollIntoView({ block: 'center' }); }
-        paintDayMap();
+        paintDayMap(true);
       }
+    });
+    dayMap.onStyle = function (k) { db.style = k; save(); if (allMap) { allMap.setStyle(k); } };
+
+    // replier la carte pour lire l'itineraire en plus grand
+    if (db.folded) { $('#mapwrap').classList.add('is-folded'); }
+    majBoutonPli();
+    $('#mapfold').addEventListener('click', function () {
+      var w = $('#mapwrap');
+      w.classList.toggle('is-folded');
+      db.folded = w.classList.contains('is-folded'); save();
+      majBoutonPli();
+      if (!db.folded) { setTimeout(function () { dayMap.render(); paintDayMap(true); }, 30); }
     });
 
     curDay = (todayIdx >= 0) ? todayIdx : (db.day != null ? db.day : 0);
@@ -2609,7 +3126,7 @@ const BUDGET = {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot);
   } else { boot(); }
-})();
+})(window);
 
 </script>
 </body>

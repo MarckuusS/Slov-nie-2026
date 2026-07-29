@@ -29,13 +29,22 @@
   <!-- ============ JOURS ============ -->
   <div class="panel is-active" id="p-jours" role="tabpanel" aria-labelledby="t-jours">
     <div class="dayrail"><div class="dayrail-in" id="dayrail"></div></div>
-    <div class="mapwrap"><div class="mm" id="daymap"></div></div>
+    <div class="mapwrap" id="mapwrap">
+      <div class="mm" id="daymap"></div>
+      <div class="maptools">
+        <button type="button" id="mapfold" class="foldbtn" aria-expanded="true" aria-controls="daymap">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 14 6-6 6 6"/></svg>
+          <span>Replier</span>
+        </button>
+        <span class="maproute" id="maproute"></span>
+      </div>
+    </div>
     <div class="wrap" id="daybody"></div>
   </div>
 
   <!-- ============ CARTE ============ -->
   <div class="panel" id="p-carte" role="tabpanel" aria-labelledby="t-carte">
-    <div class="mapwrap is-static"><div class="mm" id="allmap"></div></div>
+    <div class="mapwrap is-static" id="allwrap"><div class="mm" id="allmap"></div></div>
     <div class="maplegend" id="maplegend"></div>
     <div id="allbody"></div>
   </div>
@@ -92,6 +101,8 @@
 </nav>
 
 <script src="assets/data.js"></script>
+<script src="assets/routes.js"></script>
+<script src="assets/router.js"></script>
 <script src="assets/map.js"></script>
 <script src="assets/app.js"></script>
 </body>

@@ -1,19 +1,51 @@
 /* =============================================================
    Moteur de carte minimal, sans aucune dependance.
 
-   Tuiles raster OpenStreetMap en projection Web Mercator,
-   overlay SVG pour le trace et les marqueurs numerotes.
-   Gestes tactiles : glisser, pincer, double tap. Molette au bureau.
+   Tuiles raster en projection Web Mercator, overlay SVG pour le
+   trace et les marqueurs numerotes. Gestes tactiles : glisser,
+   pincer, double tap. Molette au bureau.
 
-   Si les tuiles ne chargent pas (pas de reseau dans une vallee),
-   le fond uni reste et le trace demeure lisible : c'est voulu.
+   Quatre fonds : Plan (OpenStreetMap), Relief (OpenTopoMap),
+   Satellite (Esri) et Fond uni. Le fond uni n'est pas une panne,
+   c'est un choix : le trace y est plus lisible, et c'est ce qui
+   reste quand il n'y a pas de reseau dans une vallee.
    ============================================================= */
 
 (function (global) {
   'use strict';
 
   var TILE = 256;
-  var TILE_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+  var STYLES = [
+    {
+      key: 'plan', name: 'Plan',
+      url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+      max: 18,
+      credit: 'OpenStreetMap', creditUrl: 'https://www.openstreetmap.org/copyright'
+    },
+    {
+      key: 'relief', name: 'Relief',
+      url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+      sub: ['a', 'b', 'c'], max: 16,
+      credit: 'OpenTopoMap, CC-BY-SA', creditUrl: 'https://opentopomap.org/'
+    },
+    {
+      key: 'satellite', name: 'Satellite',
+      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      max: 18,
+      credit: 'Esri, Maxar, Earthstar Geographics', creditUrl: 'https://www.esri.com/'
+    },
+    {
+      key: 'uni', name: 'Fond uni',
+      url: null, max: 18,
+      credit: null, creditUrl: null
+    }
+  ];
+
+  function styleOf(key) {
+    for (var i = 0; i < STYLES.length; i++) { if (STYLES[i].key === key) { return STYLES[i]; } }
+    return STYLES[0];
+  }
 
   function project(lat, lon, z) {
     var s = TILE * Math.pow(2, z);
@@ -40,17 +72,26 @@
     return e;
   }
 
+  var ICON = {
+    fit: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V5.5A1.5 1.5 0 0 1 5.5 4H9M15 4h3.5A1.5 1.5 0 0 1 20 5.5V9M20 15v3.5a1.5 1.5 0 0 1-1.5 1.5H15M9 20H5.5A1.5 1.5 0 0 1 4 18.5V15"/></svg>',
+    layer: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 21 8l-9 4.5L3 8z"/><path d="M3 12.5 12 17l9-4.5"/></svg>',
+    full: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>',
+    close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>'
+  };
+
   function MiniMap(container, opts) {
     opts = opts || {};
     this.box = container;
     this.minZoom = opts.minZoom || 6;
     this.maxZoom = opts.maxZoom || 16;
     this.z = opts.zoom || 9;
-    this.tilesOn = opts.tiles !== false;
     this.onPick = opts.onPick || function () {};
+    this.onFull = opts.onFull || null;
+    this.styleKey = opts.style || 'plan';
 
     this.box.classList.add('mm');
     this.box.innerHTML = '';
+    this.box.setAttribute('data-style', this.styleKey);
 
     this.inner = document.createElement('div');
     this.inner.className = 'mm-inner';
@@ -69,24 +110,29 @@
     this.svg.appendChild(this.gRoutes);
     this.svg.appendChild(this.gMarks);
 
-    var attrib = document.createElement('a');
-    attrib.className = 'mm-attrib';
-    attrib.href = 'https://www.openstreetmap.org/copyright';
-    attrib.target = '_blank';
-    attrib.rel = 'noopener';
-    attrib.textContent = 'Fond de carte OpenStreetMap';
-    this.box.appendChild(attrib);
+    this.attrib = document.createElement('a');
+    this.attrib.className = 'mm-attrib';
+    this.attrib.target = '_blank';
+    this.attrib.rel = 'noopener';
+    this.box.appendChild(this.attrib);
 
     this.ctrl = document.createElement('div');
     this.ctrl.className = 'mm-ctrl';
     this.ctrl.innerHTML =
       '<button type="button" data-mm="in" aria-label="Zoomer">+</button>' +
       '<button type="button" data-mm="out" aria-label="Dezoomer">-</button>' +
-      '<button type="button" data-mm="fit" aria-label="Recadrer sur le trace">' +
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V5.5A1.5 1.5 0 0 1 5.5 4H9M15 4h3.5A1.5 1.5 0 0 1 20 5.5V9M20 15v3.5a1.5 1.5 0 0 1-1.5 1.5H15M9 20H5.5A1.5 1.5 0 0 1 4 18.5V15"/></svg></button>' +
-      '<button type="button" data-mm="layer" aria-label="Afficher ou masquer le fond de carte">' +
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 21 8l-9 4.5L3 8z"/><path d="M3 12.5 12 17l9-4.5"/></svg></button>';
+      '<button type="button" data-mm="fit" aria-label="Recadrer sur le trace">' + ICON.fit + '</button>' +
+      '<button type="button" data-mm="layer" aria-label="Changer de fond de carte" aria-expanded="false">' + ICON.layer + '</button>' +
+      (this.onFull ? '<button type="button" data-mm="full" aria-label="Carte en plein ecran">' + ICON.full + '</button>' : '');
     this.box.appendChild(this.ctrl);
+
+    this.menu = document.createElement('div');
+    this.menu.className = 'mm-styles';
+    this.menu.hidden = true;
+    this.menu.innerHTML = STYLES.map(function (st) {
+      return '<button type="button" data-style="' + st.key + '">' + st.name + '</button>';
+    }).join('');
+    this.box.appendChild(this.menu);
 
     this.tiles = {};
     this.pointers = {};
@@ -96,8 +142,44 @@
     this.renderOX = 0; this.renderOY = 0;
 
     this._bind();
+    this.setStyle(this.styleKey, true);
     this.setCenter(46.25, 14.0, this.z);
   }
+
+  /* ---------- fonds de carte ---------- */
+
+  MiniMap.prototype.setStyle = function (key, quiet) {
+    var st = styleOf(key);
+    this.styleKey = st.key;
+    this.box.setAttribute('data-style', st.key);
+    this.maxZoom = Math.min(this.maxZoom, st.max);
+    if (this.z > st.max) { this.z = st.max; }
+
+    if (st.credit) {
+      this.attrib.hidden = false;
+      this.attrib.href = st.creditUrl;
+      this.attrib.textContent = 'Fond ' + st.credit;
+    } else {
+      this.attrib.hidden = true;
+    }
+
+    Array.prototype.forEach.call(this.menu.children, function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.style === st.key));
+    });
+
+    // on repart de zero : les tuiles de l'ancien fond ne sont pas reutilisables
+    this.tileLayer.innerHTML = '';
+    this.tiles = {};
+    if (!quiet) { this.render(); }
+  };
+
+  MiniMap.prototype._tileUrl = function (st, z, x, y) {
+    var u = st.url.replace('{z}', z).replace('{x}', x).replace('{y}', y);
+    if (st.sub) { u = u.replace('{s}', st.sub[(x + y) % st.sub.length]); }
+    return u;
+  };
+
+  /* ---------- geometrie ---------- */
 
   MiniMap.prototype._size = function () {
     var r = this.box.getBoundingClientRect();
@@ -112,8 +194,6 @@
     this.cx = p[0]; this.cy = p[1];
     this.render();
   };
-
-  /* ---------- contenu ---------- */
 
   MiniMap.prototype.setRoutes = function (routes) { this.routes = routes || []; this.draw(); };
   MiniMap.prototype.setMarks = function (marks) { this.marks = marks || []; this.draw(); };
@@ -162,7 +242,8 @@
   };
 
   MiniMap.prototype._tiles = function () {
-    if (!this.tilesOn) {
+    var st = styleOf(this.styleKey);
+    if (!st.url) {
       this.tileLayer.innerHTML = '';
       this.tiles = {};
       return;
@@ -177,19 +258,18 @@
       for (var y = y0; y <= y1; y++) {
         if (y < 0 || y >= n) { continue; }
         var tx = ((x % n) + n) % n;
-        var key = z + '/' + tx + '/' + y + '/' + x;
+        var key = st.key + '/' + z + '/' + tx + '/' + y + '/' + x;
         need[key] = 1;
         if (!this.tiles[key]) {
           var img = new Image();
           img.className = 'mm-tile';
           img.alt = '';
           img.decoding = 'async';
-          img.loading = 'eager';
           img.style.left = (x * TILE - ox) + 'px';
           img.style.top = (y * TILE - oy) + 'px';
           img.addEventListener('load', function () { this.classList.add('is-on'); });
           img.addEventListener('error', function () { this.classList.add('is-dead'); });
-          img.src = TILE_URL.replace('{z}', z).replace('{x}', tx).replace('{y}', y);
+          img.src = this._tileUrl(st, z, tx, y);
           this.tileLayer.appendChild(img);
           this.tiles[key] = img;
         } else {
@@ -228,10 +308,9 @@
       halo.setAttribute('d', d);
       self.gRoutes.appendChild(halo);
 
-      var line = el('path', 'mm-line' + (r.dim ? ' is-dim' : ''));
+      var line = el('path', 'mm-line' + (r.dim ? ' is-dim' : '') + (r.rough ? ' is-rough' : ''));
       line.setAttribute('d', d);
       line.setAttribute('stroke', r.color || '#0C7367');
-      if (r.dash) { line.setAttribute('stroke-dasharray', '2 7'); }
       self.gRoutes.appendChild(line);
     });
 
@@ -275,12 +354,10 @@
 
   MiniMap.prototype._pan = function () {
     var ox = this.cx - this.W / 2, oy = this.cy - this.H / 2;
-    var dx = this.renderOX - ox, dy = this.renderOY - oy;
-    this.tileLayer.style.transform = 'translate3d(' + dx + 'px,' + dy + 'px,0)';
+    this.tileLayer.style.transform =
+      'translate3d(' + (this.renderOX - ox) + 'px,' + (this.renderOY - oy) + 'px,0)';
     this._viewBox();
   };
-
-  /* ---------- gestes ---------- */
 
   MiniMap.prototype.zoomAt = function (dz, px, py) {
     var nz = Math.max(this.minZoom, Math.min(this.maxZoom, this.z + dz));
@@ -294,6 +371,14 @@
     this.render();
   };
 
+  /* ---------- gestes et commandes ---------- */
+
+  MiniMap.prototype.closeMenu = function () {
+    this.menu.hidden = true;
+    var b = this.ctrl.querySelector('[data-mm="layer"]');
+    if (b) { b.setAttribute('aria-expanded', 'false'); }
+  };
+
   MiniMap.prototype._bind = function () {
     var self = this;
     var mode = null, last = null, pinch = null, tapT = 0, tapX = 0, tapY = 0, moved = 0;
@@ -302,9 +387,13 @@
       var r = self.box.getBoundingClientRect();
       return [ev.clientX - r.left, ev.clientY - r.top];
     }
+    function inChrome(ev) {
+      return ev.target.closest && ev.target.closest('.mm-ctrl, .mm-attrib, .mm-styles');
+    }
 
     this.box.addEventListener('pointerdown', function (ev) {
-      if (ev.target.closest && ev.target.closest('.mm-ctrl, .mm-attrib')) { return; }
+      if (inChrome(ev)) { return; }
+      self.closeMenu();
       self.box.setPointerCapture(ev.pointerId);
       self.pointers[ev.pointerId] = local(ev);
       var ids = Object.keys(self.pointers);
@@ -312,10 +401,7 @@
         mode = 'pan'; last = self.pointers[ev.pointerId]; moved = 0;
       } else if (ids.length === 2) {
         var a = self.pointers[ids[0]], b = self.pointers[ids[1]];
-        pinch = {
-          d: Math.hypot(a[0] - b[0], a[1] - b[1]),
-          mx: (a[0] + b[0]) / 2, my: (a[1] + b[1]) / 2, s: 1
-        };
+        pinch = { d: Math.hypot(a[0] - b[0], a[1] - b[1]), mx: (a[0] + b[0]) / 2, my: (a[1] + b[1]) / 2, s: 1 };
         mode = 'pinch';
         self.inner.style.transformOrigin = pinch.mx + 'px ' + pinch.my + 'px';
       }
@@ -356,7 +442,6 @@
 
       if (mode === 'pan' && ids.length === 0) {
         mode = null;
-        // double tap : deuxieme appui court au meme endroit
         var p = local(ev), now = Date.now();
         if (moved < 12) {
           if (now - tapT < 300 && Math.hypot(p[0] - tapX, p[1] - tapY) < 32) {
@@ -383,15 +468,22 @@
       var b = ev.target.closest('button');
       if (!b) { return; }
       var a = b.dataset.mm;
-      if (a === 'in') { self.zoomAt(1, self.W / 2, self.H / 2); }
-      if (a === 'out') { self.zoomAt(-1, self.W / 2, self.H / 2); }
-      if (a === 'fit') { self.fit(); }
+      if (a === 'in') { self.closeMenu(); self.zoomAt(1, self.W / 2, self.H / 2); }
+      if (a === 'out') { self.closeMenu(); self.zoomAt(-1, self.W / 2, self.H / 2); }
+      if (a === 'fit') { self.closeMenu(); self.fit(); }
+      if (a === 'full') { self.closeMenu(); self.onFull(); }
       if (a === 'layer') {
-        self.tilesOn = !self.tilesOn;
-        self.box.classList.toggle('is-flat', !self.tilesOn);
-        b.setAttribute('aria-pressed', String(!self.tilesOn));
-        self.render();
+        self.menu.hidden = !self.menu.hidden;
+        b.setAttribute('aria-expanded', String(!self.menu.hidden));
       }
+    });
+
+    this.menu.addEventListener('click', function (ev) {
+      var b = ev.target.closest('button');
+      if (!b) { return; }
+      self.setStyle(b.dataset.style);
+      self.closeMenu();
+      if (self.onStyle) { self.onStyle(b.dataset.style); }
     });
 
     var t = null;
@@ -401,6 +493,7 @@
     });
   };
 
+  MiniMap.prototype.styles = function () { return STYLES; };
+
   global.MiniMap = MiniMap;
-  global.mmProject = project;
 })(window);

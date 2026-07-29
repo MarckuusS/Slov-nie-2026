@@ -28,11 +28,19 @@
   --f-data: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 
   --wrap: 44rem;
-  --pad: max(1.1rem, env(safe-area-inset-left));
-  --pad-r: max(1.1rem, env(safe-area-inset-right));
+  /* Marge de base, toujours appliquee. Les encoches s'ajoutent par-dessus
+     via --safe-*, definis plus bas sous @supports : si env() n'est pas
+     reconnu, ils restent a 0px et la marge de base tient quand meme. */
+  --gutter: 1.25rem;
+  --safe-t: 0px;
+  --safe-b: 0px;
+  --safe-l: 0px;
+  --safe-r: 0px;
+  --pad: calc(var(--gutter) + var(--safe-l));
+  --pad-r: calc(var(--gutter) + var(--safe-r));
   --tabbar: 3.55rem;
   --tap: 2.75rem;
-  --top-h: calc(env(safe-area-inset-top) + 2.85rem);
+  --top-h: calc(var(--safe-t) + 2.85rem);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -97,6 +105,15 @@
   --map-void:   #E4E9E0;
 }
 
+@supports (padding-left: env(safe-area-inset-left)) {
+  :root {
+    --safe-t: env(safe-area-inset-top);
+    --safe-b: env(safe-area-inset-bottom);
+    --safe-l: env(safe-area-inset-left);
+    --safe-r: env(safe-area-inset-right);
+  }
+}
+
 * { box-sizing: border-box; }
 
 html {
@@ -151,7 +168,7 @@ a { color: var(--soca); }
   -webkit-backdrop-filter: saturate(160%) blur(14px);
   backdrop-filter: saturate(160%) blur(14px);
   border-bottom: 1px solid var(--rule);
-  padding-top: env(safe-area-inset-top);
+  padding-top: var(--safe-t);
 }
 .topbar-in {
   max-width: var(--wrap);
@@ -268,6 +285,51 @@ h3 {
 }
 .mapwrap.is-static { position: static; }
 .mapwrap.is-static .mm { height: clamp(240px, 52vh, 520px); }
+
+/* --- carte repliee : on rend toute la hauteur a l'itineraire --- */
+.mapwrap.is-folded .mm { height: 0; border-bottom: 0; }
+.mapwrap.is-folded .mm-ctrl, .mapwrap.is-folded .mm-attrib, .mapwrap.is-folded .mm-styles { display: none; }
+
+/* --- barre sous la carte : pli et etat du trace --- */
+.maptools {
+  max-width: var(--wrap); margin: 0 auto;
+  display: flex; align-items: center; gap: .6rem;
+  padding: .25rem var(--pad-r) .3rem var(--pad);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+.foldbtn {
+  -webkit-appearance: none; appearance: none;
+  display: inline-flex; align-items: center; gap: .4rem;
+  min-height: var(--tap); padding: .3rem .55rem .3rem .3rem;
+  background: none; border: 0; color: var(--ink-soft);
+  font-family: var(--f-data); font-size: .64rem;
+  letter-spacing: .09em; text-transform: uppercase;
+  cursor: pointer; touch-action: manipulation;
+  white-space: nowrap; flex: none;
+}
+.foldbtn:active { color: var(--soca); }
+.foldbtn .ic { width: 1rem; height: 1rem; transition: transform .2s ease; }
+.foldbtn.is-folded .ic { transform: rotate(180deg); }
+.maproute {
+  margin-left: auto;
+  font-family: var(--f-data); font-size: .6rem;
+  letter-spacing: .05em; color: var(--ink-faint);
+  text-align: right; min-width: 0;
+}
+
+/* --- plein ecran --- */
+.mapwrap.is-full {
+  position: fixed; inset: 0; z-index: 90;
+  display: flex; flex-direction: column;
+  background: var(--paper);
+  padding-top: var(--safe-t);
+  top: 0;
+}
+.mapwrap.is-full .mm { flex: 1 1 auto; height: auto; border-top: 0; }
+.mapwrap.is-full .maptools { padding-bottom: calc(.3rem + var(--safe-b)); border-bottom: 0; border-top: 1px solid var(--rule); }
+body.has-full { overflow: hidden; }
+body.has-full .tabbar { display: none; }
 .mm {
   position: relative;
   height: clamp(180px, 38vh, 360px);
@@ -298,6 +360,8 @@ h3 {
 .mm-halo { fill: none; stroke: var(--paper); stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
 .mm-line { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
 .mm-line.is-dim { stroke-width: 2.5; opacity: .3; }
+/* tronçon dont l'itineraire routier n'est pas encore calcule */
+.mm-line.is-rough { stroke-dasharray: 3 7; stroke-width: 3; opacity: .75; }
 .mm-mark { cursor: pointer; }
 .mm-ring { stroke: var(--paper); stroke-width: 2.5; }
 .mm-mark.is-dim .mm-ring { opacity: .35; }
@@ -332,6 +396,36 @@ h3 {
 }
 .mm-ctrl button:active { background: var(--soca-lift); border-color: var(--soca); }
 .mm-ctrl svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.mm-ctrl button[aria-expanded="true"] { border-color: var(--soca); color: var(--soca); }
+
+.mm-styles {
+  position: absolute; right: 2.9rem; top: .5rem; z-index: 6;
+  display: grid; gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule); border-radius: 5px; overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.mm-styles[hidden] { display: none; }
+.mm-styles button {
+  -webkit-appearance: none; appearance: none;
+  background: var(--surface); border: 0; color: var(--ink);
+  font-family: var(--f-data); font-size: .66rem; letter-spacing: .06em;
+  padding: 0 .9rem; min-height: var(--tap); text-align: left;
+  white-space: nowrap; cursor: pointer; touch-action: manipulation;
+}
+.mm-styles button[aria-pressed="true"] { background: var(--soca-lift); color: var(--soca); }
+.mm-styles button:active { background: var(--surface-2); }
+
+/* Le filtre depend du fond : desature sur le plan et le relief pour que
+   le trace ressorte, laisse tel quel sur la vue satellite. */
+.mm[data-style="satellite"] .mm-tile { filter: none; }
+.mm[data-style="relief"] .mm-tile { filter: saturate(.6) contrast(.95) brightness(1.03); }
+:root[data-theme="dark"] .mm[data-style="relief"] .mm-tile,
+:root[data-theme="dark"] .mm[data-style="satellite"] .mm-tile { filter: brightness(.78) saturate(.8); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .mm[data-style="relief"] .mm-tile,
+  :root:not([data-theme="light"]) .mm[data-style="satellite"] .mm-tile { filter: brightness(.78) saturate(.8); }
+}
 
 .maplegend {
   display: flex; flex-wrap: wrap; gap: .3rem .8rem;
@@ -685,12 +779,12 @@ details.acc[open] > summary { color: var(--soca); }
   -webkit-backdrop-filter: saturate(160%) blur(16px);
   backdrop-filter: saturate(160%) blur(16px);
   border-top: 1px solid var(--rule);
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: var(--safe-b);
 }
 .tabbar-in {
   max-width: var(--wrap); margin: 0 auto;
   display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
-  padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);
+  padding-left: var(--safe-l); padding-right: var(--safe-r);
 }
 .tabbar button {
   -webkit-appearance: none; appearance: none;
@@ -704,7 +798,7 @@ details.acc[open] > summary { color: var(--soca); }
 .tabbar button[aria-selected="true"] { color: var(--soca); }
 .tabbar button:active { opacity: .55; }
 
-main { padding-bottom: calc(var(--tabbar) + 1.4rem + env(safe-area-inset-bottom)); }
+main { padding-bottom: calc(var(--tabbar) + 1.4rem + var(--safe-b)); }
 
 footer {
   margin-top: 2.2rem; padding: 1.5rem 0 1rem;
@@ -714,7 +808,7 @@ footer {
 footer p { margin: .3rem 0; }
 
 @media (min-width: 48rem) {
-  :root { --pad: 1.5rem; --pad-r: 1.5rem; }
+  :root { --gutter: 1.6rem; }
   body { font-size: 1.04rem; }
   .mm { height: clamp(260px, 46vh, 460px); }
 }
