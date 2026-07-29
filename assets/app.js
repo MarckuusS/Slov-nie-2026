@@ -174,6 +174,11 @@
   // Un objet tracé par tronçon : la vraie géométrie routière si elle est
   // connue, sinon la ligne repérée par les points de passage, signalée
   // en pointille pour que la difference se voie.
+  // au-dela d'environ 60 m, l'ecart merite d'etre montre
+  function ecarte(p, q) {
+    return Math.abs(p[0] - q[0]) > 0.00055 || Math.abs(p[1] - q[1]) > 0.0008;
+  }
+
   function routesOf(day, dim) {
     var out = [];
     build(day).rows.forEach(function (r) {
@@ -181,6 +186,16 @@
       var reel = global.Router ? Router.get(r.s, r.leg.to) : null;
       if (reel) {
         out.push({ points: reel, color: day.color, dim: dim, rough: false });
+        // OSRM raccroche l'itineraire a la route la plus proche. Quand le
+        // point de l'etape est a l'ecart, on relie les deux en pointille
+        // fin : ce bout-la se fait a pied, ce n'est pas un decalage.
+        var depart = [r.s.lat, r.s.lon], fin = [r.leg.to.lat, r.leg.to.lon];
+        if (ecarte(depart, reel[0])) {
+          out.push({ points: [depart, reel[0]], color: day.color, dim: dim, link: true });
+        }
+        if (ecarte(fin, reel[reel.length - 1])) {
+          out.push({ points: [reel[reel.length - 1], fin], color: day.color, dim: dim, link: true });
+        }
       } else {
         var pts = [[r.s.lat, r.s.lon]]
           .concat(r.leg.via || [])

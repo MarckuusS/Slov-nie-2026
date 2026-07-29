@@ -908,7 +908,7 @@ footer p { margin: .3rem 0; }
       Carte
     </button>
     <button type="button" role="tab" id="t-budget" aria-controls="p-budget" aria-selected="false" data-tab="budget">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/><path d="M6 12h.01M18 12h.01"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6.5" width="19" height="11" rx="2.5"/><text x="12.4" y="15" text-anchor="middle" font-size="8" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, system-ui, sans-serif" fill="currentColor" stroke="none">€</text></svg>
       Budget
     </button>
     <button type="button" role="tab" id="t-guide" aria-controls="p-guide" aria-selected="false" data-tab="guide">
@@ -970,20 +970,20 @@ const TRIP = {
         },
         {
           name: 'Lac de Bled', sub: 'Le tour du lac à pied, 6 km', kind: 'lac',
-          lat: 46.3625, lon: 14.0936, stay: 110, cost: 0, free: true,
+          lat: 46.3651, lon: 14.1094, stay: 110, cost: 0, free: true,
           tip: 'Dans le sens des aiguilles d\'une montre pour garder l\'ile en face de vous. Plat, praticable en baskets. Baignade possible, l\'eau est à 20-22 °C.',
           site: 'https://www.bled.si/fr/',
           leg: { km: 2, min: 6, via: [] }
         },
         {
           name: 'Park Hôtel Bled', sub: 'La kremsnita d\'origine', kind: 'repas',
-          lat: 46.3644, lon: 14.0994, stay: 40, cost: 6,
+          lat: 46.3632, lon: 14.1073, stay: 40, cost: 6,
           tip: 'Le millefeuille creme-vanille inventé ici en 1953. Il est énorme : un pour deux.',
           leg: { km: 3, min: 8, via: [] }
         },
         {
           name: 'Ojstrica', sub: 'Le point de vue, départ de Velika Zaka', kind: 'montagne',
-          lat: 46.3607, lon: 14.0817, stay: 100, cost: 0, free: true,
+          lat: 46.3592, lon: 14.0828, stay: 100, cost: 0, free: true,
           tip: '25 min de montée raide, cordes fixes sur la fin. Le lac, l\'ile et le château dans le même cadre. Coucher de soleil vers 19h30. Enchaînez sur Mala Osojnica, 15 min plus haut.',
           leg: { km: 20, min: 25, via: [[46.3400, 14.0700], [46.3000, 14.0300]] }
         },
@@ -1044,7 +1044,7 @@ const TRIP = {
         },
         {
           name: 'Baignade au lac de Bohinj', sub: 'Rive nord, sur les galets', kind: 'lac',
-          lat: 46.2800, lon: 13.8700, stay: 60, cost: 0, free: true,
+          lat: 46.2836, lon: 13.8639, stay: 60, cost: 0, free: true,
           tip: '18 à 20 °C en septembre. L\'eau est si claire qu\'on voit le fond à 4 m.',
           leg: { km: 8, min: 12, via: [] }
         },
@@ -2022,11 +2022,14 @@ window.ROUTES = {};
         return (i ? 'L' : 'M') + q[0].toFixed(1) + ' ' + q[1].toFixed(1);
       }).join(' ');
 
-      var halo = el('path', 'mm-halo');
-      halo.setAttribute('d', d);
-      self.gRoutes.appendChild(halo);
+      if (!r.link) {
+        var halo = el('path', 'mm-halo');
+        halo.setAttribute('d', d);
+        self.gRoutes.appendChild(halo);
+      }
 
-      var line = el('path', 'mm-line' + (r.dim ? ' is-dim' : '') + (r.rough ? ' is-rough' : ''));
+      var line = el('path', 'mm-line' + (r.dim ? ' is-dim' : '') +
+        (r.rough ? ' is-rough' : '') + (r.link ? ' is-link' : ''));
       line.setAttribute('d', d);
       line.setAttribute('stroke', r.color || '#0C7367');
       self.gRoutes.appendChild(line);
@@ -2395,6 +2398,11 @@ window.ROUTES = {};
   // Un objet tracé par tronçon : la vraie géométrie routière si elle est
   // connue, sinon la ligne repérée par les points de passage, signalée
   // en pointille pour que la difference se voie.
+  // au-dela d'environ 60 m, l'ecart merite d'etre montre
+  function ecarte(p, q) {
+    return Math.abs(p[0] - q[0]) > 0.00055 || Math.abs(p[1] - q[1]) > 0.0008;
+  }
+
   function routesOf(day, dim) {
     var out = [];
     build(day).rows.forEach(function (r) {
@@ -2402,6 +2410,16 @@ window.ROUTES = {};
       var reel = global.Router ? Router.get(r.s, r.leg.to) : null;
       if (reel) {
         out.push({ points: reel, color: day.color, dim: dim, rough: false });
+        // OSRM raccroche l'itineraire a la route la plus proche. Quand le
+        // point de l'etape est a l'ecart, on relie les deux en pointille
+        // fin : ce bout-la se fait a pied, ce n'est pas un decalage.
+        var depart = [r.s.lat, r.s.lon], fin = [r.leg.to.lat, r.leg.to.lon];
+        if (ecarte(depart, reel[0])) {
+          out.push({ points: [depart, reel[0]], color: day.color, dim: dim, link: true });
+        }
+        if (ecarte(fin, reel[reel.length - 1])) {
+          out.push({ points: [reel[reel.length - 1], fin], color: day.color, dim: dim, link: true });
+        }
       } else {
         var pts = [[r.s.lat, r.s.lon]]
           .concat(r.leg.via || [])

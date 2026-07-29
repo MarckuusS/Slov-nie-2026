@@ -304,11 +304,14 @@
         return (i ? 'L' : 'M') + q[0].toFixed(1) + ' ' + q[1].toFixed(1);
       }).join(' ');
 
-      var halo = el('path', 'mm-halo');
-      halo.setAttribute('d', d);
-      self.gRoutes.appendChild(halo);
+      if (!r.link) {
+        var halo = el('path', 'mm-halo');
+        halo.setAttribute('d', d);
+        self.gRoutes.appendChild(halo);
+      }
 
-      var line = el('path', 'mm-line' + (r.dim ? ' is-dim' : '') + (r.rough ? ' is-rough' : ''));
+      var line = el('path', 'mm-line' + (r.dim ? ' is-dim' : '') +
+        (r.rough ? ' is-rough' : '') + (r.link ? ' is-link' : ''));
       line.setAttribute('d', d);
       line.setAttribute('stroke', r.color || '#0C7367');
       self.gRoutes.appendChild(line);

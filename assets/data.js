@@ -45,20 +45,20 @@ const TRIP = {
         },
         {
           name: 'Lac de Bled', sub: 'Le tour du lac à pied, 6 km', kind: 'lac',
-          lat: 46.3625, lon: 14.0936, stay: 110, cost: 0, free: true,
+          lat: 46.3651, lon: 14.1094, stay: 110, cost: 0, free: true,
           tip: 'Dans le sens des aiguilles d\'une montre pour garder l\'ile en face de vous. Plat, praticable en baskets. Baignade possible, l\'eau est à 20-22 °C.',
           site: 'https://www.bled.si/fr/',
           leg: { km: 2, min: 6, via: [] }
         },
         {
           name: 'Park Hôtel Bled', sub: 'La kremsnita d\'origine', kind: 'repas',
-          lat: 46.3644, lon: 14.0994, stay: 40, cost: 6,
+          lat: 46.3632, lon: 14.1073, stay: 40, cost: 6,
           tip: 'Le millefeuille creme-vanille inventé ici en 1953. Il est énorme : un pour deux.',
           leg: { km: 3, min: 8, via: [] }
         },
         {
           name: 'Ojstrica', sub: 'Le point de vue, départ de Velika Zaka', kind: 'montagne',
-          lat: 46.3607, lon: 14.0817, stay: 100, cost: 0, free: true,
+          lat: 46.3592, lon: 14.0828, stay: 100, cost: 0, free: true,
           tip: '25 min de montée raide, cordes fixes sur la fin. Le lac, l\'ile et le château dans le même cadre. Coucher de soleil vers 19h30. Enchaînez sur Mala Osojnica, 15 min plus haut.',
           leg: { km: 20, min: 25, via: [[46.3400, 14.0700], [46.3000, 14.0300]] }
         },
@@ -119,7 +119,7 @@ const TRIP = {
         },
         {
           name: 'Baignade au lac de Bohinj', sub: 'Rive nord, sur les galets', kind: 'lac',
-          lat: 46.2800, lon: 13.8700, stay: 60, cost: 0, free: true,
+          lat: 46.2836, lon: 13.8639, stay: 60, cost: 0, free: true,
           tip: '18 à 20 °C en septembre. L\'eau est si claire qu\'on voit le fond à 4 m.',
           leg: { km: 8, min: 12, via: [] }
         },
