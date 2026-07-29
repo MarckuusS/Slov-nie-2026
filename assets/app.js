@@ -469,13 +469,13 @@
       '</div>';
 
     out += '<h3>Les sept étapes</h3><div class="tablewrap"><table><thead><tr>' +
-      '<th>Jour</th><th>Étape</th><th class="num">km</th><th class="num">Route</th></tr></thead><tbody>';
+      '<th>Jour</th><th>Étape</th><th class="num">Route</th></tr></thead><tbody>';
     TRIP.days.forEach(function (d, i) {
       var b = build(d);
       out += '<tr data-open="' + i + '" style="cursor:pointer">' +
-        '<td><span style="display:inline-block;width:.6rem;height:.6rem;border-radius:2px;background:' + d.color + ';margin-right:.4rem"></span>J' + d.n + '</td>' +
+        '<td><span class="puce" style="background:' + d.color + '"></span>J' + d.n + '</td>' +
         '<td>' + esc(d.title) + '<br><span class="fine">' + esc(d.base) + '</span></td>' +
-        '<td class="num">' + b.km + '</td><td class="num">' + hm(b.drive) + '</td></tr>';
+        '<td class="num">' + b.km + ' km<br><span class="fine">' + hm(b.drive) + '</span></td></tr>';
     });
     out += '</tbody></table></div>';
 
@@ -634,13 +634,23 @@
   function enregistrerSW() {
     if (!swDisponible()) { return; }
     navigator.serviceWorker.register('sw.js', { scope: './' }).catch(function () {});
+
+    // Quand une nouvelle version prend la main, on recharge une seule
+    // fois : sinon l'ancienne feuille de style reste servie depuis le
+    // cache et les corrections n'arrivent jamais sur le telephone.
+    var rechargeFaite = false;
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      if (rechargeFaite) { return; }
+      rechargeFaite = true;
+      location.reload();
+    });
     navigator.serviceWorker.ready.then(function (reg) {
       sw = reg.active || reg.waiting || reg.installing;
       demanderEtat();
     }).catch(function () {});
     navigator.serviceWorker.addEventListener('message', function (ev) {
       var m = ev.data || {};
-      if (m.type === 'ÉTAT') { majHorsLigne(m.tuiles); }
+      if (m.type === 'ETAT_CACHE') { majHorsLigne(m.tuiles); }
       if (m.type === 'PRECACHE_AVANCEE') { avanceeHorsLigne(m.fait, m.total); }
       if (m.type === 'PRECACHE_FINI') {
         avanceeHorsLigne(m.total, m.total);
@@ -656,7 +666,7 @@
     return false;
   }
 
-  function demanderEtat() { envoyerSW({ type: 'ÉTAT' }); }
+  function demanderEtat() { envoyerSW({ type: 'ETAT_CACHE' }); }
 
   function majHorsLigne(tuiles, echecs) {
     var e = $('#off-etat');

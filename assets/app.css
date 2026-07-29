@@ -28,19 +28,18 @@
   --f-data: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 
   --wrap: 44rem;
-  /* Marge de base, toujours appliquee. Les encoches s'ajoutent par-dessus
-     via --safe-*, definis plus bas sous @supports : si env() n'est pas
-     reconnu, ils restent à 0px et la marge de base tient quand même. */
-  --gutter: 1.25rem;
-  --safe-t: 0px;
-  --safe-b: 0px;
-  --safe-l: 0px;
-  --safe-r: 0px;
-  --pad: calc(var(--gutter) + var(--safe-l));
-  --pad-r: calc(var(--gutter) + var(--safe-r));
+  /* Marges laterales. Valeurs simples, toujours appliquees.
+     Les encoches s'ajoutent plus bas, dans un bloc @supports, avec
+     env() ecrit directement dans la declaration. Faire transiter env()
+     par une propriete personnalisee puis par un calc() marche sur
+     Chrome mais invalide la declaration sur Safari : la marge tombe
+     alors a zero et le texte colle au bord de l'ecran. */
+  --gutter: 1.35rem;
+  --pad: 1.35rem;
+  --pad-r: 1.35rem;
   --tabbar: 3.55rem;
   --tap: 2.75rem;
-  --top-h: calc(var(--safe-t) + 2.85rem);
+  --top-h: 2.85rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -105,15 +104,6 @@
   --map-void:   #E4E9E0;
 }
 
-@supports (padding-left: env(safe-area-inset-left)) {
-  :root {
-    --safe-t: env(safe-area-inset-top);
-    --safe-b: env(safe-area-inset-bottom);
-    --safe-l: env(safe-area-inset-left);
-    --safe-r: env(safe-area-inset-right);
-  }
-}
-
 * { box-sizing: border-box; }
 
 html {
@@ -168,7 +158,7 @@ a { color: var(--soca); }
   -webkit-backdrop-filter: saturate(160%) blur(14px);
   backdrop-filter: saturate(160%) blur(14px);
   border-bottom: 1px solid var(--rule);
-  padding-top: var(--safe-t);
+  padding-top: 0;
 }
 .topbar-in {
   max-width: var(--wrap);
@@ -198,7 +188,11 @@ a { color: var(--soca); }
 /* ================= panneaux ================= */
 .panel { display: none; padding-bottom: 1rem; }
 .panel.is-active { display: block; }
-.block { padding: 1.7rem 0 .2rem; }
+/* Raccourci `padding` interdit ici : six elements portent a la fois
+   .block et .wrap, et un raccourci remettrait a zero les marges
+   laterales posees par .wrap, qui est declare plus haut donc perdant a
+   specificite egale. C'etait la cause du texte colle au bord. */
+.block { padding-top: 1.7rem; padding-bottom: .2rem; }
 .block:first-child { padding-top: 1.2rem; }
 
 h1 {
@@ -323,11 +317,11 @@ h3 {
   position: fixed; inset: 0; z-index: 90;
   display: flex; flex-direction: column;
   background: var(--paper);
-  padding-top: var(--safe-t);
+  padding-top: 0;
   top: 0;
 }
 .mapwrap.is-full .mm { flex: 1 1 auto; height: auto; border-top: 0; }
-.mapwrap.is-full .maptools { padding-bottom: calc(.3rem + var(--safe-b)); border-bottom: 0; border-top: 1px solid var(--rule); }
+.mapwrap.is-full .maptools { padding-bottom: .3rem; border-bottom: 0; border-top: 1px solid var(--rule); }
 body.has-full { overflow: hidden; }
 body.has-full .tabbar { display: none; }
 .mm {
@@ -649,6 +643,10 @@ th {
 }
 td { padding: .5rem .5rem .5rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
 td.num, th.num { font-family: var(--f-data); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; padding-right: 0; }
+.puce {
+  display: inline-block; width: .6rem; height: .6rem;
+  border-radius: 2px; margin-right: .4rem; flex: none;
+}
 tr.total td { border-bottom: none; border-top: 2px solid var(--ink); font-weight: 700; padding-top: .6rem; }
 
 /* ================= accordeons ================= */
@@ -783,12 +781,12 @@ details.acc[open] > summary { color: var(--soca); }
   -webkit-backdrop-filter: saturate(160%) blur(16px);
   backdrop-filter: saturate(160%) blur(16px);
   border-top: 1px solid var(--rule);
-  padding-bottom: var(--safe-b);
+  padding-bottom: 0;
 }
 .tabbar-in {
   max-width: var(--wrap); margin: 0 auto;
   display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
-  padding-left: var(--safe-l); padding-right: var(--safe-r);
+  padding-left: 0; padding-right: 0;
 }
 .tabbar button {
   -webkit-appearance: none; appearance: none;
@@ -802,7 +800,7 @@ details.acc[open] > summary { color: var(--soca); }
 .tabbar button[aria-selected="true"] { color: var(--soca); }
 .tabbar button:active { opacity: .55; }
 
-main { padding-bottom: calc(var(--tabbar) + 1.4rem + var(--safe-b)); }
+main { padding-bottom: calc(3.55rem + 1.4rem); }
 
 footer {
   margin-top: 2.2rem; padding: 1.5rem 0 1rem;
@@ -812,7 +810,31 @@ footer {
 footer p { margin: .3rem 0; }
 
 @media (min-width: 48rem) {
-  :root { --gutter: 1.6rem; }
+  :root { --gutter: 1.6rem; --pad: 1.6rem; --pad-r: 1.6rem; }
   body { font-size: 1.04rem; }
   .mm { height: clamp(260px, 46vh, 460px); }
+}
+
+/* Encoche, Dynamic Island et barre d'accueil. Chaque declaration
+   ecrit env() directement, et double une declaration de base placee
+   ailleurs : si celle-ci echoue, la marge simple reste en place. */
+@supports (padding: max(0px, env(safe-area-inset-left))) {
+  .wrap, .topbar-in, .dayrail-in, .maptools, .maplegend {
+    padding-left: max(1.35rem, env(safe-area-inset-left));
+    padding-right: max(1.35rem, env(safe-area-inset-right));
+  }
+  .topbar { padding-top: env(safe-area-inset-top); }
+  .tabbar { padding-bottom: env(safe-area-inset-bottom); }
+  .tabbar-in { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+  main { padding-bottom: calc(3.55rem + 1.4rem + env(safe-area-inset-bottom)); }
+  .dayrail { top: calc(2.85rem + env(safe-area-inset-top)); }
+  .mapwrap { top: calc(2.85rem + 3.8rem + env(safe-area-inset-top)); }
+  .mapwrap.is-full { padding-top: env(safe-area-inset-top); }
+  .mapwrap.is-full .maptools { padding-bottom: calc(.3rem + env(safe-area-inset-bottom)); }
+  @media (min-width: 48rem) {
+    .wrap, .topbar-in, .dayrail-in, .maptools, .maplegend {
+      padding-left: max(1.6rem, env(safe-area-inset-left));
+      padding-right: max(1.6rem, env(safe-area-inset-right));
+    }
+  }
 }

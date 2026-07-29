@@ -19,9 +19,13 @@
    au corridor du voyage, plafonné, et lancé à la demande, une fois.
    ============================================================= */
 
-const VERSION = 'slo2026-v1';
+// A incrementer a chaque livraison : sans ca, le telephone continue de
+// servir l'ancienne feuille de style depuis son cache.
+const VERSION = 'slo2026-v2';
 const SHELL = VERSION + '-shell';
-const TUILES = VERSION + '-tuiles';
+// Le cache des tuiles ne porte pas la version : une mise a jour de
+// l'application ne doit pas effacer la carte telechargee hors ligne.
+const TUILES = 'slo2026-tuiles';
 
 const A_PRECHARGER = [
   './',
@@ -140,18 +144,18 @@ self.addEventListener('message', function (ev) {
     ev.waitUntil(precharger(msg.urls || [], ev.source));
   }
 
-  if (msg.type === 'ÉTAT') {
+  if (msg.type === 'ETAT_CACHE') {
     ev.waitUntil(
       caches.open(TUILES).then(function (c) { return c.keys(); })
-        .then(function (k) { repondre(ev.source, { type: 'ÉTAT', tuiles: k.length }); })
-        .catch(function () { repondre(ev.source, { type: 'ÉTAT', tuiles: 0 }); })
+        .then(function (k) { repondre(ev.source, { type: 'ETAT_CACHE', tuiles: k.length }); })
+        .catch(function () { repondre(ev.source, { type: 'ETAT_CACHE', tuiles: 0 }); })
     );
   }
 
   if (msg.type === 'VIDER') {
     ev.waitUntil(
       caches.delete(TUILES)
-        .then(function () { repondre(ev.source, { type: 'ÉTAT', tuiles: 0 }); })
+        .then(function () { repondre(ev.source, { type: 'ETAT_CACHE', tuiles: 0 }); })
     );
   }
 });
