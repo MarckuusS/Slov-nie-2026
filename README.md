@@ -18,14 +18,43 @@ Il se consulte au telephone, pendant le voyage.
 
 ### Publier l'application sur GitHub Pages
 
-1. Poussez la branche, puis dans le depot : **Settings** puis **Pages**
-2. Dans **Source**, choisissez **Deploy from a branch**
-3. Branche : `claude/slovenie-travel-itinerary-krkcha` (ou `main` apres fusion), dossier : `/ (root)`
-4. **Save**. Au bout d'une minute, l'adresse est
-   `https://marckuuss.github.io/Slov-nie-2026/`
+Un site web n'a pas de fichier "main" : son point d'entree est **`index.html`**, a la racine.
+GitHub Pages le sert automatiquement. Il n'y a donc rien a renommer ni a ajouter pour cela.
+
+Le fichier qui declenche la publication, lui, est **`.github/workflows/pages.yml`**. Il est deja la.
+
+1. Dans le depot : **Settings** puis **Pages**
+2. Dans **Source**, choisissez **GitHub Actions** (et non "Deploy from a branch")
+3. C'est tout. Le prochain push publie le site.
+
+Pour publier sans attendre un push : onglet **Actions**, workflow **Publier sur GitHub Pages**,
+bouton **Run workflow**. L'adresse du site s'affiche a la fin du job, et vaut
+
+```
+https://marckuuss.github.io/Slov-nie-2026/
+```
 
 Le depot ne contient que des fichiers statiques : ni build, ni dependance, ni compte a creer.
 Le fichier `.nojekyll` evite que GitHub ne retraite le dossier `assets/`.
+
+**Variante sans workflow.** Si vous preferez le mode classique : **Settings** puis **Pages**,
+**Source** sur **Deploy from a branch**, branche `claude/slovenie-travel-itinerary-krkcha`
+(c'est la branche par defaut du depot), dossier `/ (root)`. Le resultat est le meme, mais la
+publication n'est plus automatique a chaque push.
+
+### Lancer l'application en local
+
+```
+python3 main.py
+```
+
+Le script sert le dossier et ouvre le navigateur. Il affiche aussi une adresse reseau
+du type `http://192.168.x.x:8080/` : tapez-la dans Safari sur l'iPhone, connecte au meme
+wifi, pour essayer l'application sur le telephone avant le depart. Aucune dependance,
+uniquement la bibliotheque standard de Python.
+
+Ouvrir `index.html` par un double clic fonctionne aussi, mais passer par `main.py` est plus
+fidele a ce que fera GitHub Pages.
 
 ### La version en un seul fichier
 
@@ -98,7 +127,9 @@ ces fichiers gardent le detail.
 
 | Fichier de l'application | Role |
 |---|---|
-| `index.html` | L'application. C'est le point d'entree de GitHub Pages. |
+| `index.html` | **Le point d'entree.** C'est ce que GitHub Pages sert a la racine. |
+| `.github/workflows/pages.yml` | Publie le site a chaque push, une fois Pages regle sur GitHub Actions |
+| `main.py` | Lance le site en local et donne l'adresse a ouvrir sur l'iPhone |
 | `assets/data.js` | Toutes les donnees du voyage : etapes, coordonnees, temps de route, prix |
 | `assets/map.js` | Le moteur de carte : tuiles OpenStreetMap, trace, marqueurs, gestes tactiles |
 | `assets/app.js` | Le calcul des horaires, le budget, le rendu |

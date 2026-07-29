@@ -1,0 +1,55 @@
+name: Publier sur GitHub Pages
+
+# Publie le site a chaque push. Le site est le depot lui-meme :
+# index.html a la racine, plus le dossier assets/. Rien a compiler.
+#
+# A faire une seule fois dans le depot :
+#   Settings  ->  Pages  ->  Source  ->  GitHub Actions
+#
+# Ensuite, chaque push declenche le deploiement, et l'adresse du site
+# s'affiche dans l'onglet Actions, a la fin du job.
+
+on:
+  push:
+    branches:
+      - claude/slovenie-travel-itinerary-krkcha
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un seul deploiement a la fois, sans annuler celui qui est en cours.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploiement:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url }}
+    steps:
+      - name: Recuperer le depot
+        uses: actions/checkout@v4
+
+      - name: Verifier que le point d'entree existe
+        run: |
+          test -f index.html || { echo "index.html manquant a la racine"; exit 1; }
+          test -f assets/app.js || { echo "assets/ manquant"; exit 1; }
+          echo "Point d'entree trouve : index.html"
+
+      - name: Configurer Pages
+        uses: actions/configure-pages@v5
+
+      - name: Preparer l'archive du site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deployer
+        id: pages
+        uses: actions/deploy-pages@v4
