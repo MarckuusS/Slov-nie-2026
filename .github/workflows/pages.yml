@@ -42,6 +42,12 @@ jobs:
           test -f assets/app.js || { echo "assets/ manquant"; exit 1; }
           echo "Point d'entree trouve : index.html"
 
+      - name: Estampiller la version du cache
+        run: |
+          court="${GITHUB_SHA:0:12}"
+          sed -i "s/const VERSION = '[^']*'/const VERSION = 'slo2026-$court'/" sw.js
+          grep -n "const VERSION" sw.js
+
       - name: Configurer Pages
         uses: actions/configure-pages@v5
 

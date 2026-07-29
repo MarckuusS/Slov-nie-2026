@@ -368,7 +368,7 @@ body.has-full .tabbar { display: none; }
 /* fil entre la pastille ecartee et la position reelle de l'etape */
 .mm-leader { stroke-width: 1.5; opacity: .55; }
 .mm-anchor { stroke: var(--paper); stroke-width: 1.5; opacity: .9; }
-.mm-mark.is-dim ~ .mm-leader, .mm-mark.is-dim ~ .mm-anchor { opacity: .3; }
+.mm-links { pointer-events: none; }
 .mm-mark:focus-visible .mm-ring { stroke: var(--blaze); stroke-width: 3.5; }
 
 .mm-attrib {

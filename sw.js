@@ -19,9 +19,11 @@
    au corridor du voyage, plafonné, et lancé à la demande, une fois.
    ============================================================= */
 
-// A incrementer a chaque livraison : sans ca, le telephone continue de
-// servir l'ancienne feuille de style depuis son cache.
-const VERSION = 'slo2026-v2';
+// Le workflow de publication remplace cette valeur par le debut du
+// commit deploye. Chaque livraison change donc le nom du cache, ce qui
+// force le telephone a reprendre les fichiers a jour au lieu de servir
+// l'ancienne feuille de style. En local, la valeur ci-dessous suffit.
+const VERSION = 'slo2026-dev';
 const SHELL = VERSION + '-shell';
 // Le cache des tuiles ne porte pas la version : une mise a jour de
 // l'application ne doit pas effacer la carte telechargee hors ligne.

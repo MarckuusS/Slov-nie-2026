@@ -106,8 +106,14 @@
     this.inner.appendChild(this.svg);
 
     this.gRoutes = el('g', 'mm-routes');
+    // Les fils et les ancres vont dans leur propre calque, insere avant
+    // les pastilles : en SVG c'est l'ordre du document qui decide de la
+    // superposition, et une ancre dessinee apres recouvrait le chiffre
+    // de la pastille situee au meme endroit.
+    this.gLinks = el('g', 'mm-links');
     this.gMarks = el('g', 'mm-marks');
     this.svg.appendChild(this.gRoutes);
+    this.svg.appendChild(this.gLinks);
     this.svg.appendChild(this.gMarks);
 
     this.attrib = document.createElement('à');
@@ -295,6 +301,7 @@
     this._viewBox();
 
     this.gRoutes.innerHTML = '';
+    this.gLinks.innerHTML = '';
     this.gMarks.innerHTML = '';
 
     this.routes.forEach(function (r) {
@@ -350,12 +357,12 @@
         fil.setAttribute('x1', vrai[0].toFixed(1)); fil.setAttribute('y1', vrai[1].toFixed(1));
         fil.setAttribute('x2', q[0].toFixed(1)); fil.setAttribute('y2', q[1].toFixed(1));
         fil.setAttribute('stroke', m.color || '#0C7367');
-        self.gMarks.appendChild(fil);
+        self.gLinks.appendChild(fil);
         var ancre = el('circle', 'mm-anchor');
         ancre.setAttribute('cx', vrai[0].toFixed(1)); ancre.setAttribute('cy', vrai[1].toFixed(1));
         ancre.setAttribute('r', 3);
         ancre.setAttribute('fill', m.color || '#0C7367');
-        self.gMarks.appendChild(ancre);
+        self.gLinks.appendChild(ancre);
       }
 
       var g = el('g', 'mm-mark' + (m.active ? ' is-active' : '') + (m.dim ? ' is-dim' : ''));

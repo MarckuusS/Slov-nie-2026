@@ -390,7 +390,7 @@ body.has-full .tabbar { display: none; }
 /* fil entre la pastille ecartee et la position reelle de l'etape */
 .mm-leader { stroke-width: 1.5; opacity: .55; }
 .mm-anchor { stroke: var(--paper); stroke-width: 1.5; opacity: .9; }
-.mm-mark.is-dim ~ .mm-leader, .mm-mark.is-dim ~ .mm-anchor { opacity: .3; }
+.mm-links { pointer-events: none; }
 .mm-mark:focus-visible .mm-ring { stroke: var(--blaze); stroke-width: 3.5; }
 
 .mm-attrib {
@@ -1850,8 +1850,14 @@ window.ROUTES = {};
     this.inner.appendChild(this.svg);
 
     this.gRoutes = el('g', 'mm-routes');
+    // Les fils et les ancres vont dans leur propre calque, insere avant
+    // les pastilles : en SVG c'est l'ordre du document qui decide de la
+    // superposition, et une ancre dessinee apres recouvrait le chiffre
+    // de la pastille situee au meme endroit.
+    this.gLinks = el('g', 'mm-links');
     this.gMarks = el('g', 'mm-marks');
     this.svg.appendChild(this.gRoutes);
+    this.svg.appendChild(this.gLinks);
     this.svg.appendChild(this.gMarks);
 
     this.attrib = document.createElement('à');
@@ -2039,6 +2045,7 @@ window.ROUTES = {};
     this._viewBox();
 
     this.gRoutes.innerHTML = '';
+    this.gLinks.innerHTML = '';
     this.gMarks.innerHTML = '';
 
     this.routes.forEach(function (r) {
@@ -2094,12 +2101,12 @@ window.ROUTES = {};
         fil.setAttribute('x1', vrai[0].toFixed(1)); fil.setAttribute('y1', vrai[1].toFixed(1));
         fil.setAttribute('x2', q[0].toFixed(1)); fil.setAttribute('y2', q[1].toFixed(1));
         fil.setAttribute('stroke', m.color || '#0C7367');
-        self.gMarks.appendChild(fil);
+        self.gLinks.appendChild(fil);
         var ancre = el('circle', 'mm-anchor');
         ancre.setAttribute('cx', vrai[0].toFixed(1)); ancre.setAttribute('cy', vrai[1].toFixed(1));
         ancre.setAttribute('r', 3);
         ancre.setAttribute('fill', m.color || '#0C7367');
-        self.gMarks.appendChild(ancre);
+        self.gLinks.appendChild(ancre);
       }
 
       var g = el('g', 'mm-mark' + (m.active ? ' is-active' : '') + (m.dim ? ' is-dim' : ''));
