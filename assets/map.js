@@ -317,8 +317,47 @@
       self.gRoutes.appendChild(line);
     });
 
+    // Deux etapes peuvent tomber au meme endroit : on part de la base le
+    // matin et on y revient le soir. Sans decalage, le dernier marqueur
+    // recouvre le premier et le numero 1 disparait. On ecarte donc les
+    // pastilles qui se chevauchent, en tirant un fil vers le vrai point.
+    var poses = [];
+    function placer(q) {
+      var R = 27, x = q[0], y = q[1];
+      for (var essai = 0; essai < 32; essai++) {
+        var libre = true;
+        for (var k = 0; k < poses.length; k++) {
+          if (Math.abs(poses[k][0] - x) < R && Math.abs(poses[k][1] - y) < R &&
+              Math.hypot(poses[k][0] - x, poses[k][1] - y) < R) { libre = false; break; }
+        }
+        if (libre) { break; }
+        var angle = essai * 2.39996;                       // angle d'or
+        var rayon = R * (1 + Math.floor(essai / 7) * 0.75);
+        x = q[0] + Math.cos(angle) * rayon;
+        y = q[1] + Math.sin(angle) * rayon;
+      }
+      poses.push([x, y]);
+      return [x, y];
+    }
+
     this.marks.forEach(function (m, i) {
-      var q = project(m.lat, m.lon, z);
+      var vrai = project(m.lat, m.lon, z);
+      var q = placer(vrai);
+      var decale = Math.hypot(q[0] - vrai[0], q[1] - vrai[1]) > 3;
+
+      if (decale) {
+        var fil = el('line', 'mm-leader');
+        fil.setAttribute('x1', vrai[0].toFixed(1)); fil.setAttribute('y1', vrai[1].toFixed(1));
+        fil.setAttribute('x2', q[0].toFixed(1)); fil.setAttribute('y2', q[1].toFixed(1));
+        fil.setAttribute('stroke', m.color || '#0C7367');
+        self.gMarks.appendChild(fil);
+        var ancre = el('circle', 'mm-anchor');
+        ancre.setAttribute('cx', vrai[0].toFixed(1)); ancre.setAttribute('cy', vrai[1].toFixed(1));
+        ancre.setAttribute('r', 3);
+        ancre.setAttribute('fill', m.color || '#0C7367');
+        self.gMarks.appendChild(ancre);
+      }
+
       var g = el('g', 'mm-mark' + (m.active ? ' is-active' : '') + (m.dim ? ' is-dim' : ''));
       g.setAttribute('transform', 'translate(' + q[0].toFixed(1) + ',' + q[1].toFixed(1) + ')');
       g.setAttribute('tabindex', '0');
